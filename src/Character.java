@@ -1,18 +1,17 @@
 
 /**
- * @author Admin
+ * @author Jesse Miller
+ * @date 10/11/2017
  *
  */
 public class Character
 {
-	public String	name;
 	public int		health;
 	public int		armor;
 	public int		damage;
 	
 	public Character(String s)
 	{
-		name = s;
 		health = 100;
 		armor = 2;
 		damage = 10;
