@@ -1,14 +1,11 @@
 import java.util.ArrayList;
 
-/**
- * @author Admin
- *
- */
-public class Monster
-{
-	
-	public int					health;
-	public int					armor;
-	public int					damage;
-	public ArrayList<Monster>	monsterAL;
+public class Monster extends Entity {
+
+	private int monsterID;
+	private String monsterName;
+	private ArrayList<Item> droppableItems = new ArrayList<Item>();
+	private String description;
+	private Item item;
+
 }
