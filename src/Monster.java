@@ -18,9 +18,29 @@ public class Monster extends Entity {
 		super.damage = damage;
 	}
 	
+	public void getMonsterName()
+	{
+		System.out.println(this.monsterName);
+	}
+	
+	public void getMonsterID()
+	{
+		System.out.println(this.monsterID);
+	}
+	
+	public void getMonsterDescription()
+	{
+		System.out.println(this.description);
+	}
+	
 	public void addItem(Item item)
 	{
 		itemDropped.add(item);
+	}
+	
+	public void addLocation(Room room)
+	{
+		location.add(room);
 	}
 	
 	public void populateMonsters()
