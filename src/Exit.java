@@ -1,9 +1,8 @@
 public class Exit {
 
 	private int exitID;
-
-	private String exitDirection;
-
-	private Room room;
-
+	private Room roomA;
+	private Room roomB;
+	
+	
 }
