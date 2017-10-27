@@ -5,15 +5,23 @@ public class Entity {
 	protected int damage;
 	protected Room location;
 	
-	public void attack(Entity e) {
+	public void attack(Entity e) 
+	{
 		
 	}
 	
-	public void winFight() {
+	public void receiveDamage()
+	{
 		
 	}
 	
-	public void loseFight() {
+	public void winFight() 
+	{
+		
+	}
+	
+	public void loseFight() 
+	{
 		
 	}
 	
