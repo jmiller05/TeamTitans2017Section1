@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -19,16 +20,21 @@ import javafx.stage.Stage;
 public class View extends Application
 {
 	VBox anchor;
-	HBox topContainer;
-	ScrollPane textDisplay;
-	Pane map;
 	
 	
 	
-	protected Text text = new Text(50, 50, "JavaFX Programming");
+	
+	//protected Text text = new Text(50, 50, "JavaFX Programming");
 	
 	protected BorderPane getPane()
 	{
+		TextArea text = new TextArea();
+		text.setWrapText(true);
+		text.setText("After climbing up the stairs, you see a vaulted ceiling made from pure white marble, staggering even higher to about 30 feet high. The floor seems to be one entire slab of the same marble, completely level and smooth throughout the entire room. Lined up perfectly to the ceiling on the west and east side of the room, right before the ceiling begins to stagger upwards are 8 large marble columns giving support to the ceiling. There are many fresh corpses of humans throughout the room for what seems like a legion of men recently deceased from a gruesome battle that had to have happened within the past year. The air is thick with the stench of decay. There are 4 arches with an opening wide enough for 3 man to walk through to the North East, North West, South West, and South East. There is a set of large double doors to the North with sliver and gold plating containing 3 unlit torches to the right side of the door. To the South is the large onyx stairwell leading to the Lower Tombs.");
+		HBox topContainer = new HBox();
+		ScrollPane textDisplay = new ScrollPane();
+		Pane map = new Pane();
+		
 		Button btNorth = new Button("North");
 		Button btSouth = new Button("South");
 		Button btEast = new Button("East");
@@ -87,13 +93,24 @@ public class View extends Application
 		gridpane.add(btSoutheast, 2, 2);
 		gridpane.add(btNorthwest, 0, 0);
 		gridpane.add(btSouthwest, 0, 2);
+		
+		topContainer.getChildren().addAll(textDisplay,map);
+		HBox.setHgrow(textDisplay, Priority.ALWAYS);
+		HBox.setHgrow(map, Priority.ALWAYS);
+		textDisplay.setStyle("-fx-border-color: green");
+		textDisplay.setContent(text);
+		textDisplay.setFitToHeight(true);
+		textDisplay.setFitToWidth(true);
+		map.setStyle("-fx-border-color: green");
+		
 
 		BorderPane pane = new BorderPane();
 		pane.setBottom(gridpane);
+		pane.setCenter(topContainer);
 		    
-		Pane paneForText = new Pane();
-		paneForText.getChildren().add(text);
-		pane.setCenter(paneForText);
+		//Pane paneForText = new Pane();
+		//paneForText.getChildren().add(text);
+		//pane.setCenter(paneForText);
 		    
 		//btLeft.setOnAction(e -> text.setX(text.getX() - 10));
 		//btRight.setOnAction(e -> text.setX(text.getX() + 10));
@@ -103,11 +120,11 @@ public class View extends Application
 	
 	//These methods are used to start the GUI, I'll leave them commented out for now, until I want to change the GUI
 	
-	/*
+	
 	public void start(Stage primaryStage)
 	{
 	    // Create a scene and place it in the stage
-	    Scene scene = new Scene(getPane(), 1000, 500);
+	    Scene scene = new Scene(getPane(), 1300, 700);
 	    primaryStage.setTitle("Tomb of Doom"); // Set the stage title
 	    primaryStage.setScene(scene); // Place the scene in the stage
 	    primaryStage.show(); // Display the stage
@@ -117,5 +134,5 @@ public class View extends Application
 	{
 	    launch(args);
 	}
-	*/
+	
 }
