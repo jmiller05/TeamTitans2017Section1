@@ -101,6 +101,9 @@ public class View extends Application
 		return pane;
 	}
 	
+	//These methods are used to start the GUI, I'll leave them commented out for now, until I want to change the GUI
+	
+	/*
 	public void start(Stage primaryStage)
 	{
 	    // Create a scene and place it in the stage
@@ -114,4 +117,5 @@ public class View extends Application
 	{
 	    launch(args);
 	}
+	*/
 }
