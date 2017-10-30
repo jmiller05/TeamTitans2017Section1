@@ -1,3 +1,8 @@
+import java.awt.event.ActionListener;
+import java.util.Observer;
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class View
+public class View implements Observer
 {
 	//These are the containers
 	BorderPane anchor; //This is the primary pane that will be added to the scene and contains the other nodes
@@ -136,6 +141,24 @@ public class View
 	    primaryStage.show(); // Display the stage
 		    
 		return primaryStage;
+	}
+
+	
+	public void addController(Controller controller)
+	{
+		System.out.println("View    : adding controller");
+		btNorth.setOnAction(controller);
+		btSouth.setOnAction(controller);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(java.util.Observable arg0, Object arg1)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

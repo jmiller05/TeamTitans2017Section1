@@ -11,6 +11,8 @@ import javafx.stage.Stage;
  */
 public class Game extends Application
 {
+	View view;
+	Controller controller;
 
 	/* (non-Javadoc)
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
@@ -18,13 +20,26 @@ public class Game extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		View view = new View();
+		view = new View();
+		controller = new Controller();
+		view.addController(controller);
+		controller.addView(view);
 		primaryStage = view.getStage();
-		
 	}
 	
 	public static void main(String[] args)
 	{
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	    launch(args);
 	}
 
