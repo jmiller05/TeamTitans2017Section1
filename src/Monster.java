@@ -11,8 +11,11 @@ public class Monster extends Entity
 	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	private Random rand = new Random();
 	
+	
+	
 	public Monster(String ID, String name, String desc, int health, int damage)
 	{
+		super(health, damage);
 		this.monsterID = ID;
 		this.monsterName = name;
 		this.description = desc;

@@ -2,6 +2,12 @@ import java.util.ArrayList;
 
 public class Player extends Entity {
 	
+	public Player(int health, int damage)
+	{
+		super(health, damage);
+		// TODO Auto-generated constructor stub
+	}
+	
 	private ArrayList<Item> inventory = new ArrayList<Item>();
 	
 	public void fleeFight() {
