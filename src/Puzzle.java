@@ -55,7 +55,7 @@ public class Puzzle {
 		Puzzle p3 = new Puzzle("PZ03", "Spider Webs", "Destroy 3 spider webs - One room will be unlocked, one spider web will drop the key to room 8", "Destroy spider webs until the key to room 8 drops from one of the webs");
 		Puzzle p4 = new Puzzle("PZ04", "Centaur", "Kill the centaur and collect the key in order to access Room 21", "Kill centaur and collect key");
 		Puzzle p5 = new Puzzle("PZ05", "Witch craft", "Kill witch, drops the key to room 22", "Collect key from witch’s decomposing body");
-		Puzzle p7 = new Puzzle("PZ06", "Torch puzzle", "There should be 3 torches that have to be lit in order to unlock the door to room 29", "The three unlit torches in Room 24 need to be lit in order to enter room 29 1-0-1 1 = Lit 0 = Off");
+		Puzzle p6 = new Puzzle("PZ06", "Torch puzzle", "There should be 3 torches that have to be lit in order to unlock the door to room 29", "The three unlit torches in Room 24 need to be lit in order to enter room 29 1-0-1 1 = Lit 0 = Off");
 			}
 	
  	
