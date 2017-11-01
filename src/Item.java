@@ -5,7 +5,7 @@ public class Item {
 	private int itemID;
 	private String itemName;
 	private String itemDescription;
-	protected String itemBonus;
+	private String itemBonus;
 	private ArrayList<Room> locations = new ArrayList<Room>();
 	private ArrayList<Item> items = new ArrayList<Item>();
 	private Monster droppedBy;
