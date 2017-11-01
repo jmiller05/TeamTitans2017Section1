@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Item extends Entity {
+public class Item {
 
 	private int itemID;
 	private String itemName;
