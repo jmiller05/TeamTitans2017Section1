@@ -96,7 +96,7 @@ public class View implements Observer
 		text.setText("After climbing up the stairs, you see a vaulted ceiling made from pure white marble, staggering even higher to about 30 feet high. The floor seems to be one entire slab of the same marble, completely level and smooth throughout the entire room. Lined up perfectly to the ceiling on the west and east side of the room, right before the ceiling begins to stagger upwards are 8 large marble columns giving support to the ceiling. There are many fresh corpses of humans throughout the room for what seems like a legion of men recently deceased from a gruesome battle that had to have happened within the past year. The air is thick with the stench of decay. There are 4 arches with an opening wide enough for 3 man to walk through to the North East, North West, South West, and South East. There is a set of large double doors to the North with sliver and gold plating containing 3 unlit torches to the right side of the door. To the South is the large onyx stairwell leading to the Lower Tombs.");
 		
 		//initializing the imageview and passing the image resource to the imageview
-		mapView = new ImageView("res/mapLevel2.jpg");
+		mapView = new ImageView("res/mapLevel1.jpg");
 		
 		//Adjusting the properties of the textDisplay container and setting the content
 		textDisplayContainer.setPrefHeight(1000);
