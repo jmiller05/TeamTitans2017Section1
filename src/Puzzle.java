@@ -4,7 +4,6 @@ public class Puzzle {
 	private String puzzleID;
 	private String puzzleName;
 	private String puzzleDescription;
-	private String artifactID;
   	private String hint;
   	private ArrayList<Item> artifact = new ArrayList<Item>();
   	private ArrayList<Room> location = new ArrayList<Room>();
