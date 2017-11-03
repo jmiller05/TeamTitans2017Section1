@@ -23,6 +23,14 @@ public class Monster extends Entity
 		this.damage = damage;
 	}
 	
+	/**
+	 * 
+	 */
+	public Monster()
+	{
+		// TODO Auto-generated constructor stub
+	}
+
 	public void getMonsterName()
 	{
 		System.out.println(this.monsterName);

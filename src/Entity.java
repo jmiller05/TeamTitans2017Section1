@@ -4,6 +4,11 @@ public class Entity {
 	protected int damage;
 	protected Room location;
 	
+	public Entity()
+	{
+		//super();
+	}
+	
 	public Entity(int health, int damage)
 	{
 		super();
