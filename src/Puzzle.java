@@ -4,10 +4,10 @@ public class Puzzle {
 	private String puzzleID;
 	private String puzzleName;
 	private String puzzleDescription;
-	private String artifactID;
   	private String hint;
   	private ArrayList<Item> artifact = new ArrayList<Item>();
   	private ArrayList<Room> location = new ArrayList<Room>();
+  	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
 	
  	public Puzzle(String ID, String name, String desc, String hi)
  	{
@@ -44,7 +44,7 @@ public class Puzzle {
 	
  	public void addLocation(Room room)
 	{
-		location.add(room);
+ 		location.add(room);
 	}
 	
 	public void populatePuzzles()
@@ -54,9 +54,11 @@ public class Puzzle {
 		Puzzle p2 = new Puzzle("PZ02", "Skull Pedestal", "Find 3 golden skulls and assemble them in order to attract the final monster - One golden skull per floor", "Assemble all 3 skulls in room 29 from the skulls from Rooms 9, 22, 26");
 		Puzzle p3 = new Puzzle("PZ03", "Spider Webs", "Destroy 3 spider webs - One room will be unlocked, one spider web will drop the key to room 8", "Destroy spider webs until the key to room 8 drops from one of the webs");
 		Puzzle p4 = new Puzzle("PZ04", "Centaur", "Kill the centaur and collect the key in order to access Room 21", "Kill centaur and collect key");
-		Puzzle p5 = new Puzzle("PZ05", "Witch craft", "Kill witch, drops the key to room 22", "Collect key from witch’s decomposing body");
+		Puzzle p5 = new Puzzle("PZ05", "Witch craft", "Kill witch, drops the key to room 22", "Collect key from witchâ€™s decomposing body");
 		Puzzle p6 = new Puzzle("PZ06", "Torch puzzle", "There should be 3 torches that have to be lit in order to unlock the door to room 29", "The three unlit torches in Room 24 need to be lit in order to enter room 29 1-0-1 1 = Lit 0 = Off");
-			}
+		puzzleArray.add(p0); puzzleArray.add(p1); puzzleArray.add(p2); puzzleArray.add(p3); 
+		puzzleArray.add(p4); puzzleArray.add(p5); puzzleArray.add(p6);
+	}
 	
  	
   }
