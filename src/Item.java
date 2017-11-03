@@ -2,25 +2,27 @@ import java.util.ArrayList;
 
 public class Item {
 
-	private int itemID;
-	private String itemName;
-	private String itemDescription;
-	private String itemBonus;
+	protected static String itemID;
+	protected static String itemName;
+	protected static String itemDescription;
+	protected static int itemBonus;
 	private ArrayList<Room> locations = new ArrayList<Room>();
-	private ArrayList<Item> items = new ArrayList<Item>();
-	private Monster droppedBy;
+	protected static Monster droppedBy;
 
-	public Item(int itemID, String itemName, String itemDescription, String itemBonus, Monster droppedBy) {
-		this.itemID = itemID;
-		this.itemName = itemName;
-		this.itemDescription = itemDescription;
-		this.itemBonus = itemBonus;
+	public Item(String itemID, String itemName, String itemDescription, Monster droppedBy) {
+		Item.itemID = itemID;
+		Item.itemName = itemName;
+		Item.itemDescription = itemDescription;
+		Item.droppedBy = droppedBy;
 	}
 
+
+	
+	
 	/**
 	 * @return the itemID
 	 */
-	public int getItemID()
+	public String getItemID()
 	{
 		return itemID;
 	}
@@ -44,7 +46,7 @@ public class Item {
 	/**
 	 * @return the itemBonus
 	 */
-	public String getItemBonus()
+	public int getItemBonus()
 		{
 		return itemBonus;
 	}
@@ -57,13 +59,6 @@ public class Item {
 		return locations;
 	}
 
-	/**
-	 * @return the items
-	 */
-	public ArrayList<Item> getItems()
-	{
-		return items;
-	}
 
 	/**
 	 * @return the droppedBy
