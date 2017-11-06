@@ -13,7 +13,8 @@ public class Game extends Application
 {
 	View view;
 	Controller controller;
-
+	Monster monster;
+	
 	/* (non-Javadoc)
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
 	 */
@@ -22,9 +23,18 @@ public class Game extends Application
 	{
 		view = new View();
 		controller = new Controller();
+		
+		//monster intialized in this class? not sure really
+		monster = new Monster();
+		
 		view.addController(controller);
 		controller.addView(view);
 		primaryStage = view.getStage();
+		
+		
+		//populating monster arraylist from Controller method addMonster
+		controller.addMonsters(monster);
+		
 	}
 	
 	public static void main(String[] args)
@@ -40,7 +50,7 @@ public class Game extends Application
 		
 		
 		
-	    launch(args);
+		launch(args);
 	}
-
+	
 }

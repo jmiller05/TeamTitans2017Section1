@@ -4,7 +4,7 @@ import javafx.event.EventHandler;
 public class Controller implements EventHandler<ActionEvent>
 {
 	View view;
-
+	
 	/* (non-Javadoc)
 	 * @see javafx.event.EventHandler#handle(javafx.event.Event)
 	 */
@@ -28,7 +28,17 @@ public class Controller implements EventHandler<ActionEvent>
 		System.out.println("Controller: adding view");
 		this.view = v;
 	}
-	 
+	
+	public void addMonsters(Monster m)
+	{
+		try{
+			m.populateMonsters();
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 }
 
 
