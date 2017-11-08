@@ -206,14 +206,11 @@ public class View implements Observer
 		btNorth.setOnAction(controller);
 		btSouth.setOnAction(controller);
 		btEast.setOnAction(controller);
-<<<<<<< HEAD
 		btWest.setOnAction(controller);
 		btNortheast.setOnAction(controller);
 		btSoutheast.setOnAction(controller);
 		btNorthwest.setOnAction(controller);
 		btSouthwest.setOnAction(controller);
-=======
->>>>>>> a68d1c3827e5cc1dac53edf118d2083bb016f04d
 	}
 	
 	/* (non-Javadoc)
