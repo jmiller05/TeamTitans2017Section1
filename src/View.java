@@ -206,6 +206,12 @@ public class View implements Observer
 		System.out.println("View    : adding controller");
 		btNorth.setOnAction(controller);
 		btSouth.setOnAction(controller);
+		btEast.setOnAction(controller);
+		btWest.setOnAction(controller);
+		btNortheast.setOnAction(controller);
+		btSoutheast.setOnAction(controller);
+		btNorthwest.setOnAction(controller);
+		btSouthwest.setOnAction(controller);
 	}
 
 	/* (non-Javadoc)
@@ -215,6 +221,19 @@ public class View implements Observer
 	public void update(java.util.Observable arg0, Object arg1)
 	{
 		// TODO Auto-generated method stub
+		//System.out.println(arg1.getClass().getName());
+		if(arg1.getClass().getName().equals("Room"))
+		{
+			btNorth.setDisable(!((Room)arg1).isValidExit("north"));
+			btSouth.setDisable(!((Room)arg1).isValidExit("south"));
+			btEast.setDisable(!((Room)arg1).isValidExit("east"));
+			btWest.setDisable(!((Room)arg1).isValidExit("west"));
+			btNortheast.setDisable(!((Room)arg1).isValidExit("northeast"));
+			btSoutheast.setDisable(!((Room)arg1).isValidExit("southeast"));
+			btNorthwest.setDisable(!((Room)arg1).isValidExit("northwest"));
+			btSouthwest.setDisable(!((Room)arg1).isValidExit("southwest"));
+			text.appendText("\n" + ((Room) arg1).getRoomDescription());
+		}
 		
 	}
 	

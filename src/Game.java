@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class Game extends Application
 {
 	View view;
+	Model model;
 	Controller controller;
 	Monster monster;
 	
@@ -22,13 +23,18 @@ public class Game extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		view = new View();
+		model = new Model();
 		controller = new Controller();
+		
+		model.addObserver(view);
 		
 		//monster intialized in this class? not sure really
 		monster = new Monster();
 		
-		view.addController(controller);
+		
+		controller.addModel(model);
 		controller.addView(view);
+		view.addController(controller);
 		primaryStage = view.getStage();
 		
 		

@@ -46,6 +46,16 @@ public class Room {
 		if(direction.equalsIgnoreCase("southwest")){this.setSouthWestExit(exit);};
 	}
 	
+	public int getRoomID()
+	{
+		return roomID;
+	}
+	
+	public String getRoomDescription()
+	{
+		return roomDescription;
+	}
+	
 	public void setNorthExit(Exit northExit)
 	{
 		this.northExit = northExit;
@@ -124,6 +134,32 @@ public class Room {
 	public Exit getSouthWestExit()
 	{
 		return southWestExit;
+	}
+	
+	public Room getAdjacentRoom(Exit exit)
+	{
+		if(this == exit.getRoomA())
+		{
+			return exit.getRoomB();
+		}
+		else
+		{
+			return exit.getRoomA();
+		}
+	}
+	
+	public boolean isValidExit(String direction)
+	{
+		boolean validExit = false;
+		if(direction.equalsIgnoreCase("north") && northExit != null){validExit = true;};
+		if(direction.equalsIgnoreCase("south") && southExit != null){validExit = true;};
+		if(direction.equalsIgnoreCase("east") && eastExit != null){validExit = true;};
+		if(direction.equalsIgnoreCase("west") && westExit != null){validExit = true;};
+		if(direction.equalsIgnoreCase("northeast") && northEastExit != null){validExit = true;};
+		if(direction.equalsIgnoreCase("northwest") && northWestExit != null){validExit = true;};
+		if(direction.equalsIgnoreCase("southeast") && southEastExit != null){validExit = true;};
+		if(direction.equalsIgnoreCase("southwest") && southWestExit != null){validExit = true;};
+		return validExit;
 	}
 	
 	/*
