@@ -34,6 +34,7 @@ public class Game extends Application
 		
 		//populating monster arraylist from Controller method addMonster
 		controller.addMonsters(monster);
+		controller.addMonsterRooms(monster);
 		
 	}
 	

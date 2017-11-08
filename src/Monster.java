@@ -28,9 +28,18 @@ public class Monster extends Entity
 	 */
 	public Monster()
 	{
-		// TODO Auto-generated constructor stub
+		
 	}
-
+	
+	/**
+	 * @return the monsterArray
+	 */
+	public ArrayList<Monster> getMonsterArray()
+	{
+		return monsterArray;
+	}
+	
+	
 	public void getMonsterName()
 	{
 		System.out.println(this.monsterName);
@@ -68,8 +77,8 @@ public class Monster extends Entity
 		Monster m6 = new Monster("Mon_06", "The Insane Witch", "This witch will cast a spell on you and put you in another room. Her skin is a wrinkly as balled up piece of paper, she has long white hair.", 40, rand.nextInt(5) + 1);		
 		Monster m7 = new Monster("Mon_07", "Ballistic Beast", "This beast you will face is 7 foot tall, muscular, and very hairy. He will fight till the death with his large hands and sharp claws. His favorite move is ripping your heart from your chest and hearing it beat before you fall to your death.", 60, rand.nextInt(5) + 2);
 		
-		monsterArray.add(m0); monsterArray.add(m1); monsterArray.add(m2); monsterArray.add(m3); 
-		monsterArray.add(m4); monsterArray.add(m5); monsterArray.add(m6); monsterArray.add(m7);
+		getMonsterArray().add(m0); getMonsterArray().add(m1); getMonsterArray().add(m2); getMonsterArray().add(m3); 
+		getMonsterArray().add(m4); getMonsterArray().add(m5); getMonsterArray().add(m6); getMonsterArray().add(m7);
 	}
 	
 	public void attack(Entity e)
