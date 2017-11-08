@@ -22,7 +22,7 @@ public class Model extends Observable
     {
     	this.PopulateRooms();
     	this.assignExits();
-    	currentRoom = roomAL.get(0);
+    	
     }
     
     public void PopulateRooms()
@@ -156,6 +156,12 @@ public class Model extends Observable
     	setChanged();
     	notifyObservers(currentRoom);
     }
-	
+    
+    public void modelStart()
+    {
+    	currentRoom = roomAL.get(0);
+    	setChanged();
+    	notifyObservers(currentRoom);
+    }
 
 }

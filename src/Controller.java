@@ -61,6 +61,11 @@ public class Controller implements EventHandler<ActionEvent>
 		this.model = m;
 	}
 	
+	public void initModel()
+	{
+		model.modelStart();
+	}
+	
 	public void addMonsters(Monster m)
 	{
 		try{

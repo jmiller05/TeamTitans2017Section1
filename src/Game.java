@@ -22,6 +22,7 @@ public class Game extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
+		
 		view = new View();
 		model = new Model();
 		controller = new Controller();
@@ -34,6 +35,7 @@ public class Game extends Application
 		
 		controller.addModel(model);
 		controller.addView(view);
+		controller.initModel();
 		view.addController(controller);
 		primaryStage = view.getStage();
 		
