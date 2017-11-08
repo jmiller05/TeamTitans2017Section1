@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javafx.scene.image.Image;
+
 
 /**
  * @author Evan
@@ -22,6 +24,7 @@ public class Model extends Observable
     {
     	this.PopulateRooms();
     	this.assignExits();
+    	this.assignRoomImages();
     	
     }
     
@@ -147,6 +150,21 @@ public class Model extends Observable
     	roomAL.get(8).setExit(exitAL.get(9),"east");
     	//Assigning the direction of the exits of room 9
     	roomAL.get(9).setExit(exitAL.get(9),"west");
+    	
+    }
+    
+    public void assignRoomImages()
+    {
+    	roomAL.get(0).setMapLocationImage(new Image("res/Room_00.jpg"));
+    	roomAL.get(1).setMapLocationImage(new Image("res/Room_01.jpg"));
+    	roomAL.get(2).setMapLocationImage(new Image("res/Room_02.jpg"));
+    	roomAL.get(3).setMapLocationImage(new Image("res/Room_03.jpg"));
+    	roomAL.get(4).setMapLocationImage(new Image("res/Room_04.jpg"));
+    	roomAL.get(5).setMapLocationImage(new Image("res/Room_05.jpg"));
+    	roomAL.get(6).setMapLocationImage(new Image("res/Room_06.jpg"));
+    	roomAL.get(7).setMapLocationImage(new Image("res/Room_07.jpg"));
+    	roomAL.get(8).setMapLocationImage(new Image("res/Room_08.jpg"));
+    	roomAL.get(9).setMapLocationImage(new Image("res/Room_09.jpg"));
     	
     }
     

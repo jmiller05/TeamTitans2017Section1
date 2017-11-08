@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+
 public class Room {
 	
 	private int roomID;
@@ -7,6 +9,7 @@ public class Room {
 	private String roomDescription;	
 	private ArrayList<Puzzle> puzzles = new ArrayList<Puzzle>();	
 	private ArrayList<Monster> monsters = new ArrayList<Monster>();
+	private Image mapLocation;
 
 
 	private Exit northExit;
@@ -32,6 +35,16 @@ public class Room {
 		northWestExit = null;
 		southEastExit = null;
 		southWestExit = null;
+	}
+	
+	public void setMapLocationImage(Image image)
+	{
+		mapLocation = image;
+	}
+	
+	public Image getMapLocationImage()
+	{
+		return mapLocation;
 	}
 	
 	public void setExit(Exit exit, String direction)

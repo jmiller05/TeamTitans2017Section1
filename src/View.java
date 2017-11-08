@@ -231,6 +231,7 @@ public class View implements Observer
 			btSoutheast.setDisable(!((Room)arg1).isValidExit("southeast"));
 			btNorthwest.setDisable(!((Room)arg1).isValidExit("northwest"));
 			btSouthwest.setDisable(!((Room)arg1).isValidExit("southwest"));
+			mapView.setImage(((Room) arg1).getMapLocationImage());
 			text.appendText("\n" + ((Room) arg1).getRoomDescription());
 		}
 		
