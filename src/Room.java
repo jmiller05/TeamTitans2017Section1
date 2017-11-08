@@ -7,8 +7,9 @@ public class Room {
 	private String roomDescription;	
 	private ArrayList<Puzzle> puzzles = new ArrayList<Puzzle>();	
 	private ArrayList<Monster> monsters = new ArrayList<Monster>();
-
-
+	//ArrayList of Rooms
+	private	ArrayList<Room> roomAL = new ArrayList<Room>();
+	
 	private Exit northExit;
 	private Exit southExit;
 	private Exit eastExit;
@@ -20,7 +21,6 @@ public class Room {
 	
 	public Room(int roomID, String roomName, String roomDescription)
 	{
-		super();
 		this.roomID = roomID;
 		this.roomName = roomName;
 		this.roomDescription = roomDescription;
@@ -32,6 +32,18 @@ public class Room {
 		northWestExit = null;
 		southEastExit = null;
 		southWestExit = null;
+	}
+	public Room()
+	{
+		
+	}
+	
+	/**
+	 * @return the roomAL
+	 */
+	public ArrayList<Room> getRoomAL()
+	{
+		return roomAL;
 	}
 	
 	public void setExit(Exit exit, String direction)
@@ -100,42 +112,43 @@ public class Room {
 	{
 		return northExit;
 	}
-
+	
 	public Exit getSouthExit()
 	{
 		return southExit;
 	}
-
+	
 	public Exit getEastExit()
 	{
 		return eastExit;
 	}
-
+	
 	public Exit getWestExit()
 	{
 		return westExit;
 	}
-
+	
 	public Exit getNorthEastExit()
 	{
 		return northEastExit;
 	}
-
+	
 	public Exit getNorthWestExit()
 	{
 		return northWestExit;
 	}
-
+	
 	public Exit getSouthEastExit()
 	{
 		return southEastExit;
 	}
-
+	
 	public Exit getSouthWestExit()
 	{
 		return southWestExit;
 	}
 	
+<<<<<<< HEAD
 	public Room getAdjacentRoom(Exit exit)
 	{
 		if(this == exit.getRoomA())
@@ -171,6 +184,16 @@ public class Room {
 	    ArrayList of Room Names
 	    
 	    ArrayList<String> roomNameAL = new ArrayList<String>();
+=======
+	
+	
+	public void populateRooms()
+	{		
+		
+		
+		//ArrayList of Room Names
+		ArrayList<String> roomNameAL = new ArrayList<String>();
+>>>>>>> a68d1c3827e5cc1dac53edf118d2083bb016f04d
 		roomNameAL.add(0, "Cave Entrance");
 		roomNameAL.add(1, "Crumbling Room");
 		roomNameAL.add(2, "Map Room");
@@ -181,30 +204,29 @@ public class Room {
 		roomNameAL.add(7, "Breached Cavern");
 		roomNameAL.add(8, "Corridor of Water");
 		roomNameAL.add(9, "Cave Exit");
-		roomNameAL.add(10, Entrance to Lower Tombs");
-		roomNameAL.add(11, Sapphire Studies");
-		roomNameAL.add(12, Emerald Studies");
-		roomNameAL.add(13, Sapphire Storage Facility");
-		roomNameAL.add(14, Emerald Storage Facility");
-		roomNameAL.add(15, Ruby of Wonders");
-		roomNameAL.add(16, Emerald Mausoleum");
-		roomNameAL.add(17, Sapphire Mausoleum");
-		roomNameAL.add(18, Banquet Hall");
-		roomNameAL.add(19, Study Room");
-		roomNameAL.add(20, Alchemist's Lab");
-		roomNameAL.add(21, Entrance to Upper Tomb");
-		roomNameAL.add(22, Torture Chamber");
-		roomNameAL.add(23, Holding Cells");
-		roomNameAL.add(24, Grand Hall");
-		roomNameAL.add(25, Southwest Tomb");
-		roomNameAL.add(26, Southeast Tomb");
-		roomNameAL.add(27, Northwest Tomb");
-		roomNameAL.add(28, Northeast Tomb");
-		roomNameAL.add(29, Hall of Heroes");
-		roomNameAL.add(30, Tomb of Doom Exit");
-	 
-	    Array List of room descriptions
-	    
+		roomNameAL.add(10, "Entrance to Lower Tombs");
+		roomNameAL.add(11, "Sapphire Studies");
+		roomNameAL.add(12, "Emerald Studies");
+		roomNameAL.add(13, "Sapphire Storage Facility");
+		roomNameAL.add(14, "Emerald Storage Facility");
+		roomNameAL.add(15, "Ruby of Wonders");
+		roomNameAL.add(16, "Emerald Mausoleum");
+		roomNameAL.add(17, "Sapphire Mausoleum");
+		roomNameAL.add(18, "Banquet Hall");
+		roomNameAL.add(19, "Study Room");
+		roomNameAL.add(20, "Alchemist's Lab");
+		roomNameAL.add(21, "Entrance to Upper Tomb");
+		roomNameAL.add(22, "Torture Chamber");
+		roomNameAL.add(23, "Holding Cells");
+		roomNameAL.add(24, "Grand Hall");
+		roomNameAL.add(25, "Southwest Tomb");
+		roomNameAL.add(26, "Southeast Tomb");
+		roomNameAL.add(27, "Northwest Tomb");
+		roomNameAL.add(28, "Northeast Tomb");
+		roomNameAL.add(29, "Hall of Heroes");
+		roomNameAL.add(30, "Tomb of Doom Exit");
+		
+		//Array List of room descriptions	    
 		ArrayList<String> roomDescriptionAL = new ArrayList<String>();
 		roomDescriptionAL.add(0, "After regaining consciousness, you begin to focus looking around the room to see where you have landed. The only light that emits into the cave is from the hole which was created from where you fell. The walls are covered in dead roots all extending towards the hole in the ceiling. There is a branch on the floor. You are able to see an opening to the North and another opening to the East.");
 		roomDescriptionAL.add(1, "Upon squeezing into this room, you notice that this room has not been disturbed in many years. The walls have mostly caved in, leaving piles of stone leading up to the mostly dirt walls. There isn't much space to move around, except for a few feet ahead of you.");
@@ -238,16 +260,10 @@ public class Room {
 		roomDescriptionAL.add(29, "Monstrous room with hulking paintings depicting battles of the past. Large banners portraying an emblem of a skull without a jaw and a serpent intertwined through the eyeholes raising above the skull drape the columns that support the ceiling which is 20 feet high. In each corner of the room the fire in each of the enormous pits is ablaze. You can see 3 empty pedestals in the center of the room, with a round cutout in the center of each. To the South is a set of large double doors to the North with silver and gold plating. To the North you can see a large marble double door with light protruding through the cracks.");
 		roomDescriptionAL.add(30, "You beat the game and escaped the tomb! Welcome to the outside world!");
 		
-		for (int i = 0; i <= 30, i++)
+		for (int i = 0; i <= 30; i++)
 		{
-			roomAL.add(i, new Room(i,roomNameAL.get(i),roomDescriptionAL.get(i)));
+			getRoomAL().add(i, new Room(i,roomNameAL.get(i),roomDescriptionAL.get(i)));
 		}
 		
-
-		
-	*/
-	
-	
-	
-		
+	}
 }

@@ -1,6 +1,5 @@
 import java.awt.event.ActionListener;
 import java.util.Observer;
-
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.geometry.Insets;
@@ -64,7 +63,7 @@ public class View implements Observer
 		buttonBar = new HBox();
 		gridpane = new GridPane();
 		
-	    //Initializing and labeling the buttons
+		//Initializing and labeling the buttons
 		btNorth = new Button("North");
 		btSouth = new Button("South");
 		btEast = new Button("East");
@@ -120,51 +119,51 @@ public class View implements Observer
 		
 		//Adjusting spacing and alignment of the gridpane that holds the buttons
 		gridpane.setAlignment(Pos.CENTER);
-	    gridpane.setHgap(10);
-	    gridpane.setVgap(10);
-	    gridpane.setPadding(new Insets(10, 10, 10, 10)); 
+		gridpane.setHgap(10);
+		gridpane.setVgap(10);
+		gridpane.setPadding(new Insets(10, 10, 10, 10)); 
 		
 		//Adjusting the sizing of the buttons
 		btNorth.setMinWidth(100.0);
 		btNorth.setPrefWidth(100.0);
 		btNorth.setMaxWidth(100.0);
-
+		
 		btSouth.setMinWidth(100.0);
 		btSouth.setPrefWidth(100.0);
 		btSouth.setMaxWidth(100.0);
-
+		
 		btEast.setMinWidth(100.0);
 		btEast.setPrefWidth(100.0);
 		btEast.setMaxWidth(100.0);
-
+		
 		btWest.setMinWidth(100.0);
 		btWest.setPrefWidth(100.0);
 		btWest.setMaxWidth(100.0);
-
+		
 		btNortheast.setMinWidth(100.0);
 		btNortheast.setPrefWidth(100.0);
 		btNortheast.setMaxWidth(100.0);
-
+		
 		btSoutheast.setMinWidth(100.0);
 		btSoutheast.setPrefWidth(100.0);
 		btSoutheast.setMaxWidth(100.0);
-
+		
 		btNorthwest.setMinWidth(100.0);
 		btNorthwest.setPrefWidth(100.0);
 		btNorthwest.setMaxWidth(100.0);
-
+		
 		btSouthwest.setMinWidth(100.0);
 		btSouthwest.setPrefWidth(100.0);
 		btSouthwest.setMaxWidth(100.0);
 		
 		//Adding the text and map containers to the larger container
 		map.setStyle("-fx-border-color: green");
-	    map.setPrefWidth(400);
-	    map.setPrefHeight(400);
-	    map.setMaxHeight(400);
-	    map.setMaxWidth(400);
-	    mapView.setFitHeight(450);
-	    mapView.setFitWidth(450);
+		map.setPrefWidth(400);
+		map.setPrefHeight(400);
+		map.setMaxHeight(400);
+		map.setMaxWidth(400);
+		mapView.setFitHeight(450);
+		mapView.setFitWidth(450);
 		map.getChildren().add(mapView);
 		
 		//Adding the bottom two button containers to the the larger bottom container
@@ -191,15 +190,15 @@ public class View implements Observer
 	
 	public Stage getStage()
 	{
-	    Scene scene = new Scene(anchor, 1300, 700);
-	    Stage primaryStage = new Stage();
-	    primaryStage.setTitle("Tomb of Doom"); // Set the stage title
-	    primaryStage.setScene(scene); // Place the scene in the stage
-	    primaryStage.show(); // Display the stage
-		    
+		Scene scene = new Scene(anchor, 1300, 700);
+		Stage primaryStage = new Stage();
+		primaryStage.setTitle("Tomb of Doom"); // Set the stage title
+		primaryStage.setScene(scene); // Place the scene in the stage
+		primaryStage.show(); // Display the stage
+		
 		return primaryStage;
 	}
-
+	
 	
 	public void addController(Controller controller)
 	{
@@ -207,13 +206,16 @@ public class View implements Observer
 		btNorth.setOnAction(controller);
 		btSouth.setOnAction(controller);
 		btEast.setOnAction(controller);
+<<<<<<< HEAD
 		btWest.setOnAction(controller);
 		btNortheast.setOnAction(controller);
 		btSoutheast.setOnAction(controller);
 		btNorthwest.setOnAction(controller);
 		btSouthwest.setOnAction(controller);
+=======
+>>>>>>> a68d1c3827e5cc1dac53edf118d2083bb016f04d
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */

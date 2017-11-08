@@ -1,4 +1,5 @@
-public class Exit {
+public class Exit 
+{
 
 	private int exitID;
 	private Room roomA;
