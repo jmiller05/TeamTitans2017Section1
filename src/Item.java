@@ -15,12 +15,11 @@ public class Item {
 	private ArrayList<Room> locations = new ArrayList<Room>();
 	protected static Monster droppedBy;
 
-	public Item(String itemID, String itemName, String itemDescription, int itemBonus, ArrayList locations, Monster droppedBy) {
+	public Item(String itemID, String itemName, String itemDescription, int itemBonus, Monster droppedBy) {//need to add room location where item found
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
 		this.itemBonus = itemBonus;
-		this.roomID = roomID;
 		this.droppedBy = droppedBy;
 	}
 
