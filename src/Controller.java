@@ -45,7 +45,13 @@ public class Controller implements EventHandler<ActionEvent>
 		{
 			model.changeRoom(model.currentRoom.getSouthWestExit());
 		}
-		
+		else if (event.getSource().equals(view.btExamineMonster))
+		{
+			if(model.roomHasMonster(model.currentRoom) == true)
+			{
+				//call getMonsterDesc() in model class
+			}
+		}
 		
 	}
 	
@@ -65,7 +71,7 @@ public class Controller implements EventHandler<ActionEvent>
 	{
 		model.modelStart();
 	}
-		
+	
 }
 
 

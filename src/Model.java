@@ -219,6 +219,23 @@ public class Model extends Observable
 		
 	}
 	
+	public boolean roomHasMonster(Room r)
+	{
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			if( monsterArray.get(i).getLocation().contains("currentRoom"))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void getMonsterDesc()
+	{
+		//retrieve Mon description and update the view to display it
+	}
+	
 	public void changeRoom(Exit exit)
 	{
 		currentRoom = currentRoom.getAdjacentRoom(exit);

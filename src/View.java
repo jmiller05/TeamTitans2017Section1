@@ -47,6 +47,7 @@ public class View implements Observer
 	Button btExamine; //Button to examine a room
 	Button btSearch; //Button to search a room
 	Button btInventory; //Button to display inventory
+	Button btExamineMonster; //Button to retrieve monster description
 	TextArea text; //TextArea to display text descriptions
 	ImageView mapView;
 	
@@ -75,6 +76,7 @@ public class View implements Observer
 		btExamine = new Button("Examine Room");
 		btSearch = new Button("Search Room");
 		btInventory = new Button("Show Inventory");
+		btExamineMonster = new Button("Examine Monster");
 		
 		//Some button styling
 		btNorth.setStyle("-fx-font-size: 16;");
@@ -88,6 +90,8 @@ public class View implements Observer
 		btExamine.setStyle("-fx-font-size: 18;");
 		btSearch.setStyle("-fx-font-size: 18; ");
 		btInventory.setStyle("-fx-font-size: 18; ");
+		btExamineMonster.setStyle("-fx-font-size: 16;");
+		
 		
 		//Initializing and setting the content of the text area
 		text = new TextArea();
@@ -156,6 +160,10 @@ public class View implements Observer
 		btSouthwest.setPrefWidth(100.0);
 		btSouthwest.setMaxWidth(100.0);
 		
+		btExamineMonster.setMinWidth(100.0);
+		btExamineMonster.setPrefWidth(100.0);
+		btExamineMonster.setMaxWidth(100.0);
+		
 		//Adding the text and map containers to the larger container
 		map.setStyle("-fx-border-color: green");
 		map.setPrefWidth(400);
@@ -169,7 +177,7 @@ public class View implements Observer
 		//Adding the bottom two button containers to the the larger bottom container
 		bottomContainer.getChildren().addAll(buttonBar,gridpane);
 		bottomContainer.setPadding(new Insets(25,0,25,0));
-		buttonBar.getChildren().addAll(btExamine, btSearch, btInventory);
+		buttonBar.getChildren().addAll(btExamine, btSearch, btInventory, btExamineMonster);
 		
 		//Adding the buttons to the button container
 		gridpane.add(btNorth, 1, 0);
@@ -211,6 +219,7 @@ public class View implements Observer
 		btSoutheast.setOnAction(controller);
 		btNorthwest.setOnAction(controller);
 		btSouthwest.setOnAction(controller);
+		btExamineMonster.setOnAction(controller);
 	}
 	
 	/* (non-Javadoc)
@@ -219,7 +228,6 @@ public class View implements Observer
 	@Override
 	public void update(java.util.Observable arg0, Object arg1)
 	{
-		// TODO Auto-generated method stub
 		//System.out.println(arg1.getClass().getName());
 		if(arg1.getClass().getName().equals("Room"))
 		{
@@ -234,7 +242,6 @@ public class View implements Observer
 			mapView.setImage(((Room) arg1).getMapLocationImage());
 			text.appendText("\n" + "\n" + ((Room) arg1).getRoomDescription());
 		}
-		
 	}
 	
 }

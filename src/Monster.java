@@ -46,6 +46,11 @@ public class Monster extends Entity
 		location.add(room);
 	}
 	
+	public String getLocation()
+	{
+		return location.toString();
+		
+	}
 	
 	
 	public void attack(Entity e)
