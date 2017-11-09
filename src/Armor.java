@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+
+/**
+ * @author Brad
+ *
+ */
+
 public class Armor extends Item {
 	
 	/**
@@ -36,6 +42,14 @@ public class Armor extends Item {
 		ArmorArray.add(amr2);
 		ArmorArray.add(amr3);
 		ArmorArray.add(amr4);
+	}
+
+	/**
+	 * @return the armorArray
+	 */
+	public ArrayList<Armor> getArmorArray()
+	{
+		return ArmorArray;
 	}
 	
 }

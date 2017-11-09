@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+
+/**
+ * @author Brad
+ *
+ */
+
 public class Item {
 
 	protected String itemID;
@@ -9,14 +15,25 @@ public class Item {
 	private ArrayList<Room> locations = new ArrayList<Room>();
 	protected static Monster droppedBy;
 
-	public Item(String itemID, String itemName, String itemDescription, int itemBonus, Monster droppedBy) {
+	public Item(String itemID, String itemName, String itemDescription, int itemBonus, ArrayList locations, Monster droppedBy) {
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
 		this.itemBonus = itemBonus;
+		this.roomID = roomID;
 		this.droppedBy = droppedBy;
 	}
 
+	public void dropItem()
+	{
+		
+	}
+	
+	public void collectItem()
+	{
+		
+	}
+	
 	/**
 	 * @return the itemID
 	 */
