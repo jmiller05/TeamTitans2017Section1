@@ -22,9 +22,8 @@ public class Model extends Observable
 	Room currentRoom;
 	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	private Random rand = new Random();
-	
-	
-	
+	private Monster currentMonster;
+
 	public Model()
 	{
 		this.populateRooms();
@@ -223,8 +222,9 @@ public class Model extends Observable
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
 		{
-			if( monsterArray.get(i).getLocation().contains("currentRoom"))
+			if( monsterArray.get(i).getLocation() == currentRoom.getRoomID())
 			{
+				currentMonster = monsterArray.get(i);
 				return true;
 			}
 		}
@@ -233,7 +233,8 @@ public class Model extends Observable
 	
 	public void getMonsterDesc()
 	{
-		//retrieve Mon description and update the view to display it
+		setChanged();
+		notifyObservers(currentMonster);
 	}
 	
 	public void changeRoom(Exit exit)

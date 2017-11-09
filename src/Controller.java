@@ -12,7 +12,6 @@ public class Controller implements EventHandler<ActionEvent>
 	@Override
 	public void handle(ActionEvent event)
 	{
-		// TODO Auto-generated method stub
 		if (event.getSource()== view.btNorth)
 		{
 			model.changeRoom(model.currentRoom.getNorthExit());
@@ -49,10 +48,9 @@ public class Controller implements EventHandler<ActionEvent>
 		{
 			if(model.roomHasMonster(model.currentRoom) == true)
 			{
-				//call getMonsterDesc() in model class
+				model.getMonsterDesc();
 			}
 		}
-		
 	}
 	
 	public void addView(View v)

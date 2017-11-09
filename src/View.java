@@ -242,6 +242,11 @@ public class View implements Observer
 			mapView.setImage(((Room) arg1).getMapLocationImage());
 			text.appendText("\n" + "\n" + ((Room) arg1).getRoomDescription());
 		}
+		else if(arg1.getClass().getName().equals("Monster"))
+		{
+			text.appendText("\n\n" + ((Monster) arg1).getMonsterDescription());
+		}
+		
 	}
 	
 }

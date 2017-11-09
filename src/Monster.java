@@ -20,19 +20,19 @@ public class Monster extends Entity
 		this.damage = damage;
 	}
 	
-	public void getMonsterName()
+	public String getMonsterName()
 	{
-		System.out.println(this.monsterName);
+		return this.monsterName;
 	}
 	
-	public void getMonsterID()
+	public String getMonsterID()
 	{
-		System.out.println(this.monsterID);
+		return this.monsterID;
 	}
 	
-	public void getMonsterDescription()
+	public String getMonsterDescription()
 	{
-		System.out.println(this.description);
+		return this.description;
 	}
 	
 	
@@ -46,10 +46,9 @@ public class Monster extends Entity
 		location.add(room);
 	}
 	
-	public String getLocation()
+	public int getLocation()
 	{
-		return location.toString();
-		
+		return location.get(0).getRoomID();		
 	}
 	
 	
