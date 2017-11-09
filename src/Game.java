@@ -14,7 +14,6 @@ public class Game extends Application
 	View view;
 	Model model;
 	Controller controller;
-	Monster monster;
 	
 	/* (non-Javadoc)
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
@@ -29,19 +28,13 @@ public class Game extends Application
 		
 		model.addObserver(view);
 		
-		//monster intialized in this class? not sure really
-		monster = new Monster();
-		
-		
 		controller.addModel(model);
 		controller.addView(view);
 		controller.initModel();
 		view.addController(controller);
 		primaryStage = view.getStage();
 		
-		
-		//populating monster arraylist from Controller method addMonster
-		controller.addMonsters(monster);
+	
 		
 	}
 	

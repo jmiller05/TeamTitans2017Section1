@@ -65,17 +65,7 @@ public class Controller implements EventHandler<ActionEvent>
 	{
 		model.modelStart();
 	}
-	
-	public void addMonsters(Monster m)
-	{
-		try{
-			m.populateMonsters();
-		} catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
+		
 }
 
 
