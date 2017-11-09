@@ -24,9 +24,8 @@ public class Model extends Observable
 	private ArrayList<Artifact> artifactArray = new ArrayList<Artifact>();
 	private ArrayList<Armor> armorArray = new ArrayList<Armor>();
 	private Random rand = new Random();
-	
-	
-	
+	private Monster currentMonster;
+
 	public Model()
 	{
 		this.populateRooms();
@@ -221,6 +220,7 @@ public class Model extends Observable
 		
 	}
 	
+<<<<<<< HEAD
 	public void populateArtifact() {
 			
 			Artifact art1 = new Artifact ("art_00", "Map", "Shows the map of the entire dungeon", 0, null);
@@ -254,6 +254,27 @@ public class Model extends Observable
 		armorArray.add(amr4);
 	}
 
+=======
+	public boolean roomHasMonster(Room r)
+	{
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			if( monsterArray.get(i).getLocation() == currentRoom.getRoomID())
+			{
+				currentMonster = monsterArray.get(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void getMonsterDesc()
+	{
+		setChanged();
+		notifyObservers(currentMonster);
+	}
+	
+>>>>>>> 3385f2c8bfc28b6ee402b63ebc67fcaf85305445
 	public void changeRoom(Exit exit)
 	{
 		currentRoom = currentRoom.getAdjacentRoom(exit);
