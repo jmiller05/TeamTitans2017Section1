@@ -25,6 +25,7 @@ public class Model extends Observable
 	private ArrayList<Artifact> artifactArray = new ArrayList<Artifact>();
 	private ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
 	private ArrayList<Armor> armorArray = new ArrayList<Armor>();
+	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
 	private Random rand = new Random();
 	private Monster currentMonster;
 	
