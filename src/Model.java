@@ -291,7 +291,7 @@ public class Model extends Observable
 		puzzleArray.add(p0); puzzleArray.add(p1); puzzleArray.add(p2); puzzleArray.add(p3); 
 		puzzleArray.add(p4); puzzleArray.add(p5); puzzleArray.add(p6);
 	}
-	public void addMonsterRooms()
+	public void addPuzzleRooms()
 	{
 		puzzleArray.get(0).addLocation(roomAL.get(4));
 		puzzleArray.get(1).addLocation(roomAL.get(15));
