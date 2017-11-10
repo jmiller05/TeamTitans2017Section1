@@ -3,9 +3,7 @@
  */
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 import java.util.Random;
-
 import javafx.scene.image.Image;
 
 
@@ -15,17 +13,17 @@ import javafx.scene.image.Image;
  */
 public class Model extends Observable
 {
-	ArrayList<Room> roomAL; //ArrayList of Rooms
-	ArrayList<String> roomNameAL; //ArrayList of Room Names
-	ArrayList<String> roomDescriptionAL; // Array List of room descriptions
-	ArrayList<Exit> exitAL; //Array List of exits
-	Room currentRoom;
+	private ArrayList<Room> roomAL; //ArrayList of Rooms
+	private ArrayList<String> roomNameAL; //ArrayList of Room Names
+	private ArrayList<String> roomDescriptionAL; // Array List of room descriptions
+	private ArrayList<Exit> exitAL; //Array List of exits
+	private Room currentRoom;
 	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	private ArrayList<Artifact> artifactArray = new ArrayList<Artifact>();
 	private ArrayList<Armor> armorArray = new ArrayList<Armor>();
 	private Random rand = new Random();
 	private Monster currentMonster;
-
+	
 	public Model()
 	{
 		this.populateRooms();
@@ -176,6 +174,16 @@ public class Model extends Observable
 		
 	}
 	
+	public Room getCurrentRoom()
+	{
+		return currentRoom;
+	}
+	
+	public void setCurrentRoom(Room currentRoom)
+	{
+		this.currentRoom = currentRoom;
+	}
+	
 	public void populateMonsters()
 	{
 		Monster m0 = new Monster("Mon_00", "Toxic Wolfspider", "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom.", 5, rand.nextInt(2) + 1);
@@ -220,27 +228,28 @@ public class Model extends Observable
 		
 	}
 	
-<<<<<<< HEAD
-	public void populateArtifact() {
-			
-			Artifact art1 = new Artifact ("art_00", "Map", "Shows the map of the entire dungeon", 0, null);
-			Artifact art2 = new Artifact ("art_01", "Potion Bottle", "Restores any lost HP", 100, null);//heals 100 hp under item bonus?
-			Artifact art3 = new Artifact ("art_02", "Well of Life", "Restores any lost HP - Fills Potion Bottle", 100, null);
-			Artifact art4 = new Artifact ("PZ00_00", "Torch", "Emits a light to see through the darkness", 100, null);	
-			Artifact art5 = new Artifact ("PZ01_00", "Emerald Rune", "A glowing green stone", 100, null);
-			Artifact art6 = new Artifact ("PZ01_01", "Sapphire Rune", "A glowing blue stone", 100, null);
-			Artifact art7 = new Artifact ("PZ02_00", "Golden Skull #1", "A golden skull", 100, null);
-			Artifact art8 = new Artifact ("PZ02_01", "Golden Skull #2", "A golden skull", 100, null);
-			Artifact art9 = new Artifact ("PZ02_02", "Golden Skull #3", "A golden skull", 100, null);
-			Artifact art10 = new Artifact ("PZ03_00", "Shiny Iron Key", "A key forged from iron that's shiny", 100, null);
-			Artifact art11 = new Artifact ("PZ04_00", "Golden Key", "A key casted from gold", 100, null);
-					
-			artifactArray.add(art1); artifactArray.add(art5); artifactArray.add(art9);
-			artifactArray.add(art2); artifactArray.add(art6); artifactArray.add(art10);
-			artifactArray.add(art3); artifactArray.add(art7); artifactArray.add(art11);
-			artifactArray.add(art4); artifactArray.add(art8);
-		}
-
+	
+	public void populateArtifact() 
+	{
+		
+		Artifact art1 = new Artifact ("art_00", "Map", "Shows the map of the entire dungeon", 0, null);
+		Artifact art2 = new Artifact ("art_01", "Potion Bottle", "Restores any lost HP", 100, null);//heals 100 hp under item bonus?
+		Artifact art3 = new Artifact ("art_02", "Well of Life", "Restores any lost HP - Fills Potion Bottle", 100, null);
+		Artifact art4 = new Artifact ("PZ00_00", "Torch", "Emits a light to see through the darkness", 100, null);	
+		Artifact art5 = new Artifact ("PZ01_00", "Emerald Rune", "A glowing green stone", 100, null);
+		Artifact art6 = new Artifact ("PZ01_01", "Sapphire Rune", "A glowing blue stone", 100, null);
+		Artifact art7 = new Artifact ("PZ02_00", "Golden Skull #1", "A golden skull", 100, null);
+		Artifact art8 = new Artifact ("PZ02_01", "Golden Skull #2", "A golden skull", 100, null);
+		Artifact art9 = new Artifact ("PZ02_02", "Golden Skull #3", "A golden skull", 100, null);
+		Artifact art10 = new Artifact ("PZ03_00", "Shiny Iron Key", "A key forged from iron that's shiny", 100, null);
+		Artifact art11 = new Artifact ("PZ04_00", "Golden Key", "A key casted from gold", 100, null);
+		
+		artifactArray.add(art1); artifactArray.add(art5); artifactArray.add(art9);
+		artifactArray.add(art2); artifactArray.add(art6); artifactArray.add(art10);
+		artifactArray.add(art3); artifactArray.add(art7); artifactArray.add(art11);
+		artifactArray.add(art4); artifactArray.add(art8);
+	}
+	
 	public void populateArmor() {
 		
 		Armor amr1 = new Armor ("Amr01", "Cloth Armor", "Rugged clothes from your village", 10, null);
@@ -253,13 +262,12 @@ public class Model extends Observable
 		armorArray.add(amr3);
 		armorArray.add(amr4);
 	}
-
-=======
+	
 	public boolean roomHasMonster(Room r)
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
 		{
-			if( monsterArray.get(i).getLocation() == currentRoom.getRoomID())
+			if( monsterArray.get(i).getLocation() == getCurrentRoom().getRoomID())
 			{
 				currentMonster = monsterArray.get(i);
 				return true;
@@ -274,19 +282,18 @@ public class Model extends Observable
 		notifyObservers(currentMonster);
 	}
 	
->>>>>>> 3385f2c8bfc28b6ee402b63ebc67fcaf85305445
 	public void changeRoom(Exit exit)
 	{
-		currentRoom = currentRoom.getAdjacentRoom(exit);
+		setCurrentRoom(getCurrentRoom().getAdjacentRoom(exit));
 		setChanged();
-		notifyObservers(currentRoom);
+		notifyObservers(getCurrentRoom());
 	}
 	
 	public void modelStart()
 	{
-		currentRoom = roomAL.get(0);
+		setCurrentRoom(roomAL.get(0));
 		setChanged();
-		notifyObservers(currentRoom);
+		notifyObservers(getCurrentRoom());
 	}
 	
 }
