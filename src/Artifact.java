@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Artifact extends Item {
 
 	
-	public Artifact(String itemID, String itemName, String itemDescription, int itemBonus, Monster droppedBy)
+	public Artifact(String itemID, String itemName, String itemDescription, Monster droppedBy, Room foundIn)
 	{
-		super(itemID, itemName, itemDescription, itemBonus, droppedBy);
+		super(itemID, itemName, itemDescription, droppedBy, foundIn);
 		// TODO Auto-generated constructor stub
 	}
 

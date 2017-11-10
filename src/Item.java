@@ -11,18 +11,34 @@ public class Item {
 	protected String itemID;
 	protected String itemName;
 	protected String itemDescription;
-	protected int itemBonus;
 	private ArrayList<Room> locations = new ArrayList<Room>();
 	protected Monster droppedBy;
+	protected Room foundIn;
 	
-	public Item(String itemID, String itemName, String itemDescription, int itemBonus, Monster droppedBy) {//need to add room location where item found
+	public Item(String itemID, String itemName, String itemDescription, Monster droppedBy, Room foundIn) {//need to add room location where item found
 		this.itemID = itemID;
 		this.itemName = itemName;
 		this.itemDescription = itemDescription;
-		this.itemBonus = itemBonus;
 		this.droppedBy = droppedBy;
+		this.foundIn = foundIn;
 	}
 	
+	/**
+	 * @return the foundIn
+	 */
+	public Room getFoundIn()
+	{
+		return foundIn;
+	}
+
+	/**
+	 * @param foundIn the foundIn to set
+	 */
+	public void setFoundIn(Room foundIn)
+	{
+		this.foundIn = foundIn;
+	}
+
 	public void dropItem()
 	{
 		
@@ -57,13 +73,6 @@ public class Item {
 		return itemDescription;
 	}
 	
-	/**
-	 * @return the itemBonus
-	 */
-	public int getItemBonus()
-	{
-		return itemBonus;
-	}
 	
 	/**
 	 * @return the locations
