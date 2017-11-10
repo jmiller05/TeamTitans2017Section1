@@ -27,7 +27,7 @@ public class Puzzle {
  		System.out.println(this.puzzleID);
  	}
  	
- 	public void gePuzzleDescription()
+ 	public void getPuzzleDescription()
  	{
 		System.out.println(this.puzzleDescription);
 	}
