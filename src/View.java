@@ -48,6 +48,7 @@ public class View implements Observer
 	Button btSearch; //Button to search a room
 	Button btInventory; //Button to display inventory
 	Button btExamineMonster; //Button to retrieve monster description
+	Button btExaminePuzzle; //Button to retrieve puzzle description
 	TextArea text; //TextArea to display text descriptions
 	ImageView mapView;
 	
@@ -77,6 +78,7 @@ public class View implements Observer
 		btSearch = new Button("Search Room");
 		btInventory = new Button("Show Inventory");
 		btExamineMonster = new Button("Examine Monster");
+		btExaminePuzzle = new Button("Examine Puzzle");
 		
 		//Some button styling
 		btNorth.setStyle("-fx-font-size: 16;");
@@ -91,6 +93,7 @@ public class View implements Observer
 		btSearch.setStyle("-fx-font-size: 18; ");
 		btInventory.setStyle("-fx-font-size: 18; ");
 		btExamineMonster.setStyle("-fx-font-size: 16;");
+		btExaminePuzzle.setStyle("-fx-font-size: 16;");
 		
 		
 		//Initializing and setting the content of the text area
@@ -177,7 +180,7 @@ public class View implements Observer
 		//Adding the bottom two button containers to the the larger bottom container
 		bottomContainer.getChildren().addAll(buttonBar,gridpane);
 		bottomContainer.setPadding(new Insets(25,0,25,0));
-		buttonBar.getChildren().addAll(btExamine, btSearch, btInventory, btExamineMonster);
+		buttonBar.getChildren().addAll(btExamine, btSearch, btInventory, btExamineMonster, btExaminePuzzle);
 		
 		//Adding the buttons to the button container
 		gridpane.add(btNorth, 1, 0);
@@ -220,6 +223,7 @@ public class View implements Observer
 		btNorthwest.setOnAction(controller);
 		btSouthwest.setOnAction(controller);
 		btExamineMonster.setOnAction(controller);
+		btExaminePuzzle.setOnAction(controller);
 	}
 	
 	/* (non-Javadoc)
