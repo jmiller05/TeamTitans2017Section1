@@ -286,6 +286,17 @@ public class Model extends Observable
 		puzzleArray.add(p0); puzzleArray.add(p1); puzzleArray.add(p2); puzzleArray.add(p3); 
 		puzzleArray.add(p4); puzzleArray.add(p5); puzzleArray.add(p6);
 	}
+	public void addPuzzleRooms()
+	{
+		puzzleArray.get(0).addLocation(roomAL.get(4));
+		puzzleArray.get(1).addLocation(roomAL.get(15));
+		puzzleArray.get(2).addLocation(roomAL.get(29));
+		puzzleArray.get(3).addLocation(roomAL.get(5));
+		puzzleArray.get(4).addLocation(roomAL.get(18));
+		puzzleArray.get(5).addLocation(roomAL.get(20));
+		puzzleArray.get(6).addLocation(roomAL.get(24));
+		
+	}	
 	public boolean roomHasMonster(Room r)
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
