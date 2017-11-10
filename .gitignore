@@ -3,3 +3,5 @@ bin/Puzzle.class
 bin/Exit.class
 bin/Exit.class
 *.class
+*.class
+bin/Model.class

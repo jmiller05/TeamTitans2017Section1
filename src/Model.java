@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 
 /**
- * @author Evan
+ * @author Evan, Brad, Jessie, Josh
  *
  */
 public class Model extends Observable
@@ -19,6 +19,7 @@ public class Model extends Observable
 	private ArrayList<Artifact> artifactArray = new ArrayList<Artifact>();
 	private ArrayList<Weapon> weaponArray = new ArrayList<Weapon>();
 	private ArrayList<Armor> armorArray = new ArrayList<Armor>();
+	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
 	private Random rand = new Random();
 	private Monster currentMonster;
 	
@@ -241,11 +242,12 @@ public class Model extends Observable
 		Artifact art9 = new Artifact ("PZ02_02", "Golden Skull #3", "A golden skull", null, roomAL.get(29));
 		Artifact art10 = new Artifact ("PZ03_00", "Shiny Iron Key", "A key forged from iron that's shiny", null, roomAL.get(5));
 		Artifact art11 = new Artifact ("PZ04_00", "Golden Key", "A key casted from gold", null, roomAL.get(18));
+		Artifact art12 = new Artifact ("PZ05_00", "Dirty Key", "A dirty key", monsterArray.get(6), roomAL.get(20));
 		
 		artifactArray.add(art1); artifactArray.add(art5); artifactArray.add(art9);
 		artifactArray.add(art2); artifactArray.add(art6); artifactArray.add(art10);
 		artifactArray.add(art3); artifactArray.add(art7); artifactArray.add(art11);
-		artifactArray.add(art4); artifactArray.add(art8);
+		artifactArray.add(art4); artifactArray.add(art8); artifactArray.add(art12);
 	}
 	
 	public void populateWeapon() {
@@ -264,9 +266,9 @@ public class Model extends Observable
 	public void populateArmor() {
 		
 		Armor amr1 = new Armor ("Amr_00", "Cloth Armor", "Rugged clothes from your village", 10, null, null);//starting
-		Armor amr2 = new Armor ("Amr_01", "Leather Armor", "Armor crafted from deer skin", 10, null, roomAL.get(1));
-		Armor amr3 = new Armor ("Amr_02", "Chainmail Armor", "Armor with many iron links woven together", 10, null, roomAL.get(17));
-		Armor amr4 = new Armor ("Amr_03", "Plate Armor", "Armor forged from steel", 10, monsterArray.get(5), roomAL.get(25));//needs to be found in rooms 25-28
+		Armor amr2 = new Armor ("Amr_01", "Leather Armor", "Armor crafted from deer skin", 20, null, roomAL.get(1));
+		Armor amr3 = new Armor ("Amr_02", "Chainmail Armor", "Armor with many iron links woven together", 40, null, roomAL.get(17));
+		Armor amr4 = new Armor ("Amr_03", "Plate Armor", "Armor forged from steel", 80, monsterArray.get(5), roomAL.get(25));//needs to be found in rooms 25-28
 		
 		armorArray.add(amr1); 
 		armorArray.add(amr2);
