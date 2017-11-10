@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 
 public class Item {
-
+	
 	protected String itemID;
 	protected String itemName;
 	protected String itemDescription;
 	protected int itemBonus;
 	private ArrayList<Room> locations = new ArrayList<Room>();
-	protected static Monster droppedBy;
-
+	protected Monster droppedBy;
+	
 	public Item(String itemID, String itemName, String itemDescription, int itemBonus, Monster droppedBy) {//need to add room location where item found
 		this.itemID = itemID;
 		this.itemName = itemName;
@@ -22,7 +22,7 @@ public class Item {
 		this.itemBonus = itemBonus;
 		this.droppedBy = droppedBy;
 	}
-
+	
 	public void dropItem()
 	{
 		
@@ -40,7 +40,7 @@ public class Item {
 	{
 		return itemID;
 	}
-
+	
 	/**
 	 * @return the itemName
 	 */
@@ -48,7 +48,7 @@ public class Item {
 	{
 		return itemName;
 	}
-
+	
 	/**
 	 * @return the itemDescription
 	 */
@@ -56,7 +56,7 @@ public class Item {
 	{
 		return itemDescription;
 	}
-
+	
 	/**
 	 * @return the itemBonus
 	 */
@@ -64,7 +64,7 @@ public class Item {
 	{
 		return itemBonus;
 	}
-
+	
 	/**
 	 * @return the locations
 	 */
@@ -72,14 +72,14 @@ public class Item {
 	{
 		return locations;
 	}
-
+	
 	/**
 	 * @return the droppedBy
 	 */
-	public static Monster getDroppedBy()
+	public  Monster getDroppedBy()
 	{
 		return droppedBy;
 	}
-
-
+	
+	
 }

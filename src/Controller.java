@@ -14,39 +14,39 @@ public class Controller implements EventHandler<ActionEvent>
 	{
 		if (event.getSource()== view.btNorth)
 		{
-			model.changeRoom(model.currentRoom.getNorthExit());
+			model.changeRoom(model.getCurrentRoom().getNorthExit());
 		}
 		else if (event.getSource().equals(view.btSouth))
 		{
-			model.changeRoom(model.currentRoom.getSouthExit());
+			model.changeRoom(model.getCurrentRoom().getSouthExit());
 		}
 		else if (event.getSource().equals(view.btEast))
 		{
-			model.changeRoom(model.currentRoom.getEastExit());
+			model.changeRoom(model.getCurrentRoom().getEastExit());
 		}
 		else if (event.getSource().equals(view.btWest))
 		{
-			model.changeRoom(model.currentRoom.getWestExit());
+			model.changeRoom(model.getCurrentRoom().getWestExit());
 		}
 		else if (event.getSource().equals(view.btNortheast))
 		{
-			model.changeRoom(model.currentRoom.getNorthEastExit());
+			model.changeRoom(model.getCurrentRoom().getNorthEastExit());
 		}
 		else if (event.getSource().equals(view.btNorthwest))
 		{
-			model.changeRoom(model.currentRoom.getNorthWestExit());
+			model.changeRoom(model.getCurrentRoom().getNorthWestExit());
 		}
 		else if (event.getSource().equals(view.btSoutheast))
 		{
-			model.changeRoom(model.currentRoom.getSouthEastExit());
+			model.changeRoom(model.getCurrentRoom().getSouthEastExit());
 		}
 		else if (event.getSource().equals(view.btSouthwest))
 		{
-			model.changeRoom(model.currentRoom.getSouthWestExit());
+			model.changeRoom(model.getCurrentRoom().getSouthWestExit());
 		}
 		else if (event.getSource().equals(view.btExamineMonster))
 		{
-			if(model.roomHasMonster(model.currentRoom) == true)
+			if(model.roomHasMonster(model.getCurrentRoom()) == true)
 			{
 				model.getMonsterDesc();
 			}
