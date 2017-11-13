@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-
-
 /**
  * @author Brad
  *
@@ -39,15 +36,4 @@ public class Armor extends Item {
 	{
 		this.armor = armor;
 	}
-
-
-	/**
-	 * @param itemID
-	 * @param itemName
-	 * @param itemDescription
-	 * @param itemBonus 
-	 */
-	
-
-	
 }

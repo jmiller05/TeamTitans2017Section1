@@ -1,12 +1,6 @@
-/**
- * 
- */
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
-
-import com.sun.org.apache.bcel.internal.generic.I2D;
-
 import javafx.scene.image.Image;
 
 
@@ -36,7 +30,9 @@ public class Model extends Observable
 		this.assignRoomImages();
 		this.populateMonsters();
 		this.addMonsterRooms();
-		
+		this.populateArmor();
+		this.populateArtifact();
+		this.populateWeapon();
 	}
 	
 	public void populateRooms()
@@ -230,9 +226,7 @@ public class Model extends Observable
 		monsterArray.get(6).addLocation(roomAL.get(20));
 		
 		monsterArray.get(7).addLocation(roomAL.get(29));
-		
 	}
-	
 	
 	public void populateArtifact() 
 	{
@@ -268,6 +262,7 @@ public class Model extends Observable
 		weaponArray.add(wep3);
 		weaponArray.add(wep4);
 	}
+	
 	public void populateArmor() {
 		
 		Armor amr1 = new Armor ("Amr_00", "Cloth Armor", "Rugged clothes from your village", 10, null, null);//starting

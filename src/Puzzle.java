@@ -7,7 +7,6 @@ public class Puzzle {
   	private String hint;
   	private ArrayList<Item> artifact = new ArrayList<Item>();
   	private ArrayList<Room> location = new ArrayList<Room>();
-  	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
 	
  	public Puzzle(String ID, String name, String desc, String hi)
  	{
@@ -27,7 +26,7 @@ public class Puzzle {
  		System.out.println(this.puzzleID);
  	}
  	
- 	public void gePuzzleDescription()
+ 	public void getPuzzleDescription()
  	{
 		System.out.println(this.puzzleDescription);
 	}
