@@ -51,6 +51,13 @@ public class Controller implements EventHandler<ActionEvent>
 				model.getMonsterDesc();
 			}
 		}
+		else if (event.getSource().equals(view.btExaminePuzzle))
+		{
+			if(model.roomHasPuzzle(model.getCurrentRoom()) == true)
+			{
+				model.getPuzzleDesc();
+			}
+		}
 	}
 	
 	public void addView(View v)
