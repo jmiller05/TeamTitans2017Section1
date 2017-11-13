@@ -16,24 +16,24 @@ public class Puzzle {
 		this.hint = hi;
  	}
 	
- 	public void getPuzzleName()
+ 	public String getPuzzleName()
  	{
- 		System.out.println(this.puzzleName);
+ 		return this.puzzleName;
  	}
 	
- 	public void getPuzzleID()
+ 	public String getPuzzleID()
  	{
- 		System.out.println(this.puzzleID);
+ 		return this.puzzleID;
  	}
  	
- 	public void getPuzzleDescription()
+ 	public String getPuzzleDescription()
  	{
-		System.out.println(this.puzzleDescription);
+		return this.puzzleDescription;
 	}
 	
- 	public void getHint()
+ 	public String getHint()
  	{
- 		System.out.println(this.hint);	
+ 		return this.hint;	
  	}
 	
  	public void addItem(Item item)
@@ -45,6 +45,13 @@ public class Puzzle {
 	{
  		location.add(room);
 	}
+ 	
+ 	public int getLocation()
+	{
+		return location.get(0).getRoomID();		
+	}
 	
+
  	
   }
+
