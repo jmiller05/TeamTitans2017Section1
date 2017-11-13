@@ -250,7 +250,10 @@ public class View implements Observer
 		{
 			text.appendText("\n\n" + ((Monster) arg1).getMonsterDescription());
 		}
-		
+		else if(arg1.getClass().getName().equals("Puzzle"))
+		{
+			text.appendText("\n\n" + ((Puzzle) arg1).getPuzzleDescription());
+		}
 	}
 	
 }
