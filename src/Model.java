@@ -275,6 +275,8 @@ public class Model extends Observable
 		armorArray.add(amr3);
 		armorArray.add(amr4);
 	}
+	
+
 	public void populatePuzzles()
 	{
 		Puzzle p0 = new Puzzle("PZ00", "Torch", "Pick the torch in room 4 in order to enter and navigate room 6", "Collect and equip torch in room 4 to illuminate room 6");

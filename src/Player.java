@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 
+
 public class Player extends Entity
 {
-	private ArrayList<Item> inventory = new ArrayList<Item>();
-	
+	private Inventory inventory;
 	
 	public Player(int health, int damage)
 	{
 		super(health, damage);
+		this.inventory = new Inventory();
+		this.loadAllItems(inventory);
 	}
 	
 	public void setLocation(Room r)
