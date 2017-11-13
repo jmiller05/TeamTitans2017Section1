@@ -22,6 +22,7 @@ public class Model extends Observable
 	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
 	private Random rand = new Random();
 	private Monster currentMonster;
+	private Puzzle currentPuzzle;
 	
 	public Model()
 	{
@@ -318,6 +319,25 @@ public class Model extends Observable
 	{
 		setChanged();
 		notifyObservers(currentMonster);
+	}
+	
+	public boolean roomHasPuzzle(Room o)
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( puzzleArray.get(i).getLocation() == getCurrentRoom().getRoomID())
+			{
+				currentPuzzle = puzzleArray.get(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void getPuzzleDesc()
+	{
+		setChanged();
+		notifyObservers(currentPuzzle);
 	}
 	
 	public void changeRoom(Exit exit)
