@@ -321,9 +321,12 @@ public class Model extends Observable
 		
 	}	
 	
-	public boolean roomHasWeapon(Room r) {
-		for (int i = 0; i < weaponArray.size(); i++) {
-			if(weaponArray.get(i).getLocation() == getCurrentRoom().getRoomID()) {
+	public boolean roomHasWeapon(Room r) 
+	{
+		for (int i = 0; i < weaponArray.size(); i++) 
+		{
+			if(weaponArray.get(i).getLocation() == r.getRoomID()) 
+			{
 				currentItem = weaponArray.get(i);
 				return true;
 			}
@@ -344,7 +347,8 @@ public class Model extends Observable
 		return false;
 	}
 	
-	public void getItemDesc() {
+	public void getItemDesc() 
+	{
 		setChanged();
 		notifyObservers(currentItem);
 	}

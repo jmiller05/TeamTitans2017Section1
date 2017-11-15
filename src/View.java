@@ -224,6 +224,7 @@ public class View implements Observer
 		btSouthwest.setOnAction(controller);
 		btExamineMonster.setOnAction(controller);
 		btExaminePuzzle.setOnAction(controller);
+		btSearch.setOnAction(controller);
 	}
 	
 	/* (non-Javadoc)
@@ -253,6 +254,10 @@ public class View implements Observer
 		else if(arg1.getClass().getName().equals("Puzzle"))
 		{
 			text.appendText("\n\n" + ((Puzzle) arg1).getPuzzleDescription());
+		}
+		else if(arg1.getClass().getName().equals("Weapon"))
+		{
+			text.appendText("\n\n" + ((Weapon) arg1).getItemDescription());
 		}
 	}
 	
