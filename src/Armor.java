@@ -13,9 +13,9 @@ public class Armor extends Item {
 	 * @param itemDescription
 	 * @param droppedBy
 	 */
-	public Armor(String itemID, String itemName, String itemDescription, int armor, Monster droppedBy, Room foundIn)
+	public Armor(String itemID, String itemName, String itemDescription, int armor, Monster droppedBy)
 	{
-		super(itemID, itemName, itemDescription, droppedBy, foundIn);
+		super(itemID, itemName, itemDescription, droppedBy);
 		// TODO Auto-generated constructor stub
 		
 		this.armor = armor;

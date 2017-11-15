@@ -21,6 +21,10 @@ public class Model extends Observable
 	private ArrayList<Armor> armorArray = new ArrayList<Armor>();
 	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
 	private Random rand = new Random();
+
+	private Weapon currentItem;
+	@SuppressWarnings("rawtypes")
+	//ArrayList<ArrayList> itemArray = new ArrayList<ArrayList> ( );
 	private Monster currentMonster;
 	
 	public Model()
@@ -30,9 +34,12 @@ public class Model extends Observable
 		this.assignRoomImages();
 		this.populateMonsters();
 		this.addMonsterRooms();
-		this.populateArmor();
-		this.populateArtifact();
+		//this.populateArmor();
+		//this.populateArtifact();
 		this.populateWeapon();
+		//itemArray.add(weaponArray);
+		//itemArray.add(armorArray);
+		//itemArray.add(artifactArray);
 	}
 	
 	public void populateRooms()
@@ -228,55 +235,66 @@ public class Model extends Observable
 		monsterArray.get(7).addLocation(roomAL.get(29));
 	}
 	
-	public void populateArtifact() 
+	/**public void populateArtifact() 
 	{
 		
-		Artifact art1 = new Artifact ("art_00", "Map", "Shows the map of the entire dungeon", null, roomAL.get(2));
-		Artifact art2 = new Artifact ("art_01", "Potion Bottle", "Restores any lost HP", null, roomAL.get(20));
-		Artifact art3 = new Artifact ("art_02", "Well of Life", "Restores any lost HP - Fills Potion Bottle", null, roomAL.get(15));
-		Artifact art4 = new Artifact ("PZ00_00", "Torch", "Emits a light to see through the darkness", null, roomAL.get(4));	
-		Artifact art5 = new Artifact ("PZ01_00", "Emerald Rune", "A glowing green stone", null, roomAL.get(16));
-		Artifact art6 = new Artifact ("PZ01_01", "Sapphire Rune", "A glowing blue stone", null, roomAL.get(17));
-		Artifact art7 = new Artifact ("PZ02_00", "Golden Skull #1", "A golden skull", null, roomAL.get(9));
-		Artifact art8 = new Artifact ("PZ02_01", "Golden Skull #2", "A golden skull", null, roomAL.get(22));
-		Artifact art9 = new Artifact ("PZ02_02", "Golden Skull #3", "A golden skull", null, roomAL.get(29));
-		Artifact art10 = new Artifact ("PZ03_00", "Shiny Iron Key", "A key forged from iron that's shiny", null, roomAL.get(5));
-		Artifact art11 = new Artifact ("PZ04_00", "Golden Key", "A key casted from gold", null, roomAL.get(18));
-		Artifact art12 = new Artifact ("PZ05_00", "Dirty Key", "A dirty key", monsterArray.get(6), roomAL.get(20));
+		Artifact art0 = new Artifact ("art_00", "Map", "Shows the map of the entire dungeon", null, roomAL.get(2));
+		Artifact art1 = new Artifact ("art_01", "Potion Bottle", "Restores any lost HP", null, roomAL.get(20));
+		Artifact art2 = new Artifact ("art_02", "Well of Life", "Restores any lost HP - Fills Potion Bottle", null, roomAL.get(15));
+		Artifact art3 = new Artifact ("PZ00_00", "Torch", "Emits a light to see through the darkness", null, roomAL.get(4));	
+		Artifact art4 = new Artifact ("PZ01_00", "Emerald Rune", "A glowing green stone", null, roomAL.get(16));
+		Artifact art5 = new Artifact ("PZ01_01", "Sapphire Rune", "A glowing blue stone", null, roomAL.get(17));
+		Artifact art6 = new Artifact ("PZ02_00", "Golden Skull #1", "A golden skull", null, roomAL.get(9));
+		Artifact art7 = new Artifact ("PZ02_01", "Golden Skull #2", "A golden skull", null, roomAL.get(22));
+		Artifact art8 = new Artifact ("PZ02_02", "Golden Skull #3", "A golden skull", null, roomAL.get(29));
+		Artifact art9 = new Artifact ("PZ03_00", "Shiny Iron Key", "A key forged from iron that's shiny", null, roomAL.get(5));
+		Artifact art10 = new Artifact ("PZ04_00", "Golden Key", "A key casted from gold", null, roomAL.get(18));
+		Artifact art11 = new Artifact ("PZ05_00", "Dirty Key", "A dirty key", monsterArray.get(6), roomAL.get(20));
 		
+		artifactArray.add(art0); artifactArray.add(art4); artifactArray.add(art8);
 		artifactArray.add(art1); artifactArray.add(art5); artifactArray.add(art9);
 		artifactArray.add(art2); artifactArray.add(art6); artifactArray.add(art10);
 		artifactArray.add(art3); artifactArray.add(art7); artifactArray.add(art11);
-		artifactArray.add(art4); artifactArray.add(art8); artifactArray.add(art12);
 	}
 	
+*/
 	public void populateWeapon() {
 		
-		Weapon wep1 = new Weapon ("Wep_00", "Branch", "A tree branch", 3, null, null);//starting
-		Weapon wep2 = new Weapon ("Wep_01", "Iron Sword", "A sword forged from iron", 3, null, roomAL.get(5));
-		Weapon wep3 = new Weapon ("Wep_02", "Steel Sword", "A sword forged from steel", 3, null, roomAL.get(12));
-		Weapon wep4 = new Weapon ("Wep_03", "Tungsteel Sword", "A sword forged from tungsteel", 3, monsterArray.get(6), roomAL.get(20));
+		Weapon wep0 = new Weapon ("Wep_00", "Branch", "A tree branch", 3, null);//starting
+		Weapon wep1 = new Weapon ("Wep_01", "Iron Sword", "A sword forged from iron", 3, null);
+		Weapon wep2 = new Weapon ("Wep_02", "Steel Sword", "A sword forged from steel", 3, null);
+		Weapon wep3 = new Weapon ("Wep_03", "Tungsteel Sword", "A sword forged from tungsteel", 3, monsterArray.get(6));
 		
+		weaponArray.add(wep0);
 		weaponArray.add(wep1);
 		weaponArray.add(wep2);
 		weaponArray.add(wep3);
-		weaponArray.add(wep4);
 	}
 	
-	public void populateArmor() {
+	public void addWeaponRoom() {
+		weaponArray.get(0).addLocation(roomAL.get(4));
 		
-		Armor amr1 = new Armor ("Amr_00", "Cloth Armor", "Rugged clothes from your village", 10, null, null);//starting
-		Armor amr2 = new Armor ("Amr_01", "Leather Armor", "Armor crafted from deer skin", 20, null, roomAL.get(1));
-		Armor amr3 = new Armor ("Amr_02", "Chainmail Armor", "Armor with many iron links woven together", 40, null, roomAL.get(17));
-		Armor amr4 = new Armor ("Amr_03", "Plate Armor", "Armor forged from steel", 80, monsterArray.get(5), roomAL.get(25));//needs to be found in rooms 25-28
+		weaponArray.get(1).addLocation(roomAL.get(5));
 		
-		armorArray.add(amr1); 
+		weaponArray.get(2).addLocation(roomAL.get(12));
+		
+		weaponArray.get(3).addLocation(roomAL.get(6));
+		weaponArray.get(3).addLocation(roomAL.get(20));
+	}
+	
+	/**public void populateArmor() {
+		
+		Armor amr0 = new Armor ("Amr_00", "Cloth Armor", "Rugged clothes from your village", 10, null, null);//starting
+		Armor amr1 = new Armor ("Amr_01", "Leather Armor", "Armor crafted from deer skin", 20, null, roomAL.get(1));
+		Armor amr2 = new Armor ("Amr_02", "Chainmail Armor", "Armor with many iron links woven together", 40, null, roomAL.get(17));
+		Armor amr3 = new Armor ("Amr_03", "Plate Armor", "Armor forged from steel", 80, monsterArray.get(5), roomAL.get(25));//needs to be found in rooms 25-28
+		
+		armorArray.add(amr0); 
+		armorArray.add(amr1);
 		armorArray.add(amr2);
 		armorArray.add(amr3);
-		armorArray.add(amr4);
 	}
-	
-
+	*/
 	public void populatePuzzles()
 	{
 		Puzzle p0 = new Puzzle("PZ00", "Torch", "Pick the torch in room 4 in order to enter and navigate room 6", "Collect and equip torch in room 4 to illuminate room 6");
@@ -301,6 +319,17 @@ public class Model extends Observable
 		puzzleArray.get(6).addLocation(roomAL.get(24));
 		
 	}	
+	
+	public boolean roomHasWeapon(Room r) {
+		for (int i = 0; i < weaponArray.size(); i++) {
+			if(weaponArray.get(i).getLocation() == getCurrentRoom().getRoomID()) {
+				currentItem = weaponArray.get(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean roomHasMonster(Room r)
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
@@ -312,6 +341,11 @@ public class Model extends Observable
 			}
 		}
 		return false;
+	}
+	
+	public void getItemDesc() {
+		setChanged();
+		notifyObservers(currentItem);
 	}
 	
 	public void getMonsterDesc()

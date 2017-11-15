@@ -3,13 +3,57 @@ import java.util.ArrayList;
 
 public class Player extends Entity
 {
-	private Inventory inventory;
 	
+	private ArrayList<Item> inventory = new ArrayList<Item>();
+	
+	/**
+	 * Add item to inventory
+	 * @param item
+	 */
+    public void addItem(Item item)
+    {
+        inventory.add(item);
+    }
+    
+    /**
+     * Remove item from inventory
+     * @param item
+     */
+    public void removeItem(int item)
+    {
+        inventory.remove(item);
+    }
+    
+    /**
+     * Return inventory item
+     * @param int
+     */
+    public Item getInventoryItem(int item)
+    {
+        return inventory.get(item);
+    }
+    
+    /**
+     * Return the size of the item inventory
+     * @return int
+     */
+    public int getInventorySize()
+    {
+        return inventory.size();
+    }
+    
+    /**
+     * Return the full inventory list
+     * @return ArrayList
+     */
+    public ArrayList<Item> getInventory()
+    {
+        return inventory;
+    }
+    
 	public Player(int health, int damage)
 	{
 		super(health, damage);
-		this.inventory = new Inventory();
-		this.loadAllItems(inventory);
 	}
 	
 	public void setLocation(Room r)

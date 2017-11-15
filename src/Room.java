@@ -9,6 +9,7 @@ public class Room
 	private String roomDescription;	
 	private ArrayList<Puzzle> puzzles = new ArrayList<Puzzle>();	
 	private ArrayList<Monster> monsters = new ArrayList<Monster>();
+	private ArrayList<Item> items = new ArrayList<Item>();
 	private Image mapLocation;
 	private Exit northExit;
 	private Exit southExit;
@@ -18,6 +19,7 @@ public class Room
 	private Exit northWestExit;
 	private Exit southEastExit;
 	private Exit southWestExit;
+
 	
 	public Room(int roomID, String roomName, String roomDescription)
 	{
@@ -171,4 +173,22 @@ public class Room
 		if(direction.equalsIgnoreCase("southwest") && southWestExit != null){validExit = true;};
 		return validExit;
 	}
+	
+	/**
+	 * Assign item to room
+	 * @param item
+	 */
+	public void setItem(Item item) {
+		items.add(item);
+	}
+	
+	 public Item getItem(int item)
+	    {
+	        return items.get(item);
+	    }
+	 
+	  public ArrayList<Item> getItems()
+	    {
+	        return items;
+	    }
 }

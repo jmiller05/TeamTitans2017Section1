@@ -51,6 +51,11 @@ public class Controller implements EventHandler<ActionEvent>
 				model.getMonsterDesc();
 			}
 		}
+		else if (event.getSource().equals(view.btSearch)) {
+			if(model.roomHasWeapon(model.getCurrentRoom())==true) {
+				model.getItemDesc();
+			}
+		}
 	}
 	
 	public void addView(View v)

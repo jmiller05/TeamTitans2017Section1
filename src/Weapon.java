@@ -15,9 +15,9 @@ public class Weapon extends Item {
 	 * @param itemDescription
 	 * @param droppedBy
 	 */
-	public Weapon(String itemID, String itemName, String itemDescription, int damage, Monster droppedBy, Room foundIn)
+	public Weapon(String itemID, String itemName, String itemDescription, int damage, Monster droppedBy)
 	{
-		super(itemID, itemName, itemDescription, droppedBy, foundIn);
+		super(itemID, itemName, itemDescription, droppedBy);
 		this.damage = damage;
 	}
 
