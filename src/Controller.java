@@ -51,6 +51,7 @@ public class Controller implements EventHandler<ActionEvent>
 				model.getMonsterDesc();
 			}
 		}
+<<<<<<< HEAD
 		
 		else if (event.getSource().equals(view.btSearch)) 
 		{
@@ -60,16 +61,32 @@ public class Controller implements EventHandler<ActionEvent>
 			}
 		}
 		
+=======
+
+		else if (event.getSource().equals(view.btSearch)) {
+			if(model.roomHasWeapon(model.getCurrentRoom())==true) {
+				model.getItemDesc();
+			}
+
+>>>>>>> a471002f9988b165118f1e9dcc7056e886effe0c
 		else if (event.getSource().equals(view.btExaminePuzzle))
 		{
 			if(model.roomHasPuzzle(model.getCurrentRoom()) == true)
 			{
 				model.getPuzzleDesc();
+<<<<<<< HEAD
 			}
 		}
 	}
 	
 	
+=======
+
+			}
+		}
+	}
+		}
+>>>>>>> a471002f9988b165118f1e9dcc7056e886effe0c
 	public void addView(View v)
 	{
 		System.out.println("Controller: adding view");
