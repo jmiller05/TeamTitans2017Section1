@@ -51,21 +51,22 @@ public class Controller implements EventHandler<ActionEvent>
 				model.getMonsterDesc();
 			}
 		}
-<<<<<<< HEAD
+
 		else if (event.getSource().equals(view.btSearch)) {
 			if(model.roomHasWeapon(model.getCurrentRoom())==true) {
 				model.getItemDesc();
-=======
+			}
+
 		else if (event.getSource().equals(view.btExaminePuzzle))
 		{
 			if(model.roomHasPuzzle(model.getCurrentRoom()) == true)
 			{
 				model.getPuzzleDesc();
->>>>>>> c07013e495817caaeca4a350c7de39e6dff32296
+
 			}
 		}
 	}
-	
+		}
 	public void addView(View v)
 	{
 		System.out.println("Controller: adding view");
