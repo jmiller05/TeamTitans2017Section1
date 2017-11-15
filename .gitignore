@@ -5,3 +5,4 @@ bin/Exit.class
 *.class
 *.class
 bin/Model.class
+*.class

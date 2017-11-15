@@ -26,6 +26,7 @@ public class Model extends Observable
 	@SuppressWarnings("rawtypes")
 	//ArrayList<ArrayList> itemArray = new ArrayList<ArrayList> ( );
 	private Monster currentMonster;
+	private Puzzle currentPuzzle;
 	
 	public Model()
 	{
@@ -334,7 +335,7 @@ public class Model extends Observable
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
 		{
-			if( monsterArray.get(i).getLocation() == getCurrentRoom().getRoomID())
+			if( monsterArray.get(i).getLocation() == r.getRoomID())
 			{
 				currentMonster = monsterArray.get(i);
 				return true;
@@ -352,6 +353,25 @@ public class Model extends Observable
 	{
 		setChanged();
 		notifyObservers(currentMonster);
+	}
+	
+	public boolean roomHasPuzzle(Room o)
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( puzzleArray.get(i).getLocation() == o.getRoomID())
+			{
+				currentPuzzle = puzzleArray.get(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void getPuzzleDesc()
+	{
+		setChanged();
+		notifyObservers(currentPuzzle);
 	}
 	
 	public void changeRoom(Exit exit)
