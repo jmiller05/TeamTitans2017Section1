@@ -306,7 +306,7 @@ public class Model extends Observable
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
 		{
-			if( monsterArray.get(i).getLocation() == getCurrentRoom().getRoomID())
+			if( monsterArray.get(i).getLocation() == r.getRoomID())
 			{
 				currentMonster = monsterArray.get(i);
 				return true;
@@ -325,7 +325,7 @@ public class Model extends Observable
 	{
 		for(int i = 0; i < puzzleArray.size(); i++)
 		{
-			if( puzzleArray.get(i).getLocation() == getCurrentRoom().getRoomID())
+			if( puzzleArray.get(i).getLocation() == o.getRoomID())
 			{
 				currentPuzzle = puzzleArray.get(i);
 				return true;
