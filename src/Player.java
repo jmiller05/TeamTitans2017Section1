@@ -41,6 +41,11 @@ public class Player
 		 this.setCurrentRoom(this.getCurrentRoom().getAdjacentRoom(exit));
 	}
 
+	public void attack(Entity e)
+	{
+		
+	}
+	
 	@Override
 	public String toString()
 	{

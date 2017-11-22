@@ -20,13 +20,13 @@ public class Game extends Application
 	public Player gamePlayer;
 	public Controller gameController;
 	public Stage inventoryStage;
-
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
 		FXMLLoader loader = new FXMLLoader();
 		FXMLLoader inventoryLoader = new FXMLLoader();
-
+		
 		Player gamePlayer = new Player();
 		
 		//gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
@@ -61,13 +61,10 @@ public class Game extends Application
              c.printStackTrace();
              return;
           }*/
-        
+		
 		
 		Controller gameController = new Controller(gamePlayer,Room.readRooms("Rooms.dat"));
 		
-		
-		
-		// TODO Auto-generated method stub
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
 		loader.setLocation(getClass().getResource("View.fxml"));
@@ -245,5 +242,5 @@ public class Game extends Application
 		return roomAL;
 		
 	} */
-
+	
 }
