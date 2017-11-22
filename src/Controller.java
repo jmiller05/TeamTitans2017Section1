@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -23,7 +24,8 @@ public class Controller
 	private Stage inventoryStage;
 	private ObservableList<Item> inventoryList;
 	
-
+	@FXML
+	ProgressBar health;
 	@FXML
 	TextArea text;
 	@FXML
@@ -97,6 +99,8 @@ public class Controller
 		
 		inventoryList = FXCollections.<Item>observableArrayList();
 	    inventoryList.addAll(player.getInventory());
+	    
+	    health.progressProperty().bind(player.getHealth().divide(player.getMaxHealth()));
 
 		
 	    
@@ -114,12 +118,14 @@ public class Controller
 		}
 		else
 		{
+			//player.takeDamage(1);
+			System.out.println(player.getHealth());
 			player.changeRoom(player.getCurrentRoom().getNorthExit());
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
-			inventoryList.add(player.getInventory().get(3));
+			//inventoryList.add(player.getInventory().get(3));
 		}
 
 	}
