@@ -199,6 +199,12 @@ public class Controller
 		inventoryView.setItems(inventoryList);
 		inventoryStage.show();	
 	}
+	
+	@FXML
+	private void examineMonster(ActionEvent event)
+	{
+		
+	}
 
 	private void checkValidExits()
 	{

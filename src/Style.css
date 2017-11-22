@@ -17,6 +17,11 @@
     -fx-font-size: 18;
 }
 
+#btexamineMonster
+{          
+    -fx-font-size: 18;
+}
+
 #btnnorthwest
 {          
     -fx-background-color: transparent;
