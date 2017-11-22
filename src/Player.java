@@ -1,14 +1,42 @@
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Player
 {
 	private Room currentRoom;
 	private ArrayList<Item> inventory;
+	private int maxHealth;
+	private IntegerProperty health;
 	
 	public Player()
 	{
 		//System.out.println("I exist");
 		inventory = new ArrayList<Item>();
+		maxHealth = 10;
+		health = new SimpleIntegerProperty(maxHealth);
+		
+	}
+	
+	public IntegerProperty getHealth()
+	{
+		return health;
+	}
+	
+	public void setHealth(IntegerProperty health)
+	{
+		this.health = health;
+	}
+	
+	public int getMaxHealth()
+	{
+		return maxHealth;
+	}
+	
+	public void setMaxHealth(int maxHealth)
+	{
+		this.maxHealth = maxHealth;
 	}
 	
 	public Room getCurrentRoom()
@@ -39,6 +67,11 @@ public class Player
 	public void changeRoom(Exit exit)
 	{
 		 this.setCurrentRoom(this.getCurrentRoom().getAdjacentRoom(exit));
+	}
+	
+	public void takeDamage(int damageAmount)
+	{
+		health.subtract(damageAmount);
 	}
 
 	public void attack(Entity e)
