@@ -23,170 +23,213 @@
 
 
 
- 
 
-<VBox prefHeight="800" prefWidth="1300" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="Style.css">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-      <BorderPane>
-         <center>
-            <AnchorPane prefHeight="1000.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="426.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <content>
-                        <TextArea fx:id="text" wrapText="true"/>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
-         </center>
-         <right>
-            <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fx:id="mapView" fitHeight="450.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </FlowPane>
-         </right>
-         <bottom>
-            <VBox prefHeight="214.0" prefWidth="640.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <Button fx:id="btexamine" mnemonicParsing="false" text="Examine Room" />    
-                        <Button fx:id="btsearch" mnemonicParsing="false" text="Search Room" />
-                        <Button fx:id="btinventory" mnemonicParsing="false" text="Show Inventory" onAction="#showInventory"/>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </HBox>
-                 <GridPane alignment="CENTER" hgap="5.0" vgap="5.0">
-                     <children>
-                        <Button fx:id="btnnorthwest" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" text="" onAction="#moveNorthWest">
-                           <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/northWestButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnnorth" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" mnemonicParsing="false" text="" GridPane.columnIndex="1" onAction="#moveNorth">
-                           <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/northButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnnortheast" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" mnemonicParsing="false" text="" GridPane.columnIndex="2" onAction="#moveNorthEast">
-                           <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/northEastButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btwest" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" mnemonicParsing="false" text="" GridPane.rowIndex="1" onAction="#moveWest">
-                           <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/westButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btsouthwest" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" mnemonicParsing="false" text="" GridPane.rowIndex="2" onAction="#moveSouthWest">
-                        <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/southWestButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btsouth" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#moveSouth">
-                           <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/southButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btsoutheast" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" text="" GridPane.columnIndex="2" GridPane.rowIndex="2" onAction="#moveSouthEast">
-                        <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/southEastButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="bteast" alignment="CENTER" prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50" minHeight="50" maxHeight="50" text="" GridPane.columnIndex="2" GridPane.rowIndex="1" onAction="#moveEast">
-                           <graphic>
-                              <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@res/eastButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets bottom="15.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-               <opaqueInsets>
-                  <Insets bottom="25.0" top="25.0" />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="25.0" top="25.0" />
-               </padding>
-            </VBox>
-         </bottom>
-      </BorderPane>
-  </children>
+
+<VBox prefHeight="800" prefWidth="1300" xmlns="http://javafx.com/javafx/9.0.1"
+	xmlns:fx="http://javafx.com/fxml/1" stylesheets="Style.css">
+	<children>
+		<MenuBar VBox.vgrow="NEVER">
+			<menus>
+				<Menu mnemonicParsing="false" text="File">
+					<items>
+						<MenuItem mnemonicParsing="false" text="New" />
+						<MenuItem mnemonicParsing="false" text="Open…" />
+						<Menu mnemonicParsing="false" text="Open Recent" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false" text="Close" />
+						<MenuItem mnemonicParsing="false" text="Save" />
+						<MenuItem mnemonicParsing="false" text="Save As…" />
+						<MenuItem mnemonicParsing="false" text="Revert" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false" text="Preferences…" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false" text="Quit" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Edit">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Undo" />
+						<MenuItem mnemonicParsing="false" text="Redo" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false" text="Cut" />
+						<MenuItem mnemonicParsing="false" text="Copy" />
+						<MenuItem mnemonicParsing="false" text="Paste" />
+						<MenuItem mnemonicParsing="false" text="Delete" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem mnemonicParsing="false" text="Select All" />
+						<MenuItem mnemonicParsing="false" text="Unselect All" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Help">
+					<items>
+						<MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+		<BorderPane>
+			<center>
+				<AnchorPane prefHeight="1000.0" prefWidth="1000.0"
+					BorderPane.alignment="CENTER">
+					<children>
+						<ScrollPane fitToHeight="true" fitToWidth="true"
+							prefHeight="200.0" prefWidth="426.0" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+							AnchorPane.topAnchor="0.0">
+							<content>
+								<TextArea fx:id="text" wrapText="true" />
+							</content>
+						</ScrollPane>
+					</children>
+				</AnchorPane>
+			</center>
+			<right>
+				<FlowPane prefHeight="200.0" prefWidth="200.0"
+					BorderPane.alignment="CENTER">
+					<children>
+						<ImageView fx:id="mapView" fitHeight="450.0" fitWidth="450.0"
+							pickOnBounds="true" preserveRatio="true" />
+					</children>
+				</FlowPane>
+			</right>
+			<bottom>
+				<VBox prefHeight="214.0" prefWidth="640.0"
+					BorderPane.alignment="CENTER">
+					<children>
+						<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+							spacing="10.0">
+							<children>
+								<Button fx:id="btexamine" mnemonicParsing="false" text="Examine Room" />
+								<Button fx:id="btsearch" mnemonicParsing="false" text="Search Room" />
+								<Button fx:id="btinventory" mnemonicParsing="false"
+									text="Show Inventory" onAction="#showInventory" />
+								<Button fx:id="btexamineMonster" mnemonicParsing="false"
+									text="Examine Monster" onAction="#examineMonster" />
+							</children>
+							<padding>
+								<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+							</padding>
+						</HBox>
+						<GridPane alignment="CENTER" hgap="5.0" vgap="5.0">
+							<children>
+								<Button fx:id="btnnorthwest" alignment="CENTER"
+									prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50"
+									minHeight="50" maxHeight="50" text="" onAction="#moveNorthWest">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/northWestButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="btnnorth" alignment="CENTER" prefWidth="50"
+									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
+									maxHeight="50" mnemonicParsing="false" text=""
+									GridPane.columnIndex="1" onAction="#moveNorth">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/northButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="btnnortheast" alignment="CENTER"
+									prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50"
+									minHeight="50" maxHeight="50" mnemonicParsing="false" text=""
+									GridPane.columnIndex="2" onAction="#moveNorthEast">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/northEastButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="btwest" alignment="CENTER" prefWidth="50"
+									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
+									maxHeight="50" mnemonicParsing="false" text=""
+									GridPane.rowIndex="1" onAction="#moveWest">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/westButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="btsouthwest" alignment="CENTER" prefWidth="50"
+									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
+									maxHeight="50" mnemonicParsing="false" text=""
+									GridPane.rowIndex="2" onAction="#moveSouthWest">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/southWestButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="btsouth" alignment="CENTER" prefWidth="50"
+									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
+									maxHeight="50" text="" GridPane.columnIndex="1"
+									GridPane.rowIndex="2" onAction="#moveSouth">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/southButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="btsoutheast" alignment="CENTER" prefWidth="50"
+									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
+									maxHeight="50" text="" GridPane.columnIndex="2"
+									GridPane.rowIndex="2" onAction="#moveSouthEast">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/southEastButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button fx:id="bteast" alignment="CENTER" prefWidth="50"
+									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
+									maxHeight="50" text="" GridPane.columnIndex="2"
+									GridPane.rowIndex="1" onAction="#moveEast">
+									<graphic>
+										<ImageView fitHeight="50" fitWidth="50"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@res/eastButton.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+							</children>
+							<padding>
+								<Insets bottom="15.0" left="10.0" right="10.0" top="10.0" />
+							</padding>
+						</GridPane>
+					</children>
+					<opaqueInsets>
+						<Insets bottom="25.0" top="25.0" />
+					</opaqueInsets>
+					<padding>
+						<Insets bottom="25.0" top="25.0" />
+					</padding>
+				</VBox>
+			</bottom>
+		</BorderPane>
+	</children>
 </VBox>
 
