@@ -1,16 +1,19 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
-public class Room 
-{	
+public class Room implements Serializable
+{
+	static final long serialVersionUID = 297;
+	
 	private int roomID;
 	private String roomName;
-	private String roomDescription;	
-	private ArrayList<Puzzle> puzzles = new ArrayList<Puzzle>();	
-	private ArrayList<Monster> monsters = new ArrayList<Monster>();
-	private ArrayList<Item> items = new ArrayList<Item>();
-	private Image mapLocation;
+	private String roomDescription;
+	private transient Image mapLocation;
 	private Exit northExit;
 	private Exit southExit;
 	private Exit eastExit;
@@ -19,7 +22,6 @@ public class Room
 	private Exit northWestExit;
 	private Exit southEastExit;
 	private Exit southWestExit;
-
 	
 	public Room(int roomID, String roomName, String roomDescription)
 	{
@@ -174,21 +176,36 @@ public class Room
 		return validExit;
 	}
 	
-	/**
-	 * Assign item to room
-	 * @param item
-	 */
-	public void setItem(Item item) {
-		items.add(item);
+	public static void assignExits(Exit exit, Room roomA, String directionA, Room roomB, String directionB)
+	{
+		exit.setRoomA(roomA);
+		exit.setRoomB(roomB);
+		roomA.setExit(exit, directionA);
+		roomB.setExit(exit, directionB);
 	}
 	
-	 public Item getItem(int item)
-	    {
-	        return items.get(item);
-	    }
-	 
-	  public ArrayList<Item> getItems()
-	    {
-	        return items;
-	    }
+	public static ArrayList<Room> readRooms(String filename)
+	{
+		
+		ArrayList<Room> rooms = null;
+		
+		try
+		{
+			FileInputStream fis = new FileInputStream(filename);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			rooms = (ArrayList<Room>) ois.readObject();
+			ois.close();
+			fis.close();
+		}
+		catch(IOException ioe){
+			ioe.printStackTrace();
+		}
+		catch(ClassNotFoundException c){
+			System.out.println("Class not found");
+			c.printStackTrace();
+		}
+		
+		return rooms;
+	}
+
 }

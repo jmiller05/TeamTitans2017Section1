@@ -1,134 +1,52 @@
 import java.util.ArrayList;
 
-
-public class Player extends Entity
+public class Player
 {
+	private Room currentRoom;
+	private ArrayList<Item> inventory;
 	
-	private ArrayList<Item> inventory = new ArrayList<Item>();
-	
-	/**
-	 * Add item to inventory
-	 * @param item
-	 */
-    public void addItem(Item item)
-    {
-        inventory.add(item);
-    }
-    
-    /**
-     * Remove item from inventory
-     * @param item
-     */
-    public void removeItem(int item)
-    {
-        inventory.remove(item);
-    }
-    
-    /**
-     * Return inventory item
-     * @param int
-     */
-    public Item getInventoryItem(int item)
-    {
-        return inventory.get(item);
-    }
-    
-    /**
-     * Return the size of the item inventory
-     * @return int
-     */
-    public int getInventorySize()
-    {
-        return inventory.size();
-    }
-    
-    /**
-     * Return the full inventory list
-     * @return ArrayList
-     */
-    public ArrayList<Item> getInventory()
-    {
-        return inventory;
-    }
-    
-	public Player(int health, int damage)
+	public Player()
 	{
-		super(health, damage);
+		//System.out.println("I exist");
+		inventory = new ArrayList<Item>();
 	}
 	
-	public void setLocation(Room r)
+	public Room getCurrentRoom()
 	{
-		this.location = r;
+		return currentRoom;
 	}
 	
-	public void getLocation(Room r)
+	public void setCurrentRoom(Room newRoom)
 	{
-		
+		currentRoom = newRoom;
 	}
 	
-	public void fleeFight()
+	public ArrayList<Item> getInventory()
 	{
-		
+		return inventory;
 	}
 	
-	public void enterRoom(Room r)
+	public void setInventory(ArrayList<Item> inventory)
 	{
-		
+		this.inventory = inventory;
 	}
 	
-	public void examineMonster(Monster m)
+	public void addItemToInventory(Item item)
 	{
-		
+		inventory.add(item);
 	}
 	
-	public void examinePuzzle(Puzzle p)
+	public void changeRoom(Exit exit)
 	{
-		
+		 this.setCurrentRoom(this.getCurrentRoom().getAdjacentRoom(exit));
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Player";
 	}
 	
-	public void solvePuzzle(Puzzle p)
-	{
-		
-	}
 	
-	public void hintPuzzle(Puzzle p)
-	{
-		
-	}
-	
-	public void examineRoom(Room r)
-	{
-		
-	}
-	
-	public void searchRoom(Room r)
-	{
-		
-	}
-	
-	public void examineItem(Item i)
-	{
-		
-	}
-	
-	public void dropItem(Item i)
-	{
-		
-	}
-	
-	public void useItem(Item i)
-	{
-		
-	}
-	
-	public void equipItem(Item i)
-	{
-		
-	}
-	
-	public void collectItem(Item i)
-	{
-		
-	}
-	
+
 }

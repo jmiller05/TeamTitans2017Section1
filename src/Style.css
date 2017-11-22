@@ -1,0 +1,51 @@
+.root {
+    -fx-background-image: url("res/background5.jpg");
+}
+
+#btinventory
+{          
+    -fx-font-size: 18;
+}
+
+#btsearch
+{          
+    -fx-font-size: 18;
+}
+
+#btexamine
+{          
+    -fx-font-size: 18;
+}
+
+#btnnorthwest
+{          
+    -fx-background-color: transparent;
+}
+#btnnorth
+{          
+    -fx-background-color: transparent;
+}
+#btnnortheast
+{          
+    -fx-background-color: transparent;
+}
+#btwest
+{          
+    -fx-background-color: transparent;
+}
+#btsouthwest
+{          
+    -fx-background-color: transparent;
+}
+#btsouth
+{          
+    -fx-background-color: transparent;
+}
+#btsoutheast
+{          
+    -fx-background-color: transparent;
+}
+#bteast
+{          
+    -fx-background-color: transparent;
+}
