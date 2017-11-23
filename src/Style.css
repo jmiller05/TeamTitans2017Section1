@@ -9,6 +9,12 @@
     
 }
 
+#health > .track
+{
+	-fx-text-box-border: black;
+	-fx-control-inner-background: black;
+}
+
 #btinventory
 {          
     -fx-font-size: 18;
