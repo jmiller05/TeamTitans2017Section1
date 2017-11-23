@@ -101,7 +101,7 @@ public class Game extends Application
 		return itemsInRooms.get(roomId);
 	}
 	// Write
-		private static void saveItemsInRooms()
+		public static void saveItemsInRooms()
 		{
 			
 			try
@@ -120,7 +120,7 @@ public class Game extends Application
 		}
 		
 		// Read
-		private static void loadItemsInRooms()
+		public static void loadItemsInRooms()
 		{
 			File f = new File("ItemsInRooms.dat");
 			
@@ -186,6 +186,16 @@ public class Game extends Application
 		itemsInRooms.put(18, new Artifact("art_10", "Golden Key", "A key casted from gold", null));
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
 	}
+
+	/**
+	 * @param itemID
+	 */
+	public void removeItemFromRoom(int roomId)
+	{
+		itemsInRooms.remove(roomId);
+		
+	}
+
 	
 
 	/*

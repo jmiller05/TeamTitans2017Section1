@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -270,6 +271,11 @@ public class Controller
 		Item item = game.getItemInRoom(roomId);
 		if (item != null) {
 		text.appendText("\n" + item.getItemDescription()); 
+		player.addItemToInventory(item);
+		game.removeItemFromRoom(roomId);
+		game.saveItemsInRooms();
+		
+		//text.appendText(String.valueOf(player.getInventory().size()));
 		}
 		else {
 		text.appendText(" \n There are no item's in this room");
