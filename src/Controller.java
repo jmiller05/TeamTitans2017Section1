@@ -125,7 +125,7 @@ public class Controller
 		else
 		{
 			//player.takeDamage(1);
-			System.out.println(player.getHealth());
+			//System.out.println(player.getHealth());
 			player.changeRoom(player.getCurrentRoom().getNorthExit());
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
