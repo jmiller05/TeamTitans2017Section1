@@ -10,6 +10,9 @@
 /Room.class
 /View.class
 /Weapon.class
+/.classpath
+/.gitignore
+/.project
 /Inventory.fxml
 /Style.css
 /View.fxml
