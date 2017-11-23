@@ -18,11 +18,12 @@ import javafx.stage.Stage;
 
 public class Controller
 {
-
+	
 	private Player player;
 	private ArrayList<Room> dungeonRooms;
 	private Stage inventoryStage;
 	private ObservableList<Item> inventoryList;
+	private ArrayList<Monster> monsterArray;
 	
 	@FXML
 	ProgressBar health;
@@ -48,18 +49,18 @@ public class Controller
 	ImageView mapView;
 	@FXML
 	TableView<Item> inventoryView;
-
+	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
 	{
 		this.player = player;
 		this.dungeonRooms = dungeonRooms;
 	}
-
+	
 	public void setPlayer(Player player)
 	{
 		this.player = player;
 	}
-
+	
 	public void setDungeonRooms(ArrayList<Room> dungeonRooms)
 	{
 		this.dungeonRooms = dungeonRooms;
@@ -69,12 +70,17 @@ public class Controller
 	{
 		this.inventoryStage = stage;
 	}
-
+	
+	public void setMonsterArray(ArrayList<Monster> mAL)
+	{
+		this.monsterArray = mAL;
+	}
+	
 	public Player getPlayer()
 	{
 		return player;
 	}
-
+	
 	public ArrayList<Room> getDungeonRooms()
 	{
 		return dungeonRooms;
@@ -98,20 +104,20 @@ public class Controller
 		}
 		
 		inventoryList = FXCollections.<Item>observableArrayList();
-	    inventoryList.addAll(player.getInventory());
-	    
-	    health.progressProperty().bind(player.getHealth().divide(player.getMaxHealth()));
-
+		inventoryList.addAll(player.getInventory());
 		
-	    
-	    //System.out.println(inventoryList);
+		health.progressProperty().bind(player.getHealth().divide(player.getMaxHealth()));
+		
+		
+		
+		//System.out.println(inventoryList);
 	}
-
+	
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
 		//System.out.println(player); 
-
+		
 		if(player.getCurrentRoom().getNorthExit().isLocked())
 		{
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
@@ -127,9 +133,9 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 		}
-
+		
 	}
-
+	
 	@FXML
 	private void moveSouth(ActionEvent event)
 	{
@@ -138,7 +144,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 	}
-
+	
 	@FXML
 	private void moveEast(ActionEvent event)
 	{
@@ -147,7 +153,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 	}
-
+	
 	@FXML
 	private void moveWest(ActionEvent event)
 	{
@@ -156,7 +162,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 	}
-
+	
 	@FXML
 	private void moveNorthEast(ActionEvent event)
 	{
@@ -165,7 +171,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 	}
-
+	
 	@FXML
 	private void moveSouthEast(ActionEvent event)
 	{
@@ -174,7 +180,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 	}
-
+	
 	@FXML
 	private void moveNorthWest(ActionEvent event)
 	{
@@ -183,7 +189,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 	}
-
+	
 	@FXML
 	private void moveSouthWest(ActionEvent event)
 	{
@@ -203,9 +209,15 @@ public class Controller
 	@FXML
 	private void examineMonster(ActionEvent event)
 	{
-		
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			if( player.getCurrentRoom().equals(monsterArray.get(i).getLocation()) )
+			{
+				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
+			}
+		}
 	}
-
+	
 	private void checkValidExits()
 	{
 		btnnorth.setDisable(!player.getCurrentRoom().isValidExit("north"));
@@ -252,5 +264,5 @@ public class Controller
 		dungeonRooms.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		dungeonRooms.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
 	}
-
+	
 }

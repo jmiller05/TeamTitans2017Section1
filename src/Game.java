@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +15,10 @@ import javafx.stage.Stage;
 
 public class Game extends Application
 {
-	//private ArrayList<Room> roomAL; //ArrayList of Rooms
-	//private ArrayList<String> roomNameAL; //ArrayList of Room Names
-	//private ArrayList<String> roomDescriptionAL; // Array List of room descriptions
+	//public ArrayList<Room> roomAL; //ArrayList of Rooms
+	//	private ArrayList<String> roomNameAL; //ArrayList of Room Names
+	//	private ArrayList<String> roomDescriptionAL; // Array List of room descriptions
+	//	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	public Player gamePlayer;
 	public Controller gameController;
 	public Stage inventoryStage;
@@ -62,7 +64,6 @@ public class Game extends Application
              return;
           }*/
 		
-		
 		Controller gameController = new Controller(gamePlayer,Room.readRooms("Rooms.dat"));
 		
 		loader.setController(gameController);
@@ -76,6 +77,7 @@ public class Game extends Application
 		//gameController.setInventoryView(inventory);
 		//gameController.setInventoryLoader(inventoryLoader);
 		gameController.setInventoryStage(inventoryStage);
+		gameController.setMonsterArray(Monster.readMonsters("Monster.dat"));
 		primaryStage.setScene(new Scene(root, 1300, 750));
 		primaryStage.show();
 		
@@ -87,6 +89,52 @@ public class Game extends Application
 		
 		launch(args);
 	}
+	
+	/*public void populateMonsters()
+	{
+		Monster m0 = new Monster("Mon_00", "Toxic Wolfspider", "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom.", 5, rand.nextInt(2) + 1);
+		Monster m1 = new Monster("Mon_01", "Soul Serpent", "The soul stealing serpent will attack you to steal your soul with one of its bites.", 10, rand.nextInt(3) + 1);
+		Monster m2 = new Monster("Mon_02", "Terror Tiger", "This ferocious tiger will terrorize you with razor sharp teeth and vibrant green eyes.", 15, rand.nextInt(3) + 1);		
+		Monster m3 = new Monster("Mon_03", "Tomb Phantom", "This tomb phantom haunts the tomb with his loud screeches and screams. This monster can make you deaf until next fight.", 20, rand.nextInt(4) + 1);		
+		Monster m4 = new Monster("Mon_04", "Bloodthirsty Centaur", "The bloodthirsty centaur is on the run for your flesh but most of all your fresh blood. He is all so powerful his enormous strong arms, red glowing eyes, and 8-foot stature.", 25, rand.nextInt(4) + 1);		
+		Monster m5 = new Monster("Mon_05", "Disemboweled Mummy", "This mummy is stands at an 8 foot towering height, is covered in cobwebs, and smells of road kill. He will chase you down and reach for any limb he can get so he can take your organs and feel alive once again.", 30, rand.nextInt(4) + 1);		
+		Monster m6 = new Monster("Mon_06", "The Insane Witch", "This witch will cast a spell on you and put you in another room. Her skin is a wrinkly as balled up piece of paper, she has long white hair.", 40, rand.nextInt(5) + 1);		
+		Monster m7 = new Monster("Mon_07", "Ballistic Beast", "This beast you will face is 7 foot tall, muscular, and very hairy. He will fight till the death with his large hands and sharp claws. His favorite move is ripping your heart from your chest and hearing it beat before you fall to your death.", 60, rand.nextInt(5) + 2);
+		
+		monsterArray.add(m0); monsterArray.add(m1); monsterArray.add(m2); monsterArray.add(m3); 
+		monsterArray.add(m4); monsterArray.add(m5); monsterArray.add(m6); monsterArray.add(m7);
+		
+		
+		
+		
+	}
+	
+	public void addMonsterRooms()
+	{
+		monsterArray.get(0).addLocation(rooms.get(4));
+		monsterArray.get(0).addLocation(rooms.get(5));
+		monsterArray.get(1).addLocation(rooms.get(11));
+		monsterArray.get(1).addLocation(rooms.get(13));
+		monsterArray.get(1).addLocation(rooms.get(17));
+		
+		monsterArray.get(2).addLocation(rooms.get(12));
+		monsterArray.get(2).addLocation(rooms.get(14));
+		monsterArray.get(2).addLocation(rooms.get(16));
+		
+		monsterArray.get(3).addLocation(rooms.get(22));
+		monsterArray.get(3).addLocation(rooms.get(23));
+		
+		monsterArray.get(4).addLocation(rooms.get(18));
+		
+		monsterArray.get(5).addLocation(rooms.get(25));
+		monsterArray.get(5).addLocation(rooms.get(26));
+		monsterArray.get(5).addLocation(rooms.get(27));
+		monsterArray.get(5).addLocation(rooms.get(28));
+		
+		monsterArray.get(6).addLocation(rooms.get(20));
+		
+		monsterArray.get(7).addLocation(rooms.get(29));
+	}*/
 	
 	/*public ArrayList<Room> populateRooms()
 	{
@@ -241,6 +289,7 @@ public class Game extends Application
 		
 		return roomAL;
 		
-	} */
+	} 
+	 */
 	
 }
