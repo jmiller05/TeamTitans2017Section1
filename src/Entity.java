@@ -2,7 +2,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-public class Entity {
+public abstract class Entity {
 	
 	protected int health;
 	protected int maxHealth;
@@ -29,11 +29,6 @@ public class Entity {
 		this.maxHealth = maxHealth;
 		this.damage = damage;
 		this.healthPercentage = new SimpleDoubleProperty((double)this.health/this.maxHealth);
-		
-		System.out.println("The max health input for the entity is: " + maxHealth);
-		System.out.println("The health input for the entity is: " + health);
-		System.out.println("The max health value for the entity is: " + this.maxHealth);
-		System.out.println("The health value for the entity is: " + this.health);
 	}
 	
 	public int getHealth()

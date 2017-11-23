@@ -32,20 +32,6 @@ public class Player extends Entity
 	{
 		super(health, maxHealth, damage);
 		inventory = new ArrayList<Item>();
-		//System.out.println(this.health);
-		//System.out.println(this.maxHealth);
-		System.out.println("The max health input for the player is: " + maxHealth);
-		System.out.println("The health input for the player is: " + health);
-		System.out.println("The max health value for the player is: " + this.maxHealth);
-		System.out.println("The health value for the player is: " + this.health);
-		
-	}
-	
-	public DoubleProperty getHealthPercentage()
-	{
-		
-		
-		return healthPercentage;
 	}
 	
 	public Room getCurrentRoom()
