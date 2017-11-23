@@ -1,15 +1,14 @@
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-public abstract class Entity {
+public abstract class Entity 
+{
 	
 	protected int health;
 	protected int maxHealth;
 	protected DoubleProperty healthPercentage;
 	protected int damage;
 	protected Room location;
-	
 	
 	public Entity()
 	{
@@ -71,9 +70,9 @@ public abstract class Entity {
 		this.damage = damage;
 	}
 	
-	public void attack(Entity e) 
+	public void attack(Entity e, int dam) 
 	{
-		
+		e.takeDamage(dam);
 	}
 	
 	public void restoreHealth(int amt) throws InvalidHealthException
@@ -87,14 +86,18 @@ public abstract class Entity {
 		
 	}
 	
-	public void takeDamage(int damage) throws InvalidHealthException
+	public void takeDamage(int damage) 
 	{
-		if(health - damage < 0) throw new InvalidHealthException("You can't take that much damage!");
-		else
-		{
-			this.health -= damage;
-			healthPercentage.set((double)health/maxHealth);
-		}
+
+//		if(health - damage < 0) 
+//		{
+//			healthPercentage.set(0);
+//		}
+//		else
+//		{
+			health -= damage;
+			//healthPercentage.set((double)health/maxHealth);
+//		}
 	}
 	
 	public void winFight() 

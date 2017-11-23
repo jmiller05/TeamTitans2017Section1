@@ -9,10 +9,11 @@ public class Monster extends Entity implements Serializable
 {
 	static final long serialVersionUID = 298;
 	
-	
 	private String monsterID;
 	private String monsterName;
 	private String description;
+//	private int health;
+//	private int damage;
 	private ArrayList<Room> location = new ArrayList<Room>();
 	private ArrayList<Item> itemDropped = new ArrayList<Item>();
 	
@@ -22,7 +23,6 @@ public class Monster extends Entity implements Serializable
 		this.monsterID = ID;
 		this.monsterName = name;
 		this.description = desc;
-		
 	}
 	
 	public String getMonsterName()
@@ -39,7 +39,7 @@ public class Monster extends Entity implements Serializable
 	{
 		return this.description;
 	}
-	
+		
 	public void addItem(Item item)
 	{
 		itemDropped.add(item);
@@ -54,17 +54,6 @@ public class Monster extends Entity implements Serializable
 	{
 		return location.get(0).getRoomID();		
 	}
-	
-	
-	public void attack(Entity e)
-	{
-		super.attack(e);
-	}
-	
-	//	public void adjustHealth(int amt)
-	//	{
-	//		
-	//	}
 	
 	@Override
 	public void winFight()
