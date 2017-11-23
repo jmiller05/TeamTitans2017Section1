@@ -1,3 +1,5 @@
+import javafx.beans.property.IntegerProperty;
+
 public class Entity {
 	
 	protected int health;
@@ -16,14 +18,24 @@ public class Entity {
 		this.damage = damage;
 	}
 	
+	public int getDamage()
+	{
+		return this.damage;
+	}
+	
+	public int getHealth()
+	{
+		return this.health;
+	}
+	
 	public void attack(Entity e) 
 	{
 		
 	}
 	
-	public void receiveDamage()
+	public void adjustHealth(int amt)
 	{
-		
+		this.health += amt;
 	}
 	
 	public void winFight() 

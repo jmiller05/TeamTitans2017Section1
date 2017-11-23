@@ -16,18 +16,13 @@ public class Monster extends Entity implements Serializable
 	private ArrayList<Room> location = new ArrayList<Room>();
 	private ArrayList<Item> itemDropped = new ArrayList<Item>();
 	
-	public Monster()
-	{
-		
-	}
 	public Monster(String ID, String name, String desc, int health, int damage)
 	{
 		super(health, damage);
 		this.monsterID = ID;
 		this.monsterName = name;
 		this.description = desc;
-		this.health = health;
-		this.damage = damage;
+		
 	}
 	
 	public String getMonsterName()
@@ -55,9 +50,9 @@ public class Monster extends Entity implements Serializable
 		location.add(room);
 	}
 	
-	public Room getLocation()
+	public int getLocation()
 	{
-		return location.get(0);		
+		return location.get(0).getRoomID();		
 	}
 	
 	
@@ -66,11 +61,10 @@ public class Monster extends Entity implements Serializable
 		super.attack(e);
 	}
 	
-	@Override
-	public void receiveDamage()
-	{
-		super.receiveDamage();
-	}
+	//	public void adjustHealth(int amt)
+	//	{
+	//		
+	//	}
 	
 	@Override
 	public void winFight()
@@ -93,7 +87,7 @@ public class Monster extends Entity implements Serializable
 		{
 			FileInputStream fis = new FileInputStream(filename);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			mAL = (ArrayList<Monster>) ois.readObject();
+			mAL =  (ArrayList<Monster>) ois.readObject();
 			ois.close();
 			fis.close();
 		}

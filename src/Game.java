@@ -15,13 +15,15 @@ import javafx.stage.Stage;
 
 public class Game extends Application
 {
-	//public ArrayList<Room> roomAL; //ArrayList of Rooms
-	//	private ArrayList<String> roomNameAL; //ArrayList of Room Names
-	//	private ArrayList<String> roomDescriptionAL; // Array List of room descriptions
-	//	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
+//	public ArrayList<Room> roomAL; //ArrayList of Rooms
+//	private ArrayList<String> roomNameAL; //ArrayList of Room Names
+//	private ArrayList<String> roomDescriptionAL; // Array List of room descriptions
+	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	public Player gamePlayer;
 	public Controller gameController;
 	public Stage inventoryStage;
+//	private Random rand = new Random();
+//	public ArrayList<Room> rooms;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception
@@ -64,6 +66,21 @@ public class Game extends Application
              return;
           }*/
 		
+//		rooms = this.populateRooms();
+//		populateMonsters();
+//		addMonsterRooms();
+//		
+//		try{
+//			FileOutputStream fos= new FileOutputStream("Monsters.dat");
+//			ObjectOutputStream oos= new ObjectOutputStream(fos);
+//			oos.writeObject(monsterArray);
+//			oos.close();
+//			
+//			fos.close();
+//		}catch(IOException ioe){
+//			ioe.printStackTrace();
+//		}
+		
 		Controller gameController = new Controller(gamePlayer,Room.readRooms("Rooms.dat"));
 		
 		loader.setController(gameController);
@@ -77,7 +94,7 @@ public class Game extends Application
 		//gameController.setInventoryView(inventory);
 		//gameController.setInventoryLoader(inventoryLoader);
 		gameController.setInventoryStage(inventoryStage);
-		gameController.setMonsterArray(Monster.readMonsters("Monster.dat"));
+		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
 		primaryStage.setScene(new Scene(root, 1300, 750));
 		primaryStage.show();
 		
@@ -90,7 +107,8 @@ public class Game extends Application
 		launch(args);
 	}
 	
-	/*public void populateMonsters()
+	/*
+	public void populateMonsters()
 	{
 		Monster m0 = new Monster("Mon_00", "Toxic Wolfspider", "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom.", 5, rand.nextInt(2) + 1);
 		Monster m1 = new Monster("Mon_01", "Soul Serpent", "The soul stealing serpent will attack you to steal your soul with one of its bites.", 10, rand.nextInt(3) + 1);
@@ -134,9 +152,9 @@ public class Game extends Application
 		monsterArray.get(6).addLocation(rooms.get(20));
 		
 		monsterArray.get(7).addLocation(rooms.get(29));
-	}*/
+	}
 	
-	/*public ArrayList<Room> populateRooms()
+	public ArrayList<Room> populateRooms()
 	{
 		roomAL = new ArrayList<Room>();
 		roomNameAL = new ArrayList<String>();
@@ -289,7 +307,7 @@ public class Game extends Application
 		
 		return roomAL;
 		
-	} 
-	 */
+	} */
+	
 	
 }

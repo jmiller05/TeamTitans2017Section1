@@ -1,8 +1,12 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+=======
+import javafx.beans.value.ObservableValue;
+>>>>>>> 45a574ecade74f5db8b711c982ead1c6f363e613
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -96,7 +100,7 @@ public class Controller
 		if(player.getCurrentRoom() == null)
 		{
 			assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(0));
+			player.setCurrentRoom(dungeonRooms.get(4));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -111,7 +115,13 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
+<<<<<<< HEAD
 		health.progressProperty().bind(healthPercentage);
+=======
+		double j = (player.getHealth()/player.getMaxHealth());
+		health.setProgress(j);
+		//health.progressProperty().bind(j);
+>>>>>>> 45a574ecade74f5db8b711c982ead1c6f363e613
 		
 		
 		
@@ -222,10 +232,26 @@ public class Controller
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
 		{
-			if( player.getCurrentRoom().equals(monsterArray.get(i).getLocation()) )
+			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
 				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
-			}
+				text.appendText("\n" + monsterArray.get(i).getHealth());
+				text.appendText("\n" + monsterArray.get(i).getDamage());
+			}		
+		}
+	}
+	@FXML
+	private void attackMonster(ActionEvent event)
+	{
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
+			{
+				text.appendText("\n\n Monster hp before attack: " + monsterArray.get(i).getHealth());
+				player.attack(monsterArray.get(i), player.getDamage());
+				text.appendText("\n\n Monster hp after attack: " + monsterArray.get(i).getHealth());
+				
+			}		
 		}
 	}
 	
