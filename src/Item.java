@@ -1,3 +1,7 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -6,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 
-public class Item {
+public class Item implements Serializable{
 	
 	protected String itemID;
 	protected String itemName;

@@ -22,7 +22,7 @@ public class Room implements Serializable
 	private Exit northWestExit;
 	private Exit southEastExit;
 	private Exit southWestExit;
-	
+
 	public Room(int roomID, String roomName, String roomDescription)
 	{
 		this.roomID = roomID;

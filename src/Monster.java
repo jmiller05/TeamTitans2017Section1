@@ -78,6 +78,8 @@ public class Monster extends Entity implements Serializable
 		super.loseFight();
 	}
 	
+
+	
 	public static ArrayList<Monster> readMonsters(String filename)
 	{
 		

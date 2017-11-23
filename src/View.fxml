@@ -107,7 +107,9 @@
 							spacing="10.0">
 							<children>
 								<Button fx:id="btexamine" mnemonicParsing="false" text="Examine Room" />
-								<Button fx:id="btsearch" mnemonicParsing="false" text="Search Room" />
+								<Button fx:id="btsearch" mnemonicParsing="false" 
+								text="Search Room"
+									onAction="#searchRoom" />
 								<Button fx:id="btinventory" mnemonicParsing="false"
 									text="Show Inventory" onAction="#showInventory" />
 								<Button fx:id="btexamineMonster" mnemonicParsing="false"

@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 public class Controller
 {
-	
+	public Game	game;
 	private Player player;
 	private ArrayList<Room> dungeonRooms;
 	private Stage inventoryStage;
@@ -58,6 +58,7 @@ public class Controller
 	{
 		this.player = player;
 		this.dungeonRooms = dungeonRooms;
+		game = new Game();
 	}
 	
 	public void setPlayer(Player player)
@@ -79,6 +80,7 @@ public class Controller
 	{
 		this.monsterArray = mAL;
 	}
+	
 	
 	public Player getPlayer()
 	{
@@ -262,6 +264,20 @@ public class Controller
 			}		
 		}
 	}
+	@FXML
+	private void searchRoom(ActionEvent event)
+	{
+		int roomId = player.getCurrentRoom().getRoomID();
+		Item item = game.getItemInRoom(roomId);
+		if (item != null) {
+		text.appendText("\n" + item.getItemDescription()); 
+		}
+		else {
+		text.appendText(" \n There are no item's in this room");
+		}
+	
+	}
+	
 	@FXML
 	private void attackMonster(ActionEvent event)
 	{
