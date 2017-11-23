@@ -270,6 +270,8 @@ public class Controller
 			{
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
+				text.appendText("\n player dmg: " + player.getDamage());
+
 				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());				
 			}		
 		}

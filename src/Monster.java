@@ -12,17 +12,19 @@ public class Monster extends Entity implements Serializable
 	private String monsterID;
 	private String monsterName;
 	private String description;
-//	private int health;
-//	private int damage;
+	private int health;
+	private int damage;
 	private ArrayList<Room> location = new ArrayList<Room>();
 	private ArrayList<Item> itemDropped = new ArrayList<Item>();
 	
 	public Monster(String ID, String name, String desc, int health, int damage)
 	{
-		super(health, damage);
+		
 		this.monsterID = ID;
 		this.monsterName = name;
 		this.description = desc;
+		this.health = health;
+		this.damage = damage;
 	}
 	
 	public String getMonsterName()
@@ -39,7 +41,7 @@ public class Monster extends Entity implements Serializable
 	{
 		return this.description;
 	}
-		
+	
 	public void addItem(Item item)
 	{
 		itemDropped.add(item);
@@ -53,6 +55,29 @@ public class Monster extends Entity implements Serializable
 	public int getLocation()
 	{
 		return location.get(0).getRoomID();		
+	}
+	public int getHealth()
+	{
+		return health;
+	}
+	
+	public int getDamage()
+	{
+		return damage;
+	}
+	
+	public void takeDamage(int damage) 
+	{
+
+//		if(health - damage < 0) 
+//		{
+//			healthPercentage.set(0);
+//		}
+//		else
+//		{
+			health -= damage;
+			//healthPercentage.set((double)health/maxHealth);
+//		}
 	}
 	
 	@Override

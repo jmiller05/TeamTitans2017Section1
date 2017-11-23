@@ -1,7 +1,7 @@
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-public abstract class Entity 
+public class Entity 
 {
 	
 	protected int health;

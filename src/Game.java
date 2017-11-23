@@ -15,15 +15,15 @@ import javafx.stage.Stage;
 
 public class Game extends Application
 {
-	public ArrayList<Room> roomAL; //ArrayList of Rooms
-	private ArrayList<String> roomNameAL; //ArrayList of Room Names
-	private ArrayList<String> roomDescriptionAL; // Array List of room descriptions
-	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
+//	public ArrayList<Room> roomAL; //ArrayList of Rooms
+//	private ArrayList<String> roomNameAL; //ArrayList of Room Names
+//	private ArrayList<String> roomDescriptionAL; // Array List of room descriptions
+//	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	public Player gamePlayer;
 	public Controller gameController;
 	public Stage inventoryStage;
-	private Random rand = new Random();
-	public ArrayList<Room> rooms;
+//	private Random rand = new Random();
+//	public ArrayList<Room> rooms;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception
@@ -64,7 +64,7 @@ public class Game extends Application
              System.out.println("Class not found");
              c.printStackTrace();
              return;
-          }*/
+          }
 		
 		rooms = this.populateRooms();
 		populateMonsters();
@@ -80,6 +80,7 @@ public class Game extends Application
 		}catch(IOException ioe){
 			ioe.printStackTrace();
 		}
+		*/
 		
 		Controller gameController = new Controller(gamePlayer,Room.readRooms("Rooms.dat"));
 		
@@ -107,7 +108,7 @@ public class Game extends Application
 		launch(args);
 	}
 	
-	
+	/*
 	public void populateMonsters()
 	{
 		Monster m0 = new Monster("Mon_00", "Toxic Wolfspider", "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom.", 5, rand.nextInt(2) + 1);
@@ -308,6 +309,6 @@ public class Game extends Application
 		return roomAL;
 		
 	}
-	
+	*/
 	
 }
