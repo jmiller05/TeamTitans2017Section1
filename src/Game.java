@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 public class Game extends Application
 {
+
 	// public ArrayList<Room> roomAL; //ArrayList of Rooms
 	// private ArrayList<String> roomNameAL; //ArrayList of Room Names
 	// private ArrayList<String> roomDescriptionAL; // Array List of room
@@ -30,7 +31,7 @@ public class Game extends Application
 	public Stage					inventoryStage;
 	// private Random rand = new Random();
 	public ArrayList<Room>			rooms;
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
@@ -74,6 +75,7 @@ public class Game extends Application
 		// }
 		
 		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
+
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
@@ -185,6 +187,7 @@ public class Game extends Application
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
 	}
 	
+
 	/*
 	 * public void populateMonsters() { Monster m0 = new Monster("Mon_00",
 	 * "Toxic Wolfspider",
@@ -422,5 +425,6 @@ public class Game extends Application
 	 * 
 	 * }
 	 */
+
 	
 }

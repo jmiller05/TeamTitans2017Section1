@@ -115,33 +115,33 @@ public class Controller
 		inventoryList.addAll(player.getInventory());
 		
 		health.setStyle("-fx-accent: green; ");
-
+		
 		health.progressProperty().bind(player.getHealthPercentage());
 		
 		health.progressProperty().addListener(new ChangeListener<Number>()
+		{
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+			{
+				double progress = newValue == null ? 0 : newValue.doubleValue();
+				if (progress < 0.2)
 				{
-			    	@Override
-			        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
-			    	{
-			    		double progress = newValue == null ? 0 : newValue.doubleValue();
-			    		if (progress < 0.2)
-			    		{
-			    			health.setStyle("-fx-accent: red; ");
-			    		} 
-			    		else if (progress < 0.4)
-			    		{
-			    			health.setStyle("-fx-accent: orange; ");
-			    		}
-			    		else if (progress < 0.6)
-			    		{
-			    			health.setStyle("-fx-accent: yellow; ");
-			    		}
-			    		else
-			    		{
-			    			health.setStyle("-fx-accent: green; ");
-			    		}
-		        }});
-
+					health.setStyle("-fx-accent: red; ");
+				} 
+				else if (progress < 0.4)
+				{
+					health.setStyle("-fx-accent: orange; ");
+				}
+				else if (progress < 0.6)
+				{
+					health.setStyle("-fx-accent: yellow; ");
+				}
+				else
+				{
+					health.setStyle("-fx-accent: green; ");
+				}
+			}});
+		
 		
 		
 		
@@ -168,14 +168,14 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 			
-			try
-			{
-				player.takeDamage(1);
-			} catch (InvalidHealthException e)
-			{
-				// TODO Auto-generated catch block
-				System.out.println(e.getLocalizedMessage());
-			}
+			//			try
+			//			{
+			player.takeDamage(1);
+			//			} catch (InvalidHealthException e)
+			//			{
+			//				// TODO Auto-generated catch block
+			//				System.out.println(e.getLocalizedMessage());
+			//			}
 			
 		}
 		
@@ -259,8 +259,7 @@ public class Controller
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
 				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
-				text.appendText("\n" + monsterArray.get(i).getHealth());
-				text.appendText("\n" + monsterArray.get(i).getDamage());
+				
 			}		
 		}
 	}
@@ -285,10 +284,11 @@ public class Controller
 		{
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
-				text.appendText("\n\n Monster hp before attack: " + monsterArray.get(i).getHealth());
-				//player.attack(monsterArray.get(i), player.getDamage());
-				text.appendText("\n\n Monster hp after attack: " + monsterArray.get(i).getHealth());
-				
+				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
+				player.attack(monsterArray.get(i), player.getDamage());
+				text.appendText("\n player dmg: " + player.getDamage());
+
+				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());				
 			}		
 		}
 	}

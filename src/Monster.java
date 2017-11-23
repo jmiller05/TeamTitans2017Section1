@@ -9,20 +9,22 @@ public class Monster extends Entity implements Serializable
 {
 	static final long serialVersionUID = 298;
 	
-	
 	private String monsterID;
 	private String monsterName;
 	private String description;
+	private int health;
+	private int damage;
 	private ArrayList<Room> location = new ArrayList<Room>();
 	private ArrayList<Item> itemDropped = new ArrayList<Item>();
 	
 	public Monster(String ID, String name, String desc, int health, int damage)
 	{
-		super(health, damage);
+		//		super(health, damage);
 		this.monsterID = ID;
 		this.monsterName = name;
 		this.description = desc;
-		
+		this.health = health;
+		this.damage = damage;
 	}
 	
 	public String getMonsterName()
@@ -55,16 +57,29 @@ public class Monster extends Entity implements Serializable
 		return location.get(0).getRoomID();		
 	}
 	
-	
-	public void attack(Entity e)
+	public int getHealth()
 	{
-		super.attack(e);
+		return health;
 	}
 	
-	//	public void adjustHealth(int amt)
-	//	{
-	//		
-	//	}
+	public int getDamage()
+	{
+		return damage;
+	}
+	
+	public void takeDamage(int damage) 
+	{
+		
+		//		if(health - damage < 0) 
+		//		{
+		//			healthPercentage.set(0);
+		//		}
+		//		else
+		//		{
+		health -= damage;
+		//healthPercentage.set((double)health/maxHealth);
+		//		}
+	}
 	
 	@Override
 	public void winFight()
