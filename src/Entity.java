@@ -8,7 +8,7 @@ public class Entity
 	protected int maxHealth;
 	protected DoubleProperty healthPercentage;
 	protected int damage;
-	protected Room location;
+	//protected Room currentLocation;
 	
 	public Entity()
 	{
