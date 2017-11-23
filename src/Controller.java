@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -106,7 +107,9 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
-		health.progressProperty().bind(player.getHealth().divide(player.getMaxHealth()));
+		double j = (player.getHealth()/player.getMaxHealth());
+		health.setProgress(j);
+		//health.progressProperty().bind(j);
 		
 		
 		
@@ -214,6 +217,22 @@ public class Controller
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
 				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
+				text.appendText("\n" + monsterArray.get(i).getHealth());
+				text.appendText("\n" + monsterArray.get(i).getDamage());
+			}		
+		}
+	}
+	@FXML
+	private void attackMonster(ActionEvent event)
+	{
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
+			{
+				text.appendText("\n\n Monster hp before attack: " + monsterArray.get(i).getHealth());
+				player.attack(monsterArray.get(i), player.getDamage());
+				text.appendText("\n\n Monster hp after attack: " + monsterArray.get(i).getHealth());
+				
 			}		
 		}
 	}
