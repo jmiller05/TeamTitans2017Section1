@@ -8,12 +8,10 @@ public class Entity {
 	
 	public Entity()
 	{
-		//super();
 	}
 	
 	public Entity(int health, int damage)
 	{
-		super();
 		this.health = health;
 		this.damage = damage;
 	}

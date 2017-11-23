@@ -12,7 +12,7 @@ public class Player extends Entity
 	private int maxHealth;
 	private int health;
 	private DoubleProperty healthPercentage;
-
+	
 	
 	public Player()
 	{
@@ -20,7 +20,6 @@ public class Player extends Entity
 		
 		inventory = new ArrayList<Item>();
 		maxHealth = 10;
-		health = 10;
 		
 		healthPercentage = new SimpleDoubleProperty(health/maxHealth);
 		
@@ -83,7 +82,7 @@ public class Player extends Entity
 	
 	public void attack(Entity e, int dam)
 	{
-
+		e.adjustHealth(-dam);
 	}
 	
 	public void takeDamage(int damageAmount)
@@ -91,7 +90,7 @@ public class Player extends Entity
 		health = health - damageAmount;
 		healthPercentage.set((double)health/maxHealth);
 	}
-
+	
 	
 	@Override
 	public String toString()
