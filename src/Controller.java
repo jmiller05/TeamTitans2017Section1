@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +26,7 @@ public class Controller
 	private Stage inventoryStage;
 	private ObservableList<Item> inventoryList;
 	private ArrayList<Monster> monsterArray;
+	private DoubleProperty healthPercentage;
 	
 	@FXML
 	ProgressBar health;
@@ -98,6 +101,8 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			
+			healthPercentage = new SimpleDoubleProperty(player.getHealth()/player.getMaxHealth());
+			
 			//player.addItemToInventory(new Armor(1,"Leather Armor","Leather armor for better dexterity"));
 			//player.addItemToInventory(new Armor(2,"Bronze Helment","A a strong helmet"));
 			//player.addItemToInventory(new Weapon(3,"Sword","A strong sword for killing"));
@@ -106,7 +111,7 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
-		health.progressProperty().bind(player.getHealth().divide(player.getMaxHealth()));
+		health.progressProperty().bind(healthPercentage);
 		
 		
 		
@@ -132,6 +137,12 @@ public class Controller
 			checkValidExits();
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
+			
+			player.takeDamage(1);
+			System.out.println(player.getHealth());
+			System.out.println(player.getMaxHealth());
+			System.out.println((double)player.getHealth()/player.getMaxHealth());
+			healthPercentage.set((double)player.getHealth()/player.getMaxHealth());
 		}
 		
 	}

@@ -8,23 +8,23 @@ public class Player
 	private Room currentRoom;
 	private ArrayList<Item> inventory;
 	private int maxHealth;
-	private IntegerProperty health;
+	private int health;
 	
 	public Player()
 	{
 		//System.out.println("I exist");
 		inventory = new ArrayList<Item>();
 		maxHealth = 10;
-		health = new SimpleIntegerProperty(maxHealth);
+		health = 10;
 		
 	}
 	
-	public IntegerProperty getHealth()
+	public int getHealth()
 	{
 		return health;
 	}
 	
-	public void setHealth(IntegerProperty health)
+	public void setHealth(int health)
 	{
 		this.health = health;
 	}
@@ -71,7 +71,7 @@ public class Player
 	
 	public void takeDamage(int damageAmount)
 	{
-		health.subtract(damageAmount);
+		health = health - damageAmount;
 	}
 
 	public void attack(Entity e)
