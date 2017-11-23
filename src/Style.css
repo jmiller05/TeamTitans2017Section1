@@ -2,6 +2,13 @@
     -fx-background-image: url("res/background5.jpg");
 }
 
+#health .bar
+{
+	-fx-padding: 1px; 
+    -fx-background-insets: 0; 
+     -fx-background-color: green;
+}
+
 #btinventory
 {          
     -fx-font-size: 18;

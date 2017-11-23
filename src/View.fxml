@@ -71,7 +71,7 @@
 		</MenuBar>
 		<BorderPane>
 			<top>
-				<ProgressBar fx:id="health" prefHeight="40.0"
+				<ProgressBar fx:id="health" prefHeight="30.0"
 					prefWidth="${health.parent.width}" progress="0.0"
 					BorderPane.alignment="CENTER" />
 			</top>
