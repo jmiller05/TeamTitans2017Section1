@@ -26,7 +26,7 @@ public class Controller
 	private Stage inventoryStage;
 	private ObservableList<Item> inventoryList;
 	private ArrayList<Monster> monsterArray;
-	private DoubleProperty healthPercentage;
+	
 	
 	@FXML
 	ProgressBar health;
@@ -101,7 +101,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			
-			healthPercentage = new SimpleDoubleProperty(player.getHealth()/player.getMaxHealth());
+			
 			
 			//player.addItemToInventory(new Armor(1,"Leather Armor","Leather armor for better dexterity"));
 			//player.addItemToInventory(new Armor(2,"Bronze Helment","A a strong helmet"));
@@ -112,7 +112,7 @@ public class Controller
 		inventoryList.addAll(player.getInventory());
 		
 
-		health.progressProperty().bind(healthPercentage);
+		health.progressProperty().bind(player.getHealthPercentage());
 		//health.progressProperty().bind(j);
 
 		
@@ -142,7 +142,7 @@ public class Controller
 			//inventoryList.add(player.getInventory().get(3));
 			
 			player.takeDamage(1);
-			healthPercentage.set((double)player.getHealth()/player.getMaxHealth());
+			
 		}
 		
 	}

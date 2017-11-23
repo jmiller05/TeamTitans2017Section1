@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player extends Entity
@@ -9,6 +11,7 @@ public class Player extends Entity
 	private ArrayList<Item> inventory;
 	private int maxHealth;
 	private int health;
+	private DoubleProperty healthPercentage;
 
 	
 	public Player()
@@ -18,6 +21,8 @@ public class Player extends Entity
 		inventory = new ArrayList<Item>();
 		maxHealth = 10;
 		health = 10;
+		
+		healthPercentage = new SimpleDoubleProperty(health/maxHealth);
 		
 	}
 	
@@ -39,6 +44,11 @@ public class Player extends Entity
 	public void setMaxHealth(int maxHealth)
 	{
 		this.maxHealth = maxHealth;
+	}
+	
+	public DoubleProperty getHealthPercentage()
+	{
+		return healthPercentage;
 	}
 	
 	public Room getCurrentRoom()
@@ -79,6 +89,7 @@ public class Player extends Entity
 	public void takeDamage(int damageAmount)
 	{
 		health = health - damageAmount;
+		healthPercentage.set((double)health/maxHealth);
 	}
 
 	
