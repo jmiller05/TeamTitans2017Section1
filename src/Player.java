@@ -9,44 +9,41 @@ public class Player extends Entity
 {
 	private Room currentRoom;
 	private ArrayList<Item> inventory;
-	private int maxHealth;
-	private int health;
-	private DoubleProperty healthPercentage;
+	//private int maxHealth;
+	//private int health;
+	//private DoubleProperty healthPercentage;
 	
 	
 	public Player()
 	{
-		super(10, 10);
+		super();
+		this.inventory = new ArrayList<Item>();
+	}
+	
+	public Player(int health, int damage)
+	{
+		super(health, damage);
+		this.inventory = new ArrayList<Item>();
+		//System.out.println(this.health/this.maxHealth);
 		
+	}
+	
+	public Player(int health, int maxHealth, int damage)
+	{
+		super(health, maxHealth, damage);
 		inventory = new ArrayList<Item>();
-		maxHealth = 10;
+		//System.out.println(this.health);
+		//System.out.println(this.maxHealth);
+		System.out.println("The max health input for the player is: " + maxHealth);
+		System.out.println("The health input for the player is: " + health);
+		System.out.println("The max health value for the player is: " + this.maxHealth);
+		System.out.println("The health value for the player is: " + this.health);
 		
-		
-	}
-	
-	public int getHealth()
-	{
-		return health;
-	}
-	
-	public void setHealth(int health)
-	{
-		this.health = health;
-	}
-	
-	public int getMaxHealth()
-	{
-		return this.maxHealth;
-	}
-	
-	public void setMaxHealth(int maxHealth)
-	{
-		this.maxHealth = maxHealth;
 	}
 	
 	public DoubleProperty getHealthPercentage()
 	{
-		healthPercentage = new SimpleDoubleProperty(health/maxHealth);
+		
 		
 		return healthPercentage;
 	}
@@ -79,17 +76,6 @@ public class Player extends Entity
 	public void changeRoom(Exit exit)
 	{
 		this.setCurrentRoom(this.getCurrentRoom().getAdjacentRoom(exit));
-	}
-	
-	public void attack(Entity e, int dam)
-	{
-		e.adjustHealth(-dam);
-	}
-	
-	public void adjustHealth(int amt)
-	{
-		health += amt;
-		healthPercentage.set((double)health/maxHealth);
 	}
 	
 	@Override

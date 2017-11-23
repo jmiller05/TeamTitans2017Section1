@@ -96,7 +96,7 @@ public class Controller
 		if(player.getCurrentRoom() == null)
 		{
 			assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(4));
+			player.setCurrentRoom(dungeonRooms.get(0));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -111,10 +111,11 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
+		System.out.println(player.getHealthPercentage());
 		
+
 		health.progressProperty().bind(player.getHealthPercentage());
-		//health.progressProperty().bind(j);
-		
+
 		
 		
 		
@@ -141,8 +142,10 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 			
-			player.adjustHealth(-1);
-		}	
+			player.takeDamage(1);
+			
+		}
+		
 	}
 	
 	@FXML
@@ -236,7 +239,7 @@ public class Controller
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
 				text.appendText("\n\n Monster hp before attack: " + monsterArray.get(i).getHealth());
-				player.attack(monsterArray.get(i), player.getDamage());
+				//player.attack(monsterArray.get(i), player.getDamage());
 				text.appendText("\n\n Monster hp after attack: " + monsterArray.get(i).getHealth());
 				
 			}		

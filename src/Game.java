@@ -31,7 +31,7 @@ public class Game extends Application
 		FXMLLoader loader = new FXMLLoader();
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		
-		Player gamePlayer = new Player();
+		gamePlayer = new Player(10,10,10);
 		
 		//gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		//System.out.println(gameController.getDungeonRooms());
