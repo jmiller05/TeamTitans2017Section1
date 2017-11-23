@@ -76,16 +76,25 @@ public abstract class Entity {
 		
 	}
 	
-	public void restoreHealth(int amt)
+	public void restoreHealth(int amt) throws InvalidHealthException
 	{
-		this.health += amt;
-		healthPercentage.set((double)health/maxHealth);
+		if(health + amt > maxHealth) throw new InvalidHealthException("You can't add that much health!");
+		else
+		{
+			this.health += amt;
+			healthPercentage.set((double)health/maxHealth);
+		}
+		
 	}
 	
-	public void takeDamage(int damage)
+	public void takeDamage(int damage) throws InvalidHealthException
 	{
-		health -= damage;
-		healthPercentage.set((double)health/maxHealth);
+		if(health - damage < 0) throw new InvalidHealthException("You can't take that much damage!");
+		else
+		{
+			this.health -= damage;
+			healthPercentage.set((double)health/maxHealth);
+		}
 	}
 	
 	public void winFight() 

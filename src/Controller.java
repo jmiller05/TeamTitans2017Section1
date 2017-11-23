@@ -142,7 +142,14 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 			
-			player.takeDamage(1);
+			try
+			{
+				player.takeDamage(1);
+			} catch (InvalidHealthException e)
+			{
+				// TODO Auto-generated catch block
+				System.out.println(e.getLocalizedMessage());
+			}
 			
 		}
 		
