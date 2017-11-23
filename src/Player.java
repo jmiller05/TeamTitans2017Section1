@@ -8,18 +8,15 @@ public class Player extends Entity
 	private Room currentRoom;
 	private ArrayList<Item> inventory;
 	private int maxHealth;
-<<<<<<< HEAD
 	private int health;
-=======
->>>>>>> 45a574ecade74f5db8b711c982ead1c6f363e613
+
 	
 	public Player()
 	{
 		super(10, 10);
-		//System.out.println("I exist");
+		
 		inventory = new ArrayList<Item>();
 		maxHealth = 10;
-<<<<<<< HEAD
 		health = 10;
 		
 	}
@@ -33,15 +30,6 @@ public class Player extends Entity
 	{
 		this.health = health;
 	}
-=======
-	}
-	
-	//	public IntegerProperty getHealth()
-	//	{
-	//		return health;
-	//	}
-	
->>>>>>> 45a574ecade74f5db8b711c982ead1c6f363e613
 	
 	public int getMaxHealth()
 	{
@@ -85,17 +73,14 @@ public class Player extends Entity
 	
 	public void attack(Entity e, int dam)
 	{
-<<<<<<< HEAD
+
+	}
+	
+	public void takeDamage(int damageAmount)
+	{
 		health = health - damageAmount;
 	}
 
-	public void attack(Entity e)
-	{
-		
-=======
-		e.adjustHealth(-dam);
->>>>>>> 45a574ecade74f5db8b711c982ead1c6f363e613
-	}
 	
 	@Override
 	public String toString()

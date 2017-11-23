@@ -1,12 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
-
-<<<<<<< HEAD
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-=======
 import javafx.beans.value.ObservableValue;
->>>>>>> 45a574ecade74f5db8b711c982ead1c6f363e613
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -115,13 +111,10 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
-<<<<<<< HEAD
+
 		health.progressProperty().bind(healthPercentage);
-=======
-		double j = (player.getHealth()/player.getMaxHealth());
-		health.setProgress(j);
 		//health.progressProperty().bind(j);
->>>>>>> 45a574ecade74f5db8b711c982ead1c6f363e613
+
 		
 		
 		
@@ -149,9 +142,6 @@ public class Controller
 			//inventoryList.add(player.getInventory().get(3));
 			
 			player.takeDamage(1);
-			System.out.println(player.getHealth());
-			System.out.println(player.getMaxHealth());
-			System.out.println((double)player.getHealth()/player.getMaxHealth());
 			healthPercentage.set((double)player.getHealth()/player.getMaxHealth());
 		}
 		
