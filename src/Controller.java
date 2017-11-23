@@ -111,10 +111,10 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
-
+		
 		health.progressProperty().bind(player.getHealthPercentage());
 		//health.progressProperty().bind(j);
-
+		
 		
 		
 		
@@ -141,10 +141,8 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 			
-			player.takeDamage(1);
-			
-		}
-		
+			player.adjustHealth(-1);
+		}	
 	}
 	
 	@FXML

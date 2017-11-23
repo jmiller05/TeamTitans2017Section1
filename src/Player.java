@@ -21,7 +21,6 @@ public class Player extends Entity
 		inventory = new ArrayList<Item>();
 		maxHealth = 10;
 		
-		healthPercentage = new SimpleDoubleProperty(health/maxHealth);
 		
 	}
 	
@@ -47,6 +46,8 @@ public class Player extends Entity
 	
 	public DoubleProperty getHealthPercentage()
 	{
+		healthPercentage = new SimpleDoubleProperty(health/maxHealth);
+		
 		return healthPercentage;
 	}
 	
@@ -85,12 +86,11 @@ public class Player extends Entity
 		e.adjustHealth(-dam);
 	}
 	
-	public void takeDamage(int damageAmount)
+	public void adjustHealth(int amt)
 	{
-		health = health - damageAmount;
+		health += amt;
 		healthPercentage.set((double)health/maxHealth);
 	}
-	
 	
 	@Override
 	public String toString()
