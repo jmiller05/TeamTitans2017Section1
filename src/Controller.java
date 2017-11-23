@@ -93,7 +93,7 @@ public class Controller
 		if(player.getCurrentRoom() == null)
 		{
 			assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(0));
+			player.setCurrentRoom(dungeonRooms.get(4));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -211,10 +211,10 @@ public class Controller
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
 		{
-			if( player.getCurrentRoom().equals(monsterArray.get(i).getLocation()) )
+			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
 				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
-			}
+			}		
 		}
 	}
 	

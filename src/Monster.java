@@ -55,9 +55,9 @@ public class Monster extends Entity implements Serializable
 		location.add(room);
 	}
 	
-	public Room getLocation()
+	public int getLocation()
 	{
-		return location.get(0);		
+		return location.get(0).getRoomID();		
 	}
 	
 	
