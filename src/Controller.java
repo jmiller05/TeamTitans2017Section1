@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,10 +112,33 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
-		System.out.println(player.getHealthPercentage());
-		
+		health.setStyle("-fx-accent: green; ");
 
 		health.progressProperty().bind(player.getHealthPercentage());
+		
+		health.progressProperty().addListener(new ChangeListener<Number>()
+				{
+			    	@Override
+			        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+			    	{
+			    		double progress = newValue == null ? 0 : newValue.doubleValue();
+			    		if (progress < 0.2)
+			    		{
+			    			health.setStyle("-fx-accent: red; ");
+			    		} 
+			    		else if (progress < 0.4)
+			    		{
+			    			health.setStyle("-fx-accent: orange; ");
+			    		}
+			    		else if (progress < 0.6)
+			    		{
+			    			health.setStyle("-fx-accent: yellow; ");
+			    		}
+			    		else
+			    		{
+			    			health.setStyle("-fx-accent: green; ");
+			    		}
+		        }});
 
 		
 		
