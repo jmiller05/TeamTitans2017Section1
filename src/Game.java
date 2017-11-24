@@ -107,6 +107,7 @@ public class Game extends Application
 		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
 		gameController.setInventoryArray(Item.loadItemsInRooms("ItemsInRooms.dat"));
 		gameController.setMonsterStats();
+		//gameController.setInventory(loadItemsInRooms());
 		// gameController.setItemsArray(Item.readItems("Items.dat"));
 		primaryStage.setScene(new Scene(root, 1300, 750));
 		primaryStage.show();
