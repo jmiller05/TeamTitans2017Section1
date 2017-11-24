@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.sql.Savepoint;
 import java.util.ArrayList;
+import java.util.Random;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -28,6 +30,8 @@ public class Controller
 	private Stage inventoryStage;
 	private ObservableList<Item> inventoryList;
 	private ArrayList<Monster> monsterArray;
+	private Random rand = new Random();
+	
 	
 	
 	@FXML
@@ -80,6 +84,35 @@ public class Controller
 	public void setMonsterArray(ArrayList<Monster> mAL)
 	{
 		this.monsterArray = mAL;
+		
+	}
+	
+	public void setMonsterStats()
+	{
+		monsterArray.get(0).setHealth(5);
+		monsterArray.get(0).setDamage(rand.nextInt(2) + 1);
+		
+		monsterArray.get(1).setHealth(10);
+		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);
+		
+		monsterArray.get(2).setHealth(15);
+		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);
+		
+		monsterArray.get(3).setHealth(20);
+		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);
+		
+		monsterArray.get(4).setHealth(25);
+		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);
+		
+		monsterArray.get(5).setHealth(30);
+		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);
+		
+		monsterArray.get(6).setHealth(40);
+		monsterArray.get(6).setDamage(rand.nextInt(5) + 1);
+		
+		monsterArray.get(7).setHealth(60);
+		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);
+		
 	}
 	
 	
@@ -260,6 +293,8 @@ public class Controller
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
 				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
+				text.appendText("\n\n" + monsterArray.get(i).getLocation());
+				
 				
 			}		
 		}

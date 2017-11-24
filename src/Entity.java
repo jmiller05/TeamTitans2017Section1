@@ -2,13 +2,11 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class Entity 
-{
-	
-	protected int health;
+{	
+	protected int health;	
+	protected int damage;
 	protected int maxHealth;
 	protected DoubleProperty healthPercentage;
-	protected int damage;
-	//protected Room currentLocation;
 	
 	public Entity()
 	{
@@ -30,10 +28,11 @@ public abstract class Entity
 		this.healthPercentage = new SimpleDoubleProperty((double)this.health/this.maxHealth);
 	}
 	
-	public int getHealth()
+	public  int getHealth()
 	{
-		return health;
+		return this.health;
 	}
+	
 	
 	public void setHealth(int health)
 	{
@@ -97,7 +96,7 @@ public abstract class Entity
 		{
 			health -= damage;
 		}
-		healthPercentage.set((double)health/maxHealth);
+		//healthPercentage.set((double)health/maxHealth);
 		
 	}
 	
@@ -105,10 +104,4 @@ public abstract class Entity
 	{
 		return null;
 	}
-	
-	public String loseFight() 
-	{
-		return null;
-	}
-	
 }

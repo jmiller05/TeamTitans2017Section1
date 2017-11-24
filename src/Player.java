@@ -5,6 +5,7 @@ public class Player extends Entity
 	private Room currentRoom;
 	private ArrayList<Item> inventory;
 	
+
 	public Player(int health, int damage)
 	{
 		super(health, damage);
@@ -16,7 +17,6 @@ public class Player extends Entity
 		super(health, maxHealth, damage);
 		inventory = new ArrayList<Item>();
 	}
-	
 	
 	public Room getCurrentRoom()
 	{
@@ -53,5 +53,5 @@ public class Player extends Entity
 	{
 		return "You have defeated the monster.";
 	}
-
+	
 }
