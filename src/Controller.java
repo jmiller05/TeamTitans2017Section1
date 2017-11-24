@@ -90,27 +90,35 @@ public class Controller
 	public void setMonsterStats()
 	{
 		monsterArray.get(0).setHealth(5);
+		monsterArray.get(0).setMaxHealth(5);
 		monsterArray.get(0).setDamage(rand.nextInt(2) + 1);
 		
 		monsterArray.get(1).setHealth(10);
+		monsterArray.get(1).setMaxHealth(10);
 		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);
 		
 		monsterArray.get(2).setHealth(15);
+		monsterArray.get(2).setMaxHealth(15);
 		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);
 		
 		monsterArray.get(3).setHealth(20);
+		monsterArray.get(3).setMaxHealth(20);
 		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);
 		
 		monsterArray.get(4).setHealth(25);
+		monsterArray.get(4).setMaxHealth(25);
 		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);
 		
 		monsterArray.get(5).setHealth(30);
+		monsterArray.get(5).setMaxHealth(30);
 		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);
 		
 		monsterArray.get(6).setHealth(40);
+		monsterArray.get(6).setMaxHealth(40);
 		monsterArray.get(6).setDamage(rand.nextInt(5) + 1);
 		
 		monsterArray.get(7).setHealth(60);
+		monsterArray.get(7).setMaxHealth(60);
 		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);
 		
 	}
@@ -202,15 +210,8 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 			
-			//			try
-			//			{
-			player.takeDamage(1);
-			//			} catch (InvalidHealthException e)
-			//			{
-			//				// TODO Auto-generated catch block
-			//				System.out.println(e.getLocalizedMessage());
-			//			}
-			
+
+			player.takeDamage(1);			
 		}
 		
 	}

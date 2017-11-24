@@ -10,6 +10,7 @@ public abstract class Entity
 	
 	public Entity()
 	{
+		this.healthPercentage = new SimpleDoubleProperty((double)this.health/this.maxHealth);
 	}
 	
 	public Entity(int health, int damage)
@@ -91,12 +92,15 @@ public abstract class Entity
 		if(health - damage < 0) 
 		{
 			health = 0;
+			healthPercentage.set(0);
+			
 		}
 		else
 		{
 			health -= damage;
+			healthPercentage.set((double)health/maxHealth);
+			
 		}
-		//healthPercentage.set((double)health/maxHealth);
 		
 	}
 	
