@@ -381,6 +381,12 @@ public class Game extends Application
 		roomAL.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
 		
+		roomAL.get(5).addItem(new Weapon(2,"Iron Sword","A sword forged from iron",5));
+		roomAL.get(12).addItem(new Weapon(3,"Steel Sword","A sword forged from steel",8));
+		
+		roomAL.get(1).addItem(new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
+		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
+		
 		return roomAL;
 		
 	} 

@@ -151,6 +151,17 @@ public class Room implements Serializable
 		return southWestExit;
 	}
 	
+	public boolean hasItem()
+	{
+		if(items == null){return false;}
+		else{return true;}
+	}
+	
+	public Item getItem()
+	{
+		return items.get(0);
+	}
+	
 	public void addItem(Item item)
 	{
 		if(items == null){items = new ArrayList<Item>();}

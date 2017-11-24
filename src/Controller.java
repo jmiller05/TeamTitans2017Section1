@@ -289,7 +289,7 @@ public class Controller
 		
 		if(player.getCurrentRoom() == null)
 		{
-			assignMapImages();
+			//assignMapImages();
 			player.setCurrentRoom(dungeonRooms.get(0));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
@@ -447,7 +447,7 @@ public class Controller
 	@FXML
 	private void searchRoom(ActionEvent event)
 	{
-		int roomId = player.getCurrentRoom().getRoomID();
+		/*int roomId = player.getCurrentRoom().getRoomID();
 		Item item = getItemInRoom(roomId);
 		if (item != null) {
 			text.appendText("\n" + item.getItemDescription()); 
@@ -459,6 +459,11 @@ public class Controller
 		}
 		else {
 			text.appendText(" \n There are no item's in this room");
+		}*/
+		
+		if(player.getCurrentRoom().hasItem())
+		{
+			text.appendText("\n" + player.getCurrentRoom().getItem().getItemDescription());
 		}
 		
 	}
