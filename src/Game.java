@@ -42,7 +42,7 @@ public class Game extends Application
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		
-		gamePlayer = new Player(10, 10, 1);
+		gamePlayer = new Player(10, 10, 2);
 		
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());

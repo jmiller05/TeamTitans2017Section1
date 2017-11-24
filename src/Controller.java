@@ -286,7 +286,7 @@ public class Controller
 	@FXML
 	protected void initialize()
 	{		
-
+		
 		if(player.getCurrentRoom() == null)
 		{
 			assignMapImages();
@@ -310,8 +310,8 @@ public class Controller
 	/**
 	 * 
 	 */
-
-
+	
+	
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
@@ -483,11 +483,14 @@ public class Controller
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
-				
-				text.appendText("\n player dmg: " + player.getDamage());
-				combatText.appendText("\n player dmg: " + player.getDamage());
 				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
+				
+				text.appendText("\n Player hp before attack: " + player.getHealth());
+				combatText.appendText("\n Player hp before attack: " + player.getHealth());
+				monsterArray.get(i).attack(player, monsterArray.get(i).getDamage());
+				text.appendText("\n Player hp after attack: " + player.getHealth());
+				combatText.appendText("\n Player hp after attack: " + player.getHealth());
 				
 				if (player.getHealth() <= 0 )
 				{
