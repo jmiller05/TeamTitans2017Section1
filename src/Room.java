@@ -162,6 +162,16 @@ public class Room implements Serializable
 		return items.get(0);
 	}
 	
+	public ArrayList getItemList()
+	{
+		return items;
+	}
+	
+	public void removeItem(int index)
+	{
+		items.remove(index);
+	}
+	
 	public void addItem(Item item)
 	{
 		if(items == null){items = new ArrayList<Item>();}

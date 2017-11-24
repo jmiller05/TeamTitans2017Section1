@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Player extends Entity
 {
 	/**
@@ -10,7 +13,9 @@ public class Player extends Entity
 	/**
 	 * the player's inventory
 	 */
-	private ArrayList<Item> inventory;
+	//private ArrayList<Item> inventory;
+	
+	private ObservableList<Item> inventory;
 	
 	
 	/**
@@ -22,7 +27,7 @@ public class Player extends Entity
 	public Player(int health, int damage)
 	{
 		super(health, damage);
-		this.inventory = new ArrayList<Item>();	
+		this.inventory = FXCollections.observableArrayList();	
 	}
 	
 	/**
@@ -35,7 +40,7 @@ public class Player extends Entity
 	public Player(int health, int maxHealth, int damage)
 	{
 		super(health, maxHealth, damage);
-		inventory = new ArrayList<Item>();
+		this.inventory = FXCollections.observableArrayList();
 	}
 	
 	/**
@@ -59,7 +64,7 @@ public class Player extends Entity
 	/**
 	 * @return the inventory
 	 */
-	public ArrayList<Item> getInventory()
+	public ObservableList<Item> getInventory()
 	{
 		return inventory;
 	}
@@ -69,7 +74,7 @@ public class Player extends Entity
 	 * 
 	 * @param inventory the ArrayList to set
 	 */
-	public void setInventory(ArrayList<Item> inventory)
+	public void setInventory(ObservableList<Item> inventory)
 	{
 		this.inventory = inventory;
 	}
@@ -82,6 +87,12 @@ public class Player extends Entity
 	public void addItemToInventory(Item item)
 	{
 		inventory.add(item);
+	}
+	
+	public void pickupItem()
+	{
+		this.addItemToInventory(this.currentRoom.getItem());
+		this.currentRoom.removeItem(this.currentRoom.getItemList().indexOf(this.currentRoom.getItem()));
 	}
 	
 	/**

@@ -22,7 +22,7 @@ public class Controller
 	/**
 	 * the Game instance
 	 */
-	private Game game;
+	//private Game game;
 	
 	/**
 	 * the Player attribute of the Controller
@@ -159,7 +159,7 @@ public class Controller
 	{
 		this.player = player;
 		this.dungeonRooms = dungeonRooms;
-		game = new Game();
+		//game = new Game();
 	}
 	
 	/**
@@ -296,8 +296,8 @@ public class Controller
 			checkValidExits();
 		}
 		
-		inventoryList = FXCollections.<Item>observableArrayList();
-		inventoryList.addAll(player.getInventory());
+		//inventoryList = FXCollections.<Item>observableArrayList();
+		//inventoryList.addAll(player.getInventory());
 		
 		
 		health.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
@@ -403,7 +403,7 @@ public class Controller
 	@FXML
 	private void showInventory(ActionEvent event)
 	{
-		inventoryView.setItems(inventoryList);
+		inventoryView.setItems(player.getInventory());
 		inventoryStage.show();	
 	}
 	
@@ -464,6 +464,7 @@ public class Controller
 		if(player.getCurrentRoom().hasItem())
 		{
 			text.appendText("\n" + player.getCurrentRoom().getItem().getItemDescription());
+			player.pickupItem();
 		}
 		
 	}
