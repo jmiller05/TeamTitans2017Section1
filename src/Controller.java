@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.sql.Savepoint;
 import java.util.ArrayList;
+import java.util.Random;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -30,6 +32,8 @@ public class Controller
 	private Stage encounterStage;
 	private ObservableList<Item> inventoryList;
 	private ArrayList<Monster> monsterArray;
+	private Random rand = new Random();
+	
 	
 	
 	//Main view FXML elements which will need to be referenced in this controller class
@@ -103,6 +107,43 @@ public class Controller
 	public void setMonsterArray(ArrayList<Monster> mAL)
 	{
 		this.monsterArray = mAL;
+		
+	}
+	
+	public void setMonsterStats()
+	{
+		monsterArray.get(0).setHealth(5);
+		monsterArray.get(0).setMaxHealth(5);
+		monsterArray.get(0).setDamage(rand.nextInt(2) + 1);
+		
+		monsterArray.get(1).setHealth(10);
+		monsterArray.get(1).setMaxHealth(10);
+		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);
+		
+		monsterArray.get(2).setHealth(15);
+		monsterArray.get(2).setMaxHealth(15);
+		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);
+		
+		monsterArray.get(3).setHealth(20);
+		monsterArray.get(3).setMaxHealth(20);
+		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);
+		
+		monsterArray.get(4).setHealth(25);
+		monsterArray.get(4).setMaxHealth(25);
+		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);
+		
+		monsterArray.get(5).setHealth(30);
+		monsterArray.get(5).setMaxHealth(30);
+		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);
+		
+		monsterArray.get(6).setHealth(40);
+		monsterArray.get(6).setMaxHealth(40);
+		monsterArray.get(6).setDamage(rand.nextInt(5) + 1);
+		
+		monsterArray.get(7).setHealth(60);
+		monsterArray.get(7).setMaxHealth(60);
+		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);
+		
 	}
 	
 	
@@ -170,6 +211,7 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 			
+<<<<<<< HEAD
 			//			try
 			//			{
 			//player.takeDamage(1);
@@ -182,6 +224,10 @@ public class Controller
 			
 			
 			
+=======
+
+			player.takeDamage(1);			
+>>>>>>> 932aa54e9f2e8a4c4c311d5c377672f5f8cfb7ac
 		}
 		
 	}
@@ -265,8 +311,7 @@ public class Controller
 		{
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
-				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
-				
+				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());			
 			}		
 		}
 	}
@@ -283,17 +328,17 @@ public class Controller
 		int roomId = player.getCurrentRoom().getRoomID();
 		Item item = game.getItemInRoom(roomId);
 		if (item != null) {
-		text.appendText("\n" + item.getItemDescription()); 
-		player.addItemToInventory(item);
-		game.removeItemFromRoom(roomId);
-		game.saveItemsInRooms();
-		
-		//text.appendText(String.valueOf(player.getInventory().size()));
+			text.appendText("\n" + item.getItemDescription()); 
+			player.addItemToInventory(item);
+			game.removeItemFromRoom(roomId);
+			game.saveItemsInRooms();
+			
+			//text.appendText(String.valueOf(player.getInventory().size()));
 		}
 		else {
-		text.appendText(" \n There are no item's in this room");
+			text.appendText(" \n There are no item's in this room");
 		}
-	
+		
 	}
 	
 	@FXML
@@ -306,6 +351,7 @@ public class Controller
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
+<<<<<<< HEAD
 				text.appendText("\n player dmg: " + player.getDamage());
 				combatText.appendText("\n player dmg: " + player.getDamage());
 				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
@@ -325,9 +371,27 @@ public class Controller
 				encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
 				encounterStage.show();
 				combatText.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
+=======
+				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());	
+				
+				text.appendText("\n\n Player hp before attack: " + player.getHealth());
+				monsterArray.get(i).attack(player, monsterArray.get(i).getDamage());
+				text.appendText("\n Player hp after attack: " + player.getHealth());
+				
+				if (player.getHealth() <= 0 )
+				{
+					text.appendText("\n" + monsterArray.get(i).winFight());
+				}
+				if (monsterArray.get(i).getHealth() <= 0)
+				{
+					text.appendText("\n" + player.winFight());
+					monsterArray.remove(i);
+				}
+>>>>>>> 932aa54e9f2e8a4c4c311d5c377672f5f8cfb7ac
 				
 			}		
 		}
+		
 	}
 	
 	private void checkValidExits()

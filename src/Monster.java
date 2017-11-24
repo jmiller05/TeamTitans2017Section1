@@ -4,27 +4,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-
 public class Monster extends Entity implements Serializable
-{
-	static final long serialVersionUID = 298;
-	
+{	
+	private static final long serialVersionUID = 663865483373657824L;
 	private String monsterID;
 	private String monsterName;
 	private String description;
-	private int health;
-	private int damage;
 	private ArrayList<Room> location = new ArrayList<Room>();
-	private ArrayList<Item> itemDropped = new ArrayList<Item>();
-	
+	//private ArrayList<Item> itemDropped = new ArrayList<Item>();
+		
 	public Monster(String ID, String name, String desc, int health, int damage)
 	{
-		//		super(health, damage);
+		super(health, damage);
 		this.monsterID = ID;
 		this.monsterName = name;
 		this.description = desc;
-		this.health = health;
-		this.damage = damage;
 	}
 	
 	public String getMonsterName()
@@ -42,9 +36,9 @@ public class Monster extends Entity implements Serializable
 		return this.description;
 	}
 	
-	public void addItem(Item item)
+	public int getLocation() throws IndexOutOfBoundsException
 	{
-		itemDropped.add(item);
+		return location.get(0).getRoomID();		
 	}
 	
 	public void addLocation(Room room)
@@ -52,52 +46,46 @@ public class Monster extends Entity implements Serializable
 		location.add(room);
 	}
 	
-	public int getLocation()
-	{
-		return location.get(0).getRoomID();		
-	}
+	//	public void addItem(Item item)
+	//	{
+	//		itemDropped.add(item);
+	//	}
 	
-	public int getHealth()
-	{
-		return health;
-	}
 	
-	public int getDamage()
-	{
-		return damage;
-	}
 	
-	public void takeDamage(int damage) 
-	{
-		
-		//		if(health - damage < 0) 
-		//		{
-		//			healthPercentage.set(0);
-		//		}
-		//		else
-		//		{
-		health -= damage;
-		//healthPercentage.set((double)health/maxHealth);
-		//		}
-	}
+	//	public int getHealth()
+	//	{
+	//		return health;
+	//	}
+	//	
+	//	public int getDamage()
+	//	{
+	//		return damage;
+	//	}
 	
-	@Override
-	public void winFight()
-	{
-		super.winFight();
-	}
+	//	public void takeDamage(int damage) 
+	//	{
+	//		
+	//		if(health - damage < 0) 
+	//		{
+	//			health = 0;
+	//		}
+	//		else
+	//		{
+	//			health -= damage;
+	//		}
+	//		//healthPercentage.set((double)health/maxHealth);
+	//		
+	//	}
 	
 	@Override
-	public void loseFight()
+	public String winFight()
 	{
-		super.loseFight();
+		return "You have died.";
 	}
-	
-
 	
 	public static ArrayList<Monster> readMonsters(String filename)
 	{
-		
 		ArrayList<Monster> mAL = null;
 		
 		try
@@ -118,4 +106,5 @@ public class Monster extends Entity implements Serializable
 		
 		return mAL;
 	}
+	
 }

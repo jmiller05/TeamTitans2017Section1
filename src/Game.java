@@ -19,20 +19,34 @@ import javafx.stage.Stage;
 
 public class Game extends Application
 {
-
-	// public ArrayList<Room> roomAL; //ArrayList of Rooms
-	// private ArrayList<String> roomNameAL; //ArrayList of Room Names
-	// private ArrayList<String> roomDescriptionAL; // Array List of room
+	
+	//public ArrayList<Room>					roomAL;											// ArrayList
+	// of
+	// Rooms
+	//private ArrayList<String>				roomNameAL;										// ArrayList
+	// of
+	// Room
+	// Names
+	//private ArrayList<String>				roomDescriptionAL;								// Array
+	// List
+	// of
+	// room
 	// descriptions
-	private ArrayList<Monster>		monsterArray	= new ArrayList<Monster>();
+	// private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	private static HashMap<Integer, Item>	itemsInRooms	= new HashMap<Integer, Item>();
+<<<<<<< HEAD
 	public Player					gamePlayer;
 	public Controller				gameController;
 	public Stage					inventoryStage;
 	public Stage                    encounterStage;
+=======
+	public Player							gamePlayer;
+	public Controller						gameController;
+	public Stage							inventoryStage;
+>>>>>>> 932aa54e9f2e8a4c4c311d5c377672f5f8cfb7ac
 	// private Random rand = new Random();
-	public ArrayList<Room>			rooms;
-
+	// public ArrayList<Room> rooms;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
@@ -40,8 +54,8 @@ public class Game extends Application
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		
-		gamePlayer = new Player(10, 10, 10);
-	
+		gamePlayer = new Player(10, 10, 1);
+		
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());
 		
@@ -49,16 +63,18 @@ public class Game extends Application
 		 * ArrayList<Room> rooms = this.populateRooms();
 		 * 
 		 * try{ FileOutputStream fos= new FileOutputStream("Rooms.dat");
-		 * ObjectOutputStream oos= new ObjectOutputStream(fos); oos.writeObject(rooms);
-		 * oos.close(); fos.close(); }catch(IOException ioe){ ioe.printStackTrace(); }
+		 * ObjectOutputStream oos= new ObjectOutputStream(fos);
+		 * oos.writeObject(rooms); oos.close(); fos.close(); }catch(IOException
+		 * ioe){ ioe.printStackTrace(); }
 		 */
 		
 		/*
 		 * try { FileInputStream fis = new FileInputStream("Rooms.dat");
-		 * ObjectInputStream ois = new ObjectInputStream(fis); rooms = (ArrayList)
-		 * ois.readObject(); ois.close(); fis.close(); } catch(IOException ioe){
-		 * ioe.printStackTrace(); return; } catch(ClassNotFoundException c){
-		 * System.out.println("Class not found"); c.printStackTrace(); return; }
+		 * ObjectInputStream ois = new ObjectInputStream(fis); rooms =
+		 * (ArrayList) ois.readObject(); ois.close(); fis.close(); }
+		 * catch(IOException ioe){ ioe.printStackTrace(); return; }
+		 * catch(ClassNotFoundException c){ System.out.println("Class not found"
+		 * ); c.printStackTrace(); return; }
 		 */
 		
 		// rooms = this.populateRooms();
@@ -77,7 +93,6 @@ public class Game extends Application
 		// }
 		
 		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
-
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
@@ -99,73 +114,75 @@ public class Game extends Application
 		gameController.setInventoryStage(inventoryStage);
 		gameController.setEncounterStage(encounterStage);
 		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
+		gameController.setMonsterStats();
 		// gameController.setItemsArray(Item.readItems("Items.dat"));
 		primaryStage.setScene(new Scene(root, 1300, 750));
 		primaryStage.show();
 		
-		
 	}
 	
-	public Item getItemInRoom(int roomId) {
+	public Item getItemInRoom(int roomId)
+	{
 		return itemsInRooms.get(roomId);
 	}
+	
 	// Write
-		public static void saveItemsInRooms()
-		{
-			
-			try
-			{
-				FileOutputStream fos = new FileOutputStream("ItemsInRooms.dat");
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(itemsInRooms);
-				
-				oos.close();
-				
-				fos.close();
-			} catch (IOException ioe)
-			{
-				ioe.printStackTrace();
-			}
-		}
+	public static void saveItemsInRooms()
+	{
 		
-		// Read
-		public static void loadItemsInRooms()
+		try
 		{
-			File f = new File("ItemsInRooms.dat");
+			FileOutputStream fos = new FileOutputStream("ItemsInRooms.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(itemsInRooms);
 			
-			if (!f.exists()) {
-				populateRoomItems();
-				saveItemsInRooms();
-				
-				return;
-			}
+			oos.close();
 			
-			try
-			{
-				FileInputStream fis = new FileInputStream("ItemsInRooms.dat");
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				itemsInRooms = (HashMap<Integer, Item>) ois.readObject();
-				
-				ois.close();
-				fis.close();
-			} catch (IOException ioe)
-			{
-				ioe.printStackTrace();
-			} catch (ClassNotFoundException c)
-			{
-				System.out.println("Class not found");
-				c.printStackTrace();
-			}
+			fos.close();
+		} catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+	}
+	
+	// Read
+	public static void loadItemsInRooms()
+	{
+		File f = new File("ItemsInRooms.dat");
+		
+		if (!f.exists())
+		{
+			populateRoomItems();
+			saveItemsInRooms();
 			
 			return;
 		}
 		
+		try
+		{
+			FileInputStream fis = new FileInputStream("ItemsInRooms.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			itemsInRooms = (HashMap<Integer, Item>) ois.readObject();
+			
+			ois.close();
+			fis.close();
+		} catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		} catch (ClassNotFoundException c)
+		{
+			System.out.println("Class not found");
+			c.printStackTrace();
+		}
+		
+		return;
+	}
+	
 	public static void main(String[] args)
 	{
 		
 		launch(args);
 	}
-	
 	
 	public static void populateRoomItems()
 	{
@@ -178,8 +195,7 @@ public class Game extends Application
 		itemsInRooms.put(0, new Weapon("Wep_00", "Branch", "A tree branch", 3, null));
 		itemsInRooms.put(5, new Weapon("Wep_01", "Iron Sword", "A sword forged from iron", 3, null));
 		itemsInRooms.put(12, new Weapon("Wep_02", "Steel Sword", "A sword forged from steel", 3, null));
-		itemsInRooms.put(20,
-				new Weapon("Wep_03", "Tungsteel Sword", "A sword forged from tungsteel", 3, null));
+		itemsInRooms.put(20, new Weapon("Wep_03", "Tungsteel Sword", "A sword forged from tungsteel", 3, null));
 		
 		itemsInRooms.put(2, new Artifact("art_00", "Map", "Shows the map of the entire dungeon", null));
 		itemsInRooms.put(20, new Artifact("art_01", "Potion Bottle", "Restores any lost HP", null));
@@ -195,7 +211,7 @@ public class Game extends Application
 		itemsInRooms.put(18, new Artifact("art_10", "Golden Key", "A key casted from gold", null));
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
 	}
-
+	
 	/**
 	 * @param itemID
 	 */
@@ -204,14 +220,13 @@ public class Game extends Application
 		itemsInRooms.remove(roomId);
 		
 	}
-
 	
-
 	/*
 	 * public void populateMonsters() { Monster m0 = new Monster("Mon_00",
 	 * "Toxic Wolfspider",
 	 * "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom."
-	 * , 5, rand.nextInt(2) + 1); Monster m1 = new Monster("Mon_01", "Soul Serpent",
+	 * , 5, rand.nextInt(2) + 1); Monster m1 = new Monster("Mon_01",
+	 * "Soul Serpent",
 	 * "The soul stealing serpent will attack you to steal your soul with one of its bites."
 	 * , 10, rand.nextInt(3) + 1); Monster m2 = new Monster("Mon_02",
 	 * "Terror Tiger",
@@ -237,11 +252,7 @@ public class Game extends Application
 	 * monsterArray.add(m3); monsterArray.add(m4); monsterArray.add(m5);
 	 * monsterArray.add(m6); monsterArray.add(m7);
 	 * 
-	 * 
-	 * 
-	 * 
 	 * }
-	 * 
 	 * 
 	 * public void addMonsterRooms() {
 	 * monsterArray.get(0).addLocation(rooms.get(4));
@@ -268,30 +279,28 @@ public class Game extends Application
 	 * 
 	 * monsterArray.get(7).addLocation(rooms.get(29)); }
 	 * 
-	 * 
 	 * public ArrayList<Room> populateRooms() { roomAL = new ArrayList<Room>();
 	 * roomNameAL = new ArrayList<String>(); roomDescriptionAL = new
 	 * ArrayList<String>();
 	 * 
 	 * roomNameAL.add(0, "Cave Entrance"); roomNameAL.add(1, "Crumbling Room");
-	 * roomNameAL.add(2, "Map Room"); roomNameAL.add(3, "Cavern"); roomNameAL.add(4,
-	 * "Spider Room"); roomNameAL.add(5, "Unknown Heroes Tomb"); roomNameAL.add(6,
-	 * "Cavern Pit"); roomNameAL.add(7, "Breached Cavern"); roomNameAL.add(8,
-	 * "Corridor of Water"); roomNameAL.add(9, "Cave Exit"); roomNameAL.add(10,
-	 * "Entrance to Lower Tombs"); roomNameAL.add(11, "Sapphire Studies");
-	 * roomNameAL.add(12, "Emerald Studies"); roomNameAL.add(13,
-	 * "Sapphire Storage Facility"); roomNameAL.add(14, "Emerald Storage Facility");
-	 * roomNameAL.add(15, "Ruby of Wonders"); roomNameAL.add(16,
-	 * "Emerald Mausoleum"); roomNameAL.add(17, "Sapphire Mausoleum");
-	 * roomNameAL.add(18, "Banquet Hall"); roomNameAL.add(19, "Study Room");
-	 * roomNameAL.add(20, "Alchemist's Lab"); roomNameAL.add(21,
-	 * "Entrance to Upper Tomb"); roomNameAL.add(22, "Torture Chamber");
-	 * roomNameAL.add(23, "Holding Cells"); roomNameAL.add(24, "Grand Hall");
-	 * roomNameAL.add(25, "Southwest Tomb"); roomNameAL.add(26, "Southeast Tomb");
-	 * roomNameAL.add(27, "Northwest Tomb"); roomNameAL.add(28, "Northeast Tomb");
-	 * roomNameAL.add(29, "Hall of Heroes"); roomNameAL.add(30,
-	 * "Tomb of Doom Exit");
-	 * 
+	 * roomNameAL.add(2, "Map Room"); roomNameAL.add(3, "Cavern");
+	 * roomNameAL.add(4, "Spider Room"); roomNameAL.add(5, "Unknown Heroes Tomb"
+	 * ); roomNameAL.add(6, "Cavern Pit"); roomNameAL.add(7, "Breached Cavern");
+	 * roomNameAL.add(8, "Corridor of Water"); roomNameAL.add(9, "Cave Exit");
+	 * roomNameAL.add(10, "Entrance to Lower Tombs"); roomNameAL.add(11,
+	 * "Sapphire Studies"); roomNameAL.add(12, "Emerald Studies");
+	 * roomNameAL.add(13, "Sapphire Storage Facility"); roomNameAL.add(14,
+	 * "Emerald Storage Facility"); roomNameAL.add(15, "Ruby of Wonders");
+	 * roomNameAL.add(16, "Emerald Mausoleum"); roomNameAL.add(17,
+	 * "Sapphire Mausoleum"); roomNameAL.add(18, "Banquet Hall");
+	 * roomNameAL.add(19, "Study Room"); roomNameAL.add(20, "Alchemist's Lab");
+	 * roomNameAL.add(21, "Entrance to Upper Tomb"); roomNameAL.add(22,
+	 * "Torture Chamber"); roomNameAL.add(23, "Holding Cells");
+	 * roomNameAL.add(24, "Grand Hall"); roomNameAL.add(25, "Southwest Tomb");
+	 * roomNameAL.add(26, "Southeast Tomb"); roomNameAL.add(27, "Northwest Tomb"
+	 * ); roomNameAL.add(28, "Northeast Tomb"); roomNameAL.add(29,
+	 * "Hall of Heroes"); roomNameAL.add(30, "Tomb of Doom Exit");
 	 * 
 	 * roomDescriptionAL.add(0,
 	 * "After regaining consciousness, you begin to focus looking around the room to see where you have landed. The only light that emits into the cave is from the hole which was created from where you fell. The walls are covered in dead roots all extending towards the hole in the ceiling. There is a branch on the floor. You are able to see an opening to the North and another opening to the East."
@@ -334,7 +343,7 @@ public class Game extends Application
 	 * ); roomDescriptionAL.add(19,
 	 * "Upon entering this room, you notice the floor is made from poorly crafted wood. There is a makeshift bed in corner of room with the remains of two skeletal human bodies. There are bookcases filled with tattered tomes along the entire northern wall. You can see a small wooden table in the center of the room big enough to sit 6 at the table, each with a chair in the spots. To the East there is a wooden door. To the North contains a metal door."
 	 * ); roomDescriptionAL.add(20,
-	 * "The floor is weathered planks covered in dust and debris. In the corner of the room across from the door there is a massive alchemists desk littered with vials and parchment. There is a bookcase to the left of the desk with tomes and jars containing various organs in a murky liquid. There is a pallet bed of pillows and fur on the South wall with a lantern and a medicine bag on the floor next to it. To the West is a wooden door. To the North there is a metal door."
+	 * "The floor is weathered planks covered in dust and debris. In the corner of the room across from the door there is a massive alchemists desk littered with vials and parchment. There is a bookcase to the left of the desk with tomes and jars containing various organs in a murky liquid. There is a pallet bed of pillows and fur on the South wall with a lantern and a medicine bag on the floor next to it. To the West is a wooden door. To the North there is a metal door."
 	 * ); roomDescriptionAL.add(21,
 	 * "Directly to the north you see a double wide staircase made out of onyx with a red velvet carpet in the center leading to the top of the staircase. The walls are also made from onyx with red tapestries lining each side of the walls. These tapestries have an emblem of a skull without a jaw and a serpent intertwined through the eyeholes raising above the skull. To the south is a giant double metal door decorated in gold and silver. To the West and the East are two caged metal doors, able to see through the bars only enough to know something evil has happened in each of these rooms."
 	 * ); roomDescriptionAL.add(22,
@@ -356,57 +365,61 @@ public class Game extends Application
 	 * ); roomDescriptionAL.add(30,
 	 * "You beat the game and escaped the tomb! Welcome to the outside world!");
 	 * 
-	 * for (int i = 0; i <= 30; i++) { roomAL.add(i, new
-	 * Room(i,roomNameAL.get(i),roomDescriptionAL.get(i))); }
+	 * for (int i = 0; i <= 30; i++) { roomAL.add(i, new Room(i,
+	 * roomNameAL.get(i), roomDescriptionAL.get(i))); }
 	 * 
-	 * //Level 1 Room.assignExits(new Exit(0), roomAL.get(0), "north",
-	 * roomAL.get(3), "south"); Room.assignExits(new Exit(1), roomAL.get(0), "east",
-	 * roomAL.get(2), "west"); Room.assignExits(new Exit(2), roomAL.get(3),
-	 * "southeast", roomAL.get(4), "west"); Room.assignExits(new Exit(3),
-	 * roomAL.get(3), "northeast", roomAL.get(5), "west"); Room.assignExits(new
-	 * Exit(4), roomAL.get(4), "north", roomAL.get(5), "south");
-	 * Room.assignExits(new Exit(5), roomAL.get(3), "west", roomAL.get(6), "east");
-	 * Room.assignExits(new Exit(6), roomAL.get(6), "south", roomAL.get(1),
-	 * "north"); Room.assignExits(new Exit(7), roomAL.get(6), "north",
-	 * roomAL.get(7), "south"); Room.assignExits(new Exit(8), roomAL.get(7),
-	 * "north", roomAL.get(8), "south"); roomAL.get(7).getNorthExit().lockExit();
+	 * // Level 1 Room.assignExits(new Exit(0), roomAL.get(0), "north",
+	 * roomAL.get(3), "south"); Room.assignExits(new Exit(1), roomAL.get(0),
+	 * "east", roomAL.get(2), "west"); Room.assignExits(new Exit(2),
+	 * roomAL.get(3), "southeast", roomAL.get(4), "west"); Room.assignExits(new
+	 * Exit(3), roomAL.get(3), "northeast", roomAL.get(5), "west");
+	 * Room.assignExits(new Exit(4), roomAL.get(4), "north", roomAL.get(5),
+	 * "south"); Room.assignExits(new Exit(5), roomAL.get(3), "west",
+	 * roomAL.get(6), "east"); Room.assignExits(new Exit(6), roomAL.get(6),
+	 * "south", roomAL.get(1), "north"); Room.assignExits(new Exit(7),
+	 * roomAL.get(6), "north", roomAL.get(7), "south"); Room.assignExits(new
+	 * Exit(8), roomAL.get(7), "north", roomAL.get(8), "south");
+	 * roomAL.get(7).getNorthExit().lockExit();
 	 * roomAL.get(7).getNorthExit().setLockDescription("The door is locked!");
-	 * Room.assignExits(new Exit(9), roomAL.get(8), "east", roomAL.get(9), "west");
+	 * Room.assignExits(new Exit(9), roomAL.get(8), "east", roomAL.get(9),
+	 * "west");
 	 * 
-	 * //Level 2 Room.assignExits(new Exit(10), roomAL.get(10), "north",
+	 * // Level 2 Room.assignExits(new Exit(10), roomAL.get(10), "north",
 	 * roomAL.get(15), "south"); Room.assignExits(new Exit(11), roomAL.get(10),
 	 * "west", roomAL.get(12), "east"); Room.assignExits(new Exit(12),
 	 * roomAL.get(10), "east", roomAL.get(11), "west"); Room.assignExits(new
 	 * Exit(13), roomAL.get(11), "north", roomAL.get(15), "southeast");
 	 * Room.assignExits(new Exit(14), roomAL.get(11), "east", roomAL.get(13),
 	 * "west"); Room.assignExits(new Exit(15), roomAL.get(12), "north",
-	 * roomAL.get(15), "southwest"); Room.assignExits(new Exit(16), roomAL.get(12),
-	 * "west", roomAL.get(14), "east"); Room.assignExits(new Exit(17),
-	 * roomAL.get(13), "north", roomAL.get(17), "south"); Room.assignExits(new
-	 * Exit(18), roomAL.get(14), "north", roomAL.get(16), "south");
-	 * Room.assignExits(new Exit(19), roomAL.get(15), "north", roomAL.get(18),
-	 * "south"); Room.assignExits(new Exit(20), roomAL.get(16), "east",
-	 * roomAL.get(18), "southwest"); Room.assignExits(new Exit(21), roomAL.get(17),
-	 * "west", roomAL.get(18), "southeast"); Room.assignExits(new Exit(22),
-	 * roomAL.get(18), "north", roomAL.get(21), "south"); Room.assignExits(new
-	 * Exit(23), roomAL.get(18), "northwest", roomAL.get(19), "east");
-	 * Room.assignExits(new Exit(24), roomAL.get(18), "northeast", roomAL.get(20),
-	 * "west"); Room.assignExits(new Exit(25), roomAL.get(19), "north",
-	 * roomAL.get(22), "south"); Room.assignExits(new Exit(26), roomAL.get(20),
-	 * "north", roomAL.get(23), "south"); Room.assignExits(new Exit(27),
-	 * roomAL.get(22), "east", roomAL.get(21), "west"); Room.assignExits(new
-	 * Exit(28), roomAL.get(23), "west", roomAL.get(21), "east");
+	 * roomAL.get(15), "southwest"); Room.assignExits(new Exit(16),
+	 * roomAL.get(12), "west", roomAL.get(14), "east"); Room.assignExits(new
+	 * Exit(17), roomAL.get(13), "north", roomAL.get(17), "south");
+	 * Room.assignExits(new Exit(18), roomAL.get(14), "north", roomAL.get(16),
+	 * "south"); Room.assignExits(new Exit(19), roomAL.get(15), "north",
+	 * roomAL.get(18), "south"); Room.assignExits(new Exit(20), roomAL.get(16),
+	 * "east", roomAL.get(18), "southwest"); Room.assignExits(new Exit(21),
+	 * roomAL.get(17), "west", roomAL.get(18), "southeast");
+	 * Room.assignExits(new Exit(22), roomAL.get(18), "north", roomAL.get(21),
+	 * "south"); Room.assignExits(new Exit(23), roomAL.get(18), "northwest",
+	 * roomAL.get(19), "east"); Room.assignExits(new Exit(24), roomAL.get(18),
+	 * "northeast", roomAL.get(20), "west"); Room.assignExits(new Exit(25),
+	 * roomAL.get(19), "north", roomAL.get(22), "south"); Room.assignExits(new
+	 * Exit(26), roomAL.get(20), "north", roomAL.get(23), "south");
+	 * Room.assignExits(new Exit(27), roomAL.get(22), "east", roomAL.get(21),
+	 * "west"); Room.assignExits(new Exit(28), roomAL.get(23), "west",
+	 * roomAL.get(21), "east");
 	 * 
-	 * //Level 3 Room.assignExits(new Exit(29), roomAL.get(24), "north",
+	 * // Level 3 Room.assignExits(new Exit(29), roomAL.get(24), "north",
 	 * roomAL.get(29), "south"); Room.assignExits(new Exit(30), roomAL.get(24),
 	 * "southeast", roomAL.get(26), "west"); Room.assignExits(new Exit(31),
-	 * roomAL.get(24), "northeast", roomAL.get(28), "west"); Room.assignExits(new
-	 * Exit(32), roomAL.get(24), "northwest", roomAL.get(27), "east");
-	 * Room.assignExits(new Exit(33), roomAL.get(24), "southwest", roomAL.get(25),
-	 * "east"); Room.assignExits(new Exit(34), roomAL.get(25), "north",
-	 * roomAL.get(27), "south"); Room.assignExits(new Exit(35), roomAL.get(26),
-	 * "north", roomAL.get(28), "south"); Room.assignExits(new Exit(36),
-	 * roomAL.get(29), "north", roomAL.get(30), "south");
+	 * roomAL.get(24), "northeast", roomAL.get(28), "west");
+	 * Room.assignExits(new Exit(32), roomAL.get(24), "northwest",
+	 * roomAL.get(27), "east"); Room.assignExits(new Exit(33), roomAL.get(24),
+	 * "southwest", roomAL.get(25), "east"); Room.assignExits(new Exit(34),
+	 * roomAL.get(25), "north", roomAL.get(27), "south"); Room.assignExits(new
+	 * Exit(35), roomAL.get(26), "north", roomAL.get(28), "south");
+	 * Room.assignExits(new Exit(36), roomAL.get(29), "north", roomAL.get(30),
+	 * "south");
 	 * 
 	 * roomAL.get(0).setMapLocationImage(new Image("res/Room_00.jpg"));
 	 * roomAL.get(1).setMapLocationImage(new Image("res/Room_01.jpg"));
@@ -444,6 +457,5 @@ public class Game extends Application
 	 * 
 	 * }
 	 */
-
 	
 }
