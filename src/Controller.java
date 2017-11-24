@@ -292,10 +292,7 @@ public class Controller
 		{
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
-				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
-				text.appendText("\n\n" + monsterArray.get(i).getLocation());
-				
-				
+				text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());			
 			}		
 		}
 	}

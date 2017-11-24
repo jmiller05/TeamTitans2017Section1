@@ -248,27 +248,27 @@ public class Game extends Application
 	{
 		monsterArray.get(0).addLocation(rooms.get(4));
 		monsterArray.get(0).addLocation(rooms.get(5));
-		//		monsterArray.get(1).addLocation(rooms.get(11));
-		//		monsterArray.get(1).addLocation(rooms.get(13));
-		//		monsterArray.get(1).addLocation(rooms.get(17));
-		//		
-		//		monsterArray.get(2).addLocation(rooms.get(12));
-		//		monsterArray.get(2).addLocation(rooms.get(14));
-		//		monsterArray.get(2).addLocation(rooms.get(16));
-		//		
-		//		monsterArray.get(3).addLocation(rooms.get(22));
-		//		monsterArray.get(3).addLocation(rooms.get(23));
-		//		
-		//		monsterArray.get(4).addLocation(rooms.get(18));
-		//		
-		//		monsterArray.get(5).addLocation(rooms.get(25));
-		//		monsterArray.get(5).addLocation(rooms.get(26));
-		//		monsterArray.get(5).addLocation(rooms.get(27));
-		//		monsterArray.get(5).addLocation(rooms.get(28));
-		//		
-		//		monsterArray.get(6).addLocation(rooms.get(20));
-		//		
-		//		monsterArray.get(7).addLocation(rooms.get(29));
+		monsterArray.get(1).addLocation(rooms.get(11));
+		monsterArray.get(1).addLocation(rooms.get(13));
+		monsterArray.get(1).addLocation(rooms.get(17));
+		
+		monsterArray.get(2).addLocation(rooms.get(12));
+		monsterArray.get(2).addLocation(rooms.get(14));
+		monsterArray.get(2).addLocation(rooms.get(16));
+		
+		monsterArray.get(3).addLocation(rooms.get(22));
+		monsterArray.get(3).addLocation(rooms.get(23));
+		
+		monsterArray.get(4).addLocation(rooms.get(18));
+		
+		monsterArray.get(5).addLocation(rooms.get(25));
+		monsterArray.get(5).addLocation(rooms.get(26));
+		monsterArray.get(5).addLocation(rooms.get(27));
+		monsterArray.get(5).addLocation(rooms.get(28));
+		
+		monsterArray.get(6).addLocation(rooms.get(20));
+		
+		monsterArray.get(7).addLocation(rooms.get(29));
 	}
 	
 	public ArrayList<Room> populateRooms()
