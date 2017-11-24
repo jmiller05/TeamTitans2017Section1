@@ -387,6 +387,8 @@ public class Game extends Application
 		roomAL.get(1).addItem(new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
 		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
 		
+		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
+		
 		return roomAL;
 		
 	} 

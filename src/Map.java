@@ -16,7 +16,7 @@ public class Map extends Item implements ArtifactInterface {
 		this.map = map;
 	}
 	
-	public void setmap(ImageView map)
+	public void setMap(ImageView map)
 	{
 		this.map = map;
 	}

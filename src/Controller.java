@@ -285,7 +285,9 @@ public class Controller
 	
 	@FXML
 	protected void initialize()
-	{		
+	{	
+		((Map)dungeonRooms.get(2).getItem()).setMap(mapView);
+		mapView.setVisible(false);
 		
 		if(player.getCurrentRoom() == null)
 		{
@@ -463,8 +465,15 @@ public class Controller
 		
 		if(player.getCurrentRoom().hasItem())
 		{
+			if(player.getCurrentRoom().getItem().getItemName().equalsIgnoreCase("map"))
+			{
+				((Map)player.getCurrentRoom().getItem()).useItem();
+			}
+			
 			text.appendText("\n" + player.getCurrentRoom().getItem().getItemDescription());
 			player.pickupItem();
+			
+			
 		}
 		
 	}
