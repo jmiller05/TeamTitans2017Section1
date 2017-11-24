@@ -1,8 +1,10 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -35,7 +37,7 @@ public class Item implements Serializable{
 	{
 		return foundIn;
 	}
-	*/
+	 */
 	/**
 	 * @param foundIn the foundIn to set
 	 */
@@ -43,7 +45,7 @@ public class Item implements Serializable{
 	{
 		this.foundIn = foundIn;
 	}*/
-
+	
 	public void dropItem()
 	{
 		
@@ -82,7 +84,7 @@ public class Item implements Serializable{
 	{
 		location.add(room);
 	}
-		
+	
 	/**
 	 * @return the locations
 	 */
@@ -98,6 +100,30 @@ public class Item implements Serializable{
 	public  Monster getDroppedBy()
 	{
 		return droppedBy;
+	}
+	
+	public static HashMap<Integer, Item> loadItemsInRooms(String filename)
+	{
+		HashMap<Integer, Item> itemAL = null;
+		
+		try
+		{
+			FileInputStream fis = new FileInputStream(filename);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			itemAL = (HashMap<Integer, Item>) ois.readObject();
+			
+			ois.close();
+			fis.close();
+		} catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		} catch (ClassNotFoundException c)
+		{
+			System.out.println("Class not found");
+			c.printStackTrace();
+		}
+		
+		return itemAL;
 	}
 	
 	
