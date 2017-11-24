@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Game extends Application
@@ -109,6 +110,7 @@ public class Game extends Application
 		inventoryStage.setScene(new Scene(inventory, 600, 400));
 		
 		encounterStage = new Stage();
+		encounterStage.initModality(Modality.WINDOW_MODAL);
 		encounterStage.setScene(new Scene(encounter, 600, 500));
 		// gameController.setInventoryView(inventory);
 		// gameController.setInventoryLoader(inventoryLoader);
