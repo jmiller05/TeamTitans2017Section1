@@ -226,11 +226,7 @@ public class Controller
 	/**
 	 * @param itemID
 	 */
-	public void removeItemFromRoom(int roomId)
-	{
-		itemsInRooms.remove(roomId);
-		
-	}
+
 	
 	/**
 	 * @author Jesse Miller

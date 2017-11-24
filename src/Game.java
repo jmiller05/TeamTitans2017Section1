@@ -139,7 +139,11 @@ public class Game extends Application
 	}
 	
 	// Read
-	
+	public void removeItemFromRoom(int roomId)
+	{
+		itemsInRooms.remove(roomId);
+		
+	}
 	
 	public static void main(String[] args)
 	{
