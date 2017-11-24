@@ -68,7 +68,7 @@ public class Game extends Application
 		rooms = this.populateRooms();
 		populateMonsters();
 		addMonsterRooms();
-		populateRoomItems();
+		//populateRoomItems();
 		saveItemsInRooms();
 		
 		//
@@ -147,7 +147,7 @@ public class Game extends Application
 		launch(args);
 	}
 	
-	public static void populateRoomItems()
+	/*public static void populateRoomItems()
 	{
 		itemsInRooms.put(0, new Armor("Amr_00", "Cloth Armor", "Rugged clothes from your village", 10, null));
 		itemsInRooms.put(1, new Armor("Amr_01", "Leather Armor", "Armor crafted from deer skin", 20, null));
@@ -173,7 +173,7 @@ public class Game extends Application
 		itemsInRooms.put(5, new Artifact("art_09", "Shiny Iron Key", "A key forged from iron that's shiny", null));
 		itemsInRooms.put(18, new Artifact("art_10", "Golden Key", "A key casted from gold", null));
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
-	}
+	}*/
 	
 	/**
 	 * @param itemID
