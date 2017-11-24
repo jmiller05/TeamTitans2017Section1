@@ -83,7 +83,7 @@ public class Game extends Application
 		// ioe.printStackTrace();
 		// }
 		
-		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
+		Controller gameController = new Controller(gamePlayer, rooms);
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
