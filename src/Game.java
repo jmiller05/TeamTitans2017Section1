@@ -42,7 +42,7 @@ public class Game extends Application
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		
-		gamePlayer = new Player(10, 10, 1);
+		gamePlayer = new Player(10, 10, 2);
 		
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());
@@ -68,7 +68,7 @@ public class Game extends Application
 		rooms = this.populateRooms();
 		populateMonsters();
 		addMonsterRooms();
-		populateRoomItems();
+		//populateRoomItems();
 		saveItemsInRooms();
 		
 		//
@@ -83,7 +83,7 @@ public class Game extends Application
 		// ioe.printStackTrace();
 		// }
 		
-		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
+		Controller gameController = new Controller(gamePlayer, rooms);
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
@@ -147,7 +147,7 @@ public class Game extends Application
 		launch(args);
 	}
 	
-	public static void populateRoomItems()
+	/*public static void populateRoomItems()
 	{
 		itemsInRooms.put(0, new Armor("Amr_00", "Cloth Armor", "Rugged clothes from your village", 10, null));
 		itemsInRooms.put(1, new Armor("Amr_01", "Leather Armor", "Armor crafted from deer skin", 20, null));
@@ -173,7 +173,7 @@ public class Game extends Application
 		itemsInRooms.put(5, new Artifact("art_09", "Shiny Iron Key", "A key forged from iron that's shiny", null));
 		itemsInRooms.put(18, new Artifact("art_10", "Golden Key", "A key casted from gold", null));
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
-	}
+	}*/
 	
 
 	public void populateMonsters()
@@ -372,6 +372,14 @@ public class Game extends Application
 		roomAL.get(28).setMapLocationImage(new Image("res/Room_28.jpg"));
 		roomAL.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
+		
+		roomAL.get(5).addItem(new Weapon(2,"Iron Sword","A sword forged from iron",5));
+		roomAL.get(12).addItem(new Weapon(3,"Steel Sword","A sword forged from steel",8));
+		
+		roomAL.get(1).addItem(new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
+		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
+		
+		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
 		
 		return roomAL;
 		

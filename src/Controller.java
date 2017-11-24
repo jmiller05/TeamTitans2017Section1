@@ -22,7 +22,7 @@ public class Controller
 	/**
 	 * the Game instance
 	 */
-	private Game game;
+	//private Game game;
 	
 	/**
 	 * the Player attribute of the Controller
@@ -159,7 +159,7 @@ public class Controller
 	{
 		this.player = player;
 		this.dungeonRooms = dungeonRooms;
-		game = new Game();
+		//game = new Game();
 	}
 	
 	/**
@@ -294,19 +294,21 @@ public class Controller
 	
 	@FXML
 	protected void initialize()
-	{		
-
+	{	
+		((Map)dungeonRooms.get(2).getItem()).setMap(mapView);
+		mapView.setVisible(false);
+		
 		if(player.getCurrentRoom() == null)
 		{
-			assignMapImages();
+			//assignMapImages();
 			player.setCurrentRoom(dungeonRooms.get(0));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 		}
 		
-		inventoryList = FXCollections.<Item>observableArrayList();
-		inventoryList.addAll(player.getInventory());
+		//inventoryList = FXCollections.<Item>observableArrayList();
+		//inventoryList.addAll(player.getInventory());
 		
 		
 		health.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
@@ -319,8 +321,8 @@ public class Controller
 	/**
 	 * 
 	 */
-
-
+	
+	
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
@@ -412,7 +414,7 @@ public class Controller
 	@FXML
 	private void showInventory(ActionEvent event)
 	{
-		inventoryView.setItems(inventoryList);
+		inventoryView.setItems(player.getInventory());
 		inventoryStage.show();	
 	}
 	
@@ -456,7 +458,7 @@ public class Controller
 	@FXML
 	private void searchRoom(ActionEvent event)
 	{
-		int roomId = player.getCurrentRoom().getRoomID();
+		/*int roomId = player.getCurrentRoom().getRoomID();
 		Item item = getItemInRoom(roomId);
 		if (item != null) {
 			text.appendText("\n" + item.getItemDescription()); 
@@ -468,6 +470,19 @@ public class Controller
 		}
 		else {
 			text.appendText(" \n There are no item's in this room");
+		}*/
+		
+		if(player.getCurrentRoom().hasItem())
+		{
+			if(player.getCurrentRoom().getItem().getItemName().equalsIgnoreCase("map"))
+			{
+				((Map)player.getCurrentRoom().getItem()).useItem();
+			}
+			
+			text.appendText("\n" + player.getCurrentRoom().getItem().getItemDescription());
+			player.pickupItem();
+			
+			
 		}
 		
 	}
@@ -492,11 +507,14 @@ public class Controller
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
-				
-				text.appendText("\n player dmg: " + player.getDamage());
-				combatText.appendText("\n player dmg: " + player.getDamage());
 				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
+				
+				text.appendText("\n Player hp before attack: " + player.getHealth());
+				combatText.appendText("\n Player hp before attack: " + player.getHealth());
+				monsterArray.get(i).attack(player, monsterArray.get(i).getDamage());
+				text.appendText("\n Player hp after attack: " + player.getHealth());
+				combatText.appendText("\n Player hp after attack: " + player.getHealth());
 				
 				if (player.getHealth() <= 0 )
 				{
