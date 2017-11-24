@@ -400,7 +400,6 @@ public class Controller
 	
 	
 	/**
-	 * 
 	 * Checks if there is a monster in the player's current room, and 
 	 * if there is, prints the monster's description.
 	 * 
@@ -420,7 +419,6 @@ public class Controller
 	}
 	
 	/**
-	 * 
 	 * Ends the monster encounter.
 	 * 
 	 * @param event the pressing of Flee Monster button
@@ -452,7 +450,6 @@ public class Controller
 	}
 	
 	/**
-	 * 
 	 * Checks if there is a monster in the player's current room, and if there is,
 	 * the player attacks the monster with their current damage. In return, the monster
 	 * attacks the player.
@@ -492,7 +489,6 @@ public class Controller
 	}
 	
 	/**
-	 * 
 	 * Opens a new stage for the combat session. Includes Attack, Examine, and Flee
 	 * buttons. Also shows the player HP and monster HP. 
 	 * 
