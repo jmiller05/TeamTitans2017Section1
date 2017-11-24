@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 public class Controller
 {
+	
 	/**
 	 * the Game instance
 	 */
@@ -277,6 +278,7 @@ public class Controller
 	@FXML
 	protected void initialize()
 	{		
+
 		if(player.getCurrentRoom() == null)
 		{
 			assignMapImages();
@@ -296,6 +298,11 @@ public class Controller
 		health.progressProperty().addListener(new ProgressBarStyler(health));	
 	}
 	
+	/**
+	 * 
+	 */
+
+
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{

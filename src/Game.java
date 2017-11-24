@@ -102,7 +102,7 @@ public class Game extends Application
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
 		monsterEncounterLoader.setLocation(getClass().getResource("MonsterEncounter.fxml"));
-		loadItemsInRooms();
+		
 		Parent root = loader.load();
 		Parent inventory = inventoryLoader.load();
 		Parent encounter = monsterEncounterLoader.load();
@@ -118,6 +118,7 @@ public class Game extends Application
 		gameController.setEncounterStage(encounterStage);
 		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
 		gameController.setMonsterStats();
+		//gameController.setInventory(loadItemsInRooms());
 		// gameController.setItemsArray(Item.readItems("Items.dat"));
 		primaryStage.setScene(new Scene(root, 1300, 750));
 		primaryStage.show();
