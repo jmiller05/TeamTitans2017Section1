@@ -224,6 +224,15 @@ public class Controller
 	}
 	
 	/**
+	 * @param itemID
+	 */
+	public void removeItemFromRoom(int roomId)
+	{
+		itemsInRooms.remove(roomId);
+		
+	}
+	
+	/**
 	 * @author Jesse Miller
 	 * 
 	 * Setter statements for each Monster's Health, Damage, and Max Health.
