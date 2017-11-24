@@ -22,6 +22,7 @@ public class Room implements Serializable
 	private Exit northWestExit;
 	private Exit southEastExit;
 	private Exit southWestExit;
+	private ArrayList<Item> items;
 
 	public Room(int roomID, String roomName, String roomDescription)
 	{
@@ -148,6 +149,12 @@ public class Room implements Serializable
 	public Exit getSouthWestExit()
 	{
 		return southWestExit;
+	}
+	
+	public void addItem(Item item)
+	{
+		if(items == null){items = new ArrayList<Item>();}
+		items.add(item);
 	}
 	
 	public Room getAdjacentRoom(Exit exit)
