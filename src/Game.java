@@ -29,6 +29,7 @@ public class Game extends Application
 	public Player					gamePlayer;
 	public Controller				gameController;
 	public Stage					inventoryStage;
+	public Stage                    encounterStage;
 	// private Random rand = new Random();
 	public ArrayList<Room>			rooms;
 
@@ -37,6 +38,7 @@ public class Game extends Application
 	{
 		FXMLLoader loader = new FXMLLoader();
 		FXMLLoader inventoryLoader = new FXMLLoader();
+		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		
 		gamePlayer = new Player(10, 10, 10);
 	
@@ -79,16 +81,23 @@ public class Game extends Application
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
+		monsterEncounterLoader.setController(gameController);
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
+		monsterEncounterLoader.setLocation(getClass().getResource("MonsterEncounter.fxml"));
 		loadItemsInRooms();
 		Parent root = loader.load();
 		Parent inventory = inventoryLoader.load();
+		Parent encounter = monsterEncounterLoader.load();
 		inventoryStage = new Stage();
 		inventoryStage.setScene(new Scene(inventory, 600, 400));
+		
+		encounterStage = new Stage();
+		encounterStage.setScene(new Scene(encounter, 600, 500));
 		// gameController.setInventoryView(inventory);
 		// gameController.setInventoryLoader(inventoryLoader);
 		gameController.setInventoryStage(inventoryStage);
+		gameController.setEncounterStage(encounterStage);
 		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
 		// gameController.setItemsArray(Item.readItems("Items.dat"));
 		primaryStage.setScene(new Scene(root, 1300, 750));

@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -26,34 +27,51 @@ public class Controller
 	private Player player;
 	private ArrayList<Room> dungeonRooms;
 	private Stage inventoryStage;
+	private Stage encounterStage;
 	private ObservableList<Item> inventoryList;
 	private ArrayList<Monster> monsterArray;
 	
 	
+	//Main view FXML elements which will need to be referenced in this controller class
 	@FXML
-	ProgressBar health;
+	ProgressBar health; //ProgressBar which displays the player's health
 	@FXML
-	TextArea text;
+	TextArea text; //TextArea which displays most of the text descriptions in the game
 	@FXML
-	Button btnnorth;
+	ImageView mapView; //ImageView which displays the map
+	
+	//Navigation buttons
 	@FXML
-	Button btsouth;
+	Button btnnorth; //Button to navigate North
 	@FXML
-	Button bteast;
+	Button btsouth; //Button to navigate South
 	@FXML
-	Button btwest;
+	Button bteast; //Button to navigate East
 	@FXML
-	Button btnnortheast;
+	Button btwest; //Button to navigate West
 	@FXML
-	Button btnnorthwest;
+	Button btnnortheast; //Button to navigate Northeast
 	@FXML
-	Button btsoutheast;
+	Button btnnorthwest; //Button to navigate Northwest
 	@FXML
-	Button btsouthwest;
+	Button btsoutheast; //Button to navigate Southeast
 	@FXML
-	ImageView mapView;
+	Button btsouthwest; //Button to navigate Southwest
+	
+	//FXML element in the inventory view
 	@FXML
-	TableView<Item> inventoryView;
+	TableView<Item> inventoryView; //TableView which displays the players inventory
+	
+	//FXML elements in the monster encounter view
+	@FXML
+	TextArea combatText; //ProgressIndicator which displays a monster's health when attacking the player
+	@FXML
+	ProgressIndicator encounterPlayerHealth; //ProgressIndicator which displays the player's health when engaged in an encounter with a monster
+	@FXML
+	ProgressIndicator encounterMonsterHealth; //ProgressIndicator which displays a monster's health when attacking the player
+	
+	
+	
 	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
 	{
@@ -75,6 +93,11 @@ public class Controller
 	public void setInventoryStage(Stage stage)
 	{
 		this.inventoryStage = stage;
+	}
+	
+	public void setEncounterStage(Stage stage)
+	{
+		this.encounterStage = stage;
 	}
 	
 	public void setMonsterArray(ArrayList<Monster> mAL)
@@ -107,6 +130,7 @@ public class Controller
 			
 			
 			
+			
 			//player.addItemToInventory(new Armor(1,"Leather Armor","Leather armor for better dexterity"));
 			//player.addItemToInventory(new Armor(2,"Bronze Helment","A a strong helmet"));
 			//player.addItemToInventory(new Weapon(3,"Sword","A strong sword for killing"));
@@ -115,38 +139,14 @@ public class Controller
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
 		
-		health.setStyle("-fx-accent: green; ");
+		health.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
 		
 		health.progressProperty().bind(player.getHealthPercentage());
 		
-		health.progressProperty().addListener(new ChangeListener<Number>()
-		{
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
-			{
-				double progress = newValue == null ? 0 : newValue.doubleValue();
-				if (progress < 0.2)
-				{
-					health.setStyle("-fx-accent: red; ");
-				} 
-				else if (progress < 0.4)
-				{
-					health.setStyle("-fx-accent: orange; ");
-				}
-				else if (progress < 0.6)
-				{
-					health.setStyle("-fx-accent: yellow; ");
-				}
-				else
-				{
-					health.setStyle("-fx-accent: green; ");
-				}
-			}});
+		health.progressProperty().addListener(new ProgressBarStyler(health));
 		
 		
 		
-		
-		//System.out.println(inventoryList);
 	}
 	
 	@FXML
@@ -162,6 +162,7 @@ public class Controller
 		{
 			//player.takeDamage(1);
 			//System.out.println(player.getHealth());
+			
 			player.changeRoom(player.getCurrentRoom().getNorthExit());
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
@@ -171,12 +172,15 @@ public class Controller
 			
 			//			try
 			//			{
-			player.takeDamage(1);
+			//player.takeDamage(1);
 			//			} catch (InvalidHealthException e)
 			//			{
 			//				// TODO Auto-generated catch block
 			//				System.out.println(e.getLocalizedMessage());
+		
 			//			}
+			
+			
 			
 		}
 		
@@ -198,6 +202,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		
 	}
 	
 	@FXML
@@ -225,6 +230,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	@FXML
@@ -264,6 +270,13 @@ public class Controller
 			}		
 		}
 	}
+	
+	@FXML
+	private void fleeMonster(ActionEvent event)
+	{
+		encounterStage.close();
+	}
+	
 	@FXML
 	private void searchRoom(ActionEvent event)
 	{
@@ -291,10 +304,28 @@ public class Controller
 			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
 			{
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
+				combatText.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
 				text.appendText("\n player dmg: " + player.getDamage());
-
-				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());				
+				combatText.appendText("\n player dmg: " + player.getDamage());
+				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
+				combatText.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
+			}		
+		}
+	}
+	
+	private void triggerMonsterEncounter()
+	{
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
+			{
+				encounterPlayerHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+				encounterPlayerHealth.progressProperty().bind(player.getHealthPercentage());
+				encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
+				encounterStage.show();
+				combatText.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
+				
 			}		
 		}
 	}
@@ -344,6 +375,66 @@ public class Controller
 		dungeonRooms.get(28).setMapLocationImage(new Image("res/Room_28.jpg"));
 		dungeonRooms.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		dungeonRooms.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
+	}
+	
+	private class ProgressBarStyler implements ChangeListener<Number>
+	{
+		private ProgressBar progressBar;
+		private ProgressIndicator progressIndicator;
+		
+		public ProgressBarStyler(ProgressBar progressBar)
+		{
+			this.progressBar = progressBar;
+		}
+		
+		public ProgressBarStyler(ProgressIndicator progressIndicator)
+		{
+			this.progressIndicator = progressIndicator;
+		}
+		
+		@Override
+		public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+		{
+			double progress = newValue == null ? 0 : newValue.doubleValue();
+			if(progressBar != null)
+			{
+				if (progress < 0.2)
+				{
+					progressBar.setStyle("-fx-accent: rgba(224, 0, 0, 0.40); ");
+				} 
+				else if (progress < 0.4)
+				{
+					progressBar.setStyle("-fx-accent: rgba(241, 130, 3, 0.40); ");
+				}
+				else if (progress < 0.6)
+				{
+					progressBar.setStyle("-fx-accent: rgba(241, 237, 3, 0.40); ");
+				}
+				else
+				{
+					progressBar.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+				}
+			}
+			else if(progressIndicator != null)
+			{
+				if (progress < 0.2)
+				{
+					progressIndicator.setStyle("-fx-accent: rgba(224, 0, 0, 0.40); ");
+				} 
+				else if (progress < 0.4)
+				{
+					progressIndicator.setStyle("-fx-accent: rgba(241, 130, 3, 0.40); ");
+				}
+				else if (progress < 0.6)
+				{
+					progressIndicator.setStyle("-fx-accent: rgba(241, 237, 3, 0.40); ");
+				}
+				else
+				{
+					progressIndicator.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+				}
+			}
+		}
 	}
 	
 }

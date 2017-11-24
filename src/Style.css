@@ -11,8 +11,7 @@
 
 #health > .track
 {
-	-fx-text-box-border: black;
-	-fx-control-inner-background: black;
+	-fx-background-color: rgba(0, 0, 0, 0.62);
 }
 
 #btinventory
@@ -35,6 +34,11 @@
     -fx-font-size: 18;
 }
 #btattackMonster
+{          
+    -fx-font-size: 18;
+}
+
+#btfleeMonster
 {          
     -fx-font-size: 18;
 }
@@ -70,4 +74,19 @@
 #bteast
 {          
     -fx-background-color: transparent;
+}
+
+#encounterPlayerHealth .tick
+{
+	-fx-background-color: transparent;
+}
+
+#encounterPlayerHealth .indicator
+{
+	-fx-background-color: rgba(0, 0, 0, 0.62);
+}
+
+#encounterPlayerHealth .percentage
+{
+	-fx-fill:null;
 }
