@@ -1,19 +1,11 @@
-import java.io.IOException;
-import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
@@ -21,61 +13,142 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Controller
 {
-	public Game	game;
+	/**
+	 * the Game instance
+	 */
+	private Game game;
+	
+	/**
+	 * the Player attribute of the Controller
+	 */
 	private Player player;
+	
+	/**
+	 *  the arraylist of Rooms
+	 */
 	private ArrayList<Room> dungeonRooms;
+	
+	/**
+	 * the stage for the inventory window
+	 */
 	private Stage inventoryStage;
+	
+	/**
+	 * the stage for the monster encounter window
+	 */
 	private Stage encounterStage;
+	
+	/**
+	 * the list of inventory items
+	 */
 	private ObservableList<Item> inventoryList;
+	
+	/**
+	 * the arraylist of monsters
+	 */
 	private ArrayList<Monster> monsterArray;
+	
+	/**
+	 * random variable for generating monster damage
+	 */
 	private Random rand = new Random();
 	
 	
+	/** 
+	 * ProgressBar which displays the player's health
+	 */
+	@FXML
+	ProgressBar health; 
 	
-	//Main view FXML elements which will need to be referenced in this controller class
+	/**
+	 * TextArea which displays most of the text descriptions in the game
+	 */
 	@FXML
-	ProgressBar health; //ProgressBar which displays the player's health
-	@FXML
-	TextArea text; //TextArea which displays most of the text descriptions in the game
-	@FXML
-	ImageView mapView; //ImageView which displays the map
+	TextArea text; 
 	
-	//Navigation buttons
+	/**
+	 * ImageView which displays the map
+	 */
 	@FXML
-	Button btnnorth; //Button to navigate North
-	@FXML
-	Button btsouth; //Button to navigate South
-	@FXML
-	Button bteast; //Button to navigate East
-	@FXML
-	Button btwest; //Button to navigate West
-	@FXML
-	Button btnnortheast; //Button to navigate Northeast
-	@FXML
-	Button btnnorthwest; //Button to navigate Northwest
-	@FXML
-	Button btsoutheast; //Button to navigate Southeast
-	@FXML
-	Button btsouthwest; //Button to navigate Southwest
+	ImageView mapView; 
 	
-	//FXML element in the inventory view
+	/**
+	 * Button to navigate North
+	 */
 	@FXML
-	TableView<Item> inventoryView; //TableView which displays the players inventory
+	Button btnnorth; 
 	
-	//FXML elements in the monster encounter view
+	/**
+	 * Button to navigate South
+	 */
 	@FXML
-	TextArea combatText; //ProgressIndicator which displays a monster's health when attacking the player
+	Button btsouth; 
+	
+	/**
+	 * Button to navigate East
+	 */
 	@FXML
-	ProgressIndicator encounterPlayerHealth; //ProgressIndicator which displays the player's health when engaged in an encounter with a monster
+	Button bteast; 
+	
+	/**
+	 * Button to navigate West
+	 */
 	@FXML
-	ProgressIndicator encounterMonsterHealth; //ProgressIndicator which displays a monster's health when attacking the player
+	Button btwest; 
+	
+	/**
+	 * Button to navigate Northeast
+	 */
+	@FXML
+	Button btnnortheast; 
+	
+	/**
+	 * Button to navigate Northwest
+	 */
+	@FXML
+	Button btnnorthwest;
+	
+	/**
+	 * Button to navigate Southeast
+	 */
+	@FXML
+	Button btsoutheast; 
+	
+	/**
+	 * Button to navigate Southwest
+	 */
+	@FXML
+	Button btsouthwest; 
 	
 	
+	
+	/**
+	 * TableView which displays the players inventory
+	 */
+	@FXML
+	TableView<Item> inventoryView; 
+	
+	/**
+	 * ProgressIndicator which displays a monster's health when attacking the player
+	 */
+	@FXML
+	TextArea combatText; 
+	
+	/**
+	 * ProgressIndicator which displays the player's health when engaged in an encounter with a monster
+	 */
+	@FXML
+	ProgressIndicator encounterPlayerHealth; 
+	
+	/**
+	 * ProgressIndicator which displays a monster's health when attacking the player
+	 */
+	@FXML
+	ProgressIndicator encounterMonsterHealth; 
 	
 	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
@@ -85,32 +158,70 @@ public class Controller
 		game = new Game();
 	}
 	
+	/**
+	 * @author Evan Lamkie
+	 * 
+	 * Setter for the Controller's Player attribute
+	 * 
+	 */
 	public void setPlayer(Player player)
 	{
 		this.player = player;
 	}
 	
+	/**
+	 * @author Evan Lamkie
+	 * 
+	 * Setter for the Controller's Room ArrayList
+	 * 
+	 */
 	public void setDungeonRooms(ArrayList<Room> dungeonRooms)
 	{
 		this.dungeonRooms = dungeonRooms;
 	}
 	
+	/**
+	 * @author Evan Lamkie
+	 * 
+	 * Setter for the Controller's inventory stage
+	 * 
+	 */
 	public void setInventoryStage(Stage stage)
 	{
 		this.inventoryStage = stage;
 	}
 	
+	/**
+	 * @author Evan Lamkie
+	 * 
+	 * Setter for the Controller's encounter stage
+	 * 
+	 */
 	public void setEncounterStage(Stage stage)
 	{
 		this.encounterStage = stage;
 	}
 	
+	/**
+	 * @author Jesse Miller
+	 * 
+	 * Setter for the Controller's Monster ArrayList
+	 * 
+	 */
 	public void setMonsterArray(ArrayList<Monster> mAL)
 	{
 		this.monsterArray = mAL;
 		
 	}
 	
+	/**
+	 * @author Jesse Miller
+	 * 
+	 * Setter statements for each Monster's Health, Damage, and Max Health.
+	 * This is necessary because the Serializable interface removes inherited 
+	 * attributes when invoked.
+	 * 
+	 */
 	public void setMonsterStats()
 	{
 		monsterArray.get(0).setHealth(5);
@@ -147,12 +258,17 @@ public class Controller
 		
 	}
 	
-	
+	/**
+	 * @return the player
+	 */
 	public Player getPlayer()
 	{
 		return player;
 	}
 	
+	/**
+	 * @return the ArrayList of rooms
+	 */
 	public ArrayList<Room> getDungeonRooms()
 	{
 		return dungeonRooms;
@@ -160,8 +276,7 @@ public class Controller
 	
 	@FXML
 	protected void initialize()
-	{
-		
+	{		
 		if(player.getCurrentRoom() == null)
 		{
 			assignMapImages();
@@ -169,13 +284,6 @@ public class Controller
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
-			
-			
-			
-			
-			//player.addItemToInventory(new Armor(1,"Leather Armor","Leather armor for better dexterity"));
-			//player.addItemToInventory(new Armor(2,"Bronze Helment","A a strong helmet"));
-			//player.addItemToInventory(new Weapon(3,"Sword","A strong sword for killing"));
 		}
 		
 		inventoryList = FXCollections.<Item>observableArrayList();
@@ -185,38 +293,23 @@ public class Controller
 		
 		health.progressProperty().bind(player.getHealthPercentage());
 		
-		health.progressProperty().addListener(new ProgressBarStyler(health));
-		
-		
-		
+		health.progressProperty().addListener(new ProgressBarStyler(health));	
 	}
 	
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
-		//System.out.println(player); 
-		
 		if(player.getCurrentRoom().getNorthExit().isLocked())
 		{
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
 		}
 		else
 		{
-			//player.takeDamage(1);
-			//System.out.println(player.getHealth());
-			
 			player.changeRoom(player.getCurrentRoom().getNorthExit());
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
-			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
-			//inventoryList.add(player.getInventory().get(3));
-			
-
-
-			
 		}
-		
 	}
 	
 	@FXML
@@ -235,7 +328,6 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
-		
 	}
 	
 	@FXML
@@ -284,6 +376,14 @@ public class Controller
 		checkValidExits();
 	}
 	
+	/**
+	 * @author Evan Lamkie
+	 * 
+	 * Sets the player's current items to the window view, and then
+	 * opens the stage.
+	 * 
+	 * @param event the pressing of Show Inventory button
+	 */
 	@FXML
 	private void showInventory(ActionEvent event)
 	{
@@ -291,6 +391,15 @@ public class Controller
 		inventoryStage.show();	
 	}
 	
+	
+	/**
+	 * 
+	 * Checks if there is a monster in the player's current room, and 
+	 * if there is, prints the monster's description.
+	 * 
+	 * @param event the pressing of Examine Monster button
+	 * @author Jesse Miller
+	 */
 	@FXML
 	private void examineMonster(ActionEvent event)
 	{
@@ -303,6 +412,13 @@ public class Controller
 		}
 	}
 	
+	/**
+	 * 
+	 * Ends the monster encounter.
+	 * 
+	 * @param event the pressing of Flee Monster button
+	 * @author Evan Lamkie
+	 */
 	@FXML
 	private void fleeMonster(ActionEvent event)
 	{
@@ -328,6 +444,17 @@ public class Controller
 		
 	}
 	
+	/**
+	 * 
+	 * Checks if there is a monster in the player's current room, and if there is,
+	 * the player attacks the monster with their current damage. In return, the monster
+	 * attacks the player.
+	 * Checks to see if either Entity dies during the fight, and informs the player
+	 * with a message depending on who died.
+	 * 
+	 * @param event the pressing of Attack Monster button
+	 * @author Jesse Miller
+	 */
 	@FXML
 	private void attackMonster(ActionEvent event)
 	{
@@ -338,7 +465,7 @@ public class Controller
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
-
+				
 				text.appendText("\n player dmg: " + player.getDamage());
 				combatText.appendText("\n player dmg: " + player.getDamage());
 				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
@@ -357,6 +484,13 @@ public class Controller
 		}
 	}
 	
+	/**
+	 * 
+	 * Opens a new stage for the combat session. Includes Attack, Examine, and Flee
+	 * buttons. Also shows the player HP and monster HP. 
+	 * 
+	 * @author Evan Lamkie
+	 */
 	private void triggerMonsterEncounter()
 	{
 		for(int i = 0; i < monsterArray.size(); i++)

@@ -4,15 +4,35 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
+
 public class Monster extends Entity implements Serializable
 {	
+	/**
+	 * the serial ID for serialization
+	 */
 	private static final long serialVersionUID = 663865483373657824L;
+	
+	/**
+	 * the monster's unique ID
+	 */
 	private String monsterID;
+	
+	/**
+	 * the monster's name
+	 */
 	private String monsterName;
+	
+	/**
+	 * the monster's description
+	 */
 	private String description;
+	
+	/**
+	 * the monster's list of possible locations
+	 */
 	private ArrayList<Room> location = new ArrayList<Room>();
 	//private ArrayList<Item> itemDropped = new ArrayList<Item>();
-		
+	
 	public Monster(String ID, String name, String desc, int health, int damage)
 	{
 		super(health, damage);
@@ -21,26 +41,45 @@ public class Monster extends Entity implements Serializable
 		this.description = desc;
 	}
 	
+	/**
+	 * @return the monster's name
+	 */
 	public String getMonsterName()
 	{
 		return this.monsterName;
 	}
 	
+	/**
+	 * @return the mosnter's ID
+	 */
 	public String getMonsterID()
 	{
 		return this.monsterID;
 	}
 	
+	/**
+	 * @return the monster's description
+	 */
 	public String getMonsterDescription()
 	{
 		return this.description;
 	}
 	
-	public int getLocation() throws IndexOutOfBoundsException
+	/**
+	 * Chooses a random location to spawn in from the monster's list of locations
+	 * 
+	 * @return the monster's location
+	 */
+	public int getLocation()
 	{
 		return location.get(0).getRoomID();		
 	}
 	
+	/**
+	 * adds a room to the monster's locations
+	 * 
+	 * @param room the room to add
+	 */
 	public void addLocation(Room room)
 	{
 		location.add(room);
@@ -51,39 +90,22 @@ public class Monster extends Entity implements Serializable
 	//		itemDropped.add(item);
 	//	}
 	
-	
-	
-	//	public int getHealth()
-	//	{
-	//		return health;
-	//	}
-	//	
-	//	public int getDamage()
-	//	{
-	//		return damage;
-	//	}
-	
-	//	public void takeDamage(int damage) 
-	//	{
-	//		
-	//		if(health - damage < 0) 
-	//		{
-	//			health = 0;
-	//		}
-	//		else
-	//		{
-	//			health -= damage;
-	//		}
-	//		//healthPercentage.set((double)health/maxHealth);
-	//		
-	//	}
-	
+	/** 
+	 * Displays that the user has died (the monster wins the fight)
+	 * 
+	 * @return the message
+	 */
 	@Override
 	public String winFight()
 	{
 		return "You have died.";
 	}
 	
+	/**
+	 * @param filename the filename to read
+	 * 
+	 * @return an arrayList of monsters
+	 */
 	public static ArrayList<Monster> readMonsters(String filename)
 	{
 		ArrayList<Monster> mAL = null;
@@ -95,16 +117,12 @@ public class Monster extends Entity implements Serializable
 			mAL =  (ArrayList<Monster>) ois.readObject();
 			ois.close();
 			fis.close();
-		}
-		catch(IOException ioe){
+		}catch(IOException ioe){
 			ioe.printStackTrace();
-		}
-		catch(ClassNotFoundException c){
+		}catch(ClassNotFoundException c){
 			System.out.println("Class not found");
 			c.printStackTrace();
 		}
-		
 		return mAL;
-	}
-	
+	}	
 }
