@@ -6,10 +6,9 @@
 public class Artifact extends Item {
 
 	
-	public Artifact(String itemID, String itemName, String itemDescription, Monster droppedBy)
+	public Artifact(int itemID, String itemName, String itemDescription)
 	{
-		super(itemID, itemName, itemDescription, droppedBy);
-		// TODO Auto-generated constructor stub
+		super(itemID, itemName, itemDescription);
 	}
 
 	
