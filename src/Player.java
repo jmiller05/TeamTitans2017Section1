@@ -47,4 +47,11 @@ public class Player extends Entity
 	{
 		this.setCurrentRoom(this.getCurrentRoom().getAdjacentRoom(exit));
 	}	
+	
+	@Override
+	public String winFight()
+	{
+		return "You have defeated the monster.";
+	}
+
 }

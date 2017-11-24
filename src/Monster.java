@@ -70,30 +70,23 @@ public class Monster extends Entity implements Serializable
 	public void takeDamage(int damage) 
 	{
 		
-		//		if(health - damage < 0) 
-		//		{
-		//			healthPercentage.set(0);
-		//		}
-		//		else
-		//		{
-		health -= damage;
+		if(health - damage < 0) 
+		{
+			health = 0;
+		}
+		else
+		{
+			health -= damage;
+		}
 		//healthPercentage.set((double)health/maxHealth);
-		//		}
+		
 	}
 	
 	@Override
-	public void winFight()
+	public String winFight()
 	{
-		super.winFight();
+		return "You have died.";
 	}
-	
-	@Override
-	public void loseFight()
-	{
-		super.loseFight();
-	}
-	
-
 	
 	public static ArrayList<Monster> readMonsters(String filename)
 	{

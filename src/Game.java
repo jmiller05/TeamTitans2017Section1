@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class Game extends Application
 {
-
+	
 	// public ArrayList<Room> roomAL; //ArrayList of Rooms
 	// private ArrayList<String> roomNameAL; //ArrayList of Room Names
 	// private ArrayList<String> roomDescriptionAL; // Array List of room
@@ -31,7 +31,7 @@ public class Game extends Application
 	public Stage					inventoryStage;
 	// private Random rand = new Random();
 	public ArrayList<Room>			rooms;
-
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
@@ -39,7 +39,7 @@ public class Game extends Application
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		
 		gamePlayer = new Player(10, 10, 10);
-	
+		
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());
 		
@@ -75,7 +75,7 @@ public class Game extends Application
 		// }
 		
 		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
-
+		
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
@@ -101,56 +101,56 @@ public class Game extends Application
 		return itemsInRooms.get(roomId);
 	}
 	// Write
-		public static void saveItemsInRooms()
-		{
-			
-			try
-			{
-				FileOutputStream fos = new FileOutputStream("ItemsInRooms.dat");
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(itemsInRooms);
-				
-				oos.close();
-				
-				fos.close();
-			} catch (IOException ioe)
-			{
-				ioe.printStackTrace();
-			}
-		}
+	public static void saveItemsInRooms()
+	{
 		
-		// Read
-		public static void loadItemsInRooms()
+		try
 		{
-			File f = new File("ItemsInRooms.dat");
+			FileOutputStream fos = new FileOutputStream("ItemsInRooms.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(itemsInRooms);
 			
-			if (!f.exists()) {
-				populateRoomItems();
-				saveItemsInRooms();
-				
-				return;
-			}
+			oos.close();
 			
-			try
-			{
-				FileInputStream fis = new FileInputStream("ItemsInRooms.dat");
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				itemsInRooms = (HashMap<Integer, Item>) ois.readObject();
-				
-				ois.close();
-				fis.close();
-			} catch (IOException ioe)
-			{
-				ioe.printStackTrace();
-			} catch (ClassNotFoundException c)
-			{
-				System.out.println("Class not found");
-				c.printStackTrace();
-			}
+			fos.close();
+		} catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+	}
+	
+	// Read
+	public static void loadItemsInRooms()
+	{
+		File f = new File("ItemsInRooms.dat");
+		
+		if (!f.exists()) {
+			populateRoomItems();
+			saveItemsInRooms();
 			
 			return;
 		}
 		
+		try
+		{
+			FileInputStream fis = new FileInputStream("ItemsInRooms.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			itemsInRooms = (HashMap<Integer, Item>) ois.readObject();
+			
+			ois.close();
+			fis.close();
+		} catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		} catch (ClassNotFoundException c)
+		{
+			System.out.println("Class not found");
+			c.printStackTrace();
+		}
+		
+		return;
+	}
+	
 	public static void main(String[] args)
 	{
 		
@@ -186,7 +186,7 @@ public class Game extends Application
 		itemsInRooms.put(18, new Artifact("art_10", "Golden Key", "A key casted from gold", null));
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
 	}
-
+	
 	/**
 	 * @param itemID
 	 */
@@ -195,9 +195,9 @@ public class Game extends Application
 		itemsInRooms.remove(roomId);
 		
 	}
-
 	
-
+	
+	
 	/*
 	 * public void populateMonsters() { Monster m0 = new Monster("Mon_00",
 	 * "Toxic Wolfspider",
@@ -435,6 +435,6 @@ public class Game extends Application
 	 * 
 	 * }
 	 */
-
+	
 	
 }

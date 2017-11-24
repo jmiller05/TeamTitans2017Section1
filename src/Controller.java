@@ -270,17 +270,17 @@ public class Controller
 		int roomId = player.getCurrentRoom().getRoomID();
 		Item item = game.getItemInRoom(roomId);
 		if (item != null) {
-		text.appendText("\n" + item.getItemDescription()); 
-		player.addItemToInventory(item);
-		game.removeItemFromRoom(roomId);
-		game.saveItemsInRooms();
-		
-		//text.appendText(String.valueOf(player.getInventory().size()));
+			text.appendText("\n" + item.getItemDescription()); 
+			player.addItemToInventory(item);
+			game.removeItemFromRoom(roomId);
+			game.saveItemsInRooms();
+			
+			//text.appendText(String.valueOf(player.getInventory().size()));
 		}
 		else {
-		text.appendText(" \n There are no item's in this room");
+			text.appendText(" \n There are no item's in this room");
 		}
-	
+		
 	}
 	
 	@FXML
@@ -292,11 +292,25 @@ public class Controller
 			{
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
-				text.appendText("\n player dmg: " + player.getDamage());
-
-				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());				
+				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());	
+				
+				text.appendText("\n\n Player hp before attack: " + player.getHealth());
+				monsterArray.get(i).attack(player, monsterArray.get(i).getDamage());
+				text.appendText("\n Player hp after attack: " + player.getHealth());
+				
+				if (player.getHealth() <= 0 )
+				{
+					text.appendText("\n" + monsterArray.get(i).winFight());
+				}
+				if (monsterArray.get(i).getHealth() <= 0)
+				{
+					text.appendText("\n" + player.winFight());
+					monsterArray.remove(i);
+				}
+				
 			}		
 		}
+		
 	}
 	
 	private void checkValidExits()
