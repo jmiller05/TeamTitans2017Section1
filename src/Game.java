@@ -34,16 +34,17 @@ public class Game extends Application
 	// descriptions
 	// private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
 	private static HashMap<Integer, Item>	itemsInRooms	= new HashMap<Integer, Item>();
-<<<<<<< HEAD
-	public Player					gamePlayer;
-	public Controller				gameController;
-	public Stage					inventoryStage;
-	public Stage                    encounterStage;
-=======
+
+	
+	
+	
+	
+
 	public Player							gamePlayer;
 	public Controller						gameController;
 	public Stage							inventoryStage;
->>>>>>> 932aa54e9f2e8a4c4c311d5c377672f5f8cfb7ac
+	public Stage                    encounterStage;
+
 	// private Random rand = new Random();
 	// public ArrayList<Room> rooms;
 	

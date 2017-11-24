@@ -211,23 +211,9 @@ public class Controller
 			//player.addItemToInventory(new Weapon(4,"Axe","And my axe"));
 			//inventoryList.add(player.getInventory().get(3));
 			
-<<<<<<< HEAD
-			//			try
-			//			{
-			//player.takeDamage(1);
-			//			} catch (InvalidHealthException e)
-			//			{
-			//				// TODO Auto-generated catch block
-			//				System.out.println(e.getLocalizedMessage());
-		
-			//			}
-			
-			
-			
-=======
 
-			player.takeDamage(1);			
->>>>>>> 932aa54e9f2e8a4c4c311d5c377672f5f8cfb7ac
+
+			
 		}
 		
 	}
@@ -351,11 +337,21 @@ public class Controller
 				text.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp before attack: " + monsterArray.get(i).getHealth());
 				player.attack(monsterArray.get(i), player.getDamage());
-<<<<<<< HEAD
+
 				text.appendText("\n player dmg: " + player.getDamage());
 				combatText.appendText("\n player dmg: " + player.getDamage());
 				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
 				combatText.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());
+				
+				if (player.getHealth() <= 0 )
+				{
+					text.appendText("\n" + monsterArray.get(i).winFight());
+				}
+				if (monsterArray.get(i).getHealth() <= 0)
+				{
+					text.appendText("\n" + player.winFight());
+					monsterArray.remove(i);
+				}
 			}		
 		}
 	}
@@ -371,24 +367,6 @@ public class Controller
 				encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
 				encounterStage.show();
 				combatText.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
-=======
-				text.appendText("\n Monster hp after attack: " + monsterArray.get(i).getHealth());	
-				
-				text.appendText("\n\n Player hp before attack: " + player.getHealth());
-				monsterArray.get(i).attack(player, monsterArray.get(i).getDamage());
-				text.appendText("\n Player hp after attack: " + player.getHealth());
-				
-				if (player.getHealth() <= 0 )
-				{
-					text.appendText("\n" + monsterArray.get(i).winFight());
-				}
-				if (monsterArray.get(i).getHealth() <= 0)
-				{
-					text.appendText("\n" + player.winFight());
-					monsterArray.remove(i);
-				}
->>>>>>> 932aa54e9f2e8a4c4c311d5c377672f5f8cfb7ac
-				
 			}		
 		}
 		
