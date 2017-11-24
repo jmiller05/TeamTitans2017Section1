@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -46,6 +47,8 @@ public class Controller
 	 * the list of inventory items
 	 */
 	private ObservableList<Item> inventoryList;
+	
+	private HashMap<Integer, Item> playerInventory;
 	
 	/**
 	 * the arraylist of monsters
@@ -214,6 +217,11 @@ public class Controller
 		
 	}
 	
+	public void setInventoryArray(HashMap<Integer, Item> items)
+	{
+		this.playerInventory = items;
+	}
+	
 	/**
 	 * @author Jesse Miller
 	 * 
@@ -288,6 +296,7 @@ public class Controller
 		
 		inventoryList = FXCollections.<Item>observableArrayList();
 		inventoryList.addAll(player.getInventory());
+		
 		
 		health.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
 		
@@ -423,11 +432,16 @@ public class Controller
 		encounterStage.close();
 	}
 	
+	public Item getItemInRoom(int roomId)
+	{
+		return playerInventory.get(roomId);
+	}
+	
 	@FXML
 	private void searchRoom(ActionEvent event)
 	{
 		int roomId = player.getCurrentRoom().getRoomID();
-		Item item = game.getItemInRoom(roomId);
+		Item item = getItemInRoom(roomId);
 		if (item != null) {
 			text.appendText("\n" + item.getItemDescription()); 
 			player.addItemToInventory(item);
