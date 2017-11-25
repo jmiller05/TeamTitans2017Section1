@@ -368,6 +368,9 @@ public class Controller
 					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+	                timer.purge();
 				}
 			}, 2500);
 		}
@@ -376,6 +379,7 @@ public class Controller
 			player.changeRoom(player.getCurrentRoom().getNorthExit());
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			triggerMonsterEncounter();
 			checkValidExits();
 		}
 	}
@@ -409,6 +413,9 @@ public class Controller
 					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+	                timer.purge();
 				}
 			}, 2500);
 		}
@@ -418,6 +425,7 @@ public class Controller
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
+			triggerMonsterEncounter();
 		}
 	}
 	
@@ -428,6 +436,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	@FXML
@@ -437,6 +446,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	@FXML
@@ -463,6 +473,9 @@ public class Controller
 					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+	                timer.purge();
 				}
 			}, 2500);
 		}
@@ -472,6 +485,7 @@ public class Controller
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
+			triggerMonsterEncounter();
 		}
 	}
 	
@@ -493,6 +507,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	@FXML
@@ -502,6 +517,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	/**
