@@ -63,10 +63,14 @@ public class Controller
 	private ArrayList<Monster> monsterArray;
 	
 	/**
+	 * the arraylist of puzzles
+	 */
+	private ArrayList<Puzzle> puzzleArray;
+	
+	/**
 	 * random variable for generating monster damage
 	 */
 	private Random rand = new Random();
-	
 	
 	/** 
 	 * ProgressBar which displays the player's health
@@ -221,6 +225,12 @@ public class Controller
 	public void setMonsterArray(ArrayList<Monster> mAL)
 	{
 		this.monsterArray = mAL;
+		
+	}
+	
+	public void setPuzzleArray(ArrayList<Puzzle> pAL)
+	{
+		this.puzzleArray = pAL;
 		
 	}
 	
@@ -540,6 +550,24 @@ public class Controller
 	public Item getItemInRoom(int roomId)
 	{
 		return playerInventory.get(roomId);
+	}
+	
+	@FXML
+	private void examinePuzzle(ActionEvent event)
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
+			{
+				text.appendText("\n\n" + puzzleArray.get(i).getPuzzleDescription());			
+			}		
+		}
+	}  
+	
+	@FXML
+	private void ignorePuzzle(ActionEvent event)
+	{
+		encounterStage.close();
 	}
 	
 	@FXML

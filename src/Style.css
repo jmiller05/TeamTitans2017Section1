@@ -114,3 +114,18 @@
 {
 	-fx-fill:null;
 }
+
+#btexaminePuzzle
+{          
+    -fx-font-size: 18;
+}
+
+#btsolvePuzzle
+{          
+    -fx-font-size: 18;
+}
+
+#btignorePuzzle
+{          
+    -fx-font-size: 18;
+}
