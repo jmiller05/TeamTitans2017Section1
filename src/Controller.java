@@ -165,6 +165,8 @@ public class Controller
 	@FXML
 	ProgressIndicator encounterMonsterHealth; 
 	
+	@FXML
+	TextArea hintText;
 	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
 	{
@@ -562,6 +564,18 @@ public class Controller
 			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
 			{
 				text.appendText("\n\n" + puzzleArray.get(i).getPuzzleDescription());			
+			}		
+		}
+	}  
+	
+	@FXML
+	private void requestHint(ActionEvent event)
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
+			{
+				text.appendText("\n\n" + puzzleArray.get(i).getHint());			
 			}		
 		}
 	}  
