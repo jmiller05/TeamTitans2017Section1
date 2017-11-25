@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -256,6 +257,7 @@ public class Controller
 	{
 		monsterArray.get(0).setHealth(5);
 		monsterArray.get(0).setMaxHealth(5);
+		monsterArray.get(0).setHealthPercentage(new SimpleDoubleProperty(1));
 		monsterArray.get(0).setDamage(rand.nextInt(2) + 1);
 		
 		monsterArray.get(1).setHealth(10);
@@ -661,6 +663,11 @@ public class Controller
 				encounterPlayerHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
 				encounterPlayerHealth.progressProperty().bind(player.getHealthPercentage());
 				encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
+				
+				encounterMonsterHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+				encounterMonsterHealth.progressProperty().bind(monsterArray.get(i).getHealthPercentage());
+				encounterMonsterHealth.progressProperty().addListener(new ProgressBarStyler(encounterMonsterHealth));
+				
 				encounterStage.show();
 				combatText.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
 			}		

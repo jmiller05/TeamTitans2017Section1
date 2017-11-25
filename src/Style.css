@@ -20,12 +20,6 @@
     -fx-background-color: text-area-background ;
 }
 
-
-
-
-
-
-
 #health .bar
 {
 	-fx-padding: 1px; 
@@ -111,6 +105,21 @@
 }
 
 #encounterPlayerHealth .percentage
+{
+	-fx-fill:null;
+}
+
+#encounterMonsterHealth .tick
+{
+	-fx-background-color: transparent;
+}
+
+#encounterMonsterHealth .indicator
+{
+	-fx-background-color: rgba(0, 0, 0, 0.62);
+}
+
+#encounterMonsterHealth .percentage
 {
 	-fx-fill:null;
 }
