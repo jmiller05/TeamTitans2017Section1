@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.scene.image.Image;
 
@@ -23,6 +24,7 @@ public class Room implements Serializable
 	private Exit southEastExit;
 	private Exit southWestExit;
 	private ArrayList<Item> items;
+	private ArrayList<String> searchResults;
 
 	public Room(int roomID, String roomName, String roomDescription)
 	{
@@ -39,11 +41,19 @@ public class Room implements Serializable
 		southWestExit = null;
 	}
 	
+	/**
+	 * @param image
+	 * Sets the image of the room on a map
+	 */
 	public void setMapLocationImage(Image image)
 	{
 		mapLocation = image;
 	}
 	
+	/**
+	 * @return image
+	 * returns the mapLocation attribute of type image
+	 */
 	public Image getMapLocationImage()
 	{
 		return mapLocation;
@@ -151,6 +161,18 @@ public class Room implements Serializable
 		return southWestExit;
 	}
 	
+	public void addSearchResult(String result)
+	{
+		searchResults.add(result);
+	}
+	
+	public String getSearchResult()
+	{
+		Random resultRandomizer = new Random();
+        return searchResults.get(resultRandomizer.nextInt(searchResults.size()));
+		
+	}
+	
 	public boolean hasItem()
 	{
 		if(items == null){return false;}
@@ -162,7 +184,7 @@ public class Room implements Serializable
 		return items.get(0);
 	}
 	
-	public ArrayList getItemList()
+	public ArrayList<Item> getItemList()
 	{
 		return items;
 	}
@@ -170,6 +192,7 @@ public class Room implements Serializable
 	public void removeItem(int index)
 	{
 		items.remove(index);
+		if(items.isEmpty()){items = null;}
 	}
 	
 	public void addItem(Item item)
