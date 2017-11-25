@@ -314,6 +314,13 @@ public class Game extends Application
 		Room.assignExits(new Exit(8), roomAL.get(7), "north", roomAL.get(8), "south"); roomAL.get(7).getNorthExit().lockExit(); roomAL.get(7).getNorthExit().setLockDescription("The door is locked!"); 
 		Room.assignExits(new Exit(9), roomAL.get(8), "east", roomAL.get(9), "west");
 		
+		Exit stair0 = new Exit(100);
+		stair0.setStair(true);
+		stair0.setStairDescription("You ascend up the large stairwell, turning away from the corpse as you pass it","a");
+		stair0.setStairDescription("You descend back down the large stairwell into the cave","b");
+		
+		Room.assignExits(stair0, roomAL.get(9), "northeast", roomAL.get(10), "south");
+		
 		//Level 2
 		Room.assignExits(new Exit(10), roomAL.get(10), "north", roomAL.get(15), "south");
 		Room.assignExits(new Exit(11), roomAL.get(10), "west", roomAL.get(12), "east");
@@ -334,6 +341,13 @@ public class Game extends Application
 		Room.assignExits(new Exit(26), roomAL.get(20), "north", roomAL.get(23), "south");
 		Room.assignExits(new Exit(27), roomAL.get(22), "east", roomAL.get(21), "west");
 		Room.assignExits(new Exit(28), roomAL.get(23), "west", roomAL.get(21), "east");
+		
+		Exit stair1 = new Exit(200);
+		stair1.setStair(true);
+		stair1.setStairDescription("You ascend up the ornate staircase","a");
+		stair1.setStairDescription("You descend back down the ornate staircase","b");
+		
+		Room.assignExits(stair1, roomAL.get(21), "north", roomAL.get(24), "south");
 		
 		//Level 3
 		Room.assignExits(new Exit(29), roomAL.get(24), "north", roomAL.get(29), "south");

@@ -8,6 +8,9 @@ public class Exit implements Serializable
 	private Room roomA;
 	private Room roomB;
 	private boolean isLocked;
+	private boolean stairCase;
+	private String roomAStairDescription;
+	private String roomBStairDescription;
 	private String lockDescription;
 	
 	public Exit(int exitID)
@@ -62,6 +65,42 @@ public class Exit implements Serializable
 	public boolean isLocked()
 	{
 		return this.isLocked;
+	}
+	
+	public void setStair(boolean stair)
+	{
+		this.stairCase = stair;
+	}
+	
+	public boolean isStairCase()
+	{
+		return stairCase;
+	}
+	
+	public void setStairDescription(String stairDescription, String room)
+	{
+		if(room.equalsIgnoreCase("a"))
+		{
+			this.roomAStairDescription = stairDescription;
+		}
+		else
+		{
+			this.roomBStairDescription = stairDescription;
+		}
+		
+	}
+	
+	public String getStairDescription(String room)
+	{
+		if(room.equalsIgnoreCase("a"))
+		{
+			return roomAStairDescription;
+		}
+		else
+		{
+			return roomBStairDescription;
+		}
+		
 	}
 
 }

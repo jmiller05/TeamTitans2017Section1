@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,6 +20,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Controller
 {
@@ -322,19 +328,83 @@ public class Controller
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getNorthExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
+		//player.changeRoom(player.getCurrentRoom().getNorthExit());
+		//text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+		//checkValidExits();
+		
+		if(player.getCurrentRoom().getNorthExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getNorthExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("b"));
+			}
+				
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getNorthExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+				}
+			}, 2500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getNorthExit());
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+		}
 	}
 	
 	@FXML
 	private void moveSouth(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getSouthExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
+		//player.changeRoom(player.getCurrentRoom().getSouthExit());
+		//text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+		//checkValidExits();
+		
+		if(player.getCurrentRoom().getSouthExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getSouthExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("b"));
+			}
+				
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getSouthExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+				}
+			}, 2500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getSouthExit());
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+		}
 	}
 	
 	@FXML
@@ -358,10 +428,37 @@ public class Controller
 	@FXML
 	private void moveNorthEast(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getNorthEastExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
+		if(player.getCurrentRoom().getNorthEastExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getNorthEastExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("b"));
+			}
+				
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getNorthEastExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+				}
+			}, 2500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getNorthEastExit());
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+		}
 	}
 	
 	@FXML
@@ -373,6 +470,7 @@ public class Controller
 		checkValidExits();
 		triggerMonsterEncounter();
 	}
+	
 	
 	@FXML
 	private void moveNorthWest(ActionEvent event)
@@ -508,11 +606,13 @@ public class Controller
 				if (player.getHealth() <= 0 )
 				{
 					text.appendText("\n" + monsterArray.get(i).winFight());
+					encounterStage.close();
 				}
 				if (monsterArray.get(i).getHealth() <= 0)
 				{
 					text.appendText("\n" + player.winFight());
 					monsterArray.remove(i);
+					encounterStage.close();
 				}
 			}		
 		}
