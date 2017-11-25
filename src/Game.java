@@ -377,18 +377,26 @@ public class Game extends Application
 		roomAL.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
 		
-		roomAL.get(0).addItem(new Weapon(1,"Branch","A tree branch",3));
-		roomAL.get(0).addSearchResult("You grab the branch, it may be a useful blunt weapon");
+		roomAL.get(0).addItem(0,new Weapon(1,"Branch","A tree branch",3));
+		roomAL.get(0).addSearchResult(0,"You grab the branch, it may be a useful blunt weapon");
 		
-		roomAL.get(5).addItem(new Weapon(2,"Iron Sword","A sword forged from iron",5));
-		roomAL.get(5).addSearchResult("You grab the Iron Sword");
-		roomAL.get(12).addItem(new Weapon(3,"Steel Sword","A sword forged from steel",8));
-		
-		roomAL.get(1).addItem(new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
-		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
+		roomAL.get(1).addItem(0,new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
+		roomAL.get(1).addSearchResult(0,"After rummaging through the piles of stones you find a set of sturdy leather armor");
 		
 		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
 		roomAL.get(2).addSearchResult("You reach down and pick the map up off the floor, straining to see it in the limited light");
+		
+		roomAL.get(5).addItem(0,new Weapon(2,"Iron Sword","A sword forged from iron",5));
+		roomAL.get(5).addSearchResult(0,"You grab the Iron Sword");
+		
+		
+		roomAL.get(12).addItem(new Weapon(3,"Steel Sword","A sword forged from steel",8));
+		
+		
+		
+		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
+		
+		
 		
 		
 		

@@ -167,6 +167,12 @@ public class Room implements Serializable
 		searchResults.add(result);
 	}
 	
+	public void addSearchResult(int index, String result)
+	{
+		if(searchResults == null){searchResults = new ArrayList<String>();}
+		searchResults.add(index, result);
+	}
+	
 	public int getSearchResultIndex()
 	{
 		Random resultRandomizer = new Random();
@@ -182,7 +188,6 @@ public class Room implements Serializable
 		String searchResult;
 		if(searchResults != null){searchResult = searchResults.get(index);}
 		else{searchResult = "You don't see much else in this room";}
-		//if (this.hasItem() && searchResultIndex<items.size()){this.getItem(searchResultIndex);}
         return searchResult;
 		
 	}
@@ -219,6 +224,12 @@ public class Room implements Serializable
 	{
 		if(items == null){items = new ArrayList<Item>();}
 		items.add(item);
+	}
+	
+	public void addItem(int index, Item item)
+	{
+		if(items == null){items = new ArrayList<Item>();}
+		items.add(index, item);
 	}
 	
 	public Room getAdjacentRoom(Exit exit)

@@ -2,6 +2,30 @@
     -fx-background-image: url("res/background5.jpg");
 }
 
+.scroll-pane
+{
+	-fx-background-color: transparent;
+}
+
+.anchor-pane
+{
+	-fx-background-color: transparent;
+}
+
+.text-area {
+    text-area-background: transparent ;
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background ;
+}
+
+
+
+
+
+
+
 #health .bar
 {
 	-fx-padding: 1px; 

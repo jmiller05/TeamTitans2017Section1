@@ -322,18 +322,10 @@ public class Controller
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
-		if(player.getCurrentRoom().getNorthExit().isLocked())
-		{
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
-		}
-		else
-		{
-			player.changeRoom(player.getCurrentRoom().getNorthExit());
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-			checkValidExits();
-			System.out.println(player.getDamage());
-		}
+		player.changeRoom(player.getCurrentRoom().getNorthExit());
+		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+		checkValidExits();
 	}
 	
 	@FXML
