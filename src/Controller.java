@@ -26,6 +26,8 @@ import javafx.util.Duration;
 public class Controller
 {
 	
+	Item potion;
+	
 	/**
 	 * the Game instance
 	 */
@@ -347,6 +349,11 @@ public class Controller
 		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		//checkValidExits();
 		
+		if(player.getInventory().indexOf(potion) != -1)
+		{
+			((PotionBottle) player.getInventory().get(player.getInventory().indexOf(potion))).useItem();;
+		}
+		
 		if(player.getCurrentRoom().getNorthExit().isStairCase())
 		{
 			if(player.getCurrentRoom().getNorthExit().getRoomA() == player.getCurrentRoom())
@@ -628,6 +635,7 @@ public class Controller
 		if(player.getCurrentRoom().hasItem() && index < player.getCurrentRoom().getItemList().size())
 		{
 			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
+			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("potion bottle")){((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);potion=player.getCurrentRoom().getItem(index);}
 			//text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
 			player.pickupItem(index);
 			
