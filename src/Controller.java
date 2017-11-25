@@ -228,6 +228,10 @@ public class Controller
 	public void setMonsterArray(ArrayList<Monster> mAL)
 	{
 		this.monsterArray = mAL;
+		for (int i = 0; i < monsterArray.size(); i ++)
+		{
+			monsterArray.get(i).setRandomIndex();
+		}
 		
 	}
 	
@@ -245,7 +249,7 @@ public class Controller
 	/**
 	 * @param itemID
 	 */
-
+	
 	
 	/**
 	 * @author Jesse Miller
@@ -261,34 +265,48 @@ public class Controller
 		monsterArray.get(0).setMaxHealth(5);
 		monsterArray.get(0).setHealthPercentage(new SimpleDoubleProperty(1));
 		monsterArray.get(0).setDamage(rand.nextInt(2) + 1);
+		//monsterArray.get(0).setRandomIndex();
 		
 		monsterArray.get(1).setHealth(10);
 		monsterArray.get(1).setMaxHealth(10);
 		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);
+		//monsterArray.get(1).setRandomIndex();
+		
 		
 		monsterArray.get(2).setHealth(15);
 		monsterArray.get(2).setMaxHealth(15);
 		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);
+		//monsterArray.get(2).setRandomIndex();
+		
 		
 		monsterArray.get(3).setHealth(20);
 		monsterArray.get(3).setMaxHealth(20);
 		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);
+		//monsterArray.get(3).setRandomIndex();
+		
 		
 		monsterArray.get(4).setHealth(25);
 		monsterArray.get(4).setMaxHealth(25);
 		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);
+		//monsterArray.get(4).setRandomIndex();
+		
 		
 		monsterArray.get(5).setHealth(30);
 		monsterArray.get(5).setMaxHealth(30);
 		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);
+		//monsterArray.get(5).setRandomIndex();
+		
 		
 		monsterArray.get(6).setHealth(40);
 		monsterArray.get(6).setMaxHealth(40);
 		monsterArray.get(6).setDamage(rand.nextInt(5) + 1);
+		//monsterArray.get(6).setRandomIndex();
 		
 		monsterArray.get(7).setHealth(60);
 		monsterArray.get(7).setMaxHealth(60);
 		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);
+		//monsterArray.get(7).setRandomIndex();
+		
 		
 	}
 	
@@ -332,6 +350,7 @@ public class Controller
 		health.progressProperty().bind(player.getHealthPercentage());
 		
 		health.progressProperty().addListener(new ProgressBarStyler(health));	
+		
 	}
 	
 	/**
@@ -357,7 +376,7 @@ public class Controller
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("b"));
 			}
-				
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -370,7 +389,7 @@ public class Controller
 					checkValidExits();
 					triggerMonsterEncounter();
 					timer.cancel();
-	                timer.purge();
+					timer.purge();
 				}
 			}, 2500);
 		}
@@ -402,7 +421,7 @@ public class Controller
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("b"));
 			}
-				
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -415,7 +434,7 @@ public class Controller
 					checkValidExits();
 					triggerMonsterEncounter();
 					timer.cancel();
-	                timer.purge();
+					timer.purge();
 				}
 			}, 2500);
 		}
@@ -462,7 +481,7 @@ public class Controller
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("b"));
 			}
-				
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -475,7 +494,7 @@ public class Controller
 					checkValidExits();
 					triggerMonsterEncounter();
 					timer.cancel();
-	                timer.purge();
+					timer.purge();
 				}
 			}, 2500);
 		}
@@ -629,6 +648,11 @@ public class Controller
 			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
 			player.pickupItem(index);
 			
+		}
+		
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			text.appendText("\n " + monsterArray.get(i).getLocation());
 		}
 		
 		
