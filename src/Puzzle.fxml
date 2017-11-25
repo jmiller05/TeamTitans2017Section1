@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1"
+	xmlns:fx="http://javafx.com/fxml/1" stylesheets="Style.css">
+	<children>
+		<BorderPane>
+			<center>
+				<AnchorPane 
+					BorderPane.alignment="CENTER">
+					<children>
+						<ScrollPane fitToHeight="true" fitToWidth="true"
+							prefHeight="1000.0" prefWidth="426.0" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+							AnchorPane.topAnchor="0.0">
+							<content>
+								<TextArea fx:id="hintText" wrapText="true" prefHeight="1000" />
+							</content>
+						</ScrollPane>
+					</children>
+				</AnchorPane>
+			</center>
+			<bottom>
+				<VBox
+				    prefHeight="250"
+					BorderPane.alignment="CENTER">
+					<children>
+						<HBox alignment="CENTER" prefHeight="0.0" prefWidth="640.0"
+							spacing="10.0">
+							<children>
+								<Button fx:id="btexaminePuzzle" mnemonicParsing="false" onAction="#examinePuzzle" prefWidth="100" minWidth="100" maxWidth="100" text="Examine" />
+								<Button fx:id="btsolvePuzzle" mnemonicParsing="false" onAction="#solvePuzzle" prefWidth="100" minWidth="100" maxWidth="100" text="Solve" />
+								<Button fx:id="btignorePuzzle" mnemonicParsing="false" onAction="#ignorePuzzle" prefWidth="100" minWidth="100" maxWidth="100" text="Ignore" />
+								<Button fx:id="btrequestHint" mnemonicParsing="false" onAction="#requestHint" prefWidth="100" minWidth="100" maxWidth="100" text="Hint" />
+							</children>
+							<padding>
+								<Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+							</padding>
+						</HBox>
+					</children>
+				</VBox>
+			</bottom>
+
+		</BorderPane>
+	</children>
+</VBox
