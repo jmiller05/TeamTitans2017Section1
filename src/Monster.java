@@ -34,7 +34,7 @@ public class Monster extends Entity implements Serializable
 	private ArrayList<Room> location = new ArrayList<Room>();
 	//private ArrayList<Item> itemDropped = new ArrayList<Item>();
 	
-	Random rand = new Random();
+	Random rand;
 	
 	private int randomIndex;
 	
@@ -82,7 +82,8 @@ public class Monster extends Entity implements Serializable
 	
 	public void setRandomIndex()
 	{
-		randomIndex = rand.nextInt(location.size());
+		rand = new Random();
+		this.randomIndex = rand.nextInt(location.size());
 	}
 	
 	
@@ -133,6 +134,11 @@ public class Monster extends Entity implements Serializable
 		}catch(ClassNotFoundException c){
 			System.out.println("Class not found");
 			c.printStackTrace();
+		}
+		
+		for (int i = 0; i < mAL.size(); i ++)
+		{
+			mAL.get(i).setRandomIndex();
 		}
 		return mAL;
 	}	
