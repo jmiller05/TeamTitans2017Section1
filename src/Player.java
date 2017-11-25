@@ -89,10 +89,10 @@ public class Player extends Entity
 		inventory.add(item);
 	}
 	
-	public void pickupItem()
+	public void pickupItem(int index)
 	{
-		this.addItemToInventory(this.currentRoom.getItem());
-		this.currentRoom.removeItem(this.currentRoom.getItemList().indexOf(this.currentRoom.getItem()));
+		this.addItemToInventory(this.currentRoom.getItem(index));
+		this.currentRoom.removeItem(this.currentRoom.getItemList().indexOf(this.currentRoom.getItem(index)));
 	}
 	
 	/**

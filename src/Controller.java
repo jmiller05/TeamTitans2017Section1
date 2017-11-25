@@ -291,7 +291,7 @@ public class Controller
 	@FXML
 	protected void initialize()
 	{	
-		((Map)dungeonRooms.get(2).getItem()).setMap(mapView);
+		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
 		mapView.setVisible(false);
 		
 		if(player.getCurrentRoom() == null)
@@ -468,18 +468,18 @@ public class Controller
 			text.appendText(" \n There are no item's in this room");
 		}*/
 		
-		if(player.getCurrentRoom().hasItem())
+		int index;
+		index = player.getCurrentRoom().getSearchResultIndex();
+		
+		text.appendText("\n" + player.getCurrentRoom().getSearchResult(index));
+		
+		if(player.getCurrentRoom().hasItem() && index < player.getCurrentRoom().getItemList().size())
 		{
-			if(player.getCurrentRoom().getItem().getItemName().equalsIgnoreCase("map"))
-			{
-				((Map)player.getCurrentRoom().getItem()).useItem();
-			}
-			
-			text.appendText("\n" + player.getCurrentRoom().getItem().getItemDescription());
-			player.pickupItem();
-			
+			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
+			player.pickupItem(index);
 			
 		}
+		
 		
 	}
 	

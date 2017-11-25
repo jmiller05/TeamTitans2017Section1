@@ -384,6 +384,9 @@ public class Game extends Application
 		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
 		
 		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
+		roomAL.get(2).addSearchResult("You reach down and pick the map up off the floor, straining to see it in the limited light");
+		
+		roomAL.get(0).addSearchResult("You don't see much else in this room");
 		
 		return roomAL;
 		

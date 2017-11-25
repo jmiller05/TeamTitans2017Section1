@@ -163,13 +163,27 @@ public class Room implements Serializable
 	
 	public void addSearchResult(String result)
 	{
+		if(searchResults == null){searchResults = new ArrayList<String>();}
 		searchResults.add(result);
 	}
 	
-	public String getSearchResult()
+	public int getSearchResultIndex()
 	{
 		Random resultRandomizer = new Random();
-        return searchResults.get(resultRandomizer.nextInt(searchResults.size()));
+		int searchResultIndex;
+		if(searchResults != null){searchResultIndex = resultRandomizer.nextInt(searchResults.size());}
+		else{searchResultIndex = 0;}
+		return searchResultIndex;
+	}
+	
+	public String getSearchResult(int index)
+	{
+		
+		String searchResult;
+		if(searchResults != null){searchResult = searchResults.get(index);}
+		else{searchResult = "Doesn't look like anything to me";}
+		//if (this.hasItem() && searchResultIndex<items.size()){this.getItem(searchResultIndex);}
+        return searchResult;
 		
 	}
 	
@@ -179,9 +193,9 @@ public class Room implements Serializable
 		else{return true;}
 	}
 	
-	public Item getItem()
+	public Item getItem(int index)
 	{
-		return items.get(0);
+		return items.get(index);
 	}
 	
 	public ArrayList<Item> getItemList()
