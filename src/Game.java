@@ -25,6 +25,7 @@ public class Game extends Application
 	private ArrayList<String>				roomNameAL;										
 	private ArrayList<String>				roomDescriptionAL;								
 	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
+	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
 	public static HashMap<Integer, Item>	itemsInRooms	= new HashMap<Integer, Item>();
 	
 	public Player							gamePlayer;
@@ -41,8 +42,9 @@ public class Game extends Application
 		FXMLLoader loader = new FXMLLoader();
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
+		FXMLLoader PuzzleLoader = new FXMLLoader();
 		
-		gamePlayer = new Player(10, 10, 2);
+		gamePlayer = new Player(10, 10, 1);
 		
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());
@@ -70,27 +72,31 @@ public class Game extends Application
 		addMonsterRooms();
 		//populateRoomItems();
 		saveItemsInRooms();
+		populatePuzzles();
+		addPuzzleRooms();
 		
-		//
-		// try{
-		// FileOutputStream fos= new FileOutputStream("Monsters.dat");
-		// ObjectOutputStream oos= new ObjectOutputStream(fos);
-		// oos.writeObject(monsterArray);
-		// oos.close();
-		//
-		// fos.close();
-		// }catch(IOException ioe){
-		// ioe.printStackTrace();
-		// }
+		
+		//				try{
+		//					FileOutputStream fos= new FileOutputStream("Monsters.dat");
+		//					ObjectOutputStream oos= new ObjectOutputStream(fos);
+		//					oos.writeObject(monsterArray);
+		//					oos.close();
+		//					
+		//					fos.close();
+		//				}catch(IOException ioe){
+		//					ioe.printStackTrace();
+		//				}
 		
 		Controller gameController = new Controller(gamePlayer, rooms);
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
 		monsterEncounterLoader.setController(gameController);
+		PuzzleLoader.setController(gameController);
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
 		monsterEncounterLoader.setLocation(getClass().getResource("MonsterEncounter.fxml"));
+		PuzzleLoader.setLocation(getClass().getResource("Puzzle.fxml"));
 		Parent root = loader.load();
 		Parent inventory = inventoryLoader.load();
 		Parent encounter = monsterEncounterLoader.load();
@@ -98,7 +104,7 @@ public class Game extends Application
 		inventoryStage.setScene(new Scene(inventory, 600, 400));
 		
 		encounterStage = new Stage();
-		encounterStage.initModality(Modality.WINDOW_MODAL);
+		encounterStage.initModality(Modality.APPLICATION_MODAL);
 		encounterStage.setScene(new Scene(encounter, 600, 500));
 		// gameController.setInventoryView(inventory);
 		// gameController.setInventoryLoader(inventoryLoader);
@@ -109,7 +115,7 @@ public class Game extends Application
 		gameController.setMonsterStats();
 		//gameController.setInventory(loadItemsInRooms());
 		// gameController.setItemsArray(Item.readItems("Items.dat"));
-		primaryStage.setScene(new Scene(root, 1300, 750));
+		primaryStage.setScene(new Scene(root, 1100, 800));
 		primaryStage.show();
 		
 	}
@@ -179,7 +185,7 @@ public class Game extends Application
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
 	}*/
 	
-
+	
 	public void populateMonsters()
 	{
 		Monster m0 = new Monster("Mon_00", "Toxic Wolfspider", "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom.", 5, rand.nextInt(2) + 1);
@@ -203,6 +209,7 @@ public class Game extends Application
 	{
 		monsterArray.get(0).addLocation(rooms.get(4));
 		monsterArray.get(0).addLocation(rooms.get(5));
+		
 		monsterArray.get(1).addLocation(rooms.get(11));
 		monsterArray.get(1).addLocation(rooms.get(13));
 		monsterArray.get(1).addLocation(rooms.get(17));
@@ -314,6 +321,13 @@ public class Game extends Application
 		Room.assignExits(new Exit(8), roomAL.get(7), "north", roomAL.get(8), "south"); roomAL.get(7).getNorthExit().lockExit(); roomAL.get(7).getNorthExit().setLockDescription("The door is locked!"); 
 		Room.assignExits(new Exit(9), roomAL.get(8), "east", roomAL.get(9), "west");
 		
+		Exit stair0 = new Exit(100);
+		stair0.setStair(true);
+		stair0.setStairDescription("You ascend up the large stairwell, turning away from the corpse as you pass it","a");
+		stair0.setStairDescription("You descend back down the large stairwell into the cave","b");
+		
+		Room.assignExits(stair0, roomAL.get(9), "northeast", roomAL.get(10), "south");
+		
 		//Level 2
 		Room.assignExits(new Exit(10), roomAL.get(10), "north", roomAL.get(15), "south");
 		Room.assignExits(new Exit(11), roomAL.get(10), "west", roomAL.get(12), "east");
@@ -334,6 +348,13 @@ public class Game extends Application
 		Room.assignExits(new Exit(26), roomAL.get(20), "north", roomAL.get(23), "south");
 		Room.assignExits(new Exit(27), roomAL.get(22), "east", roomAL.get(21), "west");
 		Room.assignExits(new Exit(28), roomAL.get(23), "west", roomAL.get(21), "east");
+		
+		Exit stair1 = new Exit(200);
+		stair1.setStair(true);
+		stair1.setStairDescription("You ascend up the ornate staircase","a");
+		stair1.setStairDescription("You descend back down the ornate staircase","b");
+		
+		Room.assignExits(stair1, roomAL.get(21), "north", roomAL.get(24), "south");
 		
 		//Level 3
 		Room.assignExits(new Exit(29), roomAL.get(24), "north", roomAL.get(29), "south");
@@ -377,16 +398,63 @@ public class Game extends Application
 		roomAL.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
 		
-		roomAL.get(5).addItem(new Weapon(2,"Iron Sword","A sword forged from iron",5));
-		roomAL.get(12).addItem(new Weapon(3,"Steel Sword","A sword forged from steel",8));
+		roomAL.get(0).addItem(0,new Weapon(1,"Branch","A tree branch",3));
+		roomAL.get(0).addSearchResult(0,"You grab the branch, it may be a useful blunt weapon");
 		
-		roomAL.get(1).addItem(new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
+		roomAL.get(1).addItem(0,new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
+		roomAL.get(1).addSearchResult(0,"After rummaging through the piles of stones you find a set of sturdy leather armor");
+		
+		roomAL.get(2).addItem(0,new Map(9,"Map","Shows the map of the entire dungeon"));
+		roomAL.get(2).addSearchResult(0,"You reach down and pick the map up off the floor, straining to see it in the limited light");
+		
+		roomAL.get(5).addItem(0,new Weapon(2,"Iron Sword","A sword forged from iron",5));
+		roomAL.get(5).addSearchResult(0,"You grab the Iron Sword");
+		
+		
+		roomAL.get(12).addItem(0,new Weapon(3,"Steel Sword","A sword forged from steel",8));
+		roomAL.get(12).addSearchResult(0,"As you walk around the fire pit you notice a long sheathed sword, you pick it up and unsheathe it to find a well crafted steel sword");
+		
+		
+		
 		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
 		
-		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
+		roomAL.get(20).addItem(0,new PotionBottle(10,"Potion Bottle","Restores any lost HP"));
+		roomAL.get(20).addSearchResult(0, "You walk over to the medicine bag and start looking through it finding a bottle with a glowing red liquid");
+		roomAL.get(20).addSearchResult(1, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
+		roomAL.get(20).addSearchResult(2, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
+		
+		
+		
+		
+		
 		
 		return roomAL;
 		
 	} 
 	
+	public void populatePuzzles()
+	{
+		//Puzzle p0 = new Puzzle("PZ00", "Torch", "Pick the torch in room 4 in order to enter and navigate room 6", "Collect and equip torch in room 4 to illuminate room 6");
+		//Puzzle p1 = new Puzzle("PZ01", "Runes", "There will be two runes that is needed to be slotted into the door (Dr_18) in Room 15 in order to enter Room 18", "The Runes from room 16 and room 17 will unlock the door in Room 15 to enter Room 18");
+		//Puzzle p2 = new Puzzle("PZ02", "Skull Pedestal", "Find 3 golden skulls and assemble them in order to attract the final monster - One golden skull per floor", "Assemble all 3 skulls in room 29 from the skulls from Rooms 9, 22, 26");
+		//Puzzle p3 = new Puzzle("PZ03", "Spider Webs", "Destroy 3 spider webs - One room will be unlocked, one spider web will drop the key to room 8", "Destroy spider webs until the key to room 8 drops from one of the webs");
+		//Puzzle p4 = new Puzzle("PZ04", "Centaur", "Kill the centaur and collect the key in order to access Room 21", "Kill centaur and collect key");
+		//Puzzle p5 = new Puzzle("PZ05", "Witch craft", "Kill witch, drops the key to room 22", "Collect key from witchâ€™s decomposing body");
+		//Puzzle p6 = new Puzzle("PZ06", "Torch puzzle", "There should be 3 torches that have to be lit in order to unlock the door to room 29", "The three unlit torches in Room 24 need to be lit in order to enter room 29 1-0-1 1 = Lit 0 = Off");
+		
+		//puzzleArray.add(p0); puzzleArray.add(p1); puzzleArray.add(p2); puzzleArray.add(p3); 
+		//puzzleArray.add(p4); puzzleArray.add(p5); puzzleArray.add(p6);
+	}
+	
+	public void addPuzzleRooms()
+	{
+		//puzzleArray.get(0).addLocation(roomAL.get(4));
+		//puzzleArray.get(1).addLocation(roomAL.get(15));
+		//puzzleArray.get(2).addLocation(roomAL.get(29));
+		//puzzleArray.get(3).addLocation(roomAL.get(5));
+		//puzzleArray.get(4).addLocation(roomAL.get(18));
+		//puzzleArray.get(5).addLocation(roomAL.get(20));
+		//puzzleArray.get(6).addLocation(roomAL.get(24));
+		
+	}	
 }

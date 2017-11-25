@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,9 +21,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Controller
 {
+	
+	Item potion;
 	
 	/**
 	 * the Game instance
@@ -57,10 +66,14 @@ public class Controller
 	private ArrayList<Monster> monsterArray;
 	
 	/**
+	 * the arraylist of puzzles
+	 */
+	private ArrayList<Puzzle> puzzleArray;
+	
+	/**
 	 * random variable for generating monster damage
 	 */
 	private Random rand = new Random();
-	
 	
 	/** 
 	 * ProgressBar which displays the player's health
@@ -154,6 +167,8 @@ public class Controller
 	@FXML
 	ProgressIndicator encounterMonsterHealth; 
 	
+	@FXML
+	TextArea hintText;
 	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
 	{
@@ -215,6 +230,16 @@ public class Controller
 	public void setMonsterArray(ArrayList<Monster> mAL)
 	{
 		this.monsterArray = mAL;
+		for (int i = 0; i < monsterArray.size(); i ++)
+		{
+			monsterArray.get(i).setRandomIndex();
+		}
+		
+	}
+	
+	public void setPuzzleArray(ArrayList<Puzzle> pAL)
+	{
+		this.puzzleArray = pAL;
 		
 	}
 	
@@ -226,7 +251,7 @@ public class Controller
 	/**
 	 * @param itemID
 	 */
-
+	
 	
 	/**
 	 * @author Jesse Miller
@@ -240,35 +265,50 @@ public class Controller
 	{
 		monsterArray.get(0).setHealth(5);
 		monsterArray.get(0).setMaxHealth(5);
+		monsterArray.get(0).setHealthPercentage(new SimpleDoubleProperty(1));
 		monsterArray.get(0).setDamage(rand.nextInt(2) + 1);
+		//monsterArray.get(0).setRandomIndex();
 		
 		monsterArray.get(1).setHealth(10);
 		monsterArray.get(1).setMaxHealth(10);
 		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);
+		//monsterArray.get(1).setRandomIndex();
+		
 		
 		monsterArray.get(2).setHealth(15);
 		monsterArray.get(2).setMaxHealth(15);
 		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);
+		//monsterArray.get(2).setRandomIndex();
+		
 		
 		monsterArray.get(3).setHealth(20);
 		monsterArray.get(3).setMaxHealth(20);
 		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);
+		//monsterArray.get(3).setRandomIndex();
+		
 		
 		monsterArray.get(4).setHealth(25);
 		monsterArray.get(4).setMaxHealth(25);
 		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);
+		//monsterArray.get(4).setRandomIndex();
+		
 		
 		monsterArray.get(5).setHealth(30);
 		monsterArray.get(5).setMaxHealth(30);
 		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);
+		//monsterArray.get(5).setRandomIndex();
+		
 		
 		monsterArray.get(6).setHealth(40);
 		monsterArray.get(6).setMaxHealth(40);
 		monsterArray.get(6).setDamage(rand.nextInt(5) + 1);
+		//monsterArray.get(6).setRandomIndex();
 		
 		monsterArray.get(7).setHealth(60);
 		monsterArray.get(7).setMaxHealth(60);
 		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);
+		//monsterArray.get(7).setRandomIndex();
+		
 		
 	}
 	
@@ -291,7 +331,7 @@ public class Controller
 	@FXML
 	protected void initialize()
 	{	
-		((Map)dungeonRooms.get(2).getItem()).setMap(mapView);
+		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
 		mapView.setVisible(false);
 		
 		if(player.getCurrentRoom() == null)
@@ -312,6 +352,7 @@ public class Controller
 		health.progressProperty().bind(player.getHealthPercentage());
 		
 		health.progressProperty().addListener(new ProgressBarStyler(health));	
+		
 	}
 	
 	/**
@@ -322,15 +363,49 @@ public class Controller
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
-		if(player.getCurrentRoom().getNorthExit().isLocked())
+		//player.changeRoom(player.getCurrentRoom().getNorthExit());
+		//text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+		//checkValidExits();
+		
+		if(player.getInventory().indexOf(potion) != -1)
 		{
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
+			((PotionBottle) player.getInventory().get(player.getInventory().indexOf(potion))).useItem();;
+		}
+		
+		if(player.getCurrentRoom().getNorthExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getNorthExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("b"));
+			}
+			
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getNorthExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 2500);
 		}
 		else
 		{
 			player.changeRoom(player.getCurrentRoom().getNorthExit());
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			triggerMonsterEncounter();
 			checkValidExits();
 		}
 	}
@@ -338,10 +413,46 @@ public class Controller
 	@FXML
 	private void moveSouth(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getSouthExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
+		//player.changeRoom(player.getCurrentRoom().getSouthExit());
+		//text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+		//checkValidExits();
+		
+		if(player.getCurrentRoom().getSouthExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getSouthExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("b"));
+			}
+			
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getSouthExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 2500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getSouthExit());
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
+		}
 	}
 	
 	@FXML
@@ -351,6 +462,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	@FXML
@@ -360,15 +472,47 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	@FXML
 	private void moveNorthEast(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getNorthEastExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
+		if(player.getCurrentRoom().getNorthEastExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getNorthEastExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("b"));
+			}
+			
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getNorthEastExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 2500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getNorthEastExit());
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
+		}
 	}
 	
 	@FXML
@@ -381,6 +525,7 @@ public class Controller
 		triggerMonsterEncounter();
 	}
 	
+	
 	@FXML
 	private void moveNorthWest(ActionEvent event)
 	{
@@ -388,6 +533,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	@FXML
@@ -397,6 +543,7 @@ public class Controller
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
+		triggerMonsterEncounter();
 	}
 	
 	/**
@@ -452,6 +599,36 @@ public class Controller
 	}
 	
 	@FXML
+	private void examinePuzzle(ActionEvent event)
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
+			{
+				text.appendText("\n\n" + puzzleArray.get(i).getPuzzleDescription());			
+			}		
+		}
+	}  
+	
+	@FXML
+	private void requestHint(ActionEvent event)
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
+			{
+				hintText.appendText("\n\n" + puzzleArray.get(i).getHint());			
+			}		
+		}
+	}  
+	
+	@FXML
+	private void ignorePuzzle(ActionEvent event)
+	{
+		encounterStage.close();
+	}
+	
+	@FXML
 	private void searchRoom(ActionEvent event)
 	{
 		/*int roomId = player.getCurrentRoom().getRoomID();
@@ -468,18 +645,30 @@ public class Controller
 			text.appendText(" \n There are no item's in this room");
 		}*/
 		
-		if(player.getCurrentRoom().hasItem())
+		int index;
+		index = player.getCurrentRoom().getSearchResultIndex();
+		text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
+		
+		
+		
+		if(player.getCurrentRoom().hasItem() && index < player.getCurrentRoom().getItemList().size())
 		{
-			if(player.getCurrentRoom().getItem().getItemName().equalsIgnoreCase("map"))
-			{
-				((Map)player.getCurrentRoom().getItem()).useItem();
-			}
-			
-			text.appendText("\n" + player.getCurrentRoom().getItem().getItemDescription());
-			player.pickupItem();
-			
+			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
+			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("potion bottle")){((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);potion=player.getCurrentRoom().getItem(index);}
+			//text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
+			player.pickupItem(index);
 			
 		}
+		else if(player.getCurrentRoom().getSearchResults() != null)
+		{
+			player.getCurrentRoom().removeSearchResult(index);
+		}
+		
+		for(int i = 0; i < monsterArray.size(); i++)
+		{
+			text.appendText("\n " + monsterArray.get(i).getLocation());
+		}
+		
 		
 	}
 	
@@ -515,11 +704,13 @@ public class Controller
 				if (player.getHealth() <= 0 )
 				{
 					text.appendText("\n" + monsterArray.get(i).winFight());
+					encounterStage.close();
 				}
 				if (monsterArray.get(i).getHealth() <= 0)
 				{
 					text.appendText("\n" + player.winFight());
 					monsterArray.remove(i);
+					encounterStage.close();
 				}
 			}		
 		}
@@ -540,6 +731,11 @@ public class Controller
 				encounterPlayerHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
 				encounterPlayerHealth.progressProperty().bind(player.getHealthPercentage());
 				encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
+				
+				encounterMonsterHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+				encounterMonsterHealth.progressProperty().bind(monsterArray.get(i).getHealthPercentage());
+				encounterMonsterHealth.progressProperty().addListener(new ProgressBarStyler(encounterMonsterHealth));
+				
 				encounterStage.show();
 				combatText.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
 			}		

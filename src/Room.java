@@ -163,14 +163,44 @@ public class Room implements Serializable
 	
 	public void addSearchResult(String result)
 	{
+		if(searchResults == null){searchResults = new ArrayList<String>();}
 		searchResults.add(result);
 	}
 	
-	public String getSearchResult()
+	public void addSearchResult(int index, String result)
+	{
+		if(searchResults == null){searchResults = new ArrayList<String>();}
+		searchResults.add(index, result);
+	}
+	
+	public int getSearchResultIndex()
 	{
 		Random resultRandomizer = new Random();
-        return searchResults.get(resultRandomizer.nextInt(searchResults.size()));
+		int searchResultIndex;
+		if(searchResults != null){searchResultIndex = resultRandomizer.nextInt(searchResults.size());}
+		else{searchResultIndex = 0;}
+		return searchResultIndex;
+	}
+	
+	public String getSearchResult(int index)
+	{
 		
+		String searchResult;
+		if(searchResults != null){searchResult = searchResults.get(index);}
+		else{searchResult = "You don't see much else in this room";}
+        return searchResult;
+		
+	}
+	
+	public ArrayList<String> getSearchResults()
+	{
+		return searchResults;
+	}
+	
+	public void removeSearchResult(int index)
+	{	
+		if(searchResults != null){searchResults.remove(index);}
+		if(searchResults.isEmpty()){searchResults = null;}
 	}
 	
 	public boolean hasItem()
@@ -179,9 +209,9 @@ public class Room implements Serializable
 		else{return true;}
 	}
 	
-	public Item getItem()
+	public Item getItem(int index)
 	{
-		return items.get(0);
+		return items.get(index);
 	}
 	
 	public ArrayList<Item> getItemList()
@@ -199,6 +229,12 @@ public class Room implements Serializable
 	{
 		if(items == null){items = new ArrayList<Item>();}
 		items.add(item);
+	}
+	
+	public void addItem(int index, Item item)
+	{
+		if(items == null){items = new ArrayList<Item>();}
+		items.add(index, item);
 	}
 	
 	public Room getAdjacentRoom(Exit exit)

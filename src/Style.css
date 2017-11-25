@@ -2,6 +2,24 @@
     -fx-background-image: url("res/background5.jpg");
 }
 
+.scroll-pane
+{
+	-fx-background-color: transparent;
+}
+
+.anchor-pane
+{
+	-fx-background-color: transparent;
+}
+
+.text-area {
+    text-area-background: transparent ;
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background ;
+}
+
 #health .bar
 {
 	-fx-padding: 1px; 
@@ -89,4 +107,39 @@
 #encounterPlayerHealth .percentage
 {
 	-fx-fill:null;
+}
+
+#encounterMonsterHealth .tick
+{
+	-fx-background-color: transparent;
+}
+
+#encounterMonsterHealth .indicator
+{
+	-fx-background-color: rgba(0, 0, 0, 0.62);
+}
+
+#encounterMonsterHealth .percentage
+{
+	-fx-fill:null;
+}
+
+#btexaminePuzzle
+{          
+    -fx-font-size: 18;
+}
+
+#btsolvePuzzle
+{          
+    -fx-font-size: 18;
+}
+
+#btignorePuzzle
+{          
+    -fx-font-size: 18;
+}
+
+#btrequestHint
+{          
+    -fx-font-size: 18;
 }

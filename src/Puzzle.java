@@ -1,6 +1,11 @@
 import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
-public class Puzzle {
+public abstract class Puzzle implements Serializable{
+	private static final long serialVersionUID = 663865483373657824L;
 	private String puzzleID;
 	private String puzzleName;
 	private String puzzleDescription;
@@ -51,7 +56,25 @@ public class Puzzle {
 		return location.get(0).getRoomID();		
 	}
 	
+	public static ArrayList<Puzzle> readPuzzles(String filename)
+	{
+		ArrayList<Puzzle> pAL = null;
+		
+		try
+		{
+			FileInputStream fis = new FileInputStream(filename);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			pAL =  (ArrayList<Puzzle>) ois.readObject();
+			ois.close();
+			fis.close();
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+		}catch(ClassNotFoundException c){
+			System.out.println("Class not found");
+			c.printStackTrace();
+		}
+		return pAL;
+	}
 
- 	
   }
 

@@ -62,6 +62,8 @@ public abstract class Entity
 	public void setHealth(int health)
 	{
 		this.health = health;
+		
+		
 	}
 	
 	
@@ -159,7 +161,7 @@ public abstract class Entity
 	 */
 	public void takeDamage(int damage) 
 	{
-		if(health - damage < 0) 
+		if(health - damage <= 0) 
 		{
 			health = 0;
 			healthPercentage.set(0);
