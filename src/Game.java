@@ -25,7 +25,7 @@ public class Game extends Application
 	private ArrayList<String>				roomNameAL;										
 	private ArrayList<String>				roomDescriptionAL;								
 	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
-	private static HashMap<Integer, Item>	itemsInRooms	= new HashMap<Integer, Item>();
+	public static HashMap<Integer, Item>	itemsInRooms	= new HashMap<Integer, Item>();
 	
 	public Player							gamePlayer;
 	public Controller						gameController;
@@ -139,7 +139,11 @@ public class Game extends Application
 	}
 	
 	// Read
-	
+	public void removeItemFromRoom(int roomId)
+	{
+		itemsInRooms.remove(roomId);
+		
+	}
 	
 	public static void main(String[] args)
 	{
@@ -175,15 +179,7 @@ public class Game extends Application
 		itemsInRooms.put(20, new Artifact("art_11", "Dirty Key", "A dirty key", null));
 	}*/
 	
-	/**
-	 * @param itemID
-	 */
-	public void removeItemFromRoom(int roomId)
-	{
-		itemsInRooms.remove(roomId);
-		
-	}
-	
+
 	public void populateMonsters()
 	{
 		Monster m0 = new Monster("Mon_00", "Toxic Wolfspider", "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom.", 5, rand.nextInt(2) + 1);
