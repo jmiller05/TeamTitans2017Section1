@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-public class Puzzle implements Serializable{
+public abstract class Puzzle implements Serializable{
 	private static final long serialVersionUID = 663865483373657824L;
 	private String puzzleID;
 	private String puzzleName;
@@ -74,6 +74,7 @@ public class Puzzle implements Serializable{
 			c.printStackTrace();
 		}
 		return pAL;
+	}
 
   }
 
