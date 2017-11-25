@@ -42,7 +42,7 @@ public class Game extends Application
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		
-		gamePlayer = new Player(10, 10, 2);
+		gamePlayer = new Player(10, 10, 1);
 		
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());
@@ -377,6 +377,8 @@ public class Game extends Application
 		roomAL.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
 		
+		roomAL.get(0).addItem(new Weapon(1,"Branch","A tree branch",3));
+		
 		roomAL.get(5).addItem(new Weapon(2,"Iron Sword","A sword forged from iron",5));
 		roomAL.get(12).addItem(new Weapon(3,"Steel Sword","A sword forged from steel",8));
 		
@@ -386,7 +388,7 @@ public class Game extends Application
 		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
 		roomAL.get(2).addSearchResult("You reach down and pick the map up off the floor, straining to see it in the limited light");
 		
-		roomAL.get(0).addSearchResult("You don't see much else in this room");
+		roomAL.get(0).addSearchResult("You grab the branch, it may be a useful blunt weapon");
 		
 		return roomAL;
 		

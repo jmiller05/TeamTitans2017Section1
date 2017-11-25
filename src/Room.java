@@ -181,10 +181,16 @@ public class Room implements Serializable
 		
 		String searchResult;
 		if(searchResults != null){searchResult = searchResults.get(index);}
-		else{searchResult = "Doesn't look like anything to me";}
+		else{searchResult = "You don't see much else in this room";}
 		//if (this.hasItem() && searchResultIndex<items.size()){this.getItem(searchResultIndex);}
         return searchResult;
 		
+	}
+	
+	public void removeSearchResult(int index)
+	{	
+		if(searchResults != null){searchResults.remove(index);}
+		if(searchResults.isEmpty()){searchResults = null;}
 	}
 	
 	public boolean hasItem()

@@ -471,7 +471,7 @@ public class Controller
 		int index;
 		index = player.getCurrentRoom().getSearchResultIndex();
 		
-		text.appendText("\n" + player.getCurrentRoom().getSearchResult(index));
+		text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
 		
 		if(player.getCurrentRoom().hasItem() && index < player.getCurrentRoom().getItemList().size())
 		{

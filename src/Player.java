@@ -87,12 +87,15 @@ public class Player extends Entity
 	public void addItemToInventory(Item item)
 	{
 		inventory.add(item);
+		if(item.getClass().getName().equalsIgnoreCase("weapon")){this.setDamage(((Weapon)item).getDamage());}
 	}
 	
 	public void pickupItem(int index)
 	{
 		this.addItemToInventory(this.currentRoom.getItem(index));
 		this.currentRoom.removeItem(this.currentRoom.getItemList().indexOf(this.currentRoom.getItem(index)));
+		this.currentRoom.removeSearchResult(index);
+		
 	}
 	
 	/**
