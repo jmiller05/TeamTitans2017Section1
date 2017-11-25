@@ -575,7 +575,7 @@ public class Controller
 		{
 			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
 			{
-				text.appendText("\n\n" + puzzleArray.get(i).getHint());			
+				hintText.appendText("\n\n" + puzzleArray.get(i).getHint());			
 			}		
 		}
 	}  
