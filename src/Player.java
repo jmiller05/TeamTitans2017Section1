@@ -10,6 +10,8 @@ public class Player extends Entity
 	 */
 	private Room currentRoom;
 	
+	private Weapon equippedWeapon;
+	
 	/**
 	 * the player's inventory
 	 */
@@ -87,7 +89,11 @@ public class Player extends Entity
 	public void addItemToInventory(Item item)
 	{
 		inventory.add(item);
-		if(item.getClass().getName().equalsIgnoreCase("weapon")){this.setDamage(((Weapon)item).getDamage());}
+		if(item.getClass().getName().equalsIgnoreCase("weapon"))
+		{
+			this.equipWeapon((Weapon)item);
+		}
+		//if(item.getClass().getName().equalsIgnoreCase("weapon") && ((Weapon)item).getDamage() < this.getDamage()){this.equipWeapon((Weapon)item);}
 	}
 	
 	public void pickupItem(int index)
@@ -96,6 +102,19 @@ public class Player extends Entity
 		this.currentRoom.removeItem(this.currentRoom.getItemList().indexOf(this.currentRoom.getItem(index)));
 		this.currentRoom.removeSearchResult(index);
 		
+	}
+	
+	public void equipWeapon(Weapon weapon)
+	{
+		if(equippedWeapon != null && weapon.getDamage() > equippedWeapon.getDamage())
+		{
+			this.equippedWeapon = weapon;
+		}
+		else if(equippedWeapon == null)
+		{
+			this.equippedWeapon = weapon;
+		}	
+		this.setDamage(equippedWeapon.getDamage());
 	}
 	
 	/**

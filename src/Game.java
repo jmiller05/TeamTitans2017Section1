@@ -378,8 +378,10 @@ public class Game extends Application
 		roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
 		
 		roomAL.get(0).addItem(new Weapon(1,"Branch","A tree branch",3));
+		roomAL.get(0).addSearchResult("You grab the branch, it may be a useful blunt weapon");
 		
 		roomAL.get(5).addItem(new Weapon(2,"Iron Sword","A sword forged from iron",5));
+		roomAL.get(5).addSearchResult("You grab the Iron Sword");
 		roomAL.get(12).addItem(new Weapon(3,"Steel Sword","A sword forged from steel",8));
 		
 		roomAL.get(1).addItem(new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
@@ -388,7 +390,7 @@ public class Game extends Application
 		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
 		roomAL.get(2).addSearchResult("You reach down and pick the map up off the floor, straining to see it in the limited light");
 		
-		roomAL.get(0).addSearchResult("You grab the branch, it may be a useful blunt weapon");
+		
 		
 		return roomAL;
 		

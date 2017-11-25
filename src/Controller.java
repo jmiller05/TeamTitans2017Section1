@@ -332,6 +332,7 @@ public class Controller
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
+			System.out.println(player.getDamage());
 		}
 	}
 	
