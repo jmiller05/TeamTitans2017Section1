@@ -54,6 +54,11 @@ public class Controller
 	private Stage encounterStage;
 	
 	/**
+	 * the stage for the puzzle window
+	 */
+	private Stage puzzleStage;
+	
+	/**
 	 * the list of inventory items
 	 */
 	private ObservableList<Item> inventoryList;
