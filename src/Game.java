@@ -403,8 +403,8 @@ public class Game extends Application
 		roomAL.get(1).addItem(0,new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
 		roomAL.get(1).addSearchResult(0,"After rummaging through the piles of stones you find a set of sturdy leather armor");
 		
-		roomAL.get(2).addItem(new Map(9,"Map","Shows the map of the entire dungeon"));
-		roomAL.get(2).addSearchResult("You reach down and pick the map up off the floor, straining to see it in the limited light");
+		roomAL.get(2).addItem(0,new Map(9,"Map","Shows the map of the entire dungeon"));
+		roomAL.get(2).addSearchResult(0,"You reach down and pick the map up off the floor, straining to see it in the limited light");
 		
 		roomAL.get(5).addItem(0,new Weapon(2,"Iron Sword","A sword forged from iron",5));
 		roomAL.get(5).addSearchResult(0,"You grab the Iron Sword");
@@ -416,6 +416,12 @@ public class Game extends Application
 		
 		
 		roomAL.get(17).addItem(new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
+		
+		roomAL.get(20).addItem(0,new PotionBottle(10,"Potion Bottle","Restores any lost HP"));
+		roomAL.get(20).addSearchResult(0, "You walk over to the medicine bag and start looking through it finding a bottle with a glowing red liquid");
+		roomAL.get(20).addSearchResult(1, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
+		roomAL.get(20).addSearchResult(2, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
+		
 		
 		
 		

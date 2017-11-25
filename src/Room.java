@@ -192,6 +192,11 @@ public class Room implements Serializable
 		
 	}
 	
+	public ArrayList<String> getSearchResults()
+	{
+		return searchResults;
+	}
+	
 	public void removeSearchResult(int index)
 	{	
 		if(searchResults != null){searchResults.remove(index);}

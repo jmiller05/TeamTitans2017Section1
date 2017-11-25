@@ -621,14 +621,20 @@ public class Controller
 		
 		int index;
 		index = player.getCurrentRoom().getSearchResultIndex();
-		
 		text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
+		
+		
 		
 		if(player.getCurrentRoom().hasItem() && index < player.getCurrentRoom().getItemList().size())
 		{
 			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
+			//text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
 			player.pickupItem(index);
 			
+		}
+		else if(player.getCurrentRoom().getSearchResults() != null)
+		{
+			player.getCurrentRoom().removeSearchResult(index);
 		}
 		
 		
