@@ -407,7 +407,7 @@ public class Game extends Application
 		roomAL.get(1).addSearchResult(0,"After rummaging through the piles of stones you find a set of sturdy leather armor");
 		
 		roomAL.get(4).addItem(0,new Artifact(4,"Torch", "Emits a light to see through the darkness"));
-		roomAL.get(4).addSearchResult(0, "");
+		roomAL.get(4).addSearchResult(0, "You pull the torch from the wall");
 		
 		roomAL.get(2).addItem(0,new Map(9,"Map","Shows the map of the entire dungeon"));
 		roomAL.get(2).addSearchResult(0,"You reach down and pick the map up off the floor, straining to see it in the limited light");
@@ -415,7 +415,7 @@ public class Game extends Application
 		roomAL.get(5).addItem(0,new Weapon(2,"Iron Sword","A sword forged from iron",5));
 		roomAL.get(5).addItem(1, new Artifact(10, "Shiny Iron Key", "A key forged from iron that's shiny"));
 		roomAL.get(5).addSearchResult(0,"You grab the Iron Sword");
-		roomAL.get(5).addSearchResult(1, "You grab the iron key");
+		roomAL.get(5).addSearchResult(1, "You grab the Iron Key");
 	
 		roomAL.get(9).addItem(0,new Artifact(7, "Golden Skull #1", "A golden skull"));
 		roomAL.get(9).addSearchResult(0, "You grab the golden skull");
@@ -424,18 +424,18 @@ public class Game extends Application
 		roomAL.get(12).addSearchResult(0,"As you walk around the fire pit you notice a long sheathed sword, you pick it up and unsheathe it to find a well crafted steel sword");
 		
 		roomAL.get(15).addItem(0,new Artifact(3, "Well of Life", "Restores any lost HP - Fills Potion Bottle"));
-		roomAL.get(15).addSearchResult(0, "");
+		roomAL.get(15).addSearchResult(0, "You walk to the stone hole and fill your empty bottle with the red liquid");
 		
 		roomAL.get(16).addItem(0,new Artifact(5, "Emerald Rune", "A glowing green stone"));
-		roomAL.get(16).addSearchResult(0, "");
+		roomAL.get(16).addSearchResult(0, "You grab the green glowing rune");
 		
 		roomAL.get(17).addItem(0,new Armor(7,"Chainmail Armor","Armor with many iron links woven together", 40));
 		roomAL.get(17).addItem(1,new Artifact(6,"Sapphire Rune", "A glowing blue stone"));
-		roomAL.get(17).addSearchResult(0, "");
-		roomAL.get(17).addSearchResult(1, "");
+		roomAL.get(17).addSearchResult(0, "You remove your armor and equip the chainmail. This should be a nice upgrade");
+		roomAL.get(17).addSearchResult(1, "You grab the blue glowing rune");
 		
 		roomAL.get(18).addItem(0,new Artifact(11,"Golden Key", "A key casted from gold"));
-		roomAL.get(18).addSearchResult(0, "");
+		roomAL.get(18).addSearchResult(0, "You grab the Golden Key");
 		
 		roomAL.get(20).addItem(0,new PotionBottle(10,"Potion Bottle","Restores any lost HP"));
 		roomAL.get(20).addItem(1,new Weapon(4, "Tungsteel Sword", "A sword forged from tungsteel", 3));
@@ -443,17 +443,17 @@ public class Game extends Application
 		roomAL.get(20).addSearchResult(0, "You walk over to the medicine bag and start looking through it finding a bottle with a glowing red liquid");
 		roomAL.get(20).addSearchResult(1, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
 		roomAL.get(20).addSearchResult(2, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
-		roomAL.get(20).addSearchResult(3, "");
-		roomAL.get(20).addSearchResult(4, "");
+		roomAL.get(20).addSearchResult(3, "You pickup the Tungsteel Sword");
+		roomAL.get(20).addSearchResult(4, "You grab the Dirty Key");
 		
 		roomAL.get(22).addItem(0,new Artifact(8, "Golden Skull #2", "A golden skull"));
-		roomAL.get(22).addSearchResult(0, "");
+		roomAL.get(22).addSearchResult(0, "You grab what seems to be another Golden Skull");
 		
 		roomAL.get(25).addItem(0,new Armor(4,"Plate Armor", "Armor forged from steel", 80));
-		roomAL.get(25).addSearchResult(0, "");
+		roomAL.get(25).addSearchResult(0, "You pick up and equip the heavy steel armor");
 		
 		roomAL.get(29).addItem(0,new Artifact(9, "Golden Skull #3", "A golden skull"));
-		roomAL.get(29).addSearchResult(0, "");
+		roomAL.get(29).addSearchResult(0, "You grab what seems to be yet another golden Skull");
 		
 		return roomAL;
 		
