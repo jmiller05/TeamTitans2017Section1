@@ -4,14 +4,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
-public abstract class Puzzle implements Serializable{
+public abstract class Puzzle implements Serializable
+{
 	private static final long serialVersionUID = 663865483373657824L;
 	private String puzzleID;
 	private String puzzleName;
 	private String puzzleDescription;
   	private String hint;
-  	private ArrayList<Item> artifact = new ArrayList<Item>();
-  	private ArrayList<Room> location = new ArrayList<Room>();
+  	protected boolean isSolved;
+  	//private ArrayList<Item> artifact = new ArrayList<Item>();
+  	//private ArrayList<Room> location = new ArrayList<Room>();
 	
  	public Puzzle(String ID, String name, String desc, String hi)
  	{
@@ -19,6 +21,7 @@ public abstract class Puzzle implements Serializable{
 	  	this.puzzleName = name;
 		this.puzzleDescription = desc;
 		this.hint = hi;
+		this.isSolved = false;
  	}
 	
  	public String getPuzzleName()
@@ -40,8 +43,13 @@ public abstract class Puzzle implements Serializable{
  	{
  		return this.hint;	
  	}
+ 	
+ 	public boolean isSolved()
+ 	{
+ 		return isSolved;
+ 	}
 	
- 	public void addItem(Item item)
+ 	/*public void addItem(Item item)
  	{		
  		artifact.add(item);
  	}
@@ -54,7 +62,7 @@ public abstract class Puzzle implements Serializable{
  	public int getLocation()
 	{
 		return location.get(0).getRoomID();		
-	}
+	}*/
 	
 	public static ArrayList<Puzzle> readPuzzles(String filename)
 	{

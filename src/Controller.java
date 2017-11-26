@@ -315,6 +315,9 @@ public class Controller
 	{	
 		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
 		mapView.setVisible(false);
+		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setText(text);
+		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setTorch(dungeonRooms.get(4).getItem(0));
+		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setPlayer(player);
 		
 		if(player.getCurrentRoom() == null)
 		{
@@ -349,10 +352,6 @@ public class Controller
 		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		//checkValidExits();
 		
-		if(player.getInventory().indexOf(potion) != -1)
-		{
-			((PotionBottle) player.getInventory().get(player.getInventory().indexOf(potion))).useItem();;
-		}
 		
 		if(player.getCurrentRoom().getNorthExit().isStairCase())
 		{
@@ -434,6 +433,7 @@ public class Controller
 			checkValidExits();
 			triggerMonsterEncounter();
 		}
+		
 	}
 	
 	@FXML
@@ -449,11 +449,35 @@ public class Controller
 	@FXML
 	private void moveWest(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getWestExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
-		triggerMonsterEncounter();
+		
+		
+		/*if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).hasPuzzle())
+		{
+			if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().getPuzzleName().equalsIgnoreCase("torch"))
+			{
+				solveTorchPuzzle();
+				if(!player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().isSolved)
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
+				}
+			}
+		}
+		else */
+		
+		solveTorchPuzzle();
+			
+		if(player.getCurrentRoom().getWestExit().isLocked())
+		{
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getWestExit());
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
+		}
 	}
 	
 	@FXML
@@ -582,31 +606,19 @@ public class Controller
 	@FXML
 	private void examinePuzzle(ActionEvent event)
 	{
-		for(int i = 0; i < puzzleArray.size(); i++)
-		{
-			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
-			{
-				text.appendText("\n\n" + puzzleArray.get(i).getPuzzleDescription());			
-			}		
-		}
+		
 	}  
 	
 	@FXML
 	private void requestHint(ActionEvent event)
 	{
-		for(int i = 0; i < puzzleArray.size(); i++)
-		{
-			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
-			{
-				hintText.appendText("\n\n" + puzzleArray.get(i).getHint());			
-			}		
-		}
+	
 	}  
 	
 	@FXML
 	private void ignorePuzzle(ActionEvent event)
 	{
-		encounterStage.close();
+		//encounterStage.close();
 	}
 	
 	@FXML
@@ -764,6 +776,43 @@ public class Controller
 		dungeonRooms.get(28).setMapLocationImage(new Image("res/Room_28.jpg"));
 		dungeonRooms.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		dungeonRooms.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
+	}
+	
+	private void solveTorchPuzzle()
+	{
+		
+		if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).hasPuzzle())
+		{
+			if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().getPuzzleName().equalsIgnoreCase("torch"))
+			{
+				((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).solvePuzzle();
+				
+				if(((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).isSolved())
+				{
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask()
+					{
+						@Override
+						public void run()
+						{
+							player.changeRoom(player.getCurrentRoom().getWestExit());
+							text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+							mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+							checkValidExits();
+							triggerMonsterEncounter();
+							timer.cancel();
+			                timer.purge();
+						}
+					}, 2500);
+				}
+				
+				if(!player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().isSolved)
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
+				}
+			}
+		}
+		
 	}
 	
 	private class ProgressBarStyler implements ChangeListener<Number>

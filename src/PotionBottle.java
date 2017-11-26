@@ -63,8 +63,6 @@ public class PotionBottle extends Item implements ArtifactInterface
 		//map.setVisible(true);
 		try
 		{
-			System.out.println(player.getHealth());
-			System.out.println(player.getMaxHealth());
 			player.restoreHealth(player.getMaxHealth()-player.getHealth());
 			this.emptyBottle();
 			

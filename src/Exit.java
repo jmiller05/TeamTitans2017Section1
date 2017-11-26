@@ -62,6 +62,11 @@ public class Exit implements Serializable
 		this.isLocked = true;
 	}
 	
+	public void unlockExit()
+	{
+		this.isLocked = false;
+	}
+	
 	public boolean isLocked()
 	{
 		return this.isLocked;

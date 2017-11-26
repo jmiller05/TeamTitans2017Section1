@@ -406,6 +406,9 @@ public class Game extends Application
 		roomAL.get(2).addItem(0,new Map(9,"Map","Shows the map of the entire dungeon"));
 		roomAL.get(2).addSearchResult(0,"You reach down and pick the map up off the floor, straining to see it in the limited light");
 		
+		roomAL.get(4).addItem(0,new Artifact(12,"Torch","Emits a light to see through the darkness"));
+		roomAL.get(4).addSearchResult(0,"You take the torch off the wall, it may help you see in the dark areas of the cave");
+		
 		roomAL.get(5).addItem(0,new Weapon(2,"Iron Sword","A sword forged from iron",5));
 		roomAL.get(5).addSearchResult(0,"You grab the Iron Sword");
 		
@@ -421,6 +424,12 @@ public class Game extends Application
 		roomAL.get(20).addSearchResult(0, "You walk over to the medicine bag and start looking through it finding a bottle with a glowing red liquid");
 		roomAL.get(20).addSearchResult(1, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
 		roomAL.get(20).addSearchResult(2, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
+		
+		TorchPuzzle torchPuzzle = new TorchPuzzle("0","Torch","Pick the torch in room 4 in order to enter and navigate room 6","It's too dark to see anything, it might help if you had some light",roomAL.get(6).getEastExit());
+		torchPuzzle.setSolvedMessage("\n" + "\n" + "You light the torch and cautiously make your way into the dark room");
+		torchPuzzle.setLockedDescription(torchPuzzle.getHint());
+		
+		roomAL.get(6).setPuzzle(torchPuzzle);
 		
 		
 		

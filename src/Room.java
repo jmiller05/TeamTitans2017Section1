@@ -25,6 +25,8 @@ public class Room implements Serializable
 	private Exit southWestExit;
 	private ArrayList<Item> items;
 	private ArrayList<String> searchResults;
+	private Puzzle puzzle;
+	private boolean hasPuzzle;
 
 	public Room(int roomID, String roomName, String roomDescription)
 	{
@@ -39,6 +41,7 @@ public class Room implements Serializable
 		northWestExit = null;
 		southEastExit = null;
 		southWestExit = null;
+		hasPuzzle = false;
 	}
 	
 	/**
@@ -237,6 +240,29 @@ public class Room implements Serializable
 		items.add(index, item);
 	}
 	
+	
+	
+	public Puzzle getPuzzle()
+	{
+		return puzzle;
+	}
+
+	public void setPuzzle(Puzzle puzzle)
+	{
+		this.puzzle = puzzle;
+		this.hasPuzzle = true;
+	}
+
+	public boolean hasPuzzle()
+	{
+		return hasPuzzle;
+	}
+
+	public void setHasPuzzle(boolean hasPuzzle)
+	{
+		this.hasPuzzle = hasPuzzle;
+	}
+
 	public Room getAdjacentRoom(Exit exit)
 	{
 		if(this == exit.getRoomA())
