@@ -414,7 +414,18 @@ public class Controller
 			{
 				if(player.getCurrentRoom().getPuzzle().getPuzzleName().equalsIgnoreCase("runes"))
 				{
-					runeStage.show();
+					if(player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						player.changeRoom(player.getCurrentRoom().getNorthExit());
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+						mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+						checkValidExits();
+						triggerMonsterEncounter();
+					}
+					else
+					{
+						runeStage.show();
+					}
 					//((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
 					/*solveTorchPuzzle();
 					if(!player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().isSolved)

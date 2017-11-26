@@ -130,6 +130,7 @@ public class RunePuzzle extends Puzzle implements PuzzleInterface
 	public void solvePuzzle()
 	{
 		// TODO Auto-generated method stub
+		this.isSolved = true;
 		runeDoor.unlockExit();
 		
 	}
