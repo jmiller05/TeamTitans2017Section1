@@ -27,12 +27,7 @@ public class Controller
 {
 	
 	Item potion;
-	
-	/**
-	 * the Game instance
-	 */
-	//private Game game;
-	
+	Game game = new Game();
 	/**
 	 * the Player attribute of the Controller
 	 */
@@ -81,6 +76,8 @@ public class Controller
 	private Random rand = new Random();
 	
 	private Stage runeStage;
+	
+	private Stage gameOverStage;
 	
 	/** 
 	 * ProgressBar which displays the player's health
@@ -223,7 +220,7 @@ public class Controller
 		this.inventoryStage = stage;
 	}
 	
- 	/**
+	/**
 	 * @author Evan Lamkie
 	 * 
 	 * Setter for the Controller's encounter stage
@@ -237,6 +234,11 @@ public class Controller
 	public void setPuzzleStage(Stage stage)
 	{
 		this.puzzleStage = stage;
+	}
+	
+	public void setGameOverStage(Stage stage)
+	{
+		this.gameOverStage = stage;
 	}
 	
 	/**
@@ -529,7 +531,7 @@ public class Controller
 			checkValidExits();
 			triggerMonsterEncounter();
 		}
-
+		
 	}
 	
 	@FXML
@@ -669,7 +671,7 @@ public class Controller
 	@FXML
 	private void requestHint(ActionEvent event)
 	{
-	
+		
 	}  
 	
 	@FXML
@@ -748,6 +750,7 @@ public class Controller
 				{
 					text.appendText("\n" + monsterArray.get(i).winFight());
 					encounterStage.close();
+					gameOverStage.show();
 				}
 				if (monsterArray.get(i).getHealth() <= 0)
 				{
@@ -878,7 +881,7 @@ public class Controller
 					checkValidExits();
 					triggerMonsterEncounter();
 					timer.cancel();
-	                timer.purge();
+					timer.purge();
 				}
 			}, 2500);
 		}
@@ -888,6 +891,12 @@ public class Controller
 	public void setRuneStage(Stage stage)
 	{
 		runeStage = stage;
+	}
+	
+	public void restartGame()
+	{
+		//somehow restart the game here
+
 	}
 	
 	private class ProgressBarStyler implements ChangeListener<Number>
