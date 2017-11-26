@@ -498,7 +498,7 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
-					triggerPuzzle()
+					triggerPuzzle();
 				}
 			}, 2500);
 		}
@@ -745,7 +745,7 @@ public class Controller
 			{
 				
 				puzzleStage.show();
-				hintText.appendText("\n\n" + monsterArray.get(i).getPuzzleDescription());
+				hintText.appendText("\n\n" + puzzleArray.get(i).getPuzzleDescription());
 			}		
 		}
 		
