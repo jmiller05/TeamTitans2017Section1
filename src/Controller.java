@@ -463,10 +463,9 @@ public class Controller
 	@FXML
 	private void moveWest(ActionEvent event)
 	{
-<<<<<<< HEAD
 		
 		
-		/*if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).hasPuzzle())
+		if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).hasPuzzle())
 		{
 			if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().getPuzzleName().equalsIgnoreCase("torch"))
 			{
@@ -477,11 +476,7 @@ public class Controller
 				}
 			}
 		}
-		else */
-		
-		solveTorchPuzzle();
-			
-		if(player.getCurrentRoom().getWestExit().isLocked())
+		else if(player.getCurrentRoom().getWestExit().isLocked())
 		{
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
 		}
@@ -493,14 +488,7 @@ public class Controller
 			checkValidExits();
 			triggerMonsterEncounter();
 		}
-=======
-		player.changeRoom(player.getCurrentRoom().getWestExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
-		triggerMonsterEncounter();
-		triggerPuzzle();
->>>>>>> 719d26990cde2414db91f2e89bd1c23dc37329a2
+
 	}
 	
 	@FXML
@@ -646,11 +634,7 @@ public class Controller
 	@FXML
 	private void ignorePuzzle(ActionEvent event)
 	{
-<<<<<<< HEAD
-		//encounterStage.close();
-=======
 		puzzleStage.close();
->>>>>>> 719d26990cde2414db91f2e89bd1c23dc37329a2
 	}
 	
 	@FXML
@@ -763,7 +747,7 @@ public class Controller
 	
 	private void triggerPuzzle()
 	{
-		for(int i = 0; i < puzzleArray.size(); i++)
+		/*for(int i = 0; i < puzzleArray.size(); i++)
 		{
 			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
 			{
@@ -771,7 +755,7 @@ public class Controller
 				puzzleStage.show();
 				hintText.appendText("\n\n" + puzzleArray.get(i).getPuzzleDescription());
 			}		
-		}
+		}*/
 		
 	}
 	
@@ -825,36 +809,25 @@ public class Controller
 	private void solveTorchPuzzle()
 	{
 		
-		if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).hasPuzzle())
+		((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).solvePuzzle();
+		
+		if(((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).isSolved())
 		{
-			if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().getPuzzleName().equalsIgnoreCase("torch"))
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask()
 			{
-				((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).solvePuzzle();
-				
-				if(((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).isSolved())
+				@Override
+				public void run()
 				{
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask()
-					{
-						@Override
-						public void run()
-						{
-							player.changeRoom(player.getCurrentRoom().getWestExit());
-							text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-							mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-							checkValidExits();
-							triggerMonsterEncounter();
-							timer.cancel();
-			                timer.purge();
-						}
-					}, 2500);
+					player.changeRoom(player.getCurrentRoom().getWestExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+	                timer.purge();
 				}
-				
-				if(!player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().isSolved)
-				{
-					text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
-				}
-			}
+			}, 2500);
 		}
 		
 	}

@@ -406,9 +406,6 @@ public class Game extends Application
 		roomAL.get(1).addItem(0,new Armor(6,"Leather Armor","Armor crafted from deer skin", 20));
 		roomAL.get(1).addSearchResult(0,"After rummaging through the piles of stones you find a set of sturdy leather armor");
 		
-		roomAL.get(4).addItem(0,new Artifact(4,"Torch", "Emits a light to see through the darkness"));
-		roomAL.get(4).addSearchResult(0, "You pull the torch from the wall");
-		
 		roomAL.get(2).addItem(0,new Map(9,"Map","Shows the map of the entire dungeon"));
 		roomAL.get(2).addSearchResult(0,"You reach down and pick the map up off the floor, straining to see it in the limited light");
 		
@@ -449,17 +446,17 @@ public class Game extends Application
 		roomAL.get(20).addSearchResult(3, "You pickup the Tungsteel Sword");
 		roomAL.get(20).addSearchResult(4, "You grab the Dirty Key");
 		
-<<<<<<< HEAD
+
 		TorchPuzzle torchPuzzle = new TorchPuzzle("0","Torch","Pick the torch in room 4 in order to enter and navigate room 6","It's too dark to see anything, it might help if you had some light",roomAL.get(6).getEastExit());
 		torchPuzzle.setSolvedMessage("\n" + "\n" + "You light the torch and cautiously make your way into the dark room");
 		torchPuzzle.setLockedDescription(torchPuzzle.getHint());
 		
 		roomAL.get(6).setPuzzle(torchPuzzle);
 		
-=======
+
 		roomAL.get(22).addItem(0,new Artifact(8, "Golden Skull #2", "A golden skull"));
 		roomAL.get(22).addSearchResult(0, "You grab what seems to be another Golden Skull");
->>>>>>> 719d26990cde2414db91f2e89bd1c23dc37329a2
+
 		
 		roomAL.get(25).addItem(0,new Armor(4,"Plate Armor", "Armor forged from steel", 80));
 		roomAL.get(25).addSearchResult(0, "You pick up and equip the heavy steel armor");
