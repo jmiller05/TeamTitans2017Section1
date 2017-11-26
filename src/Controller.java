@@ -498,7 +498,7 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
-					triggerPuzzle()
+					triggerPuzzle();
 				}
 			}, 2500);
 		}
