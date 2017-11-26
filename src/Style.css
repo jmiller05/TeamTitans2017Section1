@@ -143,3 +143,13 @@
 {          
     -fx-font-size: 18;
 }
+
+#blueRune
+{
+	-fx-background-color: transparent;
+}
+
+#greenRune
+{
+	-fx-background-color: transparent;
+}

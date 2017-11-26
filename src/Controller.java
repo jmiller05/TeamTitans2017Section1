@@ -80,6 +80,8 @@ public class Controller
 	 */
 	private Random rand = new Random();
 	
+	private Stage runeStage;
+	
 	/** 
 	 * ProgressBar which displays the player's health
 	 */
@@ -174,6 +176,12 @@ public class Controller
 	
 	@FXML
 	TextArea hintText;
+	
+	@FXML
+	ImageView greenRuneImage;
+	
+	@FXML
+	ImageView blueRuneImage;
 	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
 	{
@@ -326,6 +334,7 @@ public class Controller
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setText(text);
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setTorch(dungeonRooms.get(4).getItem(0));
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setPlayer(player);
+		((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setStage(runeStage);
 		
 		if(player.getCurrentRoom() == null)
 		{
@@ -392,12 +401,44 @@ public class Controller
 		}
 		else
 		{
-			player.changeRoom(player.getCurrentRoom().getNorthExit());
+			/*player.changeRoom(player.getCurrentRoom().getNorthExit());
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			triggerMonsterEncounter();
 			checkValidExits();
-			triggerPuzzle();
+			triggerPuzzle();*/
+			
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getPuzzleName().equalsIgnoreCase("runes"))
+				{
+					runeStage.show();
+					//((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					/*solveTorchPuzzle();
+					if(!player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
+					}*/
+				}
+				
+				player.changeRoom(player.getCurrentRoom().getNorthExit());
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+				checkValidExits();
+				triggerMonsterEncounter();
+			}
+			else if(player.getCurrentRoom().getNorthExit().isLocked())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
+			}
+			else
+			{
+				player.changeRoom(player.getCurrentRoom().getNorthExit());
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+				checkValidExits();
+				triggerMonsterEncounter();
+			}
 		}
 	}
 	
@@ -718,6 +759,18 @@ public class Controller
 		}
 	}
 	
+	@FXML
+	private void insertGreenRune(ActionEvent event)
+	{
+		greenRuneImage.setOpacity(1);
+	}
+	
+	@FXML
+	private void insertBlueRune(ActionEvent event)
+	{
+		blueRuneImage.setOpacity(1);
+	}
+	
 	/**
 	 * Opens a new stage for the combat session. Includes Attack, Examine, and Flee
 	 * buttons. Also shows the player HP and monster HP. 
@@ -830,6 +883,11 @@ public class Controller
 			}, 2500);
 		}
 		
+	}
+	
+	public void setRuneStage(Stage stage)
+	{
+		runeStage = stage;
 	}
 	
 	private class ProgressBarStyler implements ChangeListener<Number>

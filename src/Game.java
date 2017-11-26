@@ -32,6 +32,7 @@ public class Game extends Application
 	public Controller						gameController;
 	public Stage							inventoryStage;
 	public Stage                    encounterStage;
+	public Stage runeStage;
 	
 	private Random rand = new Random();
 	public ArrayList<Room> rooms;
@@ -43,6 +44,7 @@ public class Game extends Application
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		FXMLLoader PuzzleLoader = new FXMLLoader();
+		FXMLLoader runeStageLoader = new FXMLLoader();
 		
 		gamePlayer = new Player(10, 10, 1);
 		
@@ -93,24 +95,35 @@ public class Game extends Application
 		inventoryLoader.setController(gameController);
 		monsterEncounterLoader.setController(gameController);
 		PuzzleLoader.setController(gameController);
+		runeStageLoader.setController(gameController);
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
 		monsterEncounterLoader.setLocation(getClass().getResource("MonsterEncounter.fxml"));
 		PuzzleLoader.setLocation(getClass().getResource("Puzzle.fxml"));
+		runeStageLoader.setLocation(getClass().getResource("RuneStage.fxml"));
+		
 		Parent root = loader.load();
 		Parent inventory = inventoryLoader.load();
 		Parent encounter = monsterEncounterLoader.load();
+		Parent runePuzzle = runeStageLoader.load();
 		inventoryStage = new Stage();
 		inventoryStage.setScene(new Scene(inventory, 600, 400));
 		
 		encounterStage = new Stage();
 		encounterStage.initModality(Modality.APPLICATION_MODAL);
 		encounterStage.setScene(new Scene(encounter, 600, 500));
+		
+		runeStage = new Stage();
+		runeStage.setScene(new Scene(runePuzzle,400,200));
+		
 		// gameController.setInventoryView(inventory);
 		// gameController.setInventoryLoader(inventoryLoader);
 		gameController.setInventoryStage(inventoryStage);
 		gameController.setEncounterStage(encounterStage);
-		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
+		gameController.setRuneStage(runeStage);
+		
+		
+		gameController.setMonsterArray(monsterArray);
 		gameController.setInventoryArray(Item.loadItemsInRooms("ItemsInRooms.dat"));
 		gameController.setMonsterStats();
 		//gameController.setInventory(loadItemsInRooms());
@@ -318,7 +331,7 @@ public class Game extends Application
 		Room.assignExits(new Exit(5), roomAL.get(3), "west", roomAL.get(6), "east");
 		Room.assignExits(new Exit(6), roomAL.get(6), "south", roomAL.get(1), "north");
 		Room.assignExits(new Exit(7), roomAL.get(6), "north", roomAL.get(7), "south");
-		Room.assignExits(new Exit(8), roomAL.get(7), "north", roomAL.get(8), "south"); roomAL.get(7).getNorthExit().lockExit(); roomAL.get(7).getNorthExit().setLockDescription("The door is locked!"); 
+		Room.assignExits(new Exit(8), roomAL.get(7), "north", roomAL.get(8), "south"); //roomAL.get(7).getNorthExit().lockExit(); roomAL.get(7).getNorthExit().setLockDescription("The door is locked!"); 
 		Room.assignExits(new Exit(9), roomAL.get(8), "east", roomAL.get(9), "west");
 		
 		Exit stair0 = new Exit(100);
@@ -451,7 +464,10 @@ public class Game extends Application
 		torchPuzzle.setSolvedMessage("\n" + "\n" + "You light the torch and cautiously make your way into the dark room");
 		torchPuzzle.setLockedDescription(torchPuzzle.getHint());
 		
+		RunePuzzle runePuzzle = new RunePuzzle("1","Runes","There will be two runes that is needed to be slotted into the door (Dr_18) in Room 15 in or-der to enter Room 18","hint");
+		
 		roomAL.get(6).setPuzzle(torchPuzzle);
+		roomAL.get(15).setPuzzle(runePuzzle);
 		
 
 		roomAL.get(22).addItem(0,new Artifact(8, "Golden Skull #2", "A golden skull"));
