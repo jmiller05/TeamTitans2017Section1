@@ -33,6 +33,7 @@ public class Game extends Application
 	public Stage							inventoryStage;
 	public Stage                    encounterStage;
 	public Stage runeStage;
+	public Stage torchesPuzzleStage;
 	public Stage gameOverStage;
 	
 	private Random rand = new Random();
@@ -46,6 +47,7 @@ public class Game extends Application
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		FXMLLoader PuzzleLoader = new FXMLLoader();
 		FXMLLoader runeStageLoader = new FXMLLoader();
+		FXMLLoader torchesPuzzleLoader = new FXMLLoader();
 		FXMLLoader gameOverStageLoader = new FXMLLoader();
 		
 		gamePlayer = new Player(10, 10, 1);
@@ -99,18 +101,21 @@ public class Game extends Application
 		PuzzleLoader.setController(gameController);
 		runeStageLoader.setController(gameController);
 		gameOverStageLoader.setController(gameController);
+		torchesPuzzleLoader.setController(gameController);
 		
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
 		monsterEncounterLoader.setLocation(getClass().getResource("MonsterEncounter.fxml"));
 		PuzzleLoader.setLocation(getClass().getResource("Puzzle.fxml"));
 		runeStageLoader.setLocation(getClass().getResource("RuneStage.fxml"));
+		torchesPuzzleLoader.setLocation(getClass().getResource("TorchesPuzzle.fxml"));
 		gameOverStageLoader.setLocation(getClass().getResource("GameOver.fxml"));
 		
 		Parent root = loader.load();
 		Parent inventory = inventoryLoader.load();
 		Parent encounter = monsterEncounterLoader.load();
 		Parent runePuzzle = runeStageLoader.load();
+		Parent torchesPuzzle = torchesPuzzleLoader.load();
 		Parent gameOver = gameOverStageLoader.load();
 		
 		inventoryStage = new Stage();
@@ -123,6 +128,9 @@ public class Game extends Application
 		runeStage = new Stage();
 		runeStage.setScene(new Scene(runePuzzle,600,300));
 		
+		torchesPuzzleStage = new Stage();
+		torchesPuzzleStage.setScene(new Scene(torchesPuzzle,600,300));
+		
 		gameOverStage = new Stage();
 		gameOverStage.setScene(new Scene(gameOver, 400, 300));
 		
@@ -132,6 +140,7 @@ public class Game extends Application
 		gameController.setInventoryStage(inventoryStage);
 		gameController.setEncounterStage(encounterStage);
 		gameController.setRuneStage(runeStage);
+		gameController.setTorchesPuzzleStage(torchesPuzzleStage);
 		gameController.setGameOverStage(gameOverStage);
 		
 		gameController.setMonsterArray(monsterArray);
@@ -479,10 +488,15 @@ public class Game extends Application
 		runePuzzle.setRuneDoor(roomAL.get(15).getNorthExit(), "It looks you need something else to open this door");
 		runePuzzle.setEmeraldRune((Artifact)roomAL.get(16).getItem(0));
 		runePuzzle.setSapphireRune((Artifact)roomAL.get(17).getItem(1));
-		System.out.println(((Artifact)roomAL.get(17).getItem(1)).itemName);
+		
+		
+		TorchesPuzzle torchesPuzzle = new TorchesPuzzle("6","Torches","There should be 3 torches that have to be lit in order to unlock the door to room 29","hint");
+		torchesPuzzle.setTorchesDoor(roomAL.get(24).getNorthExit(), "Maybe the torches in this room have something to do with this locked door");
+		
 		
 		roomAL.get(6).setPuzzle(torchPuzzle);
 		roomAL.get(15).setPuzzle(runePuzzle);
+		roomAL.get(24).setPuzzle(torchesPuzzle);
 		
 		
 		roomAL.get(22).addItem(0,new Artifact(8, "Golden Skull #2", "A golden skull"));

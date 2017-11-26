@@ -28,6 +28,7 @@ public class Controller
 	
 	Item potion;
 	Game game = new Game();
+	
 	/**
 	 * the Player attribute of the Controller
 	 */
@@ -77,6 +78,8 @@ public class Controller
 	
 	private Stage runeStage;
 	
+	private Stage torchesPuzzleStage;
+
 	private Stage gameOverStage;
 	
 	/** 
@@ -180,6 +183,15 @@ public class Controller
 	@FXML
 	ImageView blueRuneImage;
 	
+	@FXML
+	ImageView firstTorchImage;
+	
+	@FXML
+	ImageView secondTorchImage;
+	
+	@FXML
+	ImageView thirdTorchImage;
+	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
 	{
 		this.player = player;
@@ -236,6 +248,16 @@ public class Controller
 		this.puzzleStage = stage;
 	}
 	
+	public Stage getTorchesPuzzleStage()
+	{
+		return torchesPuzzleStage;
+	}
+
+	public void setTorchesPuzzleStage(Stage torchesPuzzleStage)
+	{
+		this.torchesPuzzleStage = torchesPuzzleStage;
+	}
+	
 	public void setGameOverStage(Stage stage)
 	{
 		this.gameOverStage = stage;
@@ -262,11 +284,6 @@ public class Controller
 	{
 		this.playerInventory = items;
 	}
-	
-	/**
-	 * @param itemID
-	 */
-	
 	
 	/**
 	 * @author Jesse Miller
@@ -336,12 +353,15 @@ public class Controller
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setText(text);
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setTorch(dungeonRooms.get(4).getItem(0));
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setPlayer(player);
+		
 		//((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setStage(runeStage);
+		
+		
 		
 		if(player.getCurrentRoom() == null)
 		{
 			//assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(15));
+			player.setCurrentRoom(dungeonRooms.get(0));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -359,11 +379,6 @@ public class Controller
 		
 	}
 	
-	/**
-	 * 
-	 */
-	
-	
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
@@ -372,6 +387,7 @@ public class Controller
 		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		//checkValidExits();
 		
+		torchesPuzzleStage.show();
 		
 		if(player.getCurrentRoom().getNorthExit().isStairCase())
 		{
@@ -520,6 +536,7 @@ public class Controller
 		checkValidExits();
 		triggerMonsterEncounter();
 		triggerPuzzle();
+		//((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).triggerPuzzle();
 	}
 	
 	@FXML
@@ -606,7 +623,6 @@ public class Controller
 		triggerPuzzle();
 	}
 	
-	
 	@FXML
 	private void moveNorthWest(ActionEvent event)
 	{
@@ -643,7 +659,6 @@ public class Controller
 		inventoryView.setItems(player.getInventory());
 		inventoryStage.show();	
 	}
-	
 	
 	/**
 	 * Checks if there is a monster in the player's current room, and 
@@ -824,6 +839,24 @@ public class Controller
 				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
 			}
 		}
+	}
+	
+	@FXML
+	private void lightFirstTorch(ActionEvent event)
+	{
+		firstTorchImage.setOpacity(1);
+	}
+	
+	@FXML
+	private void lightSecondTorch(ActionEvent event)
+	{
+		secondTorchImage.setOpacity(1);
+	}
+	
+	@FXML
+	private void lightThirdTorch(ActionEvent event)
+	{
+		thirdTorchImage.setOpacity(1);
 	}
 	
 	/**
