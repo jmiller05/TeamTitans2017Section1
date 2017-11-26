@@ -330,16 +330,16 @@ public class Controller
 	protected void initialize()
 	{	
 		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
-		mapView.setVisible(false);
+		mapView.setVisible(true);
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setText(text);
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setTorch(dungeonRooms.get(4).getItem(0));
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setPlayer(player);
-		((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setStage(runeStage);
+		//((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setStage(runeStage);
 		
 		if(player.getCurrentRoom() == null)
 		{
 			//assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(0));
+			player.setCurrentRoom(dungeonRooms.get(15));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -420,12 +420,20 @@ public class Controller
 						text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
 					}*/
 				}
+				else if(player.getCurrentRoom().getNorthExit().isLocked())
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
+				}
+				else
+				{
+					player.changeRoom(player.getCurrentRoom().getNorthExit());
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+				}
 				
-				player.changeRoom(player.getCurrentRoom().getNorthExit());
-				text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-				checkValidExits();
-				triggerMonsterEncounter();
+				
 			}
 			else if(player.getCurrentRoom().getNorthExit().isLocked())
 			{
@@ -762,13 +770,46 @@ public class Controller
 	@FXML
 	private void insertGreenRune(ActionEvent event)
 	{
-		greenRuneImage.setOpacity(1);
+		if(dungeonRooms.get(15).hasPuzzle())
+		{
+			if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).playerHasEmeraldRune(player))
+			{
+				greenRuneImage.setOpacity(1);
+				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertEmeraldRune();
+				
+				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isSapphireRuneInserted())
+				{
+					((RunePuzzle)dungeonRooms.get(15).getPuzzle()).solvePuzzle();
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
+			}
+		}
+		
 	}
 	
 	@FXML
 	private void insertBlueRune(ActionEvent event)
 	{
-		blueRuneImage.setOpacity(1);
+		if(dungeonRooms.get(15).hasPuzzle())
+		{
+			if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).playerHasSapphireRune(player))
+			{
+				blueRuneImage.setOpacity(1);
+				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertSapphireRune();
+				
+				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isEmeraldRuneInserted())
+				{
+					((RunePuzzle)dungeonRooms.get(15).getPuzzle()).solvePuzzle();
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
+			}
+		}
 	}
 	
 	/**

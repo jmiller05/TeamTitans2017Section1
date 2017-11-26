@@ -21,6 +21,11 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </Button>
+      <ImageView fx:id="redRuneImage" fitHeight="150.0" fitWidth="200.0" opacity="1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@res/redRune.png" />
+         </image>
+      </ImageView>
       <Button fx:id="blueRune" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#insertBlueRune">
          <graphic>
             <ImageView fx:id="blueRuneImage" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">

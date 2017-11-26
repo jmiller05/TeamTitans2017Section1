@@ -114,7 +114,7 @@ public class Game extends Application
 		encounterStage.setScene(new Scene(encounter, 600, 500));
 		
 		runeStage = new Stage();
-		runeStage.setScene(new Scene(runePuzzle,400,200));
+		runeStage.setScene(new Scene(runePuzzle,600,300));
 		
 		// gameController.setInventoryView(inventory);
 		// gameController.setInventoryLoader(inventoryLoader);
@@ -465,6 +465,10 @@ public class Game extends Application
 		torchPuzzle.setLockedDescription(torchPuzzle.getHint());
 		
 		RunePuzzle runePuzzle = new RunePuzzle("1","Runes","There will be two runes that is needed to be slotted into the door (Dr_18) in Room 15 in or-der to enter Room 18","hint");
+		runePuzzle.setRuneDoor(roomAL.get(15).getNorthExit(), "It looks you need something else to open this door");
+		runePuzzle.setEmeraldRune((Artifact)roomAL.get(16).getItem(0));
+		runePuzzle.setSapphireRune((Artifact)roomAL.get(17).getItem(1));
+		System.out.println(((Artifact)roomAL.get(17).getItem(1)).itemName);
 		
 		roomAL.get(6).setPuzzle(torchPuzzle);
 		roomAL.get(15).setPuzzle(runePuzzle);
