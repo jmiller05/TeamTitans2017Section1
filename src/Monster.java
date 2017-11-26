@@ -37,15 +37,34 @@ public class Monster extends Entity implements Serializable
 	Random rand;
 	
 	private int randomIndex;
+
+	private Item itemDropped;
 	
-	public Monster(String ID, String name, String desc, int health, int damage)
+	public Monster(String ID, String name, String desc, int health, int damage, Item itemDropped)
 	{
 		super(health, damage);
 		this.monsterID = ID;
 		this.monsterName = name;
 		this.description = desc;
+		this.itemDropped = itemDropped;
 	}
 	
+	/**
+	 * @return the itemDropped
+	 */
+	public Item getItemDropped()
+	{
+		return itemDropped;
+	}
+
+	/**
+	 * @param itemDropped the itemDropped to set
+	 */
+	public void setItemDropped(Item itemDropped)
+	{
+		this.itemDropped = itemDropped;
+	}
+
 	/**
 	 * @return the monster's name
 	 */

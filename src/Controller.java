@@ -789,8 +789,17 @@ public class Controller
 				if (monsterArray.get(i).getHealth() <= 0)
 				{
 					text.appendText("\n" + player.winFight());
+					Item itemDropped = monsterArray.get(i).getItemDropped();
+					if (itemDropped != null) {
+						text.appendText("/n" + "Monster has dropped" + itemDropped.getItemDescription());
+						player.getInventory().add(itemDropped);
+					} else {
+						text.appendText("/n" + "Nothing can be found on monster");
+					}
+				
 					monsterArray.remove(i);
 					encounterStage.close();
+					
 				}
 			}		
 		}
