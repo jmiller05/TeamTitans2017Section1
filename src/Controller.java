@@ -54,6 +54,11 @@ public class Controller
 	private Stage encounterStage;
 	
 	/**
+	 * the stage for the puzzle window
+	 */
+	private Stage puzzleStage;
+	
+	/**
 	 * the list of inventory items
 	 */
 	private ObservableList<Item> inventoryList;
@@ -210,7 +215,7 @@ public class Controller
 		this.inventoryStage = stage;
 	}
 	
-	/**
+ 	/**
 	 * @author Evan Lamkie
 	 * 
 	 * Setter for the Controller's encounter stage
@@ -219,6 +224,11 @@ public class Controller
 	public void setEncounterStage(Stage stage)
 	{
 		this.encounterStage = stage;
+	}
+	
+	public void setPuzzleStage(Stage stage)
+	{
+		this.puzzleStage = stage;
 	}
 	
 	/**
@@ -230,7 +240,6 @@ public class Controller
 	public void setMonsterArray(ArrayList<Monster> mAL)
 	{
 		this.monsterArray = mAL;
-		
 	}
 	
 	public void setPuzzleArray(ArrayList<Puzzle> pAL)
@@ -247,7 +256,7 @@ public class Controller
 	/**
 	 * @param itemID
 	 */
-
+	
 	
 	/**
 	 * @author Jesse Miller
@@ -266,23 +275,23 @@ public class Controller
 		
 		monsterArray.get(1).setHealth(10);
 		monsterArray.get(1).setMaxHealth(10);
-		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);
+		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);		
 		
 		monsterArray.get(2).setHealth(15);
 		monsterArray.get(2).setMaxHealth(15);
-		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);
+		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);		
 		
 		monsterArray.get(3).setHealth(20);
 		monsterArray.get(3).setMaxHealth(20);
-		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);
+		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);		
 		
 		monsterArray.get(4).setHealth(25);
 		monsterArray.get(4).setMaxHealth(25);
-		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);
+		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);		
 		
 		monsterArray.get(5).setHealth(30);
 		monsterArray.get(5).setMaxHealth(30);
-		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);
+		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);		
 		
 		monsterArray.get(6).setHealth(40);
 		monsterArray.get(6).setMaxHealth(40);
@@ -290,8 +299,7 @@ public class Controller
 		
 		monsterArray.get(7).setHealth(60);
 		monsterArray.get(7).setMaxHealth(60);
-		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);
-		
+		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);		
 	}
 	
 	/**
@@ -337,6 +345,7 @@ public class Controller
 		health.progressProperty().bind(player.getHealthPercentage());
 		
 		health.progressProperty().addListener(new ProgressBarStyler(health));	
+		
 	}
 	
 	/**
@@ -363,7 +372,7 @@ public class Controller
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("b"));
 			}
-				
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -376,7 +385,8 @@ public class Controller
 					checkValidExits();
 					triggerMonsterEncounter();
 					timer.cancel();
-	                timer.purge();
+					timer.purge();
+					triggerPuzzle();
 				}
 			}, 2500);
 		}
@@ -387,6 +397,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			triggerMonsterEncounter();
 			checkValidExits();
+			triggerPuzzle();
 		}
 	}
 	
@@ -408,7 +419,7 @@ public class Controller
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("b"));
 			}
-				
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -421,7 +432,8 @@ public class Controller
 					checkValidExits();
 					triggerMonsterEncounter();
 					timer.cancel();
-	                timer.purge();
+					timer.purge();
+					triggerPuzzle();
 				}
 			}, 2500);
 		}
@@ -432,6 +444,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
+			triggerPuzzle();
 		}
 		
 	}
@@ -444,11 +457,13 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	@FXML
 	private void moveWest(ActionEvent event)
 	{
+<<<<<<< HEAD
 		
 		
 		/*if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).hasPuzzle())
@@ -478,6 +493,14 @@ public class Controller
 			checkValidExits();
 			triggerMonsterEncounter();
 		}
+=======
+		player.changeRoom(player.getCurrentRoom().getWestExit());
+		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+		checkValidExits();
+		triggerMonsterEncounter();
+		triggerPuzzle();
+>>>>>>> 719d26990cde2414db91f2e89bd1c23dc37329a2
 	}
 	
 	@FXML
@@ -493,7 +516,7 @@ public class Controller
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("b"));
 			}
-				
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -506,7 +529,8 @@ public class Controller
 					checkValidExits();
 					triggerMonsterEncounter();
 					timer.cancel();
-	                timer.purge();
+					timer.purge();
+					triggerPuzzle();
 				}
 			}, 2500);
 		}
@@ -517,6 +541,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
+			triggerPuzzle();
 		}
 	}
 	
@@ -528,6 +553,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	
@@ -539,6 +565,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	@FXML
@@ -549,6 +576,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	/**
@@ -618,7 +646,11 @@ public class Controller
 	@FXML
 	private void ignorePuzzle(ActionEvent event)
 	{
+<<<<<<< HEAD
 		//encounterStage.close();
+=======
+		puzzleStage.close();
+>>>>>>> 719d26990cde2414db91f2e89bd1c23dc37329a2
 	}
 	
 	@FXML
@@ -656,8 +688,6 @@ public class Controller
 		{
 			player.getCurrentRoom().removeSearchResult(index);
 		}
-		
-		
 	}
 	
 	/**
@@ -726,6 +756,20 @@ public class Controller
 				
 				encounterStage.show();
 				combatText.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
+			}		
+		}
+		
+	}
+	
+	private void triggerPuzzle()
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
+			{
+				
+				puzzleStage.show();
+				hintText.appendText("\n\n" + puzzleArray.get(i).getPuzzleDescription());
 			}		
 		}
 		

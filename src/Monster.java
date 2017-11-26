@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,6 +33,10 @@ public class Monster extends Entity implements Serializable
 	 */
 	private ArrayList<Room> location = new ArrayList<Room>();
 	//private ArrayList<Item> itemDropped = new ArrayList<Item>();
+	
+	Random rand;
+	
+	private int randomIndex;
 	
 	public Monster(String ID, String name, String desc, int health, int damage)
 	{
@@ -72,8 +77,15 @@ public class Monster extends Entity implements Serializable
 	 */
 	public int getLocation()
 	{
-		return location.get(0).getRoomID();		
+		return location.get(randomIndex).getRoomID();		
 	}
+	
+	public void setRandomIndex()
+	{
+		rand = new Random();
+		this.randomIndex = rand.nextInt(location.size());
+	}
+	
 	
 	/**
 	 * adds a room to the monster's locations
@@ -122,6 +134,11 @@ public class Monster extends Entity implements Serializable
 		}catch(ClassNotFoundException c){
 			System.out.println("Class not found");
 			c.printStackTrace();
+		}
+		
+		for (int i = 0; i < mAL.size(); i ++)
+		{
+			mAL.get(i).setRandomIndex();
 		}
 		return mAL;
 	}	
