@@ -54,6 +54,11 @@ public class Controller
 	private Stage encounterStage;
 	
 	/**
+	 * the stage for the puzzle window
+	 */
+	private Stage puzzleStage;
+	
+	/**
 	 * the list of inventory items
 	 */
 	private ObservableList<Item> inventoryList;
@@ -210,7 +215,7 @@ public class Controller
 		this.inventoryStage = stage;
 	}
 	
-	/**
+ 	/**
 	 * @author Evan Lamkie
 	 * 
 	 * Setter for the Controller's encounter stage
@@ -219,6 +224,11 @@ public class Controller
 	public void setEncounterStage(Stage stage)
 	{
 		this.encounterStage = stage;
+	}
+	
+	public void setPuzzleStage(Stage stage)
+	{
+		this.puzzleStage = stage;
 	}
 	
 	/**
@@ -377,6 +387,7 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
+					triggerPuzzle();
 				}
 			}, 2500);
 		}
@@ -387,6 +398,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			triggerMonsterEncounter();
 			checkValidExits();
+			triggerPuzzle();
 		}
 	}
 	
@@ -422,6 +434,7 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
+					triggerPuzzle();
 				}
 			}, 2500);
 		}
@@ -432,6 +445,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
+			triggerPuzzle();
 		}
 	}
 	
@@ -443,6 +457,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	@FXML
@@ -453,6 +468,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	@FXML
@@ -482,6 +498,7 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
+					triggerPuzzle()
 				}
 			}, 2500);
 		}
@@ -492,6 +509,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
+			triggerPuzzle();
 		}
 	}
 	
@@ -503,6 +521,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	
@@ -514,6 +533,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	@FXML
@@ -524,6 +544,7 @@ public class Controller
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
+		triggerPuzzle();
 	}
 	
 	/**
@@ -605,7 +626,7 @@ public class Controller
 	@FXML
 	private void ignorePuzzle(ActionEvent event)
 	{
-		encounterStage.close();
+		puzzleStage.close();
 	}
 	
 	@FXML
@@ -711,6 +732,20 @@ public class Controller
 				
 				encounterStage.show();
 				combatText.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());
+			}		
+		}
+		
+	}
+	
+	private void triggerPuzzle()
+	{
+		for(int i = 0; i < puzzleArray.size(); i++)
+		{
+			if( player.getCurrentRoom().getRoomID() == (puzzleArray.get(i).getLocation()) )
+			{
+				
+				puzzleStage.show();
+				hintText.appendText("\n\n" + monsterArray.get(i).getPuzzleDescription());
 			}		
 		}
 		
