@@ -76,8 +76,14 @@ public class Controller
 	 */
 	private Random rand = new Random();
 	
+	/**
+	 * stage variable to show the stage for the rune puzzle
+	 */
 	private Stage runeStage;
 	
+	/**
+	 * stage variable to show the stage for the torches puzzle
+	 */
 	private Stage torchesPuzzleStage;
 
 	private Stage gameOverStage;
@@ -361,7 +367,7 @@ public class Controller
 		{
 			//assignMapImages();
 			player.setCurrentRoom(dungeonRooms.get(0));
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			text.setText(player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 		}
@@ -401,7 +407,7 @@ public class Controller
 				public void run()
 				{
 					player.changeRoom(player.getCurrentRoom().getNorthExit());
-					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					text.setText(player.getCurrentRoom().getRoomDescription());
 					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 					checkValidExits();
 					triggerMonsterEncounter();
@@ -412,14 +418,7 @@ public class Controller
 			}, 2500);
 		}
 		else
-		{
-			/*player.changeRoom(player.getCurrentRoom().getNorthExit());
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-			triggerMonsterEncounter();
-			checkValidExits();
-			triggerPuzzle();*/
-			
+		{	
 			if(player.getCurrentRoom().hasPuzzle())
 			{
 				if(player.getCurrentRoom().getPuzzle().getPuzzleName().equalsIgnoreCase("runes"))
@@ -427,7 +426,7 @@ public class Controller
 					if(player.getCurrentRoom().getPuzzle().isSolved)
 					{
 						player.changeRoom(player.getCurrentRoom().getNorthExit());
-						text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+						text.setText(player.getCurrentRoom().getRoomDescription());
 						mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 						checkValidExits();
 						triggerMonsterEncounter();
@@ -436,19 +435,13 @@ public class Controller
 					{
 						runeStage.show();
 					}
-					//((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
-					/*solveTorchPuzzle();
-					if(!player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().isSolved)
-					{
-						text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
-					}*/
 				}
 				else if(player.getCurrentRoom().getPuzzle().getPuzzleName().equalsIgnoreCase("torches"))
 				{
 					if(player.getCurrentRoom().getPuzzle().isSolved)
 					{
 						player.changeRoom(player.getCurrentRoom().getNorthExit());
-						text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+						text.setText(player.getCurrentRoom().getRoomDescription());
 						mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 						checkValidExits();
 						triggerMonsterEncounter();
@@ -465,7 +458,7 @@ public class Controller
 				else
 				{
 					player.changeRoom(player.getCurrentRoom().getNorthExit());
-					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					text.setText(player.getCurrentRoom().getRoomDescription());
 					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 					checkValidExits();
 					triggerMonsterEncounter();
@@ -480,7 +473,7 @@ public class Controller
 			else
 			{
 				player.changeRoom(player.getCurrentRoom().getNorthExit());
-				text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+				text.setText(player.getCurrentRoom().getRoomDescription());
 				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 				checkValidExits();
 				triggerMonsterEncounter();
@@ -514,7 +507,7 @@ public class Controller
 				public void run()
 				{
 					player.changeRoom(player.getCurrentRoom().getSouthExit());
-					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					text.setText(player.getCurrentRoom().getRoomDescription());
 					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 					checkValidExits();
 					triggerMonsterEncounter();
@@ -527,7 +520,7 @@ public class Controller
 		else
 		{
 			player.changeRoom(player.getCurrentRoom().getSouthExit());
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			text.setText(player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
@@ -540,7 +533,7 @@ public class Controller
 	private void moveEast(ActionEvent event)
 	{
 		player.changeRoom(player.getCurrentRoom().getEastExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		text.setText(player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
@@ -570,7 +563,7 @@ public class Controller
 			else
 			{
 				player.changeRoom(player.getCurrentRoom().getWestExit());
-				text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+				text.setText(player.getCurrentRoom().getRoomDescription());
 				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 				checkValidExits();
 				triggerMonsterEncounter();
@@ -583,7 +576,7 @@ public class Controller
 		else
 		{
 			player.changeRoom(player.getCurrentRoom().getWestExit());
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			text.setText(player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
@@ -612,7 +605,7 @@ public class Controller
 				public void run()
 				{
 					player.changeRoom(player.getCurrentRoom().getNorthEastExit());
-					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+					text.setText(player.getCurrentRoom().getRoomDescription());
 					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 					checkValidExits();
 					triggerMonsterEncounter();
@@ -625,7 +618,7 @@ public class Controller
 		else
 		{
 			player.changeRoom(player.getCurrentRoom().getNorthEastExit());
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+			text.setText(player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
@@ -637,7 +630,7 @@ public class Controller
 	private void moveSouthEast(ActionEvent event)
 	{
 		player.changeRoom(player.getCurrentRoom().getSouthEastExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		text.setText(player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
@@ -648,7 +641,7 @@ public class Controller
 	private void moveNorthWest(ActionEvent event)
 	{
 		player.changeRoom(player.getCurrentRoom().getNorthWestExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		text.setText(player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();
@@ -659,7 +652,7 @@ public class Controller
 	private void moveSouthWest(ActionEvent event)
 	{
 		player.changeRoom(player.getCurrentRoom().getSouthWestExit());
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+		text.setText(player.getCurrentRoom().getRoomDescription());
 		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		checkValidExits();
 		triggerMonsterEncounter();

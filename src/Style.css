@@ -20,6 +20,11 @@
     -fx-background-color: text-area-background ;
 }
 
+#text
+{
+	-fx-font-size: 20;
+}
+
 #health .bar
 {
 	-fx-padding: 1px; 
