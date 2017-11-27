@@ -24,7 +24,7 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="inventoryView" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="inventoryView">
         <columns>
           <TableColumn fx:id="columnName" text="Name">
             <cellValueFactory>

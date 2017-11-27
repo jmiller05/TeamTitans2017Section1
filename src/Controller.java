@@ -106,6 +106,9 @@ public class Controller
 	@FXML
 	ImageView mapView; 
 	
+	@FXML
+	Button btusePotion;
+	
 	/**
 	 * Button to navigate North
 	 */
@@ -353,6 +356,8 @@ public class Controller
 	@FXML
 	protected void initialize()
 	{	
+		
+		btusePotion.setDisable(true);
 		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
 		mapView.setVisible(false);
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setText(text);
@@ -371,6 +376,7 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 		}
+
 		
 		//inventoryList = FXCollections.<Item>observableArrayList();
 		//inventoryList.addAll(player.getInventory());
@@ -688,11 +694,13 @@ public class Controller
 			if(potion.isFull())
 			{
 				potion.useItem();
-				text.appendText("\n" + "You feel rejuvinated!" + "\n");
+				text.appendText("\n" + "\n" + "You feel rejuvinated!" + "\n");
+				btusePotion.setDisable(true);
+				
 			}
 			if(!potion.isFull())
 			{
-				text.appendText("\n" + "This bottle is empty!");
+				text.appendText("\n" + "\n" + "This bottle is empty!");
 			}
 		}
 	}
@@ -801,6 +809,7 @@ public class Controller
 				if(potion != null && !((PotionBottle)potion).isFull())
 				{
 					((PotionBottle)player.getInventory().get(player.getInventory().indexOf(potion))).fillBottle();
+					btusePotion.setDisable(false);
 					try
 					{
 						player.restoreHealth(player.getMaxHealth()-player.getHealth());
@@ -835,6 +844,7 @@ public class Controller
 					//((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);
 					potion=(PotionBottle)player.getCurrentRoom().getItem(index);
 					potion.setPlayer(player);
+					btusePotion.setDisable(false);
 					
 				}
 				player.pickupItem(index);

@@ -56,15 +56,23 @@
 {          
     -fx-font-size: 18;
 }
-#btusePotion
-{          
-    -fx-font-size: 18;
+
+#btattackMonster
+{
+	-fx-font-size: 18;
 }
 
 #btfleeMonster
 {          
     -fx-font-size: 18;
 }
+
+#btusePotion
+{          
+    -fx-font-size: 18;
+}
+
+
 
 #btnnorthwest
 {          
