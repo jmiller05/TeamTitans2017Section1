@@ -82,16 +82,16 @@ public class Game extends Application
 		addPuzzleRooms();
 		
 		
-						try{
-							FileOutputStream fos= new FileOutputStream("Monsters.dat");
-							ObjectOutputStream oos= new ObjectOutputStream(fos);
-							oos.writeObject(monsterArray);
-							oos.close();
-							
-							fos.close();
-						}catch(IOException ioe){
-							ioe.printStackTrace();
-						}
+		try{
+			FileOutputStream fos= new FileOutputStream("Monsters.dat");
+			ObjectOutputStream oos= new ObjectOutputStream(fos);
+			oos.writeObject(monsterArray);
+			oos.close();
+			
+			fos.close();
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+		}
 		
 		Controller gameController = new Controller(gamePlayer, rooms);
 		
@@ -143,7 +143,7 @@ public class Game extends Application
 		gameController.setTorchesPuzzleStage(torchesPuzzleStage);
 		gameController.setGameOverStage(gameOverStage);
 		
-		gameController.setMonsterArray(monsterArray);
+		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
 		gameController.setInventoryArray(Item.loadItemsInRooms("ItemsInRooms.dat"));
 		gameController.setMonsterStats();
 		//gameController.setInventory(loadItemsInRooms());
