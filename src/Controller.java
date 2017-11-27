@@ -386,6 +386,8 @@ public class Controller
 		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		//checkValidExits();
 		
+		torchesPuzzleStage.show();
+		
 		if(player.getCurrentRoom().getNorthExit().isStairCase())
 		{
 			if(player.getCurrentRoom().getNorthExit().getRoomA() == player.getCurrentRoom())

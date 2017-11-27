@@ -129,7 +129,7 @@ public class Game extends Application
 		runeStage.setScene(new Scene(runePuzzle,600,300));
 		
 		torchesPuzzleStage = new Stage();
-		torchesPuzzleStage.setScene(new Scene(torchesPuzzle,600,300));
+		torchesPuzzleStage.setScene(new Scene(torchesPuzzle,700,300));
 		
 		gameOverStage = new Stage();
 		gameOverStage.setScene(new Scene(gameOver, 400, 300));

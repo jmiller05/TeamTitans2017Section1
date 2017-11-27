@@ -168,3 +168,8 @@
 {
 	-fx-background-color: transparent;
 }
+
+#solveTorchPuzzle
+{          
+    -fx-font-size: 18;
+}
