@@ -83,7 +83,7 @@ public class Game extends Application
 		
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
-		monsterEncounterLoader.setLocation(getClass().getResource("MonsterEncounter.fxml"));
+		monsterEncounterLoader.setLocation(getClass().getResource("CombatView.fxml"));
 		PuzzleLoader.setLocation(getClass().getResource("Puzzle.fxml"));
 		runeStageLoader.setLocation(getClass().getResource("RuneStage.fxml"));
 		torchesPuzzleLoader.setLocation(getClass().getResource("TorchesPuzzle.fxml"));
