@@ -381,10 +381,6 @@ public class Controller
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
-		//player.changeRoom(player.getCurrentRoom().getNorthExit());
-		//text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		//checkValidExits();
 		
 		
 		if(player.getCurrentRoom().getNorthExit().isStairCase())
