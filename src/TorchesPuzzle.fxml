@@ -61,7 +61,7 @@
 				<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
 			</opaqueInsets>
 		</HBox>
-		<Button fx:id="solveTorchPuzzle" text="Open Door" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#lightSecondTorch">
+		<Button fx:id="solveTorchPuzzle" text="Open Door" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#solveTorchesPuzzle">
 		</Button>
 	</children>
 </VBox>

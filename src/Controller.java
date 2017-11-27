@@ -361,7 +361,7 @@ public class Controller
 		if(player.getCurrentRoom() == null)
 		{
 			//assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(0));
+			player.setCurrentRoom(dungeonRooms.get(24));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -386,8 +386,6 @@ public class Controller
 		//text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		//checkValidExits();
-		
-		torchesPuzzleStage.show();
 		
 		if(player.getCurrentRoom().getNorthExit().isStairCase())
 		{
@@ -448,6 +446,21 @@ public class Controller
 					{
 						text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
 					}*/
+				}
+				else if(player.getCurrentRoom().getPuzzle().getPuzzleName().equalsIgnoreCase("torches"))
+				{
+					if(player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						player.changeRoom(player.getCurrentRoom().getNorthExit());
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+						mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+						checkValidExits();
+						triggerMonsterEncounter();
+					}
+					else
+					{
+						torchesPuzzleStage.show();
+					}
 				}
 				else if(player.getCurrentRoom().getNorthExit().isLocked())
 				{
@@ -854,18 +867,28 @@ public class Controller
 	private void lightFirstTorch(ActionEvent event)
 	{
 		firstTorchImage.setOpacity(1);
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightFirstTorch();
 	}
 	
 	@FXML
 	private void lightSecondTorch(ActionEvent event)
 	{
 		secondTorchImage.setOpacity(1);
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightSecondTorch();
 	}
 	
 	@FXML
 	private void lightThirdTorch(ActionEvent event)
 	{
 		thirdTorchImage.setOpacity(1);
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightThirdTorch();
+	}
+	
+	@FXML
+	private void solveTorchesPuzzle(ActionEvent event)
+	{
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).solvePuzzle();
+		System.out.println(((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).isSolved());
 	}
 	
 	/**
