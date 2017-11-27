@@ -1,43 +1,19 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
-import javax.xml.crypto.KeySelector.Purpose;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Game extends Application
 {
-	
-	public ArrayList<Room>					roomAL;										
-	private ArrayList<String>				roomNameAL;										
-	private ArrayList<String>				roomDescriptionAL;								
-	private ArrayList<Monster> monsterArray = new ArrayList<Monster>();
-	private ArrayList<Puzzle> puzzleArray = new ArrayList<Puzzle>();
-	public static HashMap<Integer, Item>	itemsInRooms	= new HashMap<Integer, Item>();
-	
-	public Player							gamePlayer;
-	public Controller						gameController;
-	public Stage							inventoryStage;
-	public Stage                    encounterStage;
-	public Stage runeStage;
-	public Stage torchesPuzzleStage;
-	public Stage gameOverStage;
-	
-	private Random rand = new Random();
-	public ArrayList<Room> rooms;
+	public Player		gamePlayer;
+	public Controller	gameController;
+	public Stage		inventoryStage;
+	public Stage		encounterStage;
+	public Stage		runeStage;
+	public Stage		torchesPuzzleStage;
+	public Stage		gameOverStage;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception
@@ -52,6 +28,7 @@ public class Game extends Application
 		
 		gamePlayer = new Player(10, 10, 1);
 		
+<<<<<<< HEAD
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());
 		
@@ -94,6 +71,9 @@ public class Game extends Application
 		}*/
 		
 		Controller gameController = new Controller(gamePlayer, rooms);
+=======
+		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
+>>>>>>> 71c4d5e391bf60c944c7fd77399f18763ae961e5
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
@@ -126,68 +106,31 @@ public class Game extends Application
 		encounterStage.setScene(new Scene(encounter, 600, 500));
 		
 		runeStage = new Stage();
-		runeStage.setScene(new Scene(runePuzzle,600,300));
+		runeStage.setScene(new Scene(runePuzzle, 600, 300));
 		
 		torchesPuzzleStage = new Stage();
-		torchesPuzzleStage.setScene(new Scene(torchesPuzzle,700,300));
+		torchesPuzzleStage.setScene(new Scene(torchesPuzzle, 700, 300));
 		
 		gameOverStage = new Stage();
 		gameOverStage.setScene(new Scene(gameOver, 400, 300));
 		
-		
-		// gameController.setInventoryView(inventory);
-		// gameController.setInventoryLoader(inventoryLoader);
 		gameController.setInventoryStage(inventoryStage);
 		gameController.setEncounterStage(encounterStage);
 		gameController.setRuneStage(runeStage);
 		gameController.setTorchesPuzzleStage(torchesPuzzleStage);
 		gameController.setGameOverStage(gameOverStage);
-		
 		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
-		gameController.setInventoryArray(Item.loadItemsInRooms("ItemsInRooms.dat"));
 		gameController.setMonsterStats();
-		//gameController.setInventory(loadItemsInRooms());
-		// gameController.setItemsArray(Item.readItems("Items.dat"));
+		gameController.setImages();
 		primaryStage.setScene(new Scene(root, 1100, 800));
 		primaryStage.show();
 		
 	}
 	
-	public Item getItemInRoom(int roomId)
-	{
-		return itemsInRooms.get(roomId);
-	}
-	
-	// Write
-	public static void saveItemsInRooms()
-	{
-		
-		try
-		{
-			FileOutputStream fos = new FileOutputStream("ItemsInRooms.dat");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(itemsInRooms);
-			
-			oos.close();
-			
-			fos.close();
-		} catch (IOException ioe)
-		{
-			ioe.printStackTrace();
-		}
-	}
-	
-	// Read
-	public void removeItemFromRoom(int roomId)
-	{
-		itemsInRooms.remove(roomId);
-		
-	}
-	
 	public static void main(String[] args)
 	{
-		
 		launch(args);
+<<<<<<< HEAD
 	}
 	
 	/*public static void populateRoomItems()
@@ -548,5 +491,7 @@ public class Game extends Application
 		//puzzleArray.get(5).addLocation(roomAL.get(20));
 		//puzzleArray.get(6).addLocation(roomAL.get(24));
 		
+=======
+>>>>>>> 71c4d5e391bf60c944c7fd77399f18763ae961e5
 	}	
 }
