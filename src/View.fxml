@@ -108,7 +108,7 @@
 								<Button fx:id="btexamine" mnemonicParsing="false" text="Examine Room" />
 								<Button fx:id="btsearch" mnemonicParsing="false" text="Search Room" onAction="#searchRoom" />
 								<Button fx:id="btinventory" mnemonicParsing="false" text="Show Inventory" onAction="#showInventory" />
-								<Button fx:id="btexamineMonster" mnemonicParsing="false" text="Examine Monster" onAction="#examineMonster" />
+								<Button fx:id="btusePotion" mnemonicParsing="false" text="Use Potion" onAction="#usePotion" />
 								<Button fx:id="btattackMonster" mnemonicParsing="false" text="Attack Monster" onAction="#attackMonster" />
 							</children>
 							<padding>
