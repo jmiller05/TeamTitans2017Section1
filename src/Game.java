@@ -28,7 +28,6 @@ public class Game extends Application
 		
 		gamePlayer = new Player(10, 10, 1);
 		
-<<<<<<< HEAD
 		// gamePlayer.setCurrentRoom(gameController.getDungeonRooms().get(0));
 		// System.out.println(gameController.getDungeonRooms());
 		
@@ -50,13 +49,13 @@ public class Game extends Application
 		 * ); c.printStackTrace(); return; }
 		 */
 		
-		rooms = this.populateRooms();
-		populateMonsters();
-		addMonsterRooms();
+		//rooms = this.populateRooms();
+		//populateMonsters();
+		//addMonsterRooms();
 		//populateRoomItems();
-		saveItemsInRooms();
-		populatePuzzles();
-		addPuzzleRooms();
+		//saveItemsInRooms();
+		//populatePuzzles();
+		//addPuzzleRooms();
 		
 		
 		/*try{
@@ -70,10 +69,9 @@ public class Game extends Application
 			ioe.printStackTrace();
 		}*/
 		
-		Controller gameController = new Controller(gamePlayer, rooms);
-=======
+
 		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
->>>>>>> 71c4d5e391bf60c944c7fd77399f18763ae961e5
+
 		
 		loader.setController(gameController);
 		inventoryLoader.setController(gameController);
@@ -130,7 +128,6 @@ public class Game extends Application
 	public static void main(String[] args)
 	{
 		launch(args);
-<<<<<<< HEAD
 	}
 	
 	/*public static void populateRoomItems()
@@ -162,7 +159,7 @@ public class Game extends Application
 	}*/
 	
 	
-	public void populateMonsters()
+	/*public void populateMonsters()
 	{
 		Monster m0 = new Monster("Mon_00", "Toxic Wolfspider", "This spider creeps in the caves of tombs and scurries around to keep you from knowing when he is going to attack. He stands tall with 8 grey and furry legs and is as tall as a wolf. As soon as you are still he slowly creep towards you and stick you with his sharp pincers and release his toxic venom.", 5, rand.nextInt(2) + 1,null);
 		Monster m1 = new Monster("Mon_01", "Soul Serpent", "The soul stealing serpent will attack you to steal your soul with one of its bites.", 10, rand.nextInt(3) + 1,null);
@@ -493,5 +490,5 @@ public class Game extends Application
 		
 =======
 >>>>>>> 71c4d5e391bf60c944c7fd77399f18763ae961e5
-	}	
+	}	*/
 }
