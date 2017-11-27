@@ -838,6 +838,11 @@ public class Controller
 	 * @param event the pressing of Attack Monster button
 	 * @author Jesse Miller
 	 */
+	
+	private void healPlayer(ActionEvent event)
+	{
+		
+	}
 	@FXML
 	private void attackMonster(ActionEvent event)
 	{
