@@ -400,6 +400,8 @@ public class Controller
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("b"));
 			}
 			
+			btnnorth.setDisable(true);
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -500,6 +502,8 @@ public class Controller
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("b"));
 			}
 			
+			btsouth.setDisable(true);
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
@@ -597,6 +601,8 @@ public class Controller
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("b"));
 			}
+			
+			btnnortheast.setDisable(true);
 			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
@@ -1098,6 +1104,8 @@ public class Controller
 		
 		if(((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).isSolved())
 		{
+			btwest.setDisable(true);
+			
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
