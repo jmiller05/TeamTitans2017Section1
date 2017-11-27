@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Player extends Entity
+public class Player extends Entity implements Serializable
 {
 	/**
 	 * the player's current room
@@ -17,7 +18,7 @@ public class Player extends Entity
 	 */
 	//private ArrayList<Item> inventory;
 	
-	private ObservableList<Item> inventory;
+	transient ObservableList<Item> inventory;
 	
 	
 	/**

@@ -692,6 +692,11 @@ public class Controller
 			if(potion.isFull())
 			{
 				potion.useItem();
+				text.appendText("\n" + "You feel rejuvinated!" + "\n");
+			}
+			if(!potion.isFull())
+			{
+				text.appendText("\n" + "This bottle is empty!");
 			}
 		}
 	}
@@ -771,14 +776,17 @@ public class Controller
 		boolean wellOfLife = false;
 		index = player.getCurrentRoom().getSearchResultIndex();
 		
-		System.out.println(player.getCurrentRoom().getSearchResults().size());
+		//System.out.println(player.getCurrentRoom().getSearchResults().size());
 		System.out.println(index);
-		
+		//System.out.println(player.getCurrentRoom().getItemList().size());
 		//String searchResultText = "\n" + "\n" + player.getCurrentRoom().getSearchResult(index);
 		
 		//text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
 		
-		if(player.getCurrentRoom().hasItem() && player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("well of life") && index < player.getCurrentRoom().getItemList().size())
+		if(player.getCurrentRoom().hasItem()
+				&& index < player.getCurrentRoom().getItemList().size()
+				&& player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("well of life"))
+				
 		{
 			wellOfLife = true;
 		}
