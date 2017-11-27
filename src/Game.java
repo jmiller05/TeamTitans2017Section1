@@ -474,10 +474,12 @@ public class Game extends Application
 		roomAL.get(20).addItem(1,new Weapon(4, "Tungsteel Sword", "A sword forged from tungsteel", 3));
 		roomAL.get(20).addItem(2,new Artifact(12, "Dirty Key", "A dirty key"));
 		roomAL.get(20).addSearchResult(0, "You walk over to the medicine bag and start looking through it finding a bottle with a glowing red liquid");
-		roomAL.get(20).addSearchResult(1, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
-		roomAL.get(20).addSearchResult(2, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
-		roomAL.get(20).addSearchResult(3, "You pickup the Tungsteel Sword");
-		roomAL.get(20).addSearchResult(4, "You grab the Dirty Key");
+		roomAL.get(20).addSearchResult(1, "You pickup the Tungsteel Sword");
+		roomAL.get(20).addSearchResult(2, "You grab the Dirty Key");
+		roomAL.get(20).addSearchResult(3, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
+		roomAL.get(20).addSearchResult(4, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
+		
+		
 		
 		
 		TorchPuzzle torchPuzzle = new TorchPuzzle("0","Torch","Pick the torch in room 4 in order to enter and navigate room 6","It's too dark to see anything, it might help if you had some light",roomAL.get(6).getEastExit());

@@ -26,7 +26,7 @@ import javafx.util.Duration;
 public class Controller
 {
 	
-	Item potion;
+	PotionBottle potion;
 	Game game = new Game();
 	
 	/**
@@ -360,7 +360,7 @@ public class Controller
 		if(player.getCurrentRoom() == null)
 		{
 			//assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(0));
+			player.setCurrentRoom(dungeonRooms.get(20));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -684,6 +684,18 @@ public class Controller
 		inventoryStage.show();	
 	}
 	
+	@FXML
+	private void usePotion(ActionEvent event)
+	{
+		if(player.getInventory().contains(potion))
+		{
+			if(potion.isFull())
+			{
+				potion.useItem();
+			}
+		}
+	}
+	
 	/**
 	 * Checks if there is a monster in the player's current room, and 
 	 * if there is, prints the monster's description.
@@ -759,6 +771,9 @@ public class Controller
 		boolean wellOfLife = false;
 		index = player.getCurrentRoom().getSearchResultIndex();
 		
+		System.out.println(player.getCurrentRoom().getSearchResults().size());
+		System.out.println(index);
+		
 		//String searchResultText = "\n" + "\n" + player.getCurrentRoom().getSearchResult(index);
 		
 		//text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
@@ -813,8 +828,8 @@ public class Controller
 				if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
 				if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("potion bottle"))
 				{
-					((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);
-					potion=player.getCurrentRoom().getItem(index);
+					//((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);
+					potion=(PotionBottle)player.getCurrentRoom().getItem(index);
 				}
 				player.pickupItem(index);
 			}

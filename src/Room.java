@@ -180,7 +180,14 @@ public class Room implements Serializable
 	{
 		Random resultRandomizer = new Random();
 		int searchResultIndex;
-		if(searchResults != null){searchResultIndex = resultRandomizer.nextInt(searchResults.size());}
+		if(searchResults != null)
+		{
+			//System.out.println(searchResults.size());
+			searchResultIndex = resultRandomizer.nextInt(searchResults.size());
+			//System.out.println(searchResultIndex);
+			
+			
+		}
 		else{searchResultIndex = 0;}
 		return searchResultIndex;
 	}
