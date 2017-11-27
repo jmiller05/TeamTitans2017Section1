@@ -100,9 +100,9 @@
 				</FlowPane>
 			</right>
 			<bottom>
-				<VBox prefHeight="214.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+				<VBox prefHeight="214.0" prefWidth="800.0" BorderPane.alignment="CENTER">
 					<children>
-						<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+						<HBox alignment="CENTER" prefHeight="100.0" prefWidth="300.0"
 							spacing="10.0">
 							<children>
 								<Button fx:id="btexamine" mnemonicParsing="false" text="Examine Room" />
