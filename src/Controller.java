@@ -149,7 +149,6 @@ public class Controller
 	Button btsouthwest; 
 	
 	
-	
 	/**
 	 * TableView which displays the players inventory
 	 */
@@ -378,7 +377,7 @@ public class Controller
 		health.progressProperty().addListener(new ProgressBarStyler(health));	
 		
 	}
-	
+
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
@@ -828,7 +827,7 @@ public class Controller
 			player.getCurrentRoom().removeSearchResult(index);
 		}
 	}
-	
+
 	/**
 	 * Checks if there is a monster in the player's current room, and if there is,
 	 * the player attacks the monster with their current damage. In return, the monster
@@ -869,10 +868,10 @@ public class Controller
 					text.appendText("\n" + player.winFight());
 					Item itemDropped = monsterArray.get(i).getItemDropped();
 					if (itemDropped != null) {
-						text.appendText("/n" + "Monster has dropped" + itemDropped.getItemDescription());
+						text.appendText("\n" + "Monster has dropped" + itemDropped.getItemDescription());
 						player.getInventory().add(itemDropped);
 					} else {
-						text.appendText("/n" + "Nothing can be found on monster");
+						text.appendText("\n" + "Nothing can be found on monster");
 					}
 				
 					monsterArray.remove(i);
