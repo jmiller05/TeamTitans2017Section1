@@ -361,7 +361,7 @@ public class Controller
 		if(player.getCurrentRoom() == null)
 		{
 			//assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(24));
+			player.setCurrentRoom(dungeonRooms.get(0));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -567,6 +567,18 @@ public class Controller
 					text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
 				}
 			}
+			else if(player.getCurrentRoom().getWestExit().isLocked())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
+			}
+			else
+			{
+				player.changeRoom(player.getCurrentRoom().getWestExit());
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
+				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+				checkValidExits();
+				triggerMonsterEncounter();
+			}
 		}
 		else if(player.getCurrentRoom().getWestExit().isLocked())
 		{
@@ -745,17 +757,70 @@ public class Controller
 		}*/
 		
 		int index;
+		boolean wellOfLife = false;
 		index = player.getCurrentRoom().getSearchResultIndex();
-		text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
+		
+		//String searchResultText = "\n" + "\n" + player.getCurrentRoom().getSearchResult(index);
+		
+		//text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
+		
+		if(player.getCurrentRoom().hasItem() && player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("well of life") && index < player.getCurrentRoom().getItemList().size())
+		{
+			wellOfLife = true;
+		}
+		else
+		{
+			text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
+		}
 		
 		
 		
 		if(player.getCurrentRoom().hasItem() && index < player.getCurrentRoom().getItemList().size())
 		{
-			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
-			if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("potion bottle")){((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);potion=player.getCurrentRoom().getItem(index);}
+			
+			if(wellOfLife)
+			{
+				if(potion != null && !((PotionBottle)potion).isFull())
+				{
+					((PotionBottle)player.getInventory().get(player.getInventory().indexOf(potion))).fillBottle();
+					try
+					{
+						player.restoreHealth(player.getMaxHealth()-player.getHealth());
+					} catch (InvalidHealthException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					text.appendText("\n" + "\n" + "You lean down and take a drink of the glowing liquid and you can feel yourself become reinvigorated, even your wounds heal instantly. You decide it would be a good idea to take some of this liquid in your bottle and you fill up the bottle");
+				}
+				else
+				{
+					try
+					{
+						player.restoreHealth(player.getMaxHealth()-player.getHealth());
+					} catch (InvalidHealthException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					text.appendText("\n" + "\n" + "You lean down and take a drink of the glowing liquid and you can feel yourself become reinvigorated, even your wounds heal instantly.");
+				}
+				
+				
+			}
+			else
+			{
+				
+				if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("map")){((Map)player.getCurrentRoom().getItem(index)).useItem();}
+				if(player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("potion bottle"))
+				{
+					((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);
+					potion=player.getCurrentRoom().getItem(index);
+				}
+				player.pickupItem(index);
+			}
 			//text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
-			player.pickupItem(index);
+			
 			
 		}
 		else if(player.getCurrentRoom().getSearchResults() != null)
