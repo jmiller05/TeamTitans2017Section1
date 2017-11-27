@@ -364,10 +364,6 @@ public class Controller
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setTorch(dungeonRooms.get(4).getItem(0));
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setPlayer(player);
 		
-		//((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setStage(runeStage);
-		
-		
-		
 		if(player.getCurrentRoom() == null)
 		{
 			//assignMapImages();

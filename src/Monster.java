@@ -40,6 +40,9 @@ public class Monster extends Entity implements Serializable
 
 	private Item itemDropped;
 	
+	private int lowerDamage;
+	private int higherDamage;
+	
 	public Monster(String ID, String name, String desc, int health, int damage, Item itemDropped)
 	{
 		super(health, damage);
@@ -103,6 +106,26 @@ public class Monster extends Entity implements Serializable
 	{
 		rand = new Random();
 		this.randomIndex = rand.nextInt(location.size());
+	}
+	
+	public void setDamageRange(int lowerBound, int upperBound)
+	{
+		this.lowerDamage = lowerBound;
+		this.higherDamage = upperBound;
+	}
+	
+	@Override
+	public int getDamage()
+	{
+		
+		
+		Random rand = new Random();
+
+	    // nextInt is normally exclusive of the top value,
+	    // so add 1 to make it inclusive
+	    int randomNum = rand.nextInt((higherDamage - lowerDamage) + 1) + lowerDamage;
+	    
+	    return randomNum;
 	}
 	
 	

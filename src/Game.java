@@ -82,8 +82,8 @@ public class Game extends Application
 		addPuzzleRooms();
 		
 		
-		try{
-			FileOutputStream fos= new FileOutputStream("Monsters.dat");
+		/*try{
+			FileOutputStream fos = new FileOutputStream("Monsters.dat");
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 			oos.writeObject(monsterArray);
 			oos.close();
@@ -91,7 +91,7 @@ public class Game extends Application
 			fos.close();
 		}catch(IOException ioe){
 			ioe.printStackTrace();
-		}
+		}*/
 		
 		Controller gameController = new Controller(gamePlayer, rooms);
 		
@@ -229,6 +229,15 @@ public class Game extends Application
 		Monster m5 = new Monster("Mon_05", "Disemboweled Mummy", "This mummy is stands at an 8 foot towering height, is covered in cobwebs, and smells of road kill. He will chase you down and reach for any limb he can get so he can take your organs and feel alive once again.", 30, rand.nextInt(4) + 1, new Armor(4,"Plate Armor", "Armor forged from steel", 80));		
 		Monster m6 = new Monster("Mon_06", "The Insane Witch", "This witch will cast a spell on you and put you in another room. Her skin is a wrinkly as balled up piece of paper, she has long white hair.", 40, rand.nextInt(5) + 1, new Weapon(4, "Tungsteel Sword", "A sword forged from tungsteel", 3));		
 		Monster m7 = new Monster("Mon_07", "Ballistic Beast", "This beast you will face is 7 foot tall, muscular, and very hairy. He will fight till the death with his large hands and sharp claws. His favorite move is ripping your heart from your chest and hearing it beat before you fall to your death.", 60, rand.nextInt(5) + 2,null);
+		
+		m0.setDamageRange(1,2);
+		m1.setDamageRange(1,3);
+		m2.setDamageRange(1,4);
+		m3.setDamageRange(1,4);
+		m4.setDamageRange(1,4);
+		m5.setDamageRange(1,4);
+		m6.setDamageRange(1,5);
+		m7.setDamageRange(2,6);
 		
 		monsterArray.add(m0); monsterArray.add(m1); monsterArray.add(m2); monsterArray.add(m3); 
 		monsterArray.add(m4); monsterArray.add(m5); monsterArray.add(m6); monsterArray.add(m7);
