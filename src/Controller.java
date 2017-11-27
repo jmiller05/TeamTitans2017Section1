@@ -386,7 +386,6 @@ public class Controller
 		//mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 		//checkValidExits();
 		
-		torchesPuzzleStage.show();
 		
 		if(player.getCurrentRoom().getNorthExit().isStairCase())
 		{
@@ -962,22 +961,50 @@ public class Controller
 	@FXML
 	private void lightFirstTorch(ActionEvent event)
 	{
-		firstTorchImage.setOpacity(1);
-		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightFirstTorch();
+		if(((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).firstTorchIsLit())
+		{
+			firstTorchImage.setOpacity(0.5);
+			((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).unlightFirstTorch();
+		}
+		else
+		{
+			firstTorchImage.setOpacity(1);
+			((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightFirstTorch();
+		}
 	}
 	
 	@FXML
 	private void lightSecondTorch(ActionEvent event)
 	{
-		secondTorchImage.setOpacity(1);
-		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightSecondTorch();
+		
+		if(((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).secondTorchIsLit())
+		{
+			secondTorchImage.setOpacity(0.5);
+			((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).unlightSecondTorch();
+		}
+		else
+		{
+			secondTorchImage.setOpacity(1);
+			((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightSecondTorch();
+		}
+		
+		
 	}
 	
 	@FXML
 	private void lightThirdTorch(ActionEvent event)
 	{
-		thirdTorchImage.setOpacity(1);
-		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightThirdTorch();
+		
+		if(((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).thirdTorchIsLit())
+		{
+			thirdTorchImage.setOpacity(0.5);
+			((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).unlightThirdTorch();
+		}
+		else
+		{
+			thirdTorchImage.setOpacity(1);
+			((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).lightThirdTorch();
+		}
 	}
 	
 	@FXML

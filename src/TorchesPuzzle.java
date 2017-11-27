@@ -63,6 +63,36 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 	{
 		thirdTorchLit = true;
 	}
+	
+	public void unlightFirstTorch()
+	{
+		firstTorchLit = false;
+	}
+	
+	public void unlightSecondTorch()
+	{
+		secondTorchLit = false;
+	}
+	
+	public void unlightThirdTorch()
+	{
+		thirdTorchLit = false;
+	}
+	
+	public boolean firstTorchIsLit()
+	{
+		return firstTorchLit;
+	}
+	
+	public boolean secondTorchIsLit()
+	{
+		return secondTorchLit;
+	}
+	
+	public boolean thirdTorchIsLit()
+	{
+		return thirdTorchLit;
+	}
 
 	/* (non-Javadoc)
 	 * @see PuzzleInterface#triggerPuzzle()
