@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
+
 /**
  * 
  */
@@ -63,6 +65,7 @@ public class PotionBottle extends Item implements ArtifactInterface
 		//map.setVisible(true);
 		try
 		{
+			System.out.println("****** " + player.getMaxHealth() +" " +  player.getHealth());
 			player.restoreHealth(player.getMaxHealth()-player.getHealth());
 			this.emptyBottle();
 			

@@ -470,7 +470,7 @@ public class Game extends Application
 		roomAL.get(18).addItem(0,new Artifact(11,"Golden Key", "A key casted from gold"));
 		roomAL.get(18).addSearchResult(0, "You grab the Golden Key");
 		
-		roomAL.get(20).addItem(0,new PotionBottle(10,"Potion Bottle","Restores any lost HP"));
+		roomAL.get(20).addItem(0,new PotionBottle(10,"Potion Bottle","Restores any lost HP", gamePlayer));
 		roomAL.get(20).addItem(1,new Weapon(4, "Tungsteel Sword", "A sword forged from tungsteel", 3));
 		roomAL.get(20).addItem(2,new Artifact(12, "Dirty Key", "A dirty key"));
 		roomAL.get(20).addSearchResult(0, "You walk over to the medicine bag and start looking through it finding a bottle with a glowing red liquid");
