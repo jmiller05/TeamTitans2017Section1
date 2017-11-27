@@ -17,7 +17,10 @@ import javafx.stage.Stage;
 public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 {
 	private Exit torchesDoor;
-	public Stage torchesPuzzleStage;
+	private boolean firstTorchLit;
+	private boolean secondTorchLit;
+	private boolean thirdTorchLit;
+	
 	
 
 
@@ -31,13 +34,6 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 	{
 		super(ID, name, desc, hi);
 		// TODO Auto-generated constructor stub
-		
-		VBox anchor = new VBox();
-		
-		Scene scene = new Scene(anchor, 1300, 700);
-		Stage torchesPuzzleStage = new Stage();
-		torchesPuzzleStage.setTitle("TorchesPuzzle"); // Set the stage title
-		torchesPuzzleStage.setScene(scene); // Place the scene in the stage
 	}
 	
 	public void setTorchesDoor(Exit torchesDoor)
@@ -52,6 +48,21 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 		torchesDoor.lockExit();
 		torchesDoor.setLockDescription(lockDescription);
 	}
+	
+	public void lightFirstTorch()
+	{
+		firstTorchLit = true;
+	}
+	
+	public void lightSecondTorch()
+	{
+		secondTorchLit = true;
+	}
+	
+	public void lightThirdTorch()
+	{
+		thirdTorchLit = true;
+	}
 
 	/* (non-Javadoc)
 	 * @see PuzzleInterface#triggerPuzzle()
@@ -59,7 +70,7 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 	@Override
 	public void triggerPuzzle()
 	{
-		torchesPuzzleStage.show();
+		
 	}
 
 	/* (non-Javadoc)
@@ -69,8 +80,11 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 	public void solvePuzzle()
 	{
 		// TODO Auto-generated method stub
-		this.isSolved = true;
-		torchesDoor.unlockExit();
+		if(firstTorchLit && !secondTorchLit && thirdTorchLit)
+		{
+			this.isSolved = true;
+			torchesDoor.unlockExit();
+		}
 		
 	}
 	
