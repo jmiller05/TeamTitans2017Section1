@@ -20,6 +20,11 @@
     -fx-background-color: text-area-background ;
 }
 
+#text
+{
+	-fx-font-size: 20;
+}
+
 #health .bar
 {
 	-fx-padding: 1px; 
@@ -167,4 +172,9 @@
 #thirdTorch
 {
 	-fx-background-color: transparent;
+}
+
+#solveTorchPuzzle
+{          
+    -fx-font-size: 18;
 }
