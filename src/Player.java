@@ -11,6 +11,7 @@ public class Player extends Entity
 	private Room currentRoom;
 	
 	private Weapon equippedWeapon;
+	private Armor equippedArmor;
 	
 	/**
 	 * the player's inventory
@@ -93,6 +94,10 @@ public class Player extends Entity
 		{
 			this.equipWeapon((Weapon)item);
 		}
+		else if(item.getClass().getName().equalsIgnoreCase("armor"))
+		{
+			this.equipArmor((Armor)item);
+		}
 		//if(item.getClass().getName().equalsIgnoreCase("weapon") && ((Weapon)item).getDamage() < this.getDamage()){this.equipWeapon((Weapon)item);}
 	}
 	
@@ -115,6 +120,20 @@ public class Player extends Entity
 			this.equippedWeapon = weapon;
 		}	
 		this.setDamage(equippedWeapon.getDamage());
+	}
+	
+	public void equipArmor(Armor armor)
+	{
+		if(equippedArmor != null && armor.getArmor() > equippedArmor.getArmor())
+		{
+			this.equippedArmor = armor;
+		}
+		else if(equippedArmor == null)
+		{
+			this.equippedArmor = armor;
+		}	
+		this.setMaxHealth(equippedArmor.getArmor());
+		healthPercentage.set((double)health/maxHealth);
 	}
 	
 	/**

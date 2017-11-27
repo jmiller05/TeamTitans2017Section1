@@ -348,7 +348,7 @@ public class Controller
 	protected void initialize()
 	{	
 		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
-		mapView.setVisible(true);
+		mapView.setVisible(false);
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setText(text);
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setTorch(dungeonRooms.get(4).getItem(0));
 		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setPlayer(player);
@@ -360,7 +360,7 @@ public class Controller
 		if(player.getCurrentRoom() == null)
 		{
 			//assignMapImages();
-			player.setCurrentRoom(dungeonRooms.get(20));
+			player.setCurrentRoom(dungeonRooms.get(0));
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -830,6 +830,8 @@ public class Controller
 				{
 					//((PotionBottle)player.getCurrentRoom().getItem(index)).setPlayer(player);
 					potion=(PotionBottle)player.getCurrentRoom().getItem(index);
+					potion.setPlayer(player);
+					
 				}
 				player.pickupItem(index);
 			}
