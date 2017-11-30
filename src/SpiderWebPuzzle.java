@@ -1,6 +1,3 @@
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javafx.scene.control.TextArea;
 
 /**
@@ -11,13 +8,16 @@ import javafx.scene.control.TextArea;
  * @author Evan
  *
  */
-public class TorchPuzzle extends Puzzle implements PuzzleInterface
+public class SpiderWebPuzzle extends Puzzle implements PuzzleInterface
 {
 	private Exit lockedExit;
-	private Item torch;
+	private Item ironKey;
 	private TextArea text;
 	private String solvedMessage;
 	private Player player;
+	private boolean firstWebDestroyed;
+	private boolean secondWebDestroyed;
+	private boolean thirdWebDestroyed;
 	
 	/**
 	 * @param ID
@@ -25,17 +25,23 @@ public class TorchPuzzle extends Puzzle implements PuzzleInterface
 	 * @param desc
 	 * @param hi
 	 */
-	public TorchPuzzle(String ID, String name, String desc, String hi)
+	public SpiderWebPuzzle(String ID, String name, String desc, String hi)
 	{
 		super(ID, name, desc, hi);
+		firstWebDestroyed = false;
+		secondWebDestroyed = false;
+		thirdWebDestroyed = false;
 		// TODO Auto-generated constructor stub
 	}
 	
-	public TorchPuzzle(String ID, String name, String desc, String hi, Exit exit)
+	public SpiderWebPuzzle(String ID, String name, String desc, String hi, Exit exit)
 	{
 		super(ID, name, desc, hi);
 		this.lockedExit = exit;
 		lockedExit.lockExit();
+		firstWebDestroyed = false;
+		secondWebDestroyed = false;
+		thirdWebDestroyed = false;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -55,14 +61,14 @@ public class TorchPuzzle extends Puzzle implements PuzzleInterface
 		lockedExit.setLockDescription(lockedDescrption);
 	}
 
-	public Item getTorch()
+	public Item getIronKey()
 	{
-		return torch;
+		return ironKey;
 	}
 
-	public void setTorch(Item torch)
+	public void setIronKey(Item ironKey)
 	{
-		this.torch = torch;
+		this.ironKey = ironKey;
 	}
 
 	public TextArea getText()
@@ -102,7 +108,31 @@ public class TorchPuzzle extends Puzzle implements PuzzleInterface
 	public void triggerPuzzle()
 	{
 		// TODO Auto-generated method stub
-		solvePuzzle();
+		//solvePuzzle();
+		
+		System.out.println("Spider Web Puzzle Triggered!");
+		if(!firstWebDestroyed)
+		{
+			firstWebDestroyed = true;
+			text.appendText("\n" + "\n" + "You start clearing some of the spiderwebs");
+		}
+		else if(!secondWebDestroyed)
+		{
+			secondWebDestroyed = true;
+			text.appendText("\n" + "\n" + "You clear more of the spiderwebs");
+		}
+		else if(!thirdWebDestroyed)
+		{
+			thirdWebDestroyed = true;
+			text.appendText("\n" + "\n" + "after destroying the spider webs an iron key falls out!");
+			player.getInventory().add(ironKey);
+			this.setTriggerType("navigation");
+			this.setAutoNavigate(true);
+		}
+		else if(player.getInventory().contains(ironKey))
+		{
+			solvePuzzle();
+		}
 		
 	}
 
@@ -113,10 +143,11 @@ public class TorchPuzzle extends Puzzle implements PuzzleInterface
 	public void solvePuzzle()
 	{
 		// TODO Auto-generated method stub
-		if(player.getInventory().contains(torch))
+		if(player.getInventory().contains(ironKey))
 		{
 			lockedExit.unlockExit();
 			text.appendText(solvedMessage);
+			player.getInventory().remove(ironKey);
 			this.isSolved=true;
 		}
 	}

@@ -118,107 +118,35 @@
 							<children>
 								<Button fx:id="btnnorthwest" alignment="CENTER"
 									prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50"
-									minHeight="50" maxHeight="50" text="" onAction="#moveNorthWest">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/northWestButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									minHeight="50" maxHeight="50" text="" onAction="#moveNorthWest" />
 								<Button fx:id="btnnorth" alignment="CENTER" prefWidth="50"
 									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
 									maxHeight="50" mnemonicParsing="false" text=""
-									GridPane.columnIndex="1" onAction="#moveNorth">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/northButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									GridPane.columnIndex="1" onAction="#moveNorth"/>
 								<Button fx:id="btnnortheast" alignment="CENTER"
 									prefWidth="50" minWidth="50" maxWidth="50" prefHeight="50"
 									minHeight="50" maxHeight="50" mnemonicParsing="false" text=""
-									GridPane.columnIndex="2" onAction="#moveNorthEast">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/northEastButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									GridPane.columnIndex="2" onAction="#moveNorthEast"/>
 								<Button fx:id="btwest" alignment="CENTER" prefWidth="50"
 									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
 									maxHeight="50" mnemonicParsing="false" text=""
-									GridPane.rowIndex="1" onAction="#moveWest">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/westButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									GridPane.rowIndex="1" onAction="#moveWest"/>
 								<Button fx:id="btsouthwest" alignment="CENTER" prefWidth="50"
 									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
 									maxHeight="50" mnemonicParsing="false" text=""
-									GridPane.rowIndex="2" onAction="#moveSouthWest">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/southWestButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									GridPane.rowIndex="2" onAction="#moveSouthWest"/>
 								<Button fx:id="btsouth" alignment="CENTER" prefWidth="50"
 									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
 									maxHeight="50" text="" GridPane.columnIndex="1"
-									GridPane.rowIndex="2" onAction="#moveSouth">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/southButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									GridPane.rowIndex="2" onAction="#moveSouth"/>
 								<Button fx:id="btsoutheast" alignment="CENTER" prefWidth="50"
 									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
 									maxHeight="50" text="" GridPane.columnIndex="2"
-									GridPane.rowIndex="2" onAction="#moveSouthEast">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/southEastButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									GridPane.rowIndex="2" onAction="#moveSouthEast"/>
 								<Button fx:id="bteast" alignment="CENTER" prefWidth="50"
 									minWidth="50" maxWidth="50" prefHeight="50" minHeight="50"
 									maxHeight="50" text="" GridPane.columnIndex="2"
-									GridPane.rowIndex="1" onAction="#moveEast">
-									<graphic>
-										<ImageView fitHeight="50" fitWidth="50"
-											pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@res/eastButton.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
+									GridPane.rowIndex="1" onAction="#moveEast"/>
 							</children>
 							<padding>
 								<Insets bottom="15.0" left="10.0" right="10.0" top="10.0" />

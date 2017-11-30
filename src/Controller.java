@@ -22,6 +22,7 @@ public class Controller
 	
 	PotionBottle potion;
 	Game game = new Game();
+	Timer timer;
 	
 	/**
 	 * the Player attribute of the Controller
@@ -57,12 +58,14 @@ public class Controller
 	/**
 	 * stage variable to show the stage for the rune puzzle
 	 */
-	private Stage runeStage;
+	//private Stage runeStage;
 	
 	/**
 	 * stage variable to show the stage for the torches puzzle
 	 */
 	private Stage torchesPuzzleStage;
+	
+	private Stage puzzleStage;
 	
 	private Stage gameOverStage;
 	
@@ -228,6 +231,11 @@ public class Controller
 		this.encounterStage = stage;
 	}
 	
+	public void setPuzzleStage(Stage stage)
+	{
+		this.puzzleStage = stage;
+	}
+	
 	public Stage getTorchesPuzzleStage()
 	{
 		return torchesPuzzleStage;
@@ -283,7 +291,8 @@ public class Controller
 		
 		monsterArray.get(4).setHealth(25);
 		monsterArray.get(4).setMaxHealth(25);
-		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);		
+		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);	
+		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setGoldKey(monsterArray.get(4).getItemDropped());
 		
 		monsterArray.get(5).setHealth(30);
 		monsterArray.get(5).setMaxHealth(30);
@@ -321,9 +330,26 @@ public class Controller
 		btusePotion.setDisable(true);
 		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
 		mapView.setVisible(false);
-		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setText(text);
-		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setTorch(dungeonRooms.get(4).getItem(0));
-		((TorchPuzzle)dungeonRooms.get(6).getPuzzle()).setPlayer(player);
+		((TorchPuzzle)dungeonRooms.get(3).getPuzzle()).setText(text);
+		((TorchPuzzle)dungeonRooms.get(3).getPuzzle()).setPlayer(player);
+		((SpiderWebPuzzle)dungeonRooms.get(5).getPuzzle()).setText(text);
+		((SpiderWebPuzzle)dungeonRooms.get(5).getPuzzle()).setPlayer(player);
+		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setText(text);
+		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setPlayer(player);
+		//((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setRuneStage(runeStage);
+		if(puzzleStage == null)
+		{
+			puzzleStage = new Stage();
+		}
+		
+		
+		((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setStage(puzzleStage);
+		((RunePuzzle)dungeonRooms.get(15).getPuzzle()).initializeRunePuzzle(this,"RuneStage.fxml");
+		
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).setStage(puzzleStage);
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).initializeRunePuzzle(this,"TorchesPuzzle.fxml");
+		
+		
 		
 		if(player.getCurrentRoom() == null)
 		{
@@ -341,7 +367,49 @@ public class Controller
 	@FXML
 	private void moveNorth(ActionEvent event)
 	{
-		if(player.getCurrentRoom().getNorthExit().isStairCase())
+		if(player.getCurrentRoom().getNorthExit().isLocked())
+		{
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					System.out.println("Puzzle Triggered!");
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getNorthExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
+			}
+		}
+		else if(player.getCurrentRoom().getNorthExit().isStairCase())
 		{
 			if(player.getCurrentRoom().getNorthExit().getRoomA() == player.getCurrentRoom())
 			{
@@ -352,9 +420,8 @@ public class Controller
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getStairDescription("b"));
 			}
 			
-			btnnorth.setDisable(true);
-			
-			Timer timer = new Timer();
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
 				@Override
@@ -367,76 +434,65 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
-					triggerPuzzle();
 				}
-			}, 2500);
+			}, 1500);
 		}
 		else
-		{	
-			if(player.getCurrentRoom().hasPuzzle())
-			{
-				if(player.getCurrentRoom().getPuzzle().getPuzzleName().equalsIgnoreCase("runes"))
-				{
-					if(player.getCurrentRoom().getPuzzle().isSolved)
-					{
-						player.changeRoom(player.getCurrentRoom().getNorthExit());
-						text.setText(player.getCurrentRoom().getRoomDescription());
-						mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-						checkValidExits();
-						triggerMonsterEncounter();
-					}
-					else
-					{
-						runeStage.show();
-					}
-				}
-				else if(player.getCurrentRoom().getPuzzle().getPuzzleName().equalsIgnoreCase("torches"))
-				{
-					if(player.getCurrentRoom().getPuzzle().isSolved)
-					{
-						player.changeRoom(player.getCurrentRoom().getNorthExit());
-						text.setText(player.getCurrentRoom().getRoomDescription());
-						mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-						checkValidExits();
-						triggerMonsterEncounter();
-					}
-					else
-					{
-						torchesPuzzleStage.show();
-					}
-				}
-				else if(player.getCurrentRoom().getNorthExit().isLocked())
-				{
-					text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
-				}
-				else
-				{
-					player.changeRoom(player.getCurrentRoom().getNorthExit());
-					text.setText(player.getCurrentRoom().getRoomDescription());
-					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-					checkValidExits();
-					triggerMonsterEncounter();
-				}			
-			}
-			else if(player.getCurrentRoom().getNorthExit().isLocked())
-			{
-				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthExit().getLockDescription());
-			}
-			else
-			{
-				player.changeRoom(player.getCurrentRoom().getNorthExit());
-				text.setText(player.getCurrentRoom().getRoomDescription());
-				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-				checkValidExits();
-				triggerMonsterEncounter();
-			}
+		{
+			player.changeRoom(player.getCurrentRoom().getNorthExit());
+			text.setText(player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
 		}
 	}
 	
 	@FXML
 	private void moveSouth(ActionEvent event)
 	{		
-		if(player.getCurrentRoom().getSouthExit().isStairCase())
+		if(player.getCurrentRoom().getSouthExit().isLocked())
+		{	
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					System.out.println("Puzzle Triggered!");
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getSouthExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getLockDescription());
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getLockDescription());
+			}
+		}
+		else if(player.getCurrentRoom().getSouthExit().isStairCase())
 		{
 			if(player.getCurrentRoom().getSouthExit().getRoomA() == player.getCurrentRoom())
 			{
@@ -447,9 +503,8 @@ public class Controller
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthExit().getStairDescription("b"));
 			}
 			
-			btsouth.setDisable(true);
-			
-			Timer timer = new Timer();
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
 				@Override
@@ -462,9 +517,8 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
-					triggerPuzzle();
 				}
-			}, 2500);
+			}, 1500);
 		}
 		else
 		{
@@ -473,50 +527,164 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
-			triggerPuzzle();
 		}
 	}
 	
 	@FXML
 	private void moveEast(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getEastExit());
-		text.setText(player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
-		triggerMonsterEncounter();
-		triggerPuzzle();
+		if(player.getCurrentRoom().getEastExit().isLocked())
+		{
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					System.out.println("Puzzle Triggered!");
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getEastExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getEastExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getEastExit().getLockDescription());
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getEastExit().getLockDescription());
+			}
+		}
+		else if(player.getCurrentRoom().getEastExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getEastExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getEastExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getEastExit().getStairDescription("b"));
+			}
+			
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getEastExit());
+					text.setText(player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 1500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getEastExit());
+			text.setText(player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
+		}
 	}
 	
 	@FXML
 	private void moveWest(ActionEvent event)
 	{
-		if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).hasPuzzle())
+		if(player.getCurrentRoom().getWestExit().isLocked())
 		{
-			if(player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().getPuzzleName().equalsIgnoreCase("torch"))
+			if(player.getCurrentRoom().hasPuzzle())
 			{
-				solveTorchPuzzle();
-				if(!player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle().isSolved)
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					System.out.println("Puzzle Triggered!");
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getWestExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
 				{
 					text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
 				}
 			}
-			else if(player.getCurrentRoom().getWestExit().isLocked())
+			else
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
 			}
+		}
+		else if(player.getCurrentRoom().getWestExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getWestExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getStairDescription("a"));
+			}
 			else
 			{
-				player.changeRoom(player.getCurrentRoom().getWestExit());
-				text.setText(player.getCurrentRoom().getRoomDescription());
-				mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-				checkValidExits();
-				triggerMonsterEncounter();
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getStairDescription("b"));
 			}
-		}
-		else if(player.getCurrentRoom().getWestExit().isLocked())
-		{
-			text.appendText("\n" + "\n" + player.getCurrentRoom().getWestExit().getLockDescription());
+			
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getWestExit());
+					text.setText(player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 1500);
 		}
 		else
 		{
@@ -531,7 +699,50 @@ public class Controller
 	@FXML
 	private void moveNorthEast(ActionEvent event)
 	{
-		if(player.getCurrentRoom().getNorthEastExit().isStairCase())
+		if(player.getCurrentRoom().getNorthEastExit().isLocked())
+		{
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					System.out.println("Puzzle Triggered!");
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getNorthEastExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getLockDescription());
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getLockDescription());
+			}
+			
+		}
+		else if(player.getCurrentRoom().getNorthEastExit().isStairCase())
 		{
 			if(player.getCurrentRoom().getNorthEastExit().getRoomA() == player.getCurrentRoom())
 			{
@@ -542,9 +753,8 @@ public class Controller
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthEastExit().getStairDescription("b"));
 			}
 			
-			btnnortheast.setDisable(true);
-			
-			Timer timer = new Timer();
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
 			timer.schedule(new TimerTask()
 			{
 				@Override
@@ -557,9 +767,8 @@ public class Controller
 					triggerMonsterEncounter();
 					timer.cancel();
 					timer.purge();
-					triggerPuzzle();
 				}
-			}, 2500);
+			}, 1500);
 		}
 		else
 		{
@@ -568,41 +777,257 @@ public class Controller
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
 			triggerMonsterEncounter();
-			triggerPuzzle();
 		}
 	}
 	
 	@FXML
 	private void moveSouthEast(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getSouthEastExit());
-		text.setText(player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
-		triggerMonsterEncounter();
-		triggerPuzzle();
+		if(player.getCurrentRoom().getSouthEastExit().isLocked())
+		{
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					System.out.println("Puzzle Triggered!");
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthEastExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getSouthEastExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthEastExit().getLockDescription());
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthEastExit().getLockDescription());
+			}
+			
+		}
+		else if(player.getCurrentRoom().getSouthEastExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getSouthEastExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthEastExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthEastExit().getStairDescription("b"));
+			}
+			
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getSouthEastExit());
+					text.setText(player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 1500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getSouthEastExit());
+			text.setText(player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
+		}
 	}
 	
 	@FXML
 	private void moveNorthWest(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getNorthWestExit());
-		text.setText(player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
-		triggerMonsterEncounter();
-		triggerPuzzle();
+		if(player.getCurrentRoom().getNorthWestExit().isLocked())
+		{
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					System.out.println("Puzzle Triggered!");
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthWestExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getNorthWestExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthWestExit().getLockDescription());
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthWestExit().getLockDescription());
+			}
+		}
+		else if(player.getCurrentRoom().getNorthWestExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getNorthWestExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthWestExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getNorthWestExit().getStairDescription("b"));
+			}
+			
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getNorthWestExit());
+					text.setText(player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 1500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getNorthWestExit());
+			text.setText(player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
+		}
 	}
 	
 	@FXML
 	private void moveSouthWest(ActionEvent event)
 	{
-		player.changeRoom(player.getCurrentRoom().getSouthWestExit());
-		text.setText(player.getCurrentRoom().getRoomDescription());
-		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-		checkValidExits();
-		triggerMonsterEncounter();
-		triggerPuzzle();
+		if(player.getCurrentRoom().getSouthWestExit().isLocked())
+		{
+			if(player.getCurrentRoom().hasPuzzle())
+			{
+				if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("navigation") && !player.getCurrentRoom().getPuzzle().isSolved)
+				{
+					((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+					System.out.println("Puzzle Triggered!");
+					if(!player.getCurrentRoom().getPuzzle().isSolved)
+					{
+						text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthWestExit().getLockDescription());
+					}
+					else if(player.getCurrentRoom().getPuzzle().isAutoNavigate())
+					{
+						((Button)event.getSource()).setDisable(true);
+						timer = new Timer();
+						timer.schedule(new TimerTask()
+						{
+							@Override
+							public void run()
+							{
+								player.changeRoom(player.getCurrentRoom().getSouthWestExit());
+								text.setText(player.getCurrentRoom().getRoomDescription());
+								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+								checkValidExits();
+								triggerMonsterEncounter();
+								timer.cancel();
+								timer.purge();
+							}
+						}, 1500);
+					}
+				}
+				else
+				{
+					text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthWestExit().getLockDescription());
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthWestExit().getLockDescription());
+			}
+		}
+		else if(player.getCurrentRoom().getSouthWestExit().isStairCase())
+		{
+			if(player.getCurrentRoom().getSouthWestExit().getRoomA() == player.getCurrentRoom())
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthWestExit().getStairDescription("a"));
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSouthWestExit().getStairDescription("b"));
+			}
+			
+			((Button)event.getSource()).setDisable(true);
+			timer = new Timer();
+			timer.schedule(new TimerTask()
+			{
+				@Override
+				public void run()
+				{
+					player.changeRoom(player.getCurrentRoom().getSouthWestExit());
+					text.setText(player.getCurrentRoom().getRoomDescription());
+					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+					checkValidExits();
+					triggerMonsterEncounter();
+					timer.cancel();
+					timer.purge();
+				}
+			}, 1500);
+		}
+		else
+		{
+			player.changeRoom(player.getCurrentRoom().getSouthWestExit());
+			text.setText(player.getCurrentRoom().getRoomDescription());
+			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+			checkValidExits();
+			triggerMonsterEncounter();
+		}
 	}
 	
 	/**
@@ -684,6 +1109,18 @@ public class Controller
 		{
 			wellOfLife = true;
 		}
+		else if(player.getCurrentRoom().hasPuzzle())
+		{
+			if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("search") && !player.getCurrentRoom().getPuzzle().isSolved() )
+			{
+				((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+				System.out.println("Puzzle Triggered!");
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
+			}
+		}
 		else
 		{
 			text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
@@ -735,6 +1172,7 @@ public class Controller
 		{
 			player.getCurrentRoom().removeSearchResult(index);
 		}
+		
 	}
 	
 	/**
@@ -789,7 +1227,7 @@ public class Controller
 		}
 	}
 	
-	public void setImages()
+	/*public void setImages()
 	{
 		dungeonRooms.get(0).setMapLocationImage(new Image("res/Room_00.jpg"));
 		dungeonRooms.get(1).setMapLocationImage(new Image("res/Room_01.jpg"));
@@ -822,7 +1260,8 @@ public class Controller
 		dungeonRooms.get(28).setMapLocationImage(new Image("res/Room_28.jpg"));
 		dungeonRooms.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
 		dungeonRooms.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
-	}
+	}*/
+	
 	@FXML
 	private void insertGreenRune(ActionEvent event)
 	{
@@ -832,10 +1271,12 @@ public class Controller
 			{
 				greenRuneImage.setOpacity(1);
 				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertEmeraldRune();
+				player.getInventory().remove(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).getEmeraldRune());
 				
 				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isSapphireRuneInserted())
 				{
 					((RunePuzzle)dungeonRooms.get(15).getPuzzle()).solvePuzzle();
+					
 				}
 			}
 			else
@@ -855,6 +1296,7 @@ public class Controller
 			{
 				blueRuneImage.setOpacity(1);
 				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertSapphireRune();
+				player.getInventory().remove(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).getSapphireRune());
 				
 				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isEmeraldRuneInserted())
 				{
@@ -951,6 +1393,7 @@ public class Controller
 		
 	}
 	
+	
 	private void triggerPuzzle()
 	{
 		
@@ -990,14 +1433,14 @@ public class Controller
 					timer.cancel();
 					timer.purge();
 				}
-			}, 2500);
+			}, 1500);
 		}
 	}
 	
-	public void setRuneStage(Stage stage)
+	/*public void setRuneStage(Stage stage)
 	{
 		runeStage = stage;
-	}
+	}*/
 	
 	public void restartGame()
 	{

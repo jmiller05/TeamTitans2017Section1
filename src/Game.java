@@ -17,6 +17,7 @@ public class Game extends Application
 	public Stage		encounterStage;
 	public Stage		runeStage;
 	public Stage		torchesPuzzleStage;
+	public Stage puzzleStage;
 	public Stage		gameOverStage;
 	
 	public ArrayList<Room>					roomAL;										
@@ -34,8 +35,8 @@ public class Game extends Application
 		FXMLLoader inventoryLoader = new FXMLLoader();
 		FXMLLoader monsterEncounterLoader = new FXMLLoader();
 		FXMLLoader PuzzleLoader = new FXMLLoader();
-		FXMLLoader runeStageLoader = new FXMLLoader();
-		FXMLLoader torchesPuzzleLoader = new FXMLLoader();
+		//FXMLLoader runeStageLoader = new FXMLLoader();
+		//FXMLLoader torchesPuzzleLoader = new FXMLLoader();
 		FXMLLoader gameOverStageLoader = new FXMLLoader();
 		
 		
@@ -58,23 +59,23 @@ public class Game extends Application
 		inventoryLoader.setController(gameController);
 		monsterEncounterLoader.setController(gameController);
 		PuzzleLoader.setController(gameController);
-		runeStageLoader.setController(gameController);
+		//runeStageLoader.setController(gameController);
 		gameOverStageLoader.setController(gameController);
-		torchesPuzzleLoader.setController(gameController);
+		//torchesPuzzleLoader.setController(gameController);
 		
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
 		monsterEncounterLoader.setLocation(getClass().getResource("CombatView.fxml"));
 		PuzzleLoader.setLocation(getClass().getResource("Puzzle.fxml"));
-		runeStageLoader.setLocation(getClass().getResource("RuneStage.fxml"));
-		torchesPuzzleLoader.setLocation(getClass().getResource("TorchesPuzzle.fxml"));
+		//runeStageLoader.setLocation(getClass().getResource("RuneStage.fxml"));
+		//torchesPuzzleLoader.setLocation(getClass().getResource("TorchesPuzzle.fxml"));
 		gameOverStageLoader.setLocation(getClass().getResource("GameOver.fxml"));
 		
 		Parent root = loader.load();
 		Parent inventory = inventoryLoader.load();
 		Parent encounter = monsterEncounterLoader.load();
-		Parent runePuzzle = runeStageLoader.load();
-		Parent torchesPuzzle = torchesPuzzleLoader.load();
+		//Parent runePuzzle = runeStageLoader.load();
+		//Parent torchesPuzzle = torchesPuzzleLoader.load();
 		Parent gameOver = gameOverStageLoader.load();
 		
 		inventoryStage = new Stage();
@@ -84,23 +85,28 @@ public class Game extends Application
 		encounterStage.initModality(Modality.APPLICATION_MODAL);
 		encounterStage.setScene(new Scene(encounter, 600, 500));
 		
-		runeStage = new Stage();
-		runeStage.setScene(new Scene(runePuzzle, 600, 300));
+		//puzzleStage = new Stage();
 		
-		torchesPuzzleStage = new Stage();
-		torchesPuzzleStage.setScene(new Scene(torchesPuzzle, 700, 300));
+		//runeStage = new Stage();
+		//runeStage.setScene(new Scene(runePuzzle, 600, 300));
+		
+		//torchesPuzzleStage = new Stage();
+		//torchesPuzzleStage.setScene(new Scene(torchesPuzzle, 700, 300));
 		
 		gameOverStage = new Stage();
 		gameOverStage.setScene(new Scene(gameOver, 400, 300));
 		
 		gameController.setInventoryStage(inventoryStage);
 		gameController.setEncounterStage(encounterStage);
-		gameController.setRuneStage(runeStage);
-		gameController.setTorchesPuzzleStage(torchesPuzzleStage);
+		//gameController.setRunePuzzleStage(runeStage);
+		//gameController.setPuzzleStage(puzzleStage);
+		//gameController.setTorchesPuzzleStage(torchesPuzzleStage);
 		gameController.setGameOverStage(gameOverStage);
-		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
+		//gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
+		gameController.setMonsterArray(monsterArray);
 		gameController.setMonsterStats();
-		gameController.setImages();
+		//gameController.setImages();
+		//((RunePuzzle)gameController.getDungeonRooms().get(15).getPuzzle()).setScene(new Scene(runePuzzle, 600, 300));
 		primaryStage.setScene(new Scene(root, 1100, 800));
 		primaryStage.show();
 		
@@ -125,7 +131,16 @@ public class Game extends Application
 	 monsterArray.add(m0); monsterArray.add(m1); monsterArray.add(m2); monsterArray.add(m3); 
 	 monsterArray.add(m4); monsterArray.add(m5); monsterArray.add(m6); monsterArray.add(m7);
 	 
+	 m0.setDamageRange(1,2);
+	 m1.setDamageRange(1,3);
+	 m2.setDamageRange(1,4);
+	 m3.setDamageRange(1,4);
+	 m4.setDamageRange(1,4);
+	 m5.setDamageRange(1,4);
+	 m6.setDamageRange(1,5);
+	 m7.setDamageRange(2,6);
 	 
+	 m4.setItemDropped(new Artifact(11,"Golden Key", "A key casted from gold"));
 	 
 	 
 	 }
@@ -291,7 +306,7 @@ public class Game extends Application
 	 Room.assignExits(new Exit(35), roomAL.get(26), "north", roomAL.get(28), "south");
 	 Room.assignExits(new Exit(36), roomAL.get(29), "north", roomAL.get(30), "south");
 	 
-	 roomAL.get(0).setMapLocationImage(new Image("res/Room_00.jpg"));
+	 /*roomAL.get(0).setMapLocationImage(new Image("res/Room_00.jpg"));
 	 roomAL.get(1).setMapLocationImage(new Image("res/Room_01.jpg"));
 	 roomAL.get(2).setMapLocationImage(new Image("res/Room_02.jpg"));
 	 roomAL.get(3).setMapLocationImage(new Image("res/Room_03.jpg"));
@@ -321,7 +336,39 @@ public class Game extends Application
 	 roomAL.get(27).setMapLocationImage(new Image("res/Room_27.jpg"));
 	 roomAL.get(28).setMapLocationImage(new Image("res/Room_28.jpg"));
 	 roomAL.get(29).setMapLocationImage(new Image("res/Room_29.jpg"));
-	 roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
+	 roomAL.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));*/
+	 
+	 roomAL.get(0).setMapLocationImage(new Image("res/Room_00.png"));
+	 roomAL.get(1).setMapLocationImage(new Image("res/Room_01.png"));
+	 roomAL.get(2).setMapLocationImage(new Image("res/Room_02.png"));
+	 roomAL.get(3).setMapLocationImage(new Image("res/Room_03.png"));
+	 roomAL.get(4).setMapLocationImage(new Image("res/Room_04.png"));
+	 roomAL.get(5).setMapLocationImage(new Image("res/Room_05.png"));
+	 roomAL.get(6).setMapLocationImage(new Image("res/Room_06.png"));
+	 roomAL.get(7).setMapLocationImage(new Image("res/Room_07.png"));
+	 roomAL.get(8).setMapLocationImage(new Image("res/Room_08.png"));
+	 roomAL.get(9).setMapLocationImage(new Image("res/Room_09.png"));
+	 roomAL.get(10).setMapLocationImage(new Image("res/Room_10.png"));
+	 roomAL.get(11).setMapLocationImage(new Image("res/Room_11.png"));
+	 roomAL.get(12).setMapLocationImage(new Image("res/Room_12.png"));
+	 roomAL.get(13).setMapLocationImage(new Image("res/Room_13.png"));
+	 roomAL.get(14).setMapLocationImage(new Image("res/Room_14.png"));
+	 roomAL.get(15).setMapLocationImage(new Image("res/Room_15.png"));
+	 roomAL.get(16).setMapLocationImage(new Image("res/Room_16.png"));
+	 roomAL.get(17).setMapLocationImage(new Image("res/Room_17.png"));
+	 roomAL.get(18).setMapLocationImage(new Image("res/Room_18.png"));
+	 roomAL.get(19).setMapLocationImage(new Image("res/Room_19.png"));
+	 roomAL.get(20).setMapLocationImage(new Image("res/Room_20.png"));
+	 roomAL.get(21).setMapLocationImage(new Image("res/Room_21.png"));
+	 roomAL.get(22).setMapLocationImage(new Image("res/Room_22.png"));
+	 roomAL.get(23).setMapLocationImage(new Image("res/Room_23.png"));
+	 roomAL.get(24).setMapLocationImage(new Image("res/Room_24.png"));
+	 roomAL.get(25).setMapLocationImage(new Image("res/Room_25.png"));
+	 roomAL.get(26).setMapLocationImage(new Image("res/Room_26.png"));
+	 roomAL.get(27).setMapLocationImage(new Image("res/Room_27.png"));
+	 roomAL.get(28).setMapLocationImage(new Image("res/Room_28.png"));
+	 roomAL.get(29).setMapLocationImage(new Image("res/Room_29.png"));
+	 roomAL.get(30).setMapLocationImage(new Image("res/Room_30.png"));
 	 
 	 roomAL.get(0).addItem(0,new Weapon(1,"Branch","A tree branch",3));
 	 roomAL.get(0).addItem(1,new Armor(2,"Cloth Armor", "Rugged clothes from your village", 10));
@@ -338,9 +385,9 @@ public class Game extends Application
 	 roomAL.get(4).addSearchResult(0,"You take the torch off the wall, it may help you see in the dark areas of the cave");
 	 
 	 roomAL.get(5).addItem(0,new Weapon(2,"Iron Sword","A sword forged from iron",5));
-	 roomAL.get(5).addItem(1, new Artifact(10, "Shiny Iron Key", "A key forged from iron that's shiny"));
+	 //roomAL.get(5).addItem(1, new Artifact(10, "Shiny Iron Key", "A key forged from iron that's shiny"));
 	 roomAL.get(5).addSearchResult(0,"You grab the Iron Sword");
-	 roomAL.get(5).addSearchResult(1, "You grab the Iron Key");
+	 //roomAL.get(5).addSearchResult(1, "You grab the Iron Key");
 	 
 	 roomAL.get(9).addItem(0,new Artifact(7, "Golden Skull #1", "A golden skull"));
 	 roomAL.get(9).addSearchResult(0, "You grab the golden skull");
@@ -359,8 +406,8 @@ public class Game extends Application
 	 roomAL.get(17).addSearchResult(0, "You remove your armor and equip the chainmail. This should be a nice upgrade");
 	 roomAL.get(17).addSearchResult(1, "You grab the blue glowing rune");
 	 
-	 roomAL.get(18).addItem(0,new Artifact(11,"Golden Key", "A key casted from gold"));
-	 roomAL.get(18).addSearchResult(0, "You grab the Golden Key");
+	 //roomAL.get(18).addItem(0,new Artifact(11,"Golden Key", "A key casted from gold"));
+	 //roomAL.get(18).addSearchResult(0, "You grab the Golden Key");
 	 
 	 roomAL.get(20).addItem(0,new PotionBottle(10,"Potion Bottle","Restores any lost HP", gamePlayer));
 	 roomAL.get(20).addItem(1,new Weapon(4, "Tungsteel Sword", "A sword forged from tungsteel", 3));
@@ -371,28 +418,6 @@ public class Game extends Application
 	 roomAL.get(20).addSearchResult(3, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
 	 roomAL.get(20).addSearchResult(4, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
 	 
-	 
-	 
-	 
-	 TorchPuzzle torchPuzzle = new TorchPuzzle("0","Torch","Pick the torch in room 4 in order to enter and navigate room 6","It's too dark to see anything, it might help if you had some light",roomAL.get(6).getEastExit());
-	 torchPuzzle.setSolvedMessage("\n" + "\n" + "You light the torch and cautiously make your way into the dark room");
-	 torchPuzzle.setLockedDescription(torchPuzzle.getHint());
-	 
-	 RunePuzzle runePuzzle = new RunePuzzle("1","Runes","There will be two runes that is needed to be slotted into the door (Dr_18) in Room 15 in or-der to enter Room 18","hint");
-	 runePuzzle.setRuneDoor(roomAL.get(15).getNorthExit(), "It looks you need something else to open this door");
-	 runePuzzle.setEmeraldRune((Artifact)roomAL.get(16).getItem(0));
-	 runePuzzle.setSapphireRune((Artifact)roomAL.get(17).getItem(1));
-	 
-	 
-	 TorchesPuzzle torchesPuzzle = new TorchesPuzzle("6","Torches","There should be 3 torches that have to be lit in order to unlock the door to room 29","hint");
-	 torchesPuzzle.setTorchesDoor(roomAL.get(24).getNorthExit(), "Maybe the torches in this room have something to do with this locked door");
-	 
-	 
-	 roomAL.get(6).setPuzzle(torchPuzzle);
-	 roomAL.get(15).setPuzzle(runePuzzle);
-	 roomAL.get(24).setPuzzle(torchesPuzzle);
-	 
-	 
 	 roomAL.get(22).addItem(0,new Artifact(8, "Golden Skull #2", "A golden skull"));
 	 roomAL.get(22).addSearchResult(0, "You grab what seems to be another Golden Skull");
 	 
@@ -400,8 +425,79 @@ public class Game extends Application
 	 roomAL.get(25).addItem(0,new Armor(4,"Plate Armor", "Armor forged from steel", 80));
 	 roomAL.get(25).addSearchResult(0, "You pick up and equip the heavy steel armor");
 	 
-	 roomAL.get(29).addItem(0,new Artifact(9, "Golden Skull #3", "A golden skull"));
-	 roomAL.get(29).addSearchResult(0, "You grab what seems to be yet another golden Skull");
+	 roomAL.get(26).addItem(0,new Artifact(9, "Golden Skull #3", "A golden skull"));
+	 roomAL.get(26).addSearchResult(0, "You grab what seems to be yet another golden Skull");
+	 
+	 
+	 
+	 
+	 TorchPuzzle torchPuzzle = new TorchPuzzle("0","Torch","Pick the torch in room 4 in order to enter and navigate room 6","It's too dark to see anything, it might help if you had some light",roomAL.get(3).getWestExit());
+	 torchPuzzle.setTorch(roomAL.get(4).getItem(0));
+	 torchPuzzle.setSolvedMessage("\n" + "\n" + "You light the torch and cautiously make your way into the dark room");
+	 torchPuzzle.setLockedDescription(torchPuzzle.getHint());
+	 torchPuzzle.setTriggerType("navigation");
+	 torchPuzzle.setAutoNavigate(true);
+	 
+	 RunePuzzle runePuzzle = new RunePuzzle("1","Runes","There will be two runes that is needed to be slotted into the door (Dr_18) in Room 15 in or-der to enter Room 18","hint");
+	 runePuzzle.setRuneDoor(roomAL.get(15).getNorthExit(), "It looks you need something else to open this door");
+	 runePuzzle.setEmeraldRune((Artifact)roomAL.get(16).getItem(0));
+	 runePuzzle.setSapphireRune((Artifact)roomAL.get(17).getItem(1));
+	 runePuzzle.setAdditionalExit1(roomAL.get(16).getEastExit());
+	 runePuzzle.setAdditionalExit2(roomAL.get(17).getWestExit());
+	 roomAL.get(16).getEastExit().setLockDescription("It looks like this leads to the same room as the door with the runes, all the doors will probably unlock at the same time");
+	 roomAL.get(17).getWestExit().setLockDescription("It looks like this leads to the same room as the door with the runes, all the doors will probably unlock at the same time");
+	 runePuzzle.setTriggerType("navigation");
+	 runePuzzle.setAutoNavigate(false);
+	 
+	 GoldSkullPuzzle goldSkullPuzzle = new GoldSkullPuzzle("2","Skull Pedestal","There will be two runes that is needed to be slotted into the door (Dr_18) in Room 15 in or-der to enter Room 18","hint");
+	 goldSkullPuzzle.setFirstGoldSkull((Artifact)roomAL.get(9).getItem(0));
+	 goldSkullPuzzle.setSecondGoldSkull((Artifact)roomAL.get(22).getItem(0));
+	 goldSkullPuzzle.setThirdGoldSkull((Artifact)roomAL.get(26).getItem(0));
+	 goldSkullPuzzle.setTriggerType("search");
+	 goldSkullPuzzle.setAutoNavigate(false);
+	 
+	 
+	 SpiderWebPuzzle spiderWebPuzzle = new SpiderWebPuzzle("3","SpiderWebs","Destroy 3 spider webs - One room will be unlocked, one spider web will drop the key to room 8","The room is locked you probably need a key",roomAL.get(7).getNorthExit());
+	 spiderWebPuzzle.setIronKey(new Artifact(10, "Shiny Iron Key", "A key forged from iron that's shiny"));
+	 spiderWebPuzzle.setSolvedMessage("\n" + "\n" + "You use the key to unlock the door");
+	 spiderWebPuzzle.setLockedDescription(spiderWebPuzzle.getHint());
+	 spiderWebPuzzle.setTriggerType("search");
+	 spiderWebPuzzle.setAutoNavigate(false);
+	 
+	 CentaurPuzzle centaurPuzzle = new CentaurPuzzle("4","Centaur","Kill the centaur and collect the key in order to access Room 21","The door is locked tight, you will probably need a key to open it",roomAL.get(18).getNorthExit());
+	 //centaurPuzzle.setGoldKey(roomAL.get(4).getItem(0));
+	 centaurPuzzle.setSolvedMessage("\n" + "\n" + "You use the gold key to unlock the ornate door");
+	 centaurPuzzle.setLockedDescription(centaurPuzzle.getHint());
+	 centaurPuzzle.setTriggerType("navigation");
+	 centaurPuzzle.setAutoNavigate(true);
+	 
+	 WitchcraftPuzzle witchCraftPuzzle = new WitchcraftPuzzle("5","Witchcraft","Kill witch, drops the key to room 22","The door is locked tight, you will probably need a key to open it",roomAL.get(19).getNorthExit());
+	 //centaurPuzzle.setGoldKey(roomAL.get(4).getItem(0));
+	 witchCraftPuzzle.setSolvedMessage("\n" + "\n" + "You use the gold key to unlock the ornate door");
+	 witchCraftPuzzle.setLockedDescription(witchCraftPuzzle.getHint());
+	 witchCraftPuzzle.setTriggerType("navigation");
+	 witchCraftPuzzle.setAutoNavigate(true);
+	 
+	 
+	 
+	 TorchesPuzzle torchesPuzzle = new TorchesPuzzle("6","Torches","There should be 3 torches that have to be lit in order to unlock the door to room 29","hint");
+	 torchesPuzzle.setTorchesDoor(roomAL.get(24).getNorthExit(), "Maybe the torches in this room have something to do with this locked door");
+	 torchesPuzzle.setTriggerType("navigation");
+	 
+	 
+	 roomAL.get(3).setPuzzle(torchPuzzle);
+	 roomAL.get(15).setPuzzle(runePuzzle);
+	 roomAL.get(29).setPuzzle(goldSkullPuzzle);
+	 roomAL.get(5).setPuzzle(spiderWebPuzzle);
+	 roomAL.get(7).setPuzzle(spiderWebPuzzle);
+	 roomAL.get(18).setPuzzle(centaurPuzzle);
+	 roomAL.get(19).setPuzzle(witchCraftPuzzle);
+	 roomAL.get(21).setPuzzle(witchCraftPuzzle);
+	 roomAL.get(24).setPuzzle(torchesPuzzle);
+	 
+	 
+	 
+	 
 	 
 	 return roomAL;
 	 

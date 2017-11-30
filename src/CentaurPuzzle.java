@@ -1,6 +1,3 @@
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javafx.scene.control.TextArea;
 
 /**
@@ -11,10 +8,10 @@ import javafx.scene.control.TextArea;
  * @author Evan
  *
  */
-public class TorchPuzzle extends Puzzle implements PuzzleInterface
+public class CentaurPuzzle extends Puzzle implements PuzzleInterface
 {
 	private Exit lockedExit;
-	private Item torch;
+	private Item goldKey;
 	private TextArea text;
 	private String solvedMessage;
 	private Player player;
@@ -25,13 +22,13 @@ public class TorchPuzzle extends Puzzle implements PuzzleInterface
 	 * @param desc
 	 * @param hi
 	 */
-	public TorchPuzzle(String ID, String name, String desc, String hi)
+	public CentaurPuzzle(String ID, String name, String desc, String hi)
 	{
 		super(ID, name, desc, hi);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public TorchPuzzle(String ID, String name, String desc, String hi, Exit exit)
+	public CentaurPuzzle(String ID, String name, String desc, String hi, Exit exit)
 	{
 		super(ID, name, desc, hi);
 		this.lockedExit = exit;
@@ -55,14 +52,14 @@ public class TorchPuzzle extends Puzzle implements PuzzleInterface
 		lockedExit.setLockDescription(lockedDescrption);
 	}
 
-	public Item getTorch()
+	public Item getGoldKey()
 	{
-		return torch;
+		return goldKey;
 	}
 
-	public void setTorch(Item torch)
+	public void setGoldKey(Item goldKey)
 	{
-		this.torch = torch;
+		this.goldKey = goldKey;
 	}
 
 	public TextArea getText()
@@ -113,10 +110,11 @@ public class TorchPuzzle extends Puzzle implements PuzzleInterface
 	public void solvePuzzle()
 	{
 		// TODO Auto-generated method stub
-		if(player.getInventory().contains(torch))
+		if(player.getInventory().contains(goldKey))
 		{
 			lockedExit.unlockExit();
 			text.appendText(solvedMessage);
+			player.getInventory().remove(goldKey);
 			this.isSolved=true;
 		}
 	}

@@ -77,34 +77,217 @@
 #btnnorthwest
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/northWestButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
 }
+
+#btnnorthwest:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/northWestButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#btnnorthwest:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/northWestButtonPressed.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 #btnnorth
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/northButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
 }
+
+#btnnorth:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/northButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#btnnorth:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/northButtonPressed.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 #btnnortheast
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/northEastButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
 }
+
+#btnnortheast:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/northEastButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#btnnortheast:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/northEastButtonPressed.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 #btwest
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/westButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
 }
+
+#btwest:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/westButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#btwest:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/westButtonPressed.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 #btsouthwest
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/southWestButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
 }
+
+#btsouthwest:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/southWestButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#btsouthwest:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/southWestButtonPressed.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 #btsouth
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/southButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
 }
+
+#btsouth:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/southButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#btsouth:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/southButtonPressed.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 #btsoutheast
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/southEastButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
 }
+
+#btsoutheast:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/southEastButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#btsoutheast:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/southEastButtonPressed.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 #bteast
 {          
     -fx-background-color: transparent;
+    -fx-background-image: url("res/eastButton.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
+}
+
+#bteast:hover
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/eastButtonHover.png");
+    -fx-background-size: 50px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#bteast:armed
+{          
+    -fx-background-color: transparent;
+    -fx-background-image: url("res/eastButtonPressed.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
 }
 
 #encounterPlayerHealth .tick

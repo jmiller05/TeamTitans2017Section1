@@ -12,6 +12,8 @@ public abstract class Puzzle implements Serializable
 	private String puzzleDescription;
   	private String hint;
   	protected boolean isSolved;
+  	private String triggerType;
+  	private boolean isAutoNavigate;
   	//private ArrayList<Item> artifact = new ArrayList<Item>();
   	//private ArrayList<Room> location = new ArrayList<Room>();
 	
@@ -47,6 +49,26 @@ public abstract class Puzzle implements Serializable
  	public boolean isSolved()
  	{
  		return isSolved;
+ 	}
+ 	
+ 	public void setTriggerType(String triggerType)
+ 	{
+ 		this.triggerType = triggerType;
+ 	}
+ 	
+ 	public String getTriggerType()
+ 	{
+ 		return this.triggerType;
+ 	}
+ 	
+ 	public void setAutoNavigate(boolean nav)
+ 	{
+ 		this.isAutoNavigate = nav;
+ 	}
+ 	
+ 	public boolean isAutoNavigate()
+ 	{
+ 		return this.isAutoNavigate;
  	}
 	
  	/*public void addItem(Item item)

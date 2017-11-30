@@ -20,6 +20,10 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 	private boolean firstTorchLit;
 	private boolean secondTorchLit;
 	private boolean thirdTorchLit;
+	private Scene torchesPuzzleScene;
+	private Stage torchesStage;
+	
+	FXMLLoader torchesStageLoader;
 	
 	
 
@@ -93,6 +97,47 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 	{
 		return thirdTorchLit;
 	}
+	
+	public void setStage(Stage stage)
+	{
+		this.torchesStage = stage;
+	}
+	
+	public void setScene(Scene scene)
+	{
+		this.torchesPuzzleScene = scene;
+	}
+	
+    public void initializeRunePuzzle(Object controller, String file)
+	{
+		if(torchesStageLoader == null)
+		{
+			torchesStageLoader = new FXMLLoader();
+			
+			if(torchesStageLoader.getRoot() == null)
+			{
+				torchesStageLoader.setLocation(getClass().getResource(file));
+				torchesStageLoader.setController(controller);
+				Parent torchesPuzzle = null;
+				try {
+					torchesPuzzle = torchesStageLoader.load();
+					System.out.println(torchesPuzzle);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(torchesPuzzleScene == null)
+				{
+					torchesPuzzleScene = new Scene(torchesPuzzle,600,300);
+				}
+				else
+				{
+					torchesPuzzleScene.setRoot(torchesPuzzle);
+				}
+				//runeStage.setScene(runePuzzleScene);
+			}
+		}	
+	}
 
 	/* (non-Javadoc)
 	 * @see PuzzleInterface#triggerPuzzle()
@@ -100,7 +145,8 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 	@Override
 	public void triggerPuzzle()
 	{
-		
+		torchesStage.setScene(torchesPuzzleScene);
+		torchesStage.show();
 	}
 
 	/* (non-Javadoc)
