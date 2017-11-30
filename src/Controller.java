@@ -1618,6 +1618,27 @@ public class Controller
 			setImages();
 		}
 		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
+		
+		((TorchPuzzle)dungeonRooms.get(3).getPuzzle()).setText(text);
+		((TorchPuzzle)dungeonRooms.get(3).getPuzzle()).setPlayer(player);
+		((SpiderWebPuzzle)dungeonRooms.get(5).getPuzzle()).setText(text);
+		((SpiderWebPuzzle)dungeonRooms.get(5).getPuzzle()).setPlayer(player);
+		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setText(text);
+		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setPlayer(player);
+		((WitchcraftPuzzle)dungeonRooms.get(19).getPuzzle()).setText(text);
+		((WitchcraftPuzzle)dungeonRooms.get(19).getPuzzle()).setPlayer(player);
+		
+		((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setStage(puzzleStage);
+		((RunePuzzle)dungeonRooms.get(15).getPuzzle()).initializeRunePuzzle(this,"RuneStage.fxml");
+		
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).setStage(puzzleStage);
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).initializeTorchesPuzzle(this,"TorchesPuzzle.fxml");
+		
+		((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).setStage(puzzleStage);
+		((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).initializeGoldSkullPuzzle(this,"GoldSkullView.fxml");
+		
+		setMonsterStats();
+		
 		mapView.setVisible(false);
 		player.getInventory().clear();
 		player.setCurrentRoom(dungeonRooms.get(0));
