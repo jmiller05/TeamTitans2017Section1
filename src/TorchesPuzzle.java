@@ -16,6 +16,10 @@ import javafx.stage.Stage;
  */
 public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Exit torchesDoor;
 	private boolean firstTorchLit;
 	private boolean secondTorchLit;
@@ -108,7 +112,7 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 		this.torchesPuzzleScene = scene;
 	}
 	
-    public void initializeRunePuzzle(Object controller, String file)
+    public void initializeTorchesPuzzle(Object controller, String file)
 	{
 		if(torchesStageLoader == null)
 		{
@@ -121,7 +125,6 @@ public class TorchesPuzzle extends Puzzle implements PuzzleInterface
 				Parent torchesPuzzle = null;
 				try {
 					torchesPuzzle = torchesStageLoader.load();
-					System.out.println(torchesPuzzle);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

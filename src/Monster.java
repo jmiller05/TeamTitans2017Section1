@@ -39,6 +39,7 @@ public class Monster extends Entity implements Serializable
 	private int randomIndex;
 
 	private Item itemDropped;
+	private Item secondaryItem;
 	
 	private int lowerDamage;
 	private int higherDamage;
@@ -66,6 +67,22 @@ public class Monster extends Entity implements Serializable
 	public void setItemDropped(Item itemDropped)
 	{
 		this.itemDropped = itemDropped;
+	}
+	
+	/**
+	 * @return the itemDropped
+	 */
+	public Item getSecondaryItemDropped()
+	{
+		return secondaryItem;
+	}
+
+	/**
+	 * @param itemDropped the itemDropped to set
+	 */
+	public void setSecondaryItemDropped(Item itemDropped)
+	{
+		this.secondaryItem = itemDropped;
 	}
 
 	/**

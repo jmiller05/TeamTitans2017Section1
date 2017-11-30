@@ -173,7 +173,7 @@ public class GoldSkullPuzzle extends Puzzle implements PuzzleInterface
 		this.goldSkullPuzzleScene = scene;
 	}
 	
-    public void initializeRunePuzzle(Object controller, String file)
+    public void initializeGoldSkullPuzzle(Object controller, String file)
 	{
 		if(skullStageLoader == null)
 		{

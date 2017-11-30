@@ -11,7 +11,8 @@ import javafx.scene.control.TextArea;
 public class WitchcraftPuzzle extends Puzzle implements PuzzleInterface
 {
 	private Exit lockedExit;
-	private Item goldKey;
+	private Exit additionalExit;
+	private Item dirtyKey;
 	private TextArea text;
 	private String solvedMessage;
 	private Player player;
@@ -51,15 +52,26 @@ public class WitchcraftPuzzle extends Puzzle implements PuzzleInterface
 	{
 		lockedExit.setLockDescription(lockedDescrption);
 	}
-
-	public Item getGoldKey()
+	
+	public Exit getAdditionalExit()
 	{
-		return goldKey;
+		return additionalExit;
 	}
 
-	public void setGoldKey(Item goldKey)
+	public void setAdditionalExit(Exit additionalExit)
 	{
-		this.goldKey = goldKey;
+		this.additionalExit = additionalExit;
+		this.additionalExit.lockExit();
+	}
+
+	public Item getDirtyKey()
+	{
+		return dirtyKey;
+	}
+
+	public void setDirtyKey(Item dirtyKey)
+	{
+		this.dirtyKey = dirtyKey;
 	}
 
 	public TextArea getText()
@@ -110,14 +122,14 @@ public class WitchcraftPuzzle extends Puzzle implements PuzzleInterface
 	public void solvePuzzle()
 	{
 		// TODO Auto-generated method stub
-		if(player.getInventory().indexOf(goldKey) != -1)
+		if(player.getInventory().contains(dirtyKey))
 		{
 			lockedExit.unlockExit();
+			additionalExit.unlockExit();
 			text.appendText(solvedMessage);
+			player.getInventory().remove(dirtyKey);
 			this.isSolved=true;
 		}
-		
-		//System.out.println(player.getInventory().indexOf(torch));
 		
 		
 		

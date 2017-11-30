@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -181,6 +182,15 @@ public class Controller
 	@FXML
 	ImageView thirdTorchImage;
 	
+	@FXML
+	ImageView firstGoldSkullImage;
+	
+	@FXML
+	ImageView secondGoldSkullImage;
+	
+	@FXML
+	ImageView thirdGoldSkullImage;
+	
 	public Controller(Player player, ArrayList<Room> dungeonRooms)
 	{
 		this.player = player;
@@ -301,6 +311,7 @@ public class Controller
 		monsterArray.get(6).setHealth(40);
 		monsterArray.get(6).setMaxHealth(40);
 		monsterArray.get(6).setDamage(rand.nextInt(5) + 1);
+		((WitchcraftPuzzle)dungeonRooms.get(19).getPuzzle()).setDirtyKey(monsterArray.get(6).getSecondaryItemDropped());
 		
 		monsterArray.get(7).setHealth(60);
 		monsterArray.get(7).setMaxHealth(60);
@@ -336,7 +347,9 @@ public class Controller
 		((SpiderWebPuzzle)dungeonRooms.get(5).getPuzzle()).setPlayer(player);
 		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setText(text);
 		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setPlayer(player);
-		//((RunePuzzle)dungeonRooms.get(15).getPuzzle()).setRuneStage(runeStage);
+		((WitchcraftPuzzle)dungeonRooms.get(19).getPuzzle()).setText(text);
+		((WitchcraftPuzzle)dungeonRooms.get(19).getPuzzle()).setPlayer(player);
+		
 		if(puzzleStage == null)
 		{
 			puzzleStage = new Stage();
@@ -347,7 +360,10 @@ public class Controller
 		((RunePuzzle)dungeonRooms.get(15).getPuzzle()).initializeRunePuzzle(this,"RuneStage.fxml");
 		
 		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).setStage(puzzleStage);
-		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).initializeRunePuzzle(this,"TorchesPuzzle.fxml");
+		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).initializeTorchesPuzzle(this,"TorchesPuzzle.fxml");
+		
+		((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).setStage(puzzleStage);
+		((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).initializeGoldSkullPuzzle(this,"GoldSkullView.fxml");
 		
 		
 		
@@ -392,7 +408,10 @@ public class Controller
 								text.setText(player.getCurrentRoom().getRoomDescription());
 								mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 								checkValidExits();
-								triggerMonsterEncounter();
+								Platform.runLater(() -> {
+									triggerMonsterEncounter();
+					            });
+								
 								timer.cancel();
 								timer.purge();
 							}
@@ -1211,19 +1230,24 @@ public class Controller
 				
 				if (player.getHealth() <= 0 )
 				{
-					text.appendText("\n" + monsterArray.get(i).winFight());
+					text.appendText("\n" + "\n" + monsterArray.get(i).winFight());
 					encounterStage.close();
 					gameOverStage.show();
 				}
 				if (monsterArray.get(i).getHealth() <= 0)
 				{
-					text.appendText("\n" + player.winFight());
+					text.appendText("\n" + "\n" + player.winFight());
 					Item itemDropped = monsterArray.get(i).getItemDropped();
 					if (itemDropped != null) {
-						text.appendText("\n" + "Monster has dropped" + itemDropped.getItemDescription());
+						text.appendText("\n" + "\n" + "Monster has dropped" + " " + itemDropped.getItemDescription());
 						player.getInventory().add(itemDropped);
+						if (monsterArray.get(i).getSecondaryItemDropped() != null) {
+							text.appendText("\n" + "\n" + "Monster has dropped" + " " + monsterArray.get(i).getSecondaryItemDropped().getItemDescription());
+							player.getInventory().add(monsterArray.get(i).getSecondaryItemDropped());
+							
+						}
 					} else {
-						text.appendText("\n" + "Nothing can be found on monster");
+						text.appendText("\n" + "\n" + "Nothing can be found on monster");
 					}
 					monsterArray.remove(i);
 					encounterStage.close();
@@ -1369,6 +1393,125 @@ public class Controller
 	{
 		((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).solvePuzzle();
 		System.out.println(((TorchesPuzzle)dungeonRooms.get(24).getPuzzle()).isSolved());
+	}
+	
+	@FXML
+	private void placeFirstSkull(ActionEvent event)
+	{
+		if(dungeonRooms.get(29).hasPuzzle())
+		{
+			if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).playerHasFirstSkull(player))
+			{
+				
+				firstGoldSkullImage.setOpacity(1);
+				
+				((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).placeFirstSkull();
+				player.getInventory().remove(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).getFirstGoldSkull());
+				
+				if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isSecondSkullPlaced() && ((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isThirdSkullPlaced())
+				{
+					((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).solvePuzzle();
+					
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
+			}
+		}
+		
+	}
+	
+	@FXML
+	private void placeSecondSkull(ActionEvent event)
+	{
+		/*if(dungeonRooms.get(15).hasPuzzle())
+		{
+			if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).playerHasEmeraldRune(player))
+			{
+				greenRuneImage.setOpacity(1);
+				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertEmeraldRune();
+				player.getInventory().remove(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).getEmeraldRune());
+				
+				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isSapphireRuneInserted())
+				{
+					((RunePuzzle)dungeonRooms.get(15).getPuzzle()).solvePuzzle();
+					
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
+			}
+		}*/
+		
+		if(dungeonRooms.get(29).hasPuzzle())
+		{
+			if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).playerHasSecondSkull(player))
+			{
+				secondGoldSkullImage.setOpacity(1);
+				
+				((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).placeSecondSkull();
+				player.getInventory().remove(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).getSecondGoldSkull());
+				
+				if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isFirstSkullPlaced() && ((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isThirdSkullPlaced())
+				{
+					((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).solvePuzzle();
+					
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
+			}
+		}
+		
+	}
+	
+	@FXML
+	private void placeThirdSkull(ActionEvent event)
+	{
+		/*if(dungeonRooms.get(15).hasPuzzle())
+		{
+			if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).playerHasEmeraldRune(player))
+			{
+				greenRuneImage.setOpacity(1);
+				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertEmeraldRune();
+				player.getInventory().remove(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).getEmeraldRune());
+				
+				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isSapphireRuneInserted())
+				{
+					((RunePuzzle)dungeonRooms.get(15).getPuzzle()).solvePuzzle();
+					
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
+			}
+		}*/
+		
+		if(dungeonRooms.get(29).hasPuzzle())
+		{
+			if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).playerHasThirdSkull(player))
+			{
+				thirdGoldSkullImage.setOpacity(1);
+				
+				((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).placeThirdSkull();
+				player.getInventory().remove(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).getThirdGoldSkull());
+				
+				if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isSecondSkullPlaced() && ((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isFirstSkullPlaced())
+				{
+					((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).solvePuzzle();
+					
+				}
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
+			}
+		}
+		
 	}
 	
 	/**
