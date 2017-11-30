@@ -1102,24 +1102,17 @@ public class Controller
 		boolean wellOfLife = false;
 		index = player.getCurrentRoom().getSearchResultIndex();
 		
-		if(player.getCurrentRoom().hasItem()
-				&& index < player.getCurrentRoom().getItemList().size()
-				&& player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("well of life"))
-			
+		if(player.getCurrentRoom().hasItem() && index < player.getCurrentRoom().getItemList().size() && player.getCurrentRoom().getItem(index).getItemName().equalsIgnoreCase("well of life"))		
 		{
 			wellOfLife = true;
 		}
 		else if(player.getCurrentRoom().hasPuzzle())
 		{
-			if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("search") && !player.getCurrentRoom().getPuzzle().isSolved() )
-			{
-				((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
-				System.out.println("Puzzle Triggered!");
-			}
-			else
+			if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("search") && player.getCurrentRoom().getSearchResults() != null)
 			{
 				text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
 			}
+			
 		}
 		else
 		{
@@ -1166,6 +1159,18 @@ public class Controller
 					btusePotion.setDisable(false);
 				}
 				player.pickupItem(index);
+			}
+		}
+		else if(player.getCurrentRoom().hasPuzzle() && player.getCurrentRoom().getSearchResults() == null)
+		{
+			if(player.getCurrentRoom().getPuzzle().getTriggerType().equalsIgnoreCase("search") && !player.getCurrentRoom().getPuzzle().isSolved() )
+			{
+				((PuzzleInterface)player.getCurrentRoom().getPuzzle()).triggerPuzzle();
+				System.out.println("Puzzle Triggered!");
+			}
+			else
+			{
+				text.appendText("\n" + "\n" + player.getCurrentRoom().getSearchResult(index));
 			}
 		}
 		else if(player.getCurrentRoom().getSearchResults() != null)

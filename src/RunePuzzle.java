@@ -184,7 +184,6 @@ public class RunePuzzle extends Puzzle implements PuzzleInterface
 				Parent runePuzzle = null;
 				try {
 					runePuzzle = runeStageLoader.load();
-					System.out.println(runePuzzle);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -197,7 +196,6 @@ public class RunePuzzle extends Puzzle implements PuzzleInterface
 				{
 					runePuzzleScene.setRoot(runePuzzle);
 				}
-				//runeStage.setScene(runePuzzleScene);
 			}
 		}	
 	}
@@ -208,7 +206,6 @@ public class RunePuzzle extends Puzzle implements PuzzleInterface
 	@Override
 	public void triggerPuzzle()
 	{
-		//runeStage.setScene(new Scene(runePuzzleRoot,600,300));
 		runeStage.setScene(runePuzzleScene);
 		runeStage.show();
 	}
@@ -226,9 +223,6 @@ public class RunePuzzle extends Puzzle implements PuzzleInterface
 		additionalExit2.unlockExit();
 		
 		runeStage.close();
-		
-		
-		
 	}
 }
 
