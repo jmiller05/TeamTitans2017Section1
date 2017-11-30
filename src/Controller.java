@@ -24,6 +24,7 @@ public class Controller
 	PotionBottle potion;
 	Game game = new Game();
 	Timer timer;
+	Monster finalMonster;
 	
 	/**
 	 * the Player attribute of the Controller
@@ -316,6 +317,8 @@ public class Controller
 		monsterArray.get(7).setHealth(60);
 		monsterArray.get(7).setMaxHealth(60);
 		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);		
+		
+		finalMonster = monsterArray.get(7);
 	}
 	
 	/**
@@ -1411,6 +1414,16 @@ public class Controller
 				if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isSecondSkullPlaced() && ((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isThirdSkullPlaced())
 				{
 					((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).solvePuzzle();
+					encounterPlayerHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+					encounterPlayerHealth.progressProperty().bind(player.getHealthPercentage());
+					encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
+					
+					encounterMonsterHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+					encounterMonsterHealth.progressProperty().bind(finalMonster.getHealthPercentage());
+					encounterMonsterHealth.progressProperty().addListener(new ProgressBarStyler(encounterMonsterHealth));
+					
+					encounterStage.show();
+					combatText.appendText("\n\n" + finalMonster.getMonsterDescription());
 					
 				}
 			}
@@ -1425,25 +1438,6 @@ public class Controller
 	@FXML
 	private void placeSecondSkull(ActionEvent event)
 	{
-		/*if(dungeonRooms.get(15).hasPuzzle())
-		{
-			if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).playerHasEmeraldRune(player))
-			{
-				greenRuneImage.setOpacity(1);
-				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertEmeraldRune();
-				player.getInventory().remove(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).getEmeraldRune());
-				
-				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isSapphireRuneInserted())
-				{
-					((RunePuzzle)dungeonRooms.get(15).getPuzzle()).solvePuzzle();
-					
-				}
-			}
-			else
-			{
-				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
-			}
-		}*/
 		
 		if(dungeonRooms.get(29).hasPuzzle())
 		{
@@ -1457,6 +1451,16 @@ public class Controller
 				if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isFirstSkullPlaced() && ((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isThirdSkullPlaced())
 				{
 					((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).solvePuzzle();
+					encounterPlayerHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+					encounterPlayerHealth.progressProperty().bind(player.getHealthPercentage());
+					encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
+					
+					encounterMonsterHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+					encounterMonsterHealth.progressProperty().bind(finalMonster.getHealthPercentage());
+					encounterMonsterHealth.progressProperty().addListener(new ProgressBarStyler(encounterMonsterHealth));
+					
+					encounterStage.show();
+					combatText.appendText("\n\n" + finalMonster.getMonsterDescription());
 					
 				}
 			}
@@ -1471,25 +1475,6 @@ public class Controller
 	@FXML
 	private void placeThirdSkull(ActionEvent event)
 	{
-		/*if(dungeonRooms.get(15).hasPuzzle())
-		{
-			if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).playerHasEmeraldRune(player))
-			{
-				greenRuneImage.setOpacity(1);
-				((RunePuzzle)dungeonRooms.get(15).getPuzzle()).insertEmeraldRune();
-				player.getInventory().remove(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).getEmeraldRune());
-				
-				if(((RunePuzzle)dungeonRooms.get(15).getPuzzle()).isSapphireRuneInserted())
-				{
-					((RunePuzzle)dungeonRooms.get(15).getPuzzle()).solvePuzzle();
-					
-				}
-			}
-			else
-			{
-				text.appendText("\n" + "\n" + "It looks like you might need to put something here");
-			}
-		}*/
 		
 		if(dungeonRooms.get(29).hasPuzzle())
 		{
@@ -1503,6 +1488,16 @@ public class Controller
 				if(((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isSecondSkullPlaced() && ((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).isFirstSkullPlaced())
 				{
 					((GoldSkullPuzzle)dungeonRooms.get(29).getPuzzle()).solvePuzzle();
+					encounterPlayerHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+					encounterPlayerHealth.progressProperty().bind(player.getHealthPercentage());
+					encounterPlayerHealth.progressProperty().addListener(new ProgressBarStyler(encounterPlayerHealth));
+					
+					encounterMonsterHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
+					encounterMonsterHealth.progressProperty().bind(finalMonster.getHealthPercentage());
+					encounterMonsterHealth.progressProperty().addListener(new ProgressBarStyler(encounterMonsterHealth));
+					
+					encounterStage.show();
+					combatText.appendText("\n\n" + finalMonster.getMonsterDescription());
 					
 				}
 			}
@@ -1524,7 +1519,7 @@ public class Controller
 	{
 		for(int i = 0; i < monsterArray.size(); i++)
 		{
-			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
+			if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) && !monsterArray.get(i).equals(finalMonster) )
 			{
 				encounterPlayerHealth.setStyle("-fx-accent: rgba(13, 199, 4, 0.40); ");
 				encounterPlayerHealth.progressProperty().bind(player.getHealthPercentage());
