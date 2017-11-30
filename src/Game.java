@@ -410,20 +410,20 @@ public class Game extends Application
 	 //roomAL.get(18).addSearchResult(0, "You grab the Golden Key");
 	 
 	 roomAL.get(20).addItem(0,new PotionBottle(10,"Potion Bottle","Restores any lost HP", gamePlayer));
-	 roomAL.get(20).addItem(1,new Weapon(4, "Tungsteel Sword", "A sword forged from tungsteel", 3));
-	 roomAL.get(20).addItem(2,new Artifact(12, "Dirty Key", "A dirty key"));
+	// roomAL.get(20).addItem(1,new Weapon(4, "Tungsteel Sword", "A sword forged from tungsteel", 3));
+	 roomAL.get(20).addItem(1,new Artifact(12, "Dirty Key", "A dirty key"));
 	 roomAL.get(20).addSearchResult(0, "You walk over to the medicine bag and start looking through it finding a bottle with a glowing red liquid");
-	 roomAL.get(20).addSearchResult(1, "You pickup the Tungsteel Sword");
-	 roomAL.get(20).addSearchResult(2, "You grab the Dirty Key");
-	 roomAL.get(20).addSearchResult(3, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
-	 roomAL.get(20).addSearchResult(4, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
+	 //roomAL.get(20).addSearchResult(1, "You pickup the Tungsteel Sword");
+	 roomAL.get(20).addSearchResult(1, "You grab the Dirty Key");
+	 roomAL.get(20).addSearchResult(2, "Browsing the tomes on the book case, you can help but feel nauseated looking at the grotesque contents of the jars on the book case, there doesn't seem to be anything you want");
+	 roomAL.get(20).addSearchResult(3, "You look through parchment and examine some of the vials on the desk but none of it seems useful");
 	 
 	 roomAL.get(22).addItem(0,new Artifact(8, "Golden Skull #2", "A golden skull"));
 	 roomAL.get(22).addSearchResult(0, "You grab what seems to be another Golden Skull");
 	 
 	 
-	 roomAL.get(25).addItem(0,new Armor(4,"Plate Armor", "Armor forged from steel", 80));
-	 roomAL.get(25).addSearchResult(0, "You pick up and equip the heavy steel armor");
+	 //roomAL.get(25).addItem(0,new Armor(4,"Plate Armor", "Armor forged from steel", 80));
+	 //roomAL.get(25).addSearchResult(0, "You pick up and equip the heavy steel armor");
 	 
 	 roomAL.get(26).addItem(0,new Artifact(9, "Golden Skull #3", "A golden skull"));
 	 roomAL.get(26).addSearchResult(0, "You grab what seems to be yet another golden Skull");
