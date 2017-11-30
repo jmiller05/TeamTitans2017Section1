@@ -290,33 +290,41 @@ public class Controller
 		
 		monsterArray.get(1).setHealth(10);
 		monsterArray.get(1).setMaxHealth(10);
-		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);		
+		monsterArray.get(1).setDamage(rand.nextInt(3) + 1);	
+		monsterArray.get(1).setHealthPercentage(new SimpleDoubleProperty(1));
 		
 		monsterArray.get(2).setHealth(15);
 		monsterArray.get(2).setMaxHealth(15);
-		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);		
+		monsterArray.get(2).setDamage(rand.nextInt(3) + 1);	
+		monsterArray.get(2).setHealthPercentage(new SimpleDoubleProperty(1));
 		
 		monsterArray.get(3).setHealth(20);
 		monsterArray.get(3).setMaxHealth(20);
 		monsterArray.get(3).setDamage(rand.nextInt(4) + 1);		
+		monsterArray.get(3).setHealthPercentage(new SimpleDoubleProperty(1));
 		
 		monsterArray.get(4).setHealth(25);
 		monsterArray.get(4).setMaxHealth(25);
 		monsterArray.get(4).setDamage(rand.nextInt(4) + 1);	
 		((CentaurPuzzle)dungeonRooms.get(18).getPuzzle()).setGoldKey(monsterArray.get(4).getItemDropped());
+		monsterArray.get(4).setHealthPercentage(new SimpleDoubleProperty(1));
 		
 		monsterArray.get(5).setHealth(30);
 		monsterArray.get(5).setMaxHealth(30);
-		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);		
+		monsterArray.get(5).setDamage(rand.nextInt(4) + 1);	
+		monsterArray.get(5).setHealthPercentage(new SimpleDoubleProperty(1));
 		
 		monsterArray.get(6).setHealth(40);
 		monsterArray.get(6).setMaxHealth(40);
 		monsterArray.get(6).setDamage(rand.nextInt(5) + 1);
+		monsterArray.get(6).setHealthPercentage(new SimpleDoubleProperty(1));
 		((WitchcraftPuzzle)dungeonRooms.get(19).getPuzzle()).setDirtyKey(monsterArray.get(6).getSecondaryItemDropped());
 		
 		monsterArray.get(7).setHealth(60);
 		monsterArray.get(7).setMaxHealth(60);
-		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);		
+		monsterArray.get(7).setDamage(rand.nextInt(5) + 2);	
+		monsterArray.get(7).setHealthPercentage(new SimpleDoubleProperty(1));
+		
 		
 		finalMonster = monsterArray.get(7);
 	}
@@ -341,6 +349,11 @@ public class Controller
 	protected void initialize()
 	{	
 		
+		
+		if(dungeonRooms.get(0).getMapLocationImage() == null)
+		{
+			setImages();
+		}
 		btusePotion.setDisable(true);
 		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
 		mapView.setVisible(false);
@@ -372,7 +385,7 @@ public class Controller
 		
 		if(player.getCurrentRoom() == null)
 		{
-			player.setCurrentRoom(dungeonRooms.get(0));
+			player.setCurrentRoom(dungeonRooms.get(18));
 			text.setText(player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
@@ -1294,6 +1307,41 @@ public class Controller
 		dungeonRooms.get(30).setMapLocationImage(new Image("res/Room_30.jpg"));
 	}*/
 	
+	public void setImages()
+	{
+		dungeonRooms.get(0).setMapLocationImage(new Image("res/Room_00.png"));
+		 dungeonRooms.get(1).setMapLocationImage(new Image("res/Room_01.png"));
+		 dungeonRooms.get(2).setMapLocationImage(new Image("res/Room_02.png"));
+		 dungeonRooms.get(3).setMapLocationImage(new Image("res/Room_03.png"));
+		 dungeonRooms.get(4).setMapLocationImage(new Image("res/Room_04.png"));
+		 dungeonRooms.get(5).setMapLocationImage(new Image("res/Room_05.png"));
+		 dungeonRooms.get(6).setMapLocationImage(new Image("res/Room_06.png"));
+		 dungeonRooms.get(7).setMapLocationImage(new Image("res/Room_07.png"));
+		 dungeonRooms.get(8).setMapLocationImage(new Image("res/Room_08.png"));
+		 dungeonRooms.get(9).setMapLocationImage(new Image("res/Room_09.png"));
+		 dungeonRooms.get(10).setMapLocationImage(new Image("res/Room_10.png"));
+		 dungeonRooms.get(11).setMapLocationImage(new Image("res/Room_11.png"));
+		 dungeonRooms.get(12).setMapLocationImage(new Image("res/Room_12.png"));
+		 dungeonRooms.get(13).setMapLocationImage(new Image("res/Room_13.png"));
+		 dungeonRooms.get(14).setMapLocationImage(new Image("res/Room_14.png"));
+		 dungeonRooms.get(15).setMapLocationImage(new Image("res/Room_15.png"));
+		 dungeonRooms.get(16).setMapLocationImage(new Image("res/Room_16.png"));
+		 dungeonRooms.get(17).setMapLocationImage(new Image("res/Room_17.png"));
+		 dungeonRooms.get(18).setMapLocationImage(new Image("res/Room_18.png"));
+		 dungeonRooms.get(19).setMapLocationImage(new Image("res/Room_19.png"));
+		 dungeonRooms.get(20).setMapLocationImage(new Image("res/Room_20.png"));
+		 dungeonRooms.get(21).setMapLocationImage(new Image("res/Room_21.png"));
+		 dungeonRooms.get(22).setMapLocationImage(new Image("res/Room_22.png"));
+		 dungeonRooms.get(23).setMapLocationImage(new Image("res/Room_23.png"));
+		 dungeonRooms.get(24).setMapLocationImage(new Image("res/Room_24.png"));
+		 dungeonRooms.get(25).setMapLocationImage(new Image("res/Room_25.png"));
+		 dungeonRooms.get(26).setMapLocationImage(new Image("res/Room_26.png"));
+		 dungeonRooms.get(27).setMapLocationImage(new Image("res/Room_27.png"));
+		 dungeonRooms.get(28).setMapLocationImage(new Image("res/Room_28.png"));
+		 dungeonRooms.get(29).setMapLocationImage(new Image("res/Room_29.png"));
+		 dungeonRooms.get(30).setMapLocationImage(new Image("res/Room_30.png"));
+	}
+	
 	@FXML
 	private void insertGreenRune(ActionEvent event)
 	{
@@ -1536,12 +1584,6 @@ public class Controller
 		
 	}
 	
-	
-	private void triggerPuzzle()
-	{
-		
-	}
-	
 	private void checkValidExits()
 	{
 		btnnorth.setDisable(!player.getCurrentRoom().isValidExit("north"));
@@ -1553,41 +1595,35 @@ public class Controller
 		btsoutheast.setDisable(!player.getCurrentRoom().isValidExit("southeast"));
 		btsouthwest.setDisable(!player.getCurrentRoom().isValidExit("southwest"));
 	}
-	
-	private void solveTorchPuzzle()
-	{
-		((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).solvePuzzle();
 		
-		if(((TorchPuzzle)player.getCurrentRoom().getAdjacentRoom(player.getCurrentRoom().getWestExit()).getPuzzle()).isSolved())
-		{
-			btwest.setDisable(true);
-			
-			Timer timer = new Timer();
-			timer.schedule(new TimerTask()
-			{
-				@Override
-				public void run()
-				{
-					player.changeRoom(player.getCurrentRoom().getWestExit());
-					text.appendText("\n" + "\n" + player.getCurrentRoom().getRoomDescription());
-					mapView.setImage(player.getCurrentRoom().getMapLocationImage());
-					checkValidExits();
-					triggerMonsterEncounter();
-					timer.cancel();
-					timer.purge();
-				}
-			}, 1500);
-		}
-	}
-	
-	/*public void setRuneStage(Stage stage)
-	{
-		runeStage = stage;
-	}*/
-	
-	public void restartGame()
+	@FXML
+	private void restartGame(ActionEvent event)
 	{
 		//somehow restart the game here
+		try
+		{
+			player.restoreHealth(player.getMaxHealth()-player.getHealth());
+		} catch (InvalidHealthException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		btusePotion.setDisable(true);
+		
+		mapView.setVisible(false);
+		this.setDungeonRooms(Room.readRooms("Rooms.dat"));
+		this.setMonsterArray(Monster.readMonsters("Monsters.dat"));
+		if(dungeonRooms.get(0).getMapLocationImage() == null)
+		{
+			setImages();
+		}
+		((Map)dungeonRooms.get(2).getItem(0)).setMap(mapView);
+		mapView.setVisible(false);
+		player.getInventory().clear();
+		player.setCurrentRoom(dungeonRooms.get(0));
+		text.setText(player.getCurrentRoom().getRoomDescription());
+		mapView.setImage(player.getCurrentRoom().getMapLocationImage());
+		checkValidExits();
 		
 	}
 	

@@ -46,13 +46,35 @@ public class Game extends Application
 		rooms = this.populateRooms();
 		populateMonsters();
 		addMonsterRooms();
+		
+		if(!monsterArray.isEmpty())
+		 {
+			 //for
+			 for(int i = 0; i < monsterArray.size(); i++)
+			{
+				 int roomID = monsterArray.get(i).getLocation();
+				 rooms.get(roomID).setMonster(monsterArray.get(i));
+					/*if( player.getCurrentRoom().getRoomID() == (monsterArray.get(i).getLocation()) )
+					{
+						text.appendText("\n\n" + monsterArray.get(i).getMonsterDescription());			
+					}*/		
+			}
+			 
+			 ((CentaurPuzzle)roomAL.get(18).getPuzzle()).setGoldKey(monsterArray.get(4).getItemDropped());
+			 ((WitchcraftPuzzle)roomAL.get(21).getPuzzle()).setDirtyKey(monsterArray.get(6).getSecondaryItemDropped());
+		 }
+		
+		//Room.writeRooms("Rooms.dat", rooms);
+		//Monster.writeMonsters("Monsters.dat",monsterArray);
+		
+		
 		//populateRoomItems();
 		//saveItemsInRooms();
 		//populatePuzzles();
 		//addPuzzleRooms();
 		
 		
-		Controller gameController = new Controller(gamePlayer, rooms);
+		Controller gameController = new Controller(gamePlayer, Room.readRooms("Rooms.dat"));
 		
 		
 		loader.setController(gameController);
@@ -66,7 +88,7 @@ public class Game extends Application
 		loader.setLocation(getClass().getResource("View.fxml"));
 		inventoryLoader.setLocation(getClass().getResource("Inventory.fxml"));
 		monsterEncounterLoader.setLocation(getClass().getResource("CombatView.fxml"));
-		PuzzleLoader.setLocation(getClass().getResource("Puzzle.fxml"));
+		//PuzzleLoader.setLocation(getClass().getResource("Puzzle.fxml"));
 		//runeStageLoader.setLocation(getClass().getResource("RuneStage.fxml"));
 		//torchesPuzzleLoader.setLocation(getClass().getResource("TorchesPuzzle.fxml"));
 		gameOverStageLoader.setLocation(getClass().getResource("GameOver.fxml"));
@@ -94,6 +116,7 @@ public class Game extends Application
 		//torchesPuzzleStage.setScene(new Scene(torchesPuzzle, 700, 300));
 		
 		gameOverStage = new Stage();
+		gameOverStage.initModality(Modality.APPLICATION_MODAL);
 		gameOverStage.setScene(new Scene(gameOver, 400, 300));
 		
 		gameController.setInventoryStage(inventoryStage);
@@ -103,7 +126,7 @@ public class Game extends Application
 		//gameController.setTorchesPuzzleStage(torchesPuzzleStage);
 		gameController.setGameOverStage(gameOverStage);
 		//gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
-		gameController.setMonsterArray(monsterArray);
+		gameController.setMonsterArray(Monster.readMonsters("Monsters.dat"));
 		gameController.setMonsterStats();
 		//gameController.setImages();
 		//((RunePuzzle)gameController.getDungeonRooms().get(15).getPuzzle()).setScene(new Scene(runePuzzle, 600, 300));
@@ -140,7 +163,7 @@ public class Game extends Application
 	 m6.setDamageRange(1,5);
 	 m7.setDamageRange(2,6);
 	 
-	 m4.setItemDropped(new Artifact(11,"Golden Key", "A key casted from gold"));
+	// m4.setItemDropped(new Artifact(11,"Golden Key", "A key casted from gold"));
 	 m6.setSecondaryItemDropped(new Artifact(12, "Dirty Key", "A dirty key"));
 	 
 	 
@@ -498,6 +521,8 @@ public class Game extends Application
 	 roomAL.get(21).setPuzzle(witchCraftPuzzle);
 	 roomAL.get(24).setPuzzle(torchesPuzzle);
 	 roomAL.get(29).setPuzzle(goldSkullPuzzle);
+	 
+	 
 	 
 	 
 	 

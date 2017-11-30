@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 
@@ -200,5 +202,22 @@ public class Monster extends Entity implements Serializable
 			mAL.get(i).setRandomIndex();
 		}
 		return mAL;
-	}	
+	}
+	
+	public static void writeMonsters(String filename, ArrayList<Monster> monsterArray)
+	{
+				
+		 try
+		 {
+			 FileOutputStream fos= new FileOutputStream(filename);
+			 ObjectOutputStream oos= new ObjectOutputStream(fos);
+			 oos.writeObject(monsterArray);
+			 oos.close();
+			 fos.close();
+	     }
+		 catch(IOException ioe)
+		 { 
+	    	 ioe.printStackTrace();
+	     }
+	}
 }

@@ -1,6 +1,8 @@
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,6 +29,7 @@ public class Room implements Serializable
 	private ArrayList<String> searchResults;
 	private Puzzle puzzle;
 	private boolean hasPuzzle;
+	private Monster monster;
 
 	public Room(int roomID, String roomName, String roomDescription)
 	{
@@ -269,6 +272,16 @@ public class Room implements Serializable
 	{
 		this.hasPuzzle = hasPuzzle;
 	}
+	
+	public Monster getMonster()
+	{
+		return monster;
+	}
+
+	public void setMonster(Monster monster)
+	{
+		this.monster = monster;
+	}
 
 	public Room getAdjacentRoom(Exit exit)
 	{
@@ -326,6 +339,23 @@ public class Room implements Serializable
 		}
 		
 		return rooms;
+	}
+	
+	public static void writeRooms(String filename, ArrayList<Room> roomArray)
+	{
+				
+		 try
+		 {
+			 FileOutputStream fos= new FileOutputStream(filename);
+			 ObjectOutputStream oos= new ObjectOutputStream(fos);
+			 oos.writeObject(roomArray);
+			 oos.close();
+			 fos.close();
+	     }
+		 catch(IOException ioe)
+		 { 
+	    	 ioe.printStackTrace();
+	     }
 	}
 
 }
