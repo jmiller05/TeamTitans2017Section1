@@ -385,7 +385,7 @@ public class Controller
 		
 		if(player.getCurrentRoom() == null)
 		{
-			player.setCurrentRoom(dungeonRooms.get(18));
+			player.setCurrentRoom(dungeonRooms.get(0));
 			text.setText(player.getCurrentRoom().getRoomDescription());
 			mapView.setImage(player.getCurrentRoom().getMapLocationImage());
 			checkValidExits();
